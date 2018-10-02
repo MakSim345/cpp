@@ -1,0 +1,34 @@
+#####################################################################
+#                                                                   #
+#                              CHE                                  #
+#                         ~~~~~~~~~~~~~~                            #
+# Makefile for building Prostotron exe. Common settings.            #
+#                                                                   #
+# NOTE 1: there are program compile flags, which must be set        # 
+# according to ASM code; see source files.                          #
+# NOTE 2: When you do modifications in source code so that included #
+# files change, you must do similar changes to this files by hand.  # 
+# This file must be updated every time you change include's.        #
+#                                                                   #
+# (c) Copyright Yuriy Senishch, 2012                                #
+#                                                                   #
+#####################################################################
+
+# CC = gcc
+GEN = gen.h 
+CC = cl
+CFLAGS = -Wall -g
+ALL_OBJ = main.obj memory.obj processor.obj utils.obj mem_cell.obj
+
+PROGRAM = Prostotron.exe
+
+$(PROGRAM): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(PROGRAM)
+
+# all .obj files depend on their corresponding .cpp file
+%.obj: %.cpp %.h $(GEN)
+	$(CC) $(CFLAGS) -c $<
+
+clean:
+	del *.obj
+	del *.exe

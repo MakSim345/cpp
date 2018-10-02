@@ -1,0 +1,18 @@
+#makefile
+
+# !include <win32.mak>
+
+GEN = gen.h 
+PROGRAM = erato.exe
+GCC = cl
+ALL_OBJ = main.obj eratosphen.obj div_error.obj my_exceptions.obj printHex.obj utils.obj
+CFLAGS = -Wall -g
+
+#Link the program:
+$(PROGRAM): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(PROGRAM)
+
+# All .o files depend on their corresponding .cpp file
+%.obj: %.cpp %.h $(GEN)
+	$(GCC) $(CFLAGS) -c $<
+

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "edu_smart_pointers", "edu_smart_pointers.vcxproj", "{7CD32EE2-BBDE-4D4C-B561-7E118E5050E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CD32EE2-BBDE-4D4C-B561-7E118E5050E2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7CD32EE2-BBDE-4D4C-B561-7E118E5050E2}.Debug|Win32.Build.0 = Debug|Win32
+		{7CD32EE2-BBDE-4D4C-B561-7E118E5050E2}.Release|Win32.ActiveCfg = Release|Win32
+		{7CD32EE2-BBDE-4D4C-B561-7E118E5050E2}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,27 @@
+#####################################################################
+#                                                                   #
+# (c) Copyright YS, 2012                                            #
+#                                                                   #
+#####################################################################
+
+# CC = gcc
+CC = cl
+CFLAGS = -Wall
+# CFLAGS =
+
+GEN = gen.h 
+
+PROGRAM = app.exe
+
+ALL_OBJ = main.obj tgaimage.obj
+
+$(PROGRAM): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(PROGRAM)
+
+# All .o files depend on their corresponding .cpp file
+%.obj: %.cpp %.h $(GEN)
+	$(CC) $(CFLAGS) -c $<
+
+clean:
+	del *.obj
+	del *.exe

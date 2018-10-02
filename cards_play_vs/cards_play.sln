@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cards_play", "cards_play.vcxproj", "{1BDC3B00-628C-40C7-ADE3-C7EA349E51EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BDC3B00-628C-40C7-ADE3-C7EA349E51EA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1BDC3B00-628C-40C7-ADE3-C7EA349E51EA}.Debug|Win32.Build.0 = Debug|Win32
+		{1BDC3B00-628C-40C7-ADE3-C7EA349E51EA}.Release|Win32.ActiveCfg = Release|Win32
+		{1BDC3B00-628C-40C7-ADE3-C7EA349E51EA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

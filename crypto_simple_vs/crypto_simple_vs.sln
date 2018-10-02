@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crypto_simple_vs", "crypto_simple_vs.vcxproj", "{AFA828FE-16C0-4295-AA2E-EE51BC8E4FFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFA828FE-16C0-4295-AA2E-EE51BC8E4FFC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AFA828FE-16C0-4295-AA2E-EE51BC8E4FFC}.Debug|Win32.Build.0 = Debug|Win32
+		{AFA828FE-16C0-4295-AA2E-EE51BC8E4FFC}.Release|Win32.ActiveCfg = Release|Win32
+		{AFA828FE-16C0-4295-AA2E-EE51BC8E4FFC}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

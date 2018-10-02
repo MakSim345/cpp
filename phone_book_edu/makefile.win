@@ -1,0 +1,29 @@
+#makefile
+
+# !include <win32.mak>
+
+GEN = gen.h 
+PROGRAM = phone_book.exe
+ALL_OBJ = mainc.obj cTimer.obj phone_book.obj utils.obj RandomNumbers.obj Person.obj
+GCC = cl
+
+$(PROGRAM): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(PROGRAM)
+
+mainc.obj: mainc.cpp $(GEN)
+	$(GCC) -c mainc.cpp
+
+cTimer.obj: cTimer.cpp cTimer.h $(GEN)
+	$(GCC) -c cTimer.cpp
+
+phone_book.obj: phone_book.cpp phone_book.h $(GEN)
+	$(GCC) -c phone_book.cpp
+
+utils.obj: utils.cpp utils.h $(GEN)
+	$(GCC) -c utils.cpp
+
+RandomNumbers.obj: RandomNumbers.cpp RandomNumbers.h $(GEN)
+	$(GCC) -c RandomNumbers.cpp
+
+Person.obj: Person.cpp Person.h $(GEN)
+	$(GCC) -c Person.cpp

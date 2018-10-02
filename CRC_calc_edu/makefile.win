@@ -1,0 +1,22 @@
+# Sample makefile
+
+!include <win32.mak>
+
+GEN = gen.h
+PROGRAM = app.exe
+ALL_OBJ = main.obj linked_list.obj crc_calc.obj
+COMPILER = cl
+LINKER = link
+
+$(PROGRAM): $(ALL_OBJ)
+	$(LINKER) $(ALL_OBJ) /OUT:$(PROGRAM)
+
+main.obj: main.cpp
+	$(COMPILER) -c /MD main.cpp
+
+linked_list.obj: linked_list.cpp linked_list.h $(GEN)
+	$(COMPILER) -c linked_list.cpp
+
+crc_calc.obj: crc_calc.cpp crc_calc.h $(GEN)
+	$(COMPILER) -c crc_calc.cpp
+

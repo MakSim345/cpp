@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/dev/cpp/cmake_edu/ToDo.cpp
+ToDo.h
+D:/dev/cpp/cmake_edu/ToDo.h
+
+D:/dev/cpp/cmake_edu/ToDo.h
+gen.h
+D:/dev/cpp/cmake_edu/gen.h
+
+D:/dev/cpp/cmake_edu/gen.h
+stdio.h
+-
+conio.h
+-
+stdlib.h
+D:/dev/cpp/cmake_edu/stdlib.h
+vector
+-
+iostream
+-
+sstream
+-
+ctype.h
+-
+errno.h
+-
+string.h
+-
+time.h
+-
+
+D:/dev/cpp/cmake_edu/main.cpp
+gen.h
+D:/dev/cpp/cmake_edu/gen.h
+ToDo.h
+D:/dev/cpp/cmake_edu/ToDo.h
+

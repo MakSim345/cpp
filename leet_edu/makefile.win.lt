@@ -1,0 +1,15 @@
+#makefile
+
+# !include <win32.mak>
+
+GEN = gen.h 
+PROGRAM = l33t.exe
+ALL_OBJ = l33t.obj
+GCC = cl
+
+$(PROGRAM): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(PROGRAM)
+
+l33t.obj: l33t.cpp $(GEN)
+	$(GCC) -c l33t.cpp
+

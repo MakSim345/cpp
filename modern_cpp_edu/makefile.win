@@ -1,0 +1,15 @@
+#makefile
+
+# !include <win32.mak>
+
+GEN = gen.h 
+PROGRAM = app.exe
+ALL_OBJ = main.obj
+GCC = cl
+
+$(PROGRAM): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(PROGRAM)
+
+mainc.obj: main.cpp $(GEN)
+	$(GCC) -c main.cpp
+

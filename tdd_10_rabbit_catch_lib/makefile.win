@@ -1,0 +1,18 @@
+#makefile
+
+# !include <win32.mak>
+
+GEN = gen.h 
+PROGRAM = run.exe
+GCC = cl
+ALL_OBJ = main.obj winner.obj turtle.obj rabbit.obj random_generator.obj
+CFLAGS = -Wall -g
+
+#Link the program:
+$(PROGRAM): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(PROGRAM)
+
+# All .o files depend on their corresponding .cpp file
+%.obj: %.cpp %.h $(GEN)
+	$(GCC) $(CFLAGS) -c $<
+

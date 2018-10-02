@@ -1,0 +1,18 @@
+#makefile
+
+# !include <win32.mak>
+
+GEN = gen.h 
+PROGRAM = ini_file_cfg.exe
+GCC = cl
+ALL_OBJ = mainc.obj utils.obj cfgfile.obj
+CFLAGS = -Wall -g
+
+#Link the program:
+$(PROGRAM): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(PROGRAM)
+
+# All .o files depend on their corresponding .cpp file
+%.obj: %.cpp %.h $(GEN)
+	$(GCC) $(CFLAGS) -c $<
+

@@ -1,0 +1,25 @@
+#makefile
+
+# !include <win32.mak>
+
+GEN = gen.h 
+PROGRAM = main.exe
+ALL_OBJ = main.obj cube_calc.obj oven.obj bread.obj
+GCC = cl
+
+$(PROGRAM): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(PROGRAM)
+
+mainc.obj: main.cpp bread.h cube_calc.h oven.h $(GEN)
+	$(GCC) -c main.cpp
+
+cube_calc.obj: cube_calc.cpp cube_calc.h $(GEN)
+	$(GCC) -c cube_calc.cpp
+
+bread.obj: bread.cpp bread.h $(GEN)
+	$(GCC) -c bread.cpp
+
+oven.obj: oven.cpp oven.h $(GEN)
+	$(GCC) -c oven.cpp
+
+

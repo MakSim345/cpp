@@ -1,0 +1,24 @@
+#makefile
+
+# !include <win32.mak>
+
+GEN = gen.h 
+RESULT_EXE = app.exe
+ALL_OBJ = main.obj cube_calc.obj trace.obj trace_logger.obj
+GCC = cl
+
+$(RESULT_EXE): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(RESULT_EXE)
+
+mainc.obj: main.cpp base.h cube_calc.h $(GEN)
+	$(GCC) -c main.cpp
+
+cube_calc.obj: cube_calc.cpp cube_calc.h $(GEN)
+	$(GCC) -c cube_calc.cpp
+
+trace.obj: trace.cpp trace.h $(GEN)
+	$(GCC) -c trace.cpp
+
+trace_logger.obj: trace_logger.cpp trace_logger.h $(GEN)
+	$(GCC) -c trace_logger.cpp
+

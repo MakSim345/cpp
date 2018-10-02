@@ -1,0 +1,21 @@
+#makefile
+
+# !include <win32.mak>
+
+GEN = gen.h 
+PROGRAM = tdd.exe
+GCC = cl
+ALL_OBJ = main.obj utils.obj error_message.obj patient.obj 
+CFLAGS = -Wall -g
+
+#Link the program:
+$(PROGRAM): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(PROGRAM)
+
+# All .o files depend on their corresponding .cpp file
+%.obj: %.cpp %.h $(GEN)
+	$(GCC) $(CFLAGS) -c $<
+
+clean:
+	rm -f *~ *.o *.obj *.exe $(TARGETS) $(GUI_TARGETS)
+	rm unit_test.cpp

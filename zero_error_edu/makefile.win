@@ -1,0 +1,18 @@
+#makefile
+
+# !include <win32.mak>
+
+GEN = gen.h 
+PROGRAM = run_div.exe
+GCC = cl
+ALL_OBJ = mainc.obj cTimer.obj phone_book.obj divide_by_zero.obj
+CFLAGS = -Wall -g
+
+#Link the program:
+$(PROGRAM): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(PROGRAM)
+
+# All .o files depend on their corresponding .cpp file
+%.obj: %.cpp %.h $(GEN)
+	$(GCC) $(CFLAGS) -c $<
+

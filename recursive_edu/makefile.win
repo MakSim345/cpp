@@ -1,0 +1,21 @@
+# Sample makefile
+
+!include <win32.mak>
+
+GEN = gen.h
+PROGRAM = app.exe
+ALL_OBJ = main.obj print_util.obj trace_logger.obj
+
+
+$(PROGRAM): $(ALL_OBJ)
+	link $(ALL_OBJ) /OUT:$(PROGRAM)
+
+main.obj: main.cpp
+	cl -c main.cpp
+
+print_util.obj: print_util.cpp print_util.h
+	cl -c print_util.cpp
+
+trace_logger.obj: trace_logger.cpp trace_logger.h $(GEN)
+	cl -c trace_logger.cpp
+

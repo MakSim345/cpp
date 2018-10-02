@@ -1,0 +1,16 @@
+# Sample makefile
+
+!include <win32.mak>
+
+all: main.exe
+
+PROGRAM = basic_sample.exe
+
+main.exe: main.obj utils.obj
+	link main.obj utils.obj
+
+main.obj: main.cpp
+	cl -c main.cpp
+
+utils.obj: utils.cpp utils.h
+	cl -c utils.cpp

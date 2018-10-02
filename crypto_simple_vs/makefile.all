@@ -1,0 +1,33 @@
+#####################################################################
+#                                                                   #
+#                              CHE                                  #
+#                         ~~~~~~~~~~~~~~                            #
+# Makefile for building CRYPTO exe. Common settings.                #
+#                                                                   #
+# NOTE 1: there are program compile flags, which must be set        # 
+# according to     code; see source files.                          #
+# NOTE 2: When you do modifications in source code so that included #
+# files change, you must do similar changes to this files by hand.  # 
+# This file must be updated every time you change include's.        #
+#                                                                   #
+# (c) Savcor One Oy, 2003                                           #
+#                                                                   #
+#####################################################################
+
+GEN = globals.h 
+
+ALL=  Mainc.CPP binary.cpp
+
+dscript : mainc.o binary.o 
+
+	$(CC) -o dcript mainc.o binary.o
+
+mainc.o : Mainc.CPP binary.h 
+	$(CC) -c Mainc.cpp  $(CFLAGS)
+
+binary.o : binary.cpp binary.h
+	$(CC) -c binary.cpp $(CFLAGS)
+
+clean :
+	del *.o
+	del dcript.exe

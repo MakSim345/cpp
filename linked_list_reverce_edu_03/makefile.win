@@ -1,0 +1,16 @@
+# Sample makefile
+
+!include <win32.mak>
+
+GEN = gen.h
+PROGRAM = app.exe
+ALL_OBJ = main.obj
+COMPILER = cl
+LINKER = link
+
+$(PROGRAM): $(ALL_OBJ)
+	$(LINKER) $(ALL_OBJ) /OUT:$(PROGRAM)
+
+main.obj: main.cpp
+	$(COMPILER) -c /MD main.cpp
+
