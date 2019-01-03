@@ -2,6 +2,9 @@
 *.slo
 *.lo
 
+# unit_test autogenrated:
+*test.cpp
+
 # VIM/GVIM session files
 *.vim
 
