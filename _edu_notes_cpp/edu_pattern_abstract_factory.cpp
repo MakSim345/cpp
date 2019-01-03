@@ -10,7 +10,7 @@ http://habrahabr.ru/blogs/cpp/129202/
 Исходя из названия легко догадаться, что это некая, определенная, фабрика (или завод), который создает объекты. Еще раз выражу слово определенная. Как и в реальной жизни фабрика имеет некую специализацию, создавая товары или устройства какого-либо определенного типа. И фабрика, которая выпускает, например, мебель, не может производить, например, еще и компоненты для смартфонов. По аналогии с программированием фабрика объектов может создавать только объекты определенного типа, которые используют единый интерфейс. Самыми главными преимуществами данного паттерна в С++, является упрощение создания объектов различных классов, использующих единый интерфейс. Зачастую библиотекам, которые разрабатывают программисты нужно не только уметь работать с определенными объектами, но и создавать их. Самый очевидный пример загрузка файлов различных форматов. Мы не знаем, какой файл мы будем загружать заранее, но у нас есть список возможных форматов. Пользователь указывает файл, библиотека пытается определить тип файла и вызвать соответствующий загрузчик для него. В большинстве случаев программисты использует конструкции типа switch или if, чтобы определить экземпляр какого класса им необходимо создать. И чем больше возможных вариантов появляется, тем больше разрастается эта конструкция, в последствии превращающиеся в уродливого монстра.
 
 "Что нам может предложить фабрика объектов?"
-Во-первых, простой метод создания объектов, который сократит switch/if до 1ой строчки.
+Во-первых, простой метод создания объектов, который сократит switch/if до одной строчки.
 Во-вторых, удобные методы для работы с объектами фабрики. Мы всегда точно можем узнать, зарегистрирован ли у нее определенный класс, количество зарегистрированных классов, а так же удобные методы для добавления и удаления экземпляров классов в фабрику. С помощью фабрики можно ограничивать набор возможных классов, которая она будет создавать, используя некую конфигурацию.
 
 
@@ -25,7 +25,7 @@ public:
     FooFactory();
     ~virtual FooFactory();
 
-    Foo * create(const std::string & id) const;   
+    Foo * create(const std::string & id) const;
 };
 
 
@@ -33,7 +33,7 @@ public:
 
 Разберем проблемы по порядку. Прежде чем создать объект, нужно добавить класс в фабрику. Очевидно, что нужна какая-та функция. Но как передать в функцию класс, а не объект?
 
-Как вариант, можно использовать стратегию клонирования. То есть создавать объект, помещать его в фабрику, а при вызове метода фабрики create вызывать функцию типа clone(). Вариант прямо скажем плохой, который заставляет программиста мало того что добавлять в интерфейс Foo функцию clone, и реализовывать ее во всех конкретных классах. И к тому же при добавлении объекта в фабрику нам нужно будет его создавать — то есть выделять для объекта память. А объекты могут быть достаточно тяжелыми. 
+Как вариант, можно использовать стратегию клонирования. То есть создавать объект, помещать его в фабрику, а при вызове метода фабрики create вызывать функцию типа clone(). Вариант прямо скажем плохой, который заставляет программиста мало того что добавлять в интерфейс Foo функцию clone, и реализовывать ее во всех конкретных классах. И к тому же при добавлении объекта в фабрику нам нужно будет его создавать — то есть выделять для объекта память. А объекты могут быть достаточно тяжелыми.
 
 Да конечно, в современном мире проблема памяти/производительности стоит не так остро, но С++ такой язык, который позволяет оптимизировать как и высокоуровневые конструкции, так и низкоуровневые и почему бы этим не пользоваться.
 
@@ -249,7 +249,7 @@ class ObjectFactoryException : public std::exception
 public:
     ObjectFactoryException(const std::string & msg) throw() : _msg(msg) {}
     virtual ~ObjectFactoryException() throw() {}
-  
+
     virtual const char * what() const throw()
     {
         return _msg.c_str();
@@ -276,7 +276,7 @@ public:
     {
         throw ObjectFactoryException(generateMessage("ObjectFactory - can't remove class (not registered)", type));
     }
-  
+
     void onDuplicateRegistered(const Type & type)
     {
         throw ObjectFactoryException(generateMessage("ObjectFactory - class already registered", type));
@@ -345,7 +345,7 @@ public:
     {
     }
 
-    virtual ~Creator()        
+    virtual ~Creator()
     {
     }
 
@@ -365,7 +365,7 @@ class ObjectFactoryException : public std::exception
 public:
     ObjectFactoryException(const std::string & msg) throw() : _msg(msg) {}
     virtual ~ObjectFactoryException() throw() {}
-  
+
     virtual const char * what() const throw()
     {
         return _msg.c_str();
@@ -408,7 +408,7 @@ public:
     {
         throw ObjectFactoryException(generateMessage("ObjectFactory - can't remove class (not registered)", type));
     }
-  
+
     void onDuplicateRegistered(const Type & type)
     {
         throw ObjectFactoryException(generateMessage("ObjectFactory - class already registered", type));
@@ -433,7 +433,7 @@ public:
 
     virtual ~ObjectFactory()
     {
-        for (typename FactoryMap::iterator it = _map.begin(), endIt = _map.end(); it != endIt; ++it)   
+        for (typename FactoryMap::iterator it = _map.begin(), endIt = _map.end(); it != endIt; ++it)
             delete it->second;
     }
 
@@ -472,8 +472,8 @@ public:
     {
         return _map.size();
     }
-  
-  
+
+
 protected:
     void registerClass(const IdType & id, AbstractFactory * pAbstractFactory)
     {
@@ -487,7 +487,7 @@ protected:
 
 private:
     ObjectFactory(const ObjectFactory&);
-    ObjectFactory& operator = (const ObjectFactory&);   
+    ObjectFactory& operator = (const ObjectFactory&);
 
     FactoryMap _map;
 };
@@ -512,11 +512,11 @@ enum Type
 };
 
 std::ostream & operator << (std::ostream & strm, const Type & type)
-{   
+{
     const char * names[] = {"foo", "bar", "masked"};
     if (type < firstType || type > lastType)
-        return strm << "unknown type(" << int(type) << ")";   
-    return strm << names[type];   
+        return strm << "unknown type(" << int(type) << ")";
+    return strm << names[type];
 };
 
 class Base
@@ -553,7 +553,7 @@ void checkType(TypeFactory & factory, Type type)
     std::cout << "Object with type : " << type;
     if (p.get())
     {
-        if (type == p->type())   
+        if (type == p->type())
             std::cout << " - successfully created\n";
         else
             std::cout << " - created, but type mismatch\n";
@@ -563,17 +563,17 @@ void checkType(TypeFactory & factory, Type type)
 }
 
 int main()
-{   
+{
     TypeFactory factory;
     factory.add<Foo>(fooType);
     factory.add<Bar>(barType);
     factory.add<MaskedFoo>(maskedType);
-  
+
     checkType(factory, fooType);
     checkType(factory, barType);
     checkType(factory, maskedType);
     checkType(factory, unknownType);
-  
+
     return 0;
 }
 
@@ -584,5 +584,5 @@ int main()
 
 Ссылки
 
-Если вас заинтересовали шаблоны проектирования, советую обратить внимание на эти книги. В книге А.Александреску очень хорошо переданы особенности синтаксиса С++ при работе с шаблонами. А в книге банды 4-х можно найти все самые популярные паттерны, используемые во многих языках программирования.
+Если вас заинтересовали шаблоны проектирования, советую обратить внимание на эти книги. В книге "А.Александреску" очень хорошо переданы особенности синтаксиса С++ при работе с шаблонами. А в книге банды 4-х можно найти все самые популярные паттерны, используемые во многих языках программирования.
 
