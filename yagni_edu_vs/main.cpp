@@ -19,10 +19,10 @@ public:
         // create gas and electric ovens:
         gasOven gas_oven = gasOven();
         electricOven elect_oven = electricOven();
-        
+
         // create bread Factory:
         BreadMaker breadmaker = BreadMaker();
-        
+
         // make the product:
         Bread *_my_bread = breadmaker.doBakeBread(gas_oven);
 
@@ -39,12 +39,13 @@ public:
 
 int main()
 {
-    std::auto_ptr <App> bakery(new App());
+    // std::auto_ptr <App> bakery(new App());
+    std::unique_ptr <App> bakery(new App());
     try
     {
         bakery->Run();
     }
-    
+
     catch (error_message err)
     {
         std::cout << "ERROR: ";

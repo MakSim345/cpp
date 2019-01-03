@@ -233,7 +233,8 @@ private:
 
 int main()
 {
-    std::auto_ptr <Prostotron> pc(new Prostotron());
+    // std::auto_ptr <Prostotron> pc(new Prostotron());
+    std::unique_ptr <Prostotron> pc(new Prostotron());
     
     PrintIntroduction();
 

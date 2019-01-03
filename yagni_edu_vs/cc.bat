@@ -1,7 +1,7 @@
 @echo off
 
 REM call "C:\[2] dev\set_visual_studio.bat"
-call "C:\dev\set_visual_studio.bat"
+REM call "C:\dev\set_visual_studio.bat
 REM call cls
 
 nmake -f makefile.win
