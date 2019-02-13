@@ -48,10 +48,10 @@ int test_foo()
     return 1;
 }
 
-void call_other(int t())
+void call_other(int pFunction_to_call())
 {
     std::cout << "call_other called! Now we'll call outside function:\n";
-    t();
+    pFunction_to_call();
 }
 
 void call_other_empty(int ())
@@ -137,7 +137,10 @@ void test_array_error()
 
 int &fun()
 {
+    std::cout << "Enter to fun()\n";
     static int x = 10;
+    std::cout << "x = " << x << "\n";
+    std::cout << "return value will be: " << x << "\n";
     return x;
 }
 
@@ -165,19 +168,48 @@ bool are_unique_characters(const std::string& str)
 	return true;
 }
 
+void test_fun_function()
+{
+    std::cout << "1. call fun()\n";
+    fun() = 500;
+
+    std::cout << "2. call fun()\n";
+    cout << fun();
+}
+
+void test_struct()
+{
+  struct S
+    {
+        long i;
+        char c;
+    } s;
+    
+    std::cout << sizeof(*(&s));
+}
+
+void test_increment()
+{
+    int five = 5;
+    std::cout << five++ << "\n";
+    std::cout << five << "\n";
+    //std::cout << << "\n";
+    //std::cout << << "\n";
+    //std::cout << << "\n";
+}
 
 int main()
 {
+    test_increment();
     // CubeCalc *cube_calc = new CubeCalc();
-    //std::auto_ptr <App> app(new App());
-    //app->run();    
+    // std::auto_ptr <App> app(new App());
+    // std::auto_ptr <CubeCalc> app(new CubeCalc());
+    // app->run();    
     
-    //test_foo();        
-    //call_other(test_foo);
+    // test_foo();        
+    // call_other(test_foo);
     // test_array_error();
-    
-    //fun() = 30;
-    //cout << fun();
+    // test_fun_function(); 
     // are_unique_characters("my_test");
     /*
     int x = 4;
@@ -191,13 +223,6 @@ int main()
     dispBits((unsigned)x, 1);
     */
 
-    struct S
-    {
-        long i;
-        char c;
-    } s;
-    
-    std::cout << sizeof(*(&s));
 
     return 1;
 }
