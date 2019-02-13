@@ -34,7 +34,7 @@ ____________________________
 int main()
 {
     base* b;
-    b=new derived1;
+    b = new derived1;
     delete b; // Here's the problem!
 }
 ____________________________
