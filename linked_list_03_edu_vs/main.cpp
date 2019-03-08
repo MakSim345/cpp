@@ -44,7 +44,7 @@ public:
     {
         int iRnd = getRndNumber(0, 10);
         lnNode = new ListNode(iRnd, NULL);
-        
+
         ListNode* tmpNode = NULL;
 
         iRnd = getRndNumber(0, 10);
@@ -69,17 +69,17 @@ public:
     }
 
     void addToList(int iValP)
-    {        
-        ListNode* tmpHead = lnNodePM;
-        while(tmpHead->next != NULL) 
+    {
+        ListNode* tmpTail = lnNodePM;
+        while(tmpTail->next != NULL)
         {
-            tmpHead = tmpHead->next;
+            tmpTail = tmpTail->next;
         }
-        tmpHead->next = new ListNode(iValP, NULL);
+        tmpTail->next = new ListNode(iValP, NULL);
     }
 
     void Run()
-    {        
+    {
         this->createLists();
         this->addTwoNumbers(lnNode, lnNodePM);
     }
@@ -140,7 +140,7 @@ int main()
 
         //my_list->Run();
         mySolution->Run();
-        
+
         long b1 = std::clock();
         std::cout << "Time END: " << b1 << "\n\n";
         std::cout << "Open file Time TOTAL: " << (b1-a1)/1000.0 << " sec.\n";
