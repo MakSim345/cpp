@@ -1,0 +1,29 @@
+#makefile
+
+# !include <win32.mak>
+
+GEN = gen.h 
+PROGRAM = doom.exe
+GCC = cl -c
+
+ALL = mainc.obj phone_book.obj cTimer.obj
+
+$(PROGRAM): $(ALL)
+	link $(ALL) /OUT:$(PROGRAM)
+
+mainc.obj: mainc.cpp $(GEN)
+	$(GCC) mainc.cpp
+
+phone_book.obj: phone_book.cpp phone_book.h $(GEN)
+	$(GCC) phone_book.cpp
+
+cTimer.obj: cTimer.cpp cTimer.h $(GEN)
+	$(GCC) cTimer.cpp
+
+# All .o files depend on their corresponding .cpp file
+#%.obj: %.cpp %.h $(GEN)
+#	$(CC) $(CFLAGS) -c $<
+
+clean:
+	del *.obj
+	del *.exe
