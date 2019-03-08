@@ -1,101 +1,106 @@
 #include "gen.h"
+#include "LinkedList.h"
 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode
+ * {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
 
-// Node class
-class Node 
-{ 
-public:
-    int         data;
-    Node*       next;
- 
-    // create a new node: a = new Node (1, NULL);
-    Node(int x, Node* addr) 
-    {
-        data = x;
-        next = addr;
-    }
-};
+ You are given two non-empty linked lists representing two non-negative integers.
+ The digits are stored in reverse order and each of their nodes contain a single digit.
+ Add the two numbers and return it as a linked list.
 
-class LinkedList
+ You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+ Example:
+ Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+ Output: 7 -> 0 -> 8
+ Explanation: 342 + 465 = 807.
+ */
+
+int getRndNumber(int, int);
+
+class Solution
 {
-private:
-    Node* head;
-
 public:
-    // initialize Linked list with a NULL head:
-    LinkedList() { head = NULL; }
-
-    // determinate if list is empty:
-    bool is_empty()
+    Solution()
     {
-        if (head == NULL) return 1;
-        else return 0;
+        //lnNode = new ListNode();
     }
 
-    // add an item to LinkedList:
-    void node_push(int val)
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
     {
-        Node* n = new Node(val, NULL);
-        // n->data = val;
-        n->next = head;
-        head = n;
-    }
-    
-    // add an item to LinkedList:
-    void node_add(int val)
-    {
-        if (head == NULL) 
-        {
-            head = new Node(val, NULL);
-        }
-        else
-        {
-            Node* n = head;
-            while(n->next != NULL) n = n->next;
-            n->next = new Node(val, NULL);            
-        }
+        return lnNode;
     }
 
-    // print a linked list
-    void print() 
+    ListNode* lnNode;
+    ListNode* lnNodePM;
+
+    void createLists()
     {
-        cout<<"[";
-        if(head != NULL) 
-        {
-            if(head->next == NULL) 
-            {
-                cout << head->data << "-" << head->next;
-            }
-            else 
-            {
-                Node* n = head;
-                while(n->next != NULL) 
-                {
-                    cout << n << ":" << n->data << "-" << n->next << " -> " ;
-                    n = n->next;
-                }
-                cout<<n->data;
-            }
-        }
-        cout<<"]\n";
+        int iRnd = getRndNumber(0, 10);
+        lnNode = new ListNode(iRnd, NULL);
+        
+        ListNode* tmpNode = NULL;
+
+        iRnd = getRndNumber(0, 10);
+        tmpNode = new ListNode(iRnd, NULL);
+        tmpNode->next = lnNode;
+        lnNode = tmpNode;
+
+        iRnd = getRndNumber(0, 10);
+        tmpNode = new ListNode(iRnd, NULL);
+        tmpNode->next = lnNode;
+        lnNode = tmpNode;
+
+        //---------------------------------
+        iRnd = getRndNumber(0, 10);
+        lnNodePM = new ListNode(iRnd, NULL);
+
+        iRnd = getRndNumber(0, 10);
+        addToList(iRnd);
+        iRnd = getRndNumber(0, 10);
+        addToList(iRnd);
+
     }
-    
+
+    void addToList(int iValP)
+    {        
+        ListNode* tmpHead = lnNodePM;
+        while(tmpHead->next != NULL) 
+        {
+            tmpHead = tmpHead->next;
+        }
+        tmpHead->next = new ListNode(iValP, NULL);
+    }
+
+    void Run()
+    {        
+        this->createLists();
+        this->addTwoNumbers(lnNode, lnNodePM);
+    }
+
 };
+
 
 
 class App
 {
-public: 
+public:
     int Run()
-    {   
+    {
         test();
         // create_list();
         // show_list( create_list() );
         // reverse( create_list() );
-        
+
         return 1;
     }
-    
+
     void test()
     {
         LinkedList L;
@@ -103,22 +108,12 @@ public:
         for (int i = 0; i<10; i++)
         {
             // std::cout << i << " - " << this->get_rnd_number() << "\n";
-            int i_rnd = get_rnd_number();
-            L.node_add(i_rnd);
-            L2.node_add(i_rnd);
+            int i_rnd = getRndNumber();
+            L.addNode(i_rnd);
+            L2.addNode(i_rnd);
         }
-        L.print();
-        L2.print();
-    }
-    
-    int get_rnd_number(int iMin=0, int iMax=101)
-    {
-        int _tmp_rand_value = 0;
-        int _retValue = 0;        
-
-        _tmp_rand_value = rand();
-        _retValue = ( iMin + int( (iMax - iMin + 1) * _tmp_rand_value /(RAND_MAX + 1.0) ) );
-        return _retValue;
+        L.printMe();
+        L2.printMe();
     }
 
     ~App()
@@ -136,14 +131,16 @@ public:
 
 int main()
 {
-    std::auto_ptr <App> my_list(new App());
+    std::unique_ptr <App> my_list(new App());
+    std::unique_ptr <Solution> mySolution(new Solution());
     try
-    { 
+    {
         long a1 = std::clock();
         std::cout << "Time Start: " << a1 << "\n";
 
-        my_list->Run();
-
+        //my_list->Run();
+        mySolution->Run();
+        
         long b1 = std::clock();
         std::cout << "Time END: " << b1 << "\n\n";
         std::cout << "Open file Time TOTAL: " << (b1-a1)/1000.0 << " sec.\n";
@@ -156,7 +153,7 @@ int main()
     __except (EXCEPTION_EXECUTE_HANDLER)
     {
         std::cout << "EXCEPTION_EXECUTE_HANDLER has number - " << EXCEPTION_EXECUTE_HANDLER << "\n";
-    }    
+    }
     */
     //std::string p;
     system("PAUSE");

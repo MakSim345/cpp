@@ -1,3 +1,4 @@
+#pragma once
 
 #include <stdio.h>
 
@@ -12,7 +13,7 @@
 #include <fstream>
 #include <map>
 #include <math.h>
-#include <Windows.h>
+// #include <Windows.h>
 
 using namespace std;
 
@@ -26,5 +27,17 @@ using namespace std;
 
 #define WIN32_APP
 #define RND_MAX 65536
+
+
+int getRndNumber(int iMinP=0, int iMaxP=101)
+{
+    int _tmp_rand_value = 0;
+    int _retValue = 0;
+
+    _tmp_rand_value = rand();
+    _retValue = ( iMinP + int( (iMaxP - iMinP + 1) * _tmp_rand_value /(RAND_MAX + 1.0) ) );
+    std::cout << _retValue << "\n";
+    return _retValue;
+}
 
 
