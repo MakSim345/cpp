@@ -85,11 +85,23 @@ void test_Clock()
     baseClock02->print();               // which method will call, base or derived?
 }
 
+void test_Cats()
+{
+    Cat *cats[] = {new Cat, new CheshireCat};
+    std::cout << "Ordinary Cat:" << std::endl; cats[0]->AskForFood();
+    std::cout << "CheshireCat" << std::endl; cats[1]->AskForFood();
+
+    delete cats[0];
+    delete cats[1];
+}
+
+
 int main()
 {
+    test_Cats();
     // test_Clock();
 
-    test_CallFunction();
+    // test_CallFunction();
 
     // CubeCalc *cube_calc = new CubeCalc();
     //std::auto_ptr <CubeCalc> cube_calc(new CubeCalc());
@@ -98,9 +110,9 @@ int main()
     //std::auto_ptr <App> virt_test(new App());
     //virt_test->Run();
     
-    // test_foo();
+    // test_foo();    
 
-    
-
+    printf ("Application complete.\n");
+    system ("PAUSE");
     return 1;
 }

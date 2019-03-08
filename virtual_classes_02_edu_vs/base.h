@@ -3,6 +3,30 @@
 
 #include "gen.h"
 
+class Cat
+{
+public:
+    virtual ~Cat() {sayGoodBye();} // if this is not virtual, only this will be called
+    void AskForFood() const
+    {
+        speak();
+        eat();
+    }
+    virtual void speak() const {std::cout << " Meow! " << std::endl;}
+    virtual void eat()   const {std::cout << " *yami-yami* " << std::endl;}
+    virtual void sayGoodBye() const {std::cout << " Meow-meow! " << std::endl;}
+};
+
+class CheshireCat : public Cat
+{
+public:
+    ~CheshireCat() {sayGoodBye();}
+    virtual void speak() const {std::cout << " WTF! Where is my milk? =)" << std::endl;}
+    // virtual void eat()   const {std::cout << " *yami-yami* " << std::endl;}
+    virtual void sayGoodBye() const {std::cout << " Bye-Bye! " << std::endl;}
+};
+
+
 class Clock
 {
 public:
