@@ -28,4 +28,10 @@ struct ListNode
     }
 };
 
+struct MyNode
+{
+    int            data;
+    struct MyNode* next;
+};
+
 

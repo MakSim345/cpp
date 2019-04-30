@@ -86,8 +86,6 @@ public:
 
 };
 
-
-
 class App
 {
 public:
@@ -129,17 +127,71 @@ public:
     }
 };
 
+class InsertToHead
+{
+public:    
+    InsertToHead()
+    {
+        // init random generator:
+        srand((unsigned)time(0));
+        rand();
+    }
+    void insert(int x)
+    {
+        MyNode* temp = new MyNode();
+        temp->data = x;
+        temp->next = head;
+        head = temp;
+    }
+
+    void print()
+    {
+        MyNode* temp = head;
+        while (temp != NULL)
+        {
+            printf(" %d", temp->data);
+            temp = temp->next;
+        }
+        printf(" \n");
+    }
+
+    int Run()
+    {
+        head = NULL;
+        int i, n, x;
+        printf ("How many numbers?\n");        
+        scanf("%d", &n);
+        for (i=0; i <n; i++)
+        {
+            printf ("enter the number: \n");
+            scanf("%d", &x);
+            this->insert(x);
+            this->print();
+        }
+        return 1;
+    }
+
+    ~InsertToHead()
+    {
+        std::cout << "\nGood bye!\n";
+    }
+
+    struct MyNode* head;
+};
+
 int main()
 {
     std::unique_ptr <App> my_list(new App());
     std::unique_ptr <Solution> mySolution(new Solution());
+    std::unique_ptr <InsertToHead> insertToHead(new InsertToHead());
     try
     {
         long a1 = std::clock();
         std::cout << "Time Start: " << a1 << "\n";
 
-        //my_list->Run();
-        mySolution->Run();
+        // my_list->Run();
+        // mySolution->Run();
+        insertToHead->Run();
 
         long b1 = std::clock();
         std::cout << "Time END: " << b1 << "\n\n";
