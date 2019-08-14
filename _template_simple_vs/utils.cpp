@@ -1,7 +1,5 @@
 #include "gen.h" 
 #include "utils.h"
-#define RND_MAX 65536
-
 
 extern long g_lTimeTick;
 
@@ -12,7 +10,7 @@ int produceRND()
  
  if (1 == nFirstTime)
  {
-  srand (time (NULL));
+  srand ((unsigned)time (NULL));
   nFirstTime = 0;
  }
  random = 1 + (rand() % RND_MAX);

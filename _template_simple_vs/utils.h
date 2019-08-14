@@ -1,15 +1,10 @@
-#ifndef UTILS_H
-#define UTILS_H		
+#pragma once
 /*********************************************************************
 
   utils.h  
-  01.10.2004 Initial coding YS 
   
 **********************************************************************/
-#ifdef WIN32_APP
-  #include <Windows.h>
-#endif
-		
+
 void AddTimeStamp(int *pos,char * msg);
 void AddStringPan(char * destStr, char * strToAdd,int len);
 void AddShortTimeStamp(int *pos,char * msg);
@@ -37,7 +32,3 @@ private:
     LARGE_INTEGER m_liStart;
     LARGE_INTEGER m_liEnd;
 };
-
-
-
-#endif
