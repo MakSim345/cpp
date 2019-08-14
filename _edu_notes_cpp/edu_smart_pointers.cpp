@@ -215,4 +215,270 @@ std::auto_ptr
 
 В-третьих, существует проблема циклических ссылок. Рассматривать ее здесь не буду, чтобы не увеличивать статью. Так же остались нерассмотренными boost::weak_ptr, boost::intrusive_ptr и указатели для массивов.
 
-Кстати, smart pointers достаточно хорошо описаны у Джеффа Элджера в книге «С++ for real programmers».
+Кстати, smart pointers достаточно хорошо описаны у Джеффа Элджера в книге "С++ for real programmers".
+
+=============================================================
+Шпаргалка по использованию умных указателей в C++
+26 февраля 2018
+
+Благодаря наличию исключений, язык C++ позволяет разделить основную логику приложения и обработку ошибок, не мешая их в одну кучу. Что есть очень хорошо. Однако теперь по коду нельзя с уверенностью сказать, где может быть прервано его исполнение. Отсюда возникает опасность утечки ресурсов. Проблема эта решается при помощи деструкторов и идиомы RAII. Впрочем, придерживаться этой идиомы становится проблематично при использовании указателей. Особенно при использовании их не как членов класса, а просто как переменных в методах. На наше с вами счастье, в стандартной библиотеке языка есть умные указатели (smart pointers), придуманные именно для этого случая. Поскольку на C++ я пишу не регулярно, то иногда забываю некоторые нюансы использования умных указателей, в связи с чем решил вот набросать небольшую шпаргалку.
+
+Важно! 
+В старых книжках и статьях можно встретить упоминание auto_ptr. Этот тип умных указателей появился в C++, когда в языке еще не было move semantics. Из-за этого использование auto_ptr порой может приводить к трудным в обнаружении ошибкам. В стандарте C++17 auto_ptr был удален. Другими словами, все, что вы должны знать об auto_ptr — это то, что его не должно быть в современном коде. Вместо него всегда используйте unique_ptr.
+
+1. unique_ptr
+Шаблонный класс unique_ptr представляет собой уникальный указатель на объект. Указатель нельзя копировать, но можно передавать владение им с помощью std::move. При уничтожении указателя автоматически вызывается деструктор объекта, на который он указывает.
+
+Создается unique_ptr так:
+
+std::unique_ptr<SomeClass> unq(new SomeClass(/* ctor args */));
+
+… но обычно используют шаблон make_unique, так короче:
+
+auto unq = std::make_unique<SomeClass>(/* ctor args */);
+
+Класс unique_ptr перегружает оператор ->, что позволяет обращаться к полям класса и вызывать его методы, словно мы работаем с обычным указателем:
+
+unq->sayHello();
+
+Как уже отмечалось, unique_ptr запрещено копировать:
+
+// will not compile!
+auto cpy = unq;
+
+Однако владение им можно передать при помощи std::move, например:
+
+auto mov = std::move(unq);
+// unq is invalid now!
+mov->sayHello();
+
+Плюс к этому, мы всегда можем получать из unique_ptr обычный указатель на объект:
+
+SomeClass* ptr = mov.get();
+ptr->sayHello();
+
+… хотя это и является code smell. Кроме того, ничто не мешает создавать ссылки (reference) на unique_ptr:
+
+auto& ref = mov;
+ref->sayHello();
+
+То есть, в этом случае мы как бы не отнимаем владение объектом, а ненадолго одалживаем его, обращаясь к нему через все тот же умный указатель.
+
+Интересно, что unique_ptr позволяет указать функцию, которую он будет вызывать вместо деструктора, так называемый custom deleter. Это позволяет использовать unique_ptr с ресурсами, возвращаемых из библиотек для языка C, и даже реализовать аналог defer из языка Go:
+
+/* g++ custom-deleter.cpp -o custom-deleter */
+
+#include <memory>
+#include <functional>
+#include <iostream>
+#include <stdio.h>
+
+template<typename T>
+using auto_cleanup = std::unique_ptr<T,std::function<void(T*)>>;
+
+static char dummy[] = "";
+
+#define _DEFER_CAT_(a,b) a##b
+#define _DEFER_NAME_(a,b) _DEFER_CAT_(a,b)
+#define defer(...) \
+  auto _DEFER_NAME_(_defer_,__LINE__) = \
+    auto_cleanup<char>(dummy, [&](char*) { __VA_ARGS__; });
+
+int main() 
+{
+    auto_cleanup<FILE> f(
+        fopen("test.txt", "w"),
+        [](FILE* f) { fclose(f); }
+    );
+
+    defer( std::cout << "Bye #1" << std::endl );
+    defer( std::cout << "Bye #2" << std::endl );
+
+    fwrite("Hello!\n", 7, 1, f.get());
+}
+
+Заметьте, что в макросе "defer" нам пришлось передать в unique_ptr фиктивный указатель. Если бы мы передали nullptr, custom deleter не был бы вызван.
+
+Важно! 
+Если в умном указателе вы держите указать на массив объектов, то обязаны указать custom deleter, вызывающий для этого массива delete[] вместо delete. Если этого не сделать, будет освобожден только первый объект из массива, остальные же утекут.
+
+2. shared_ptr и weak_ptr
+
+Класс shared_ptr является указатем на объект, которым владеет сразу несколько объектов. Указатель можно как перемещать, так и копировать. Число существующих указателей отслеживается при помощи счетчика ссылок. Когда счетчик ссылок обнуляется, вызывается деструктор объекта. Сам по себе shared_ptr является thread-safe, но он не делает магическим образом thread-safe объект, на который ссылается. То есть, если доступ к объекту может осуществляться из нескольких потоков, вы должны не забыть предусмотреть в нем мьютексы или что-то такое.
+
+Для создания shared_ptr обычно используется шаблон "make_shared":
+
+auto ptr = std::make_shared<SomeClass>(/* ctor args */);
+
+В остальном работа с ним мало отличается от работы с unique_ptr, за тем исключением, что shared_ptr можно смело копировать.
+
+Интересные грабли при использовании shared_ptr заключается в том, что с его помощью можно создать циклические ссылки. Например, есть два объекта. Первый ссылается при помощи shared_ptr на второй, а второй — на первый. Даже если ни на один из объектов нет других ссылок, счетчики ссылок никогда не обнулятся, и объекты никогда не будут уничтожены.
+
+Эта проблема обходится при помощи weak_ptr, так называемого слабого указателя. Класс weak_ptr похож на shared_ptr, но не участвует в подсчете ссылок. Также у weak_ptr есть метод lock(), возвращающий временный shared_ptr на объект. Пример использования:
+
+#include <memory>
+#include <iostream>
+
+class SomeClass 
+{
+public:
+    void sayHello() 
+    {
+        std::cout << "Hello!" << std::endl;
+    }
+
+    ~SomeClass() 
+    {
+        std::cout << "~SomeClass" << std::endl;
+    }
+};
+
+int main() 
+{
+    std::weak_ptr<SomeClass> wptr;
+
+    {
+        auto ptr = std::make_shared<SomeClass>();
+        wptr = ptr;
+
+        if(auto tptr = wptr.lock()) 
+        {
+            tptr->sayHello();
+        } 
+        else 
+        {
+            std::cout << "lock() failed" << std::endl;
+        }
+    }
+
+    if(auto tptr = wptr.lock()) 
+    {
+        tptr->sayHello();
+    }
+    else 
+    {
+        std::cout << "lock() failed" << std::endl;
+    }
+}
+
+Программа выведет:
+
+Hello!
+~SomeClass
+lock() failed
+Можно думать о weak_ptr как об указателе, позволяющим получить временное владение объектом. Само собой разумеется, если все постоянные указатели на объект перестанут существовать, и останутся только временные, полученные при помощи метода lock() класса weak_ptr, объект продолжит свое существование. Он будет уничтожен только тогда, когда на объект не останется вообще никаких указателей.
+
+3. Умные указатели и наследование
+Вопрос, о котором часто забывают — это кастование умных указателей вверх и вниз по иерархии классов. Для shared_ptr в стандартной библиотеке есть шаблоны static_pointer_cast, dynamic_pointer_cast и другие. Для unique_ptr таких же шаблонов почему-то не занесли, но их нетрудно найти на StackOverflow.
+
+Пример кода:
+
+#include <memory>
+#include <iostream>
+
+// https://stackoverflow.com/a/21174979/1565238
+template<typename Derived, typename Base, typename Del>
+std::unique_ptr<Derived, Del> 
+static_unique_ptr_cast( std::unique_ptr<Base, Del>&& p )
+{
+    auto d = static_cast<Derived *>(p.release());
+    return std::unique_ptr<Derived, Del>(d,
+        std::move(p.get_deleter()));
+}
+
+template<typename Derived, typename Base, typename Del>
+std::unique_ptr<Derived, Del> 
+dynamic_unique_ptr_cast( std::unique_ptr<Base, Del>&& p )
+{
+    if(Derived *result = dynamic_cast<Derived *>(p.get())) 
+    {
+        p.release();
+        return std::unique_ptr<Derived, Del>(result,
+            std::move(p.get_deleter()));
+    }
+    return std::unique_ptr<Derived, Del>(nullptr, p.get_deleter());
+}
+
+class Base 
+{
+public:
+    Base(int num): num(num) {};
+
+    virtual void sayHello() 
+    {
+        std::cout << "I'm Base #" << num << std::endl;
+    }
+
+    virtual ~Base() 
+    { 
+        std::cout << "~Base #" << num << std::endl;
+    }
+
+protected:
+    int num;
+};
+
+class Derived: public Base 
+{
+public:
+    Derived(int num): Base(num) {}
+
+    virtual void sayHello() 
+    {
+        std::cout << "I'm Derived #" << num << std::endl;
+    }
+
+    virtual ~Derived()
+    { 
+        std::cout << "~Derived #" << num << std::endl;
+    }
+};
+
+void testUnique() 
+{
+    std::cout << "=== testUnique begin ===" << std::endl;
+
+    auto derived = std::make_unique<Derived>(1);
+    derived->sayHello();
+
+    std::unique_ptr<Base> base = std::move(derived);
+    base->sayHello();
+
+    auto derived2 = static_unique_ptr_cast<Derived>(std::move(base));
+    derived2->sayHello();
+
+    std::unique_ptr<Base> base2 = std::make_unique<Derived>(2);
+    base2->sayHello();
+
+    std::cout << "=== testUnique end ===" << std::endl;
+}
+
+void testShared() 
+{
+    std::cout << "=== testShared begin ===" << std::endl;
+
+    auto derived = std::make_shared<Derived>(1);
+    derived->sayHello();
+
+    auto base = std::static_pointer_cast<Base>(derived);
+    base->sayHello();
+
+    auto derived2 = std::static_pointer_cast<Derived>(base);
+    derived2->sayHello();
+
+    std::shared_ptr<Base> base2 = std::make_shared<Derived>(2);
+    base2->sayHello();
+
+    std::cout << "=== testShared end ===" << std::endl;
+}
+
+int main() 
+{
+    testUnique();
+    testShared();
+}
+
+Как видите, все оказалось не так уж и сложно.
+
+Заключение
+По моим представлениям, приведенной шпаргалки должно хватать в ~99% реальных задач. В оставшемся же 1% случаев вам поможет документация на cppreference.com. Впрочем, я не являюсь гуру C++, и вполне мог о чем-то забыть или чего-то не учесть. Так что, если вы видите в приведенном тексте какие-либо косяки, или вам есть, что к нему добавить, не стесняйтесь воспользоваться комментариями!

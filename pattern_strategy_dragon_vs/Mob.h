@@ -21,11 +21,11 @@ public:
       void setAttackBehavior(IAttackBehavior* b);
 
       // various getters and setters for name and HP:
-      void setHP(int hp) 
-      { 
-          (this->_hp = hp); 
+      void setHP(int hp)
+      {
+          (this->_hp = hp);
       }
-      inline int getHP() const 
+      inline int getHP() const
       {
           return (this->_hp);
       }
