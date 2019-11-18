@@ -1,0 +1,20 @@
+2023 ; read from cell 23 to accum
+2121 ; save const to loop counter
+2099 ; read from cell 99 to accum
+3020 ; add to accum number from cell 20
+2199 ; save accum to cell 99
+2021 ; read loop counter from cell 21 to accum
+3120 ; SUBTRACT accum to number from cell 20
+2121 ; save new counter number to cell 21
+1199 ; print value from cell 99
+1121 ; print value from cell 21
+4290 ; Branch ZERO to cell 90 (HALT)
+4002 ; if not zero: goto cell 02
+0000 ;
+
+DATA:
+CELL 20: 01; incrementor
+CELL 23: 20; const iteration number. copy to var
+CELL 90: 4300; HALT
+
+
