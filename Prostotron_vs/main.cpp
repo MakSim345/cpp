@@ -30,17 +30,19 @@ public:
      while (!EndFlag) 
      {
       do 
-      {
+      { 
+        if (memory->getCellNumber() == 0)
+        {
+              memory->printMemoryDump();
+              // do nothing, because dump print anyway.
+        }
         memory->printCurCellNumber();
-        std::cout << " > ";
+        std::cout << " [";
+        memory->printCellValue();
+        std::cout << "] > ";
         std::getline (std::cin, strInput);
 
-        if (strInput.compare(strDump) == 0) // show dump immediately
-        {
-            // memory->printMemoryDump();
-            // do nothing, because dump print anyway.
-        }
-        else if (strInput.compare("") == 0) // no changes to current memory cell, increment counter.
+        if (strInput.compare("") == 0) // no changes to current memory cell, increment counter.
         {
             memory->cellCtrIncrement();
         }

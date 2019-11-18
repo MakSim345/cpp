@@ -5,7 +5,7 @@
 //*****************************************
 // Class Processor implementation
 
-void Processor::runProgramInMemory(int traceP)
+void Processor::runProgramInMemory(const int isTraceP)
     /*
       MemCell* memory //pointer to an array!,
       Processor* pProc,
@@ -15,8 +15,7 @@ void Processor::runProgramInMemory(int traceP)
     std::string cInput("0");
     std::string cInTrace("0");
 
-    mIsTrace = traceP;
-    setInstructionCounter(START_ADDRESS); // set counter to the start == 0
+    setInstructionCounter(MEMORY_START_ADDRESS); // set counter to the start == 0
 
     do
      {
@@ -27,12 +26,20 @@ void Processor::runProgramInMemory(int traceP)
         // save an address of memory cell where data is:
         mMemory->setCellCounter(getOperand());
 
-        if (mIsTrace)
+        if (isTraceP)
         {
             mMemory->printMemoryDump ();
             this->printProcessorState();
             std::cout << "\nPress Enter to TRACE >> ";
             std::getline (std::cin, cInTrace);
+            if (cInTrace.length())
+            {
+                printf ("*******************************************************\n");
+                printf ("STOP. TRACE interrupted by user!\n");
+                printf ("\n*******************************************************\n");
+                StopFlag = 1;
+                break;
+            }
         }
 
         switch ( this->getOpCode() )
@@ -59,22 +66,22 @@ void Processor::runProgramInMemory(int traceP)
             this->incInctructionCounter();
             break;
 
-        case STORE: // 21 - //save a word from accumulator to memory cell
+        case STORE: // 21 - save a word from accumulator to memory cell
             mMemory->setCellValue(this->getAccumulator());
             this->incInctructionCounter();
             break;
 
-         case ADD:
+         case ADD: // 30 - 
             this->setAccumulator(this->getAccumulator() + mMemory->getCellValue());
             this->incInctructionCounter();
             break;
 
-         case SUBTRACT:
+         case SUBTRACT: // 31
             this->setAccumulator(this->getAccumulator() - mMemory->getCellValue()); //
             this->incInctructionCounter();
             break;
 
-         case DIVIDE:
+         case DIVIDE: // 32
             if (this->getAccumulator() == 0)
             {
                 printf ("ERROR: divide to zero!\n");
@@ -121,7 +128,7 @@ void Processor::runProgramInMemory(int traceP)
             StopFlag = 1;
         }// case
 
-        if (mIsTrace)
+        if (isTraceP)
         {
           //mMemory->printMemoryDump ();
           //this->printProcessorState();
@@ -137,7 +144,6 @@ void Processor::runProgramInMemory(int traceP)
 };
 // constructor / destructor:
 Processor::Processor()
-    : mIsTrace(0)
 {
     setAccumulator(0);
     setInstructionCounter(0);

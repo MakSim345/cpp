@@ -39,7 +39,7 @@ public:
     void setOperand(int);//
     int  getOperand();//
     void printOperand();
-    void runProgramInMemory(int _n_trace = 0);
+    void runProgramInMemory(const int _n_trace = 0);
 
     void getMemory(Memory* externalMemoryP) {mMemory = externalMemoryP;}
 
@@ -51,7 +51,6 @@ private:
     int mInstructionRegister;
     int mOpCode;
     int mOperand;//
-    int mIsTrace;
 
     std::string getOpCodeDesctiption(int _opCode);
 

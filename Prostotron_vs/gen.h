@@ -37,7 +37,7 @@
 #define BRANCHZERO 42
 #define HALT       43 // Total stop
 
-#define START_ADDRESS 0
+#define MEMORY_START_ADDRESS 0
 #define MEMORY_SIZE   100
 
 #define ASM 1
