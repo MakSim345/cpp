@@ -26,4 +26,42 @@ private:
     LARGE_INTEGER m_liEnd;
 };
 
+//====================================================================
+#include <sys/timeb.h>
+class msTimer 
+{
+public:
+    msTimer() { restart(); }
+    void restart() { ftime(&t_start);}
+
+    float elapsedMs()
+    {
+        timeb t_now;
+        ftime(&t_now);
+        return (float)(t_now.time - t_start.time) * 1000.0f +
+            (float)(t_now.millitm - t_start.millitm);
+    }
+
+private:
+    timeb t_start;
+};
+
+/* Example of usage:
+ *
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
+int main(int argc, char** argv) 
+{
+    msTimer t;
+    for (int i = 0; i < 5000000; i++)
+        ;
+    std::cout << t.elapsedMs() << endl;
+    return 0;
+}
+* 
+* */
+
 #endif
