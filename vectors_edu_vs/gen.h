@@ -5,6 +5,7 @@
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
 #define TIME_TICK_INTERVAL 1000
+#define SIZE5000 5000
 
 // This didn't work:
 // #define rdtsc __asm __emit 0fh __asm __emit 031h
@@ -23,4 +24,5 @@
 #include <iostream>
 #include <sstream>
 #include <map>
+
 using namespace std;

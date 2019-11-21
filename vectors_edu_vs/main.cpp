@@ -9,6 +9,61 @@
 #include <ctime>
 
 
+class SuperList
+{
+public:
+    SuperList()
+    {
+        mRandomNumbers.push_back(23);
+        mRandomNumbers.push_back(24);
+        mRandomNumbers.push_back(25);
+        // mRandomNumbers (10, 23);
+        // mRandomNumbers{ 10, 20, 30 };
+    }
+   ~SuperList();
+
+   vector <int>& getMyListUnsafely()
+   {
+       // call getMyListUnsafely().clear() will erase the list
+       return mRandomNumbers;
+   }
+
+   const vector <int>& getMyListSafely() // rem: const keyword !
+   {
+       return mRandomNumbers;
+   }
+
+   int getMySize()
+   {
+       return mRandomNumbers.size();
+   }
+
+private:
+
+    vector <int> mRandomNumbers;
+
+};
+
+typedef struct {
+    long len;
+    float *data;
+} vec;
+
+long vec_len(vec *v)
+{
+    return v->len;
+}
+
+void combine0(vec *v, float *dest)
+{
+    long i;
+    *dest = 1;
+    for (i = 0; i <vec_len(v); i++ )
+    {
+        *dest *= v->data[i];
+    }
+}
+
 template <class My_Type>
 My_Type maximum (My_Type value_1, My_Type value_2)
 {
@@ -38,27 +93,6 @@ int main(int argc, char *argv[], char *envp[])
     printf ("main - start\n");
     CTimer *_time = new CTimer ();
 
-#ifdef FILE_OUTPUT
-    int nOpenFileToken = 0;
-    char *FileNameF = "TimeSt.log";
-    FILE *fi = NULL;
-
-    // open the file for input:
-    if ( (fi = fopen(FileNameF, "a+") ) != NULL)
-    {
-        //printf ("file %s was open succesfully\n", FileNameF);
-        nOpenFileToken = 1;
-    }
-    else
-    {
-        printf ("file %s was not open\n", FileNameF);
-        getchar(); // pause
-        nOpenFileToken = 0;
-    }
-
-    fprintf(fi, "Start time: %d\n", Get1msTime());
-#endif// FILE_OUTPUT
-
     if (argc >= 2)
     {
         // i = atoi(argv[1]);
@@ -72,7 +106,26 @@ int main(int argc, char *argv[], char *envp[])
     char* word1 = "Hello";
     char* word2 = "Hello";
 
-    // word2[2] = 'x';
+    float a[SIZE5000];
+    vec v = {SIZE5000, a};
+
+    float res;
+    for (long i = 0; i < SIZE5000; i++ )
+    {
+        a[i] = rand();
+    }
+
+    combine0(&v, &res);
+    /*
+    SuperList* mySuperList = new SuperList();
+    
+    mySuperList->getMyListSafely();
+    int a = mySuperList->getMySize();
+
+    mySuperList->getMyListUnsafely().clear();
+    a = mySuperList->getMySize();
+    */
+    
 
     if( word1 == word2 )
         printf("equal\n");
@@ -170,4 +223,6 @@ int main(int argc, char *argv[], char *envp[])
 printf ("Application complete.\n");
 return 0;
 }
+
+
 
