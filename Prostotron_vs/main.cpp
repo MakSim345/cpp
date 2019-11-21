@@ -42,7 +42,7 @@ public:
         std::cout << "] > ";
         std::getline (std::cin, strInput);
 
-        if (strInput.compare("") == 0) // no changes to current memory cell, increment counter.
+        if (strInput.compare("") == 0) // no changes to current memory cell, increment program counter.
         {
             memory->cellCtrIncrement();
         }
@@ -76,7 +76,7 @@ public:
           {
             if (memory->setCellValue(strInput.c_str())) // avoid incorrect values!
             {
-                // and increment counter:
+                // and increment cell counter:
                 memory->cellCtrIncrement();
             }
           }
@@ -155,8 +155,9 @@ public:
                 {
                     memory->printMemoryDump();
                 }
+
+                std::cout << "Load from binary file " << cFileName << " complete.\n";
             }
-            std::cout << "Load from binary file " << cFileName << " complete.\n";
         }
 
         else if ( (strInput.c_str()[0] == 'p') && (strInput.c_str()[1] == 'r') && (strInput.c_str()[2] == 'i') && (strInput.c_str()[3] == 'n') && (strInput.c_str()[4] == 't') )
@@ -175,6 +176,7 @@ public:
             
             std::ofstream outputAsciiFile;
             outputAsciiFile.open (cFileName, std::ios::app);
+            // char tmpbuf[20];
 
             for (i=0; i<MEMORY_SIZE; i++)
             {
@@ -182,7 +184,9 @@ public:
                 memory->setCellCounter(i);
                 nClVal = memory->getCellValue();
                 //nClVal = memory->getCellNumber();
-                outputAsciiFile << formatMemoryCellToPrint(nClNum, nClVal) << std::endl;
+                // outputAsciiFile << formatMemoryCellToPrint(nClNum, nClVal) << std::endl;
+                formatMemoryCellToPrint(nClNum, nClVal, tmpbuf);
+                outputAsciiFile << tmpbuf << std::endl;
                 // std::putf("this is a number: %d\n",i);
             }
             outputAsciiFile.close();

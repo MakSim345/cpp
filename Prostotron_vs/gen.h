@@ -16,6 +16,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// NO Operation
+#define NOOP   0 // read a word from the terminal to the memory cell
 
 // Input-Output operations:
 #define READ   10 // read a word from the terminal to the memory cell

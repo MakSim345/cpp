@@ -61,43 +61,45 @@ void PrintHelpInfo(int is_asm)
 };
 
 
-char * formatMemoryCellToPrint(int nClNum, int nClVal)
+// char * formatMemoryCellToPrint(int nClNum, int nClVal)
+void formatMemoryCellToPrint(int nClNum, int nClVal, char* tmpbuf)
 {
-    char tmpbuf[20];
+    // char tmpbuf[20];
 
     // sprintf(tmpbuf, "%s", cInput.c_str() + PRINT_LEN);
+    // tmpbuf += sprintf( tmpbuf, "0%d :", nClNum);
     
     if (nClNum < 10)
-        sprintf( tmpbuf, "0%d :", nClNum);
+        tmpbuf += sprintf( tmpbuf, "0%d :", nClNum);
     else
-        sprintf( tmpbuf, "%d :", nClNum);
+        tmpbuf += sprintf( tmpbuf, "%d :", nClNum);
 
     if (nClVal == 0)
     {
-        sprintf (tmpbuf, "  +0000\n");
+        sprintf (tmpbuf, "  +0000");
     }
     else if (nClVal > 0)
     {
         if (nClVal < 10)
-            sprintf ( tmpbuf, "  +000%d\n", nClVal);
+            sprintf ( tmpbuf, "  +000%d", nClVal);
         else if (nClVal < 100)
-            sprintf ( tmpbuf, "  +00%d\n", nClVal);
+            sprintf ( tmpbuf, "  +00%d", nClVal);
         else if (nClVal < 1000)
-            sprintf ( tmpbuf, "  +0%d\n", nClVal);
+            sprintf ( tmpbuf, "  +0%d", nClVal);
         else if (nClVal < 10000)
-            sprintf ( tmpbuf, "  +%d\n", nClVal);
+            sprintf ( tmpbuf, "  +%d", nClVal);
     }
     else
     {
         if (nClVal > -10)
-            sprintf ( tmpbuf, "  -000%d\n", nClVal *(-1) );
+            sprintf ( tmpbuf, "  -000%d", nClVal *(-1) );
         else if (nClVal > -100 )
-            sprintf ( tmpbuf, "  -00%d\n", nClVal *(-1));
+            sprintf ( tmpbuf, "  -00%d", nClVal *(-1));
         else if (nClVal > -1000)
-            sprintf ( tmpbuf, "  -0%d\n", nClVal *(-1));
+            sprintf ( tmpbuf, "  -0%d", nClVal *(-1));
         else if (nClVal > -10000)
-            sprintf ( tmpbuf, "  -%d\n", nClVal *(-1));
+            sprintf ( tmpbuf, "  -%d", nClVal *(-1));
     }
 
-    return tmpbuf;
+    // return tmpbuf;
 }

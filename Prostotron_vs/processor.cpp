@@ -15,12 +15,12 @@ void Processor::runProgramInMemory(const int isTraceP)
     std::string cInput("0");
     std::string cInTrace("0");
 
-    setInstructionCounter(MEMORY_START_ADDRESS); // set counter to the start == 0
+    setProgramCounter(MEMORY_START_ADDRESS); // set counter to the start == 0
 
     do
      {
         // copy next memory cell to the instruction register IR:
-        this->setInstructionRegister(mMemory->getCellValue(this->getInstructionCounter()) );
+        this->setInstructionRegister(mMemory->getCellValue(this->getProgramCounter()) );
         // get an operation code and operand from IR:
         this->decodeInstruction();
         // save an address of memory cell where data is:
@@ -49,7 +49,7 @@ void Processor::runProgramInMemory(const int isTraceP)
             std::getline (std::cin, cInput);
 
             mMemory->setCellValue(cInput.c_str()); //
-            this->incInctructionCounter();
+            this->incProgramCounter();
             break;
 
          case WRITE:// 11 - print a word from the memory cell to the terminal
@@ -58,27 +58,27 @@ void Processor::runProgramInMemory(const int isTraceP)
             printf ("*******************************************************\n");
             mMemory->printCellValue();
             printf ("\n*******************************************************\n");
-            this->incInctructionCounter();
+            this->incProgramCounter();
             break;
 
          case LOAD: // 20 - save a word from the memory cell to an accumulator
             this->setAccumulator( mMemory->getCellValue() );
-            this->incInctructionCounter();
+            this->incProgramCounter();
             break;
 
         case STORE: // 21 - save a word from accumulator to memory cell
             mMemory->setCellValue(this->getAccumulator());
-            this->incInctructionCounter();
+            this->incProgramCounter();
             break;
 
          case ADD: // 30 - 
             this->setAccumulator(this->getAccumulator() + mMemory->getCellValue());
-            this->incInctructionCounter();
+            this->incProgramCounter();
             break;
 
          case SUBTRACT: // 31
             this->setAccumulator(this->getAccumulator() - mMemory->getCellValue()); //
-            this->incInctructionCounter();
+            this->incProgramCounter();
             break;
 
          case DIVIDE: // 32
@@ -92,36 +92,40 @@ void Processor::runProgramInMemory(const int isTraceP)
             {
                 this->setAccumulator(mMemory->getCellValue() / this->getAccumulator());
             }
-            this->incInctructionCounter();
+            this->incProgramCounter();
             break;
 
          case MULTIPLY:
             this->setAccumulator(this->getAccumulator() * mMemory->getCellValue()); //
-            this->incInctructionCounter();
+            this->incProgramCounter();
             break;
 
          case BRANCH: //GOTO
-            this->setInstructionCounter(getOperand());
+            this->setProgramCounter(getOperand());
             break;
 
          case BRANCHNEG: // branch if accumulator is negative
             if (this->getAccumulator() < 0)
-                this->setInstructionCounter(getOperand());
+                this->setProgramCounter(getOperand());
             else
-                this->incInctructionCounter();
+                this->incProgramCounter();
             break;
 
          case BRANCHZERO:
             if (this->getAccumulator() == 0)
-                this->setInstructionCounter(getOperand());
+                this->setProgramCounter(getOperand());
             else
-                this->incInctructionCounter();
+                this->incProgramCounter();
             break;
 
          case HALT:
             printf ("Program complete.\n");
             StopFlag = 1;
             break;
+
+         case NOOP:
+             this->incProgramCounter();
+             break;
 
          default:
             printf ("Unexpected value in the address %d\n", getOperand());
@@ -146,7 +150,7 @@ void Processor::runProgramInMemory(const int isTraceP)
 Processor::Processor()
 {
     setAccumulator(0);
-    setInstructionCounter(0);
+    setProgramCounter(0);
     setInstructionRegister(0);
     setOpCode(0);
     setOperand(0); // this is an address of cell in the current command
@@ -166,7 +170,7 @@ void Processor::decodeInstruction()
 void Processor::printProcessorState()
 {
     printAccumulator();
-    printInstructionCounter();
+    printProgramCounter();
     printInstrRegister();
     printOpCode();
     printOperand();
@@ -187,24 +191,24 @@ void Processor::printAccumulator()
     printf ("- Accumulator  = %d\n", mAccumulator );
 }
 
-void Processor::setInstructionCounter(int newInstrCtrP)
+void Processor::setProgramCounter(int newProgramCounterP)
 {
-    mInstructionCounter = newInstrCtrP;
+    mProgramCounter = newProgramCounterP;
 }
 
-int Processor::getInstructionCounter()
+int Processor::getProgramCounter()
 {
-    return mInstructionCounter;
+    return mProgramCounter;
 }
 
-void Processor::printInstructionCounter()
+void Processor::printProgramCounter()
 {
-    printf ("- InctrCounter = %d\n", mInstructionCounter);
+    printf ("- ProgCounter  = %d\n", mProgramCounter);
 }
 
-int Processor::incInctructionCounter()
+int Processor::incProgramCounter()
 {
-    return mInstructionCounter++;
+    return mProgramCounter++;
 }
 
 void Processor::setInstructionRegister(int newInsRegP)
@@ -253,21 +257,23 @@ void Processor::printOperand()
 }
 
 std::string Processor::getOpCodeDesctiption(int _opCode)
+
 {
     static std::map<int, std::string> OpCodeMap;
     if(OpCodeMap.empty()) // Only runs once.
     {
-        OpCodeMap[10] = "READ - from terminal to selected memory address";
-        OpCodeMap[11] = "WRITE - print in terminal value of selected memory";
+        OpCodeMap[0]  = "NO OPERATION - program will stop";
+        OpCodeMap[10] = "READ - read from terminal to selected memory address";
+        OpCodeMap[11] = "WRITE - print to terminal value of selected memory";
         OpCodeMap[20] = "LOAD - from selected memory address to accumulator";
         OpCodeMap[21] = "SAVE - from accumulator to selected memory address";
         OpCodeMap[30] = "ADD - number from selected memory address and accumulator. Result to accumulator";
         OpCodeMap[31] = "SUBTRACT - number from selected memory address and accumulator. Result to accumulator";
         OpCodeMap[32] = "DIVIDE - number from selected memory address and accumulator. Result to accumulator";
         OpCodeMap[33] = "MULTIPLY - number from selected memory address and accumulator. Result to accumulator";
-        OpCodeMap[40] = "BRANCH - GoTo selected memory address, unconditional";
-        OpCodeMap[41] = "BRAMCHNEG - GoTo selected memory address, if accumulator is negative";
-        OpCodeMap[42] = "BRANCHZERO - GoTo selected memory address, if accumulator is zero";
+        OpCodeMap[40] = "BRANCH - Goto selected memory address, unconditional";
+        OpCodeMap[41] = "BRAMCHNEG - Goto selected memory address, if accumulator is negative";
+        OpCodeMap[42] = "BRANCHZERO - Goto selected memory address, if accumulator is zero";
         OpCodeMap[43] = "HALT - full stop";
     }
     return OpCodeMap[_opCode];

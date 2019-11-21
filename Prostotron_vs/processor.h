@@ -23,10 +23,10 @@ public:
     int  getAccumulator ();     // get
     void printAccumulator();
 
-    void setInstructionCounter(int);
-    int  getInstructionCounter();
-    int  incInctructionCounter();
-    void printInstructionCounter();
+    void setProgramCounter(int);
+    int  getProgramCounter();
+    int  incProgramCounter();
+    void printProgramCounter();
 
     void setInstructionRegister(int);
     int  getInstructionRegister();
@@ -47,7 +47,7 @@ public:
 private:
     Memory *mMemory;
     int mAccumulator;
-    int mInstructionCounter;
+    int mProgramCounter;
     int mInstructionRegister;
     int mOpCode;
     int mOperand;//
