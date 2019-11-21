@@ -2,7 +2,7 @@
 #include "utils.h"
 #include <ctime>
 #include <cstdio>
-// #include <chrono>
+#include <chrono>
 
 using namespace std;
 
@@ -61,26 +61,31 @@ int test_one()
 
 int main()
 {
+    auto cycle_counter = 1000000000;
     std::clock_t start = std::clock();
-    std::cout << "START:" << start << " \n";
-    //auto begin = std::chrono::system_clock::now();
-    for (int i = 0; i < 1000000000; ++i)
+    std::cout << "Application start. Time :" << start << " \n";
+    std::cout << "Will count " << cycle_counter << " allocations from stack\n";
+    
+    // auto begin = std::chrono::system_clock::now();
+    
+    for (int i = 0; i < cycle_counter; ++i)
         on_stack();
-    //auto end = std::chrono::system_clock::now();
-    //std::printf("on_stack took %f seconds\n", std::chrono::duration<double>(end - begin).count());
+    // auto end = std::chrono::system_clock::now();
+    // std::printf("on_stack took %f seconds\n", std::chrono::duration<double>(end - begin).count());
     
     std::clock_t duration = std::clock() - start;
-    std::cout << "stack allocation took " << duration << " clock ticks\n";
+    std::cout << "- stack allocation took " << duration << " clock ticks\n";
     
+    std::cout << "Next - start heap allocation for " << cycle_counter << ". Please wait...\n";
     start = std::clock();
 
     //begin = std::chrono::system_clock::now();
-    for (int i = 0; i < 1000000000; ++i)
+    for (int i = 0; i < cycle_counter; ++i)
         on_heap();
     //end = std::chrono::system_clock::now();
     //std::printf("on_heap took %f seconds\n", std::chrono::duration<double>(end - begin).count());
     duration = std::clock() - start;    
-    std::cout << "heap allocation took " << duration << " clock ticks\n";
+    std::cout << "- heap allocation took " << duration << " clock ticks\n";
     std::cout << "END:" << std::clock() << " \n";
     
     return 0;
