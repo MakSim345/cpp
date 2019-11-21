@@ -16,6 +16,9 @@ bool Winner::win(int stepCounter)
 
 void Winner::setWinner(std::string _strWinner)
 {
+    if (m_bWinner)
+        return;
+
     strWinnerName = _strWinner;
     m_bWinner = true;
 }

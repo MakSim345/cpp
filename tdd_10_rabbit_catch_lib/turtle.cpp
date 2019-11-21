@@ -40,10 +40,11 @@ SuperTurtle::~SuperTurtle()
 //Turtle functions:
 
 Turtle::Turtle(Winner *_win)
+    :m_strName("Turtle")
+    ,m_cTurtle('T')
+    ,m_nPosition(1)
+    ,m_step (0)
 {
-    m_cTurtle   ='T';
-    m_nPosition = 1;
-    m_step = 0;
     winner = _win;
 }
 
@@ -59,7 +60,7 @@ void Turtle::setPos (int nPos)
     if (m_nPosition >= MAIN_LINE)
     {
         m_nPosition = MAIN_LINE;
-        winner->setWinner("Turtle");
+        winner->setWinner(m_strName);
         //cout<<"turtle WON ( function message)" << endl;
     }
 }

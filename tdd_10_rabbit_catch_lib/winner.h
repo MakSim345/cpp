@@ -11,6 +11,7 @@ public:
     ~Winner(){};
     bool win(int stepCounter);
     void setWinner(std::string _strWinner);
+    std::string getWinnerName() { return strWinnerName; }
 
 private:
     bool m_bWinner;

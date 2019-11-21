@@ -3,10 +3,11 @@
 //Rabbit functions:
 
 Rabbit::Rabbit(Winner *_win)
+    :m_strName("Rabbit")
+    ,m_cRabbit('R')
+    ,m_nPosition(1)
+    ,m_step(0)
 {
-    m_cRabbit = 'R';
-    m_nPosition =1;
-    m_step = 0;
     winner = _win;
 }
 
@@ -58,8 +59,8 @@ void Rabbit::setPos (int nPos)
     if (m_nPosition >= MAIN_LINE)
     {
         m_nPosition = MAIN_LINE;
-        std::string rbt("Rabbit");
-        this->winner->setWinner(rbt);
+        // std::string rbt("Rabbit");
+        this->winner->setWinner(m_strName);
     }
 
     //std::cout<<"Rabbit new pos: " << m_nPosition << std::endl;

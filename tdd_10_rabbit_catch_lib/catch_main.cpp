@@ -8,6 +8,20 @@
 #include "turtle.h"
 #include "random_generator.h"
 
+void SetConsoleColour(WORD* Attributes, DWORD Colour)
+{
+    CONSOLE_SCREEN_BUFFER_INFO Info;
+    HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleScreenBufferInfo(hStdout, &Info);
+    *Attributes = Info.wAttributes;
+    SetConsoleTextAttribute(hStdout, Colour);
+}
+
+void ResetConsoleColour(WORD Attributes)
+{
+    // SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), Attributes);
+}
+
 class Test_RND_Generator
 {
 public:
@@ -56,12 +70,12 @@ public:
 
 };
 
-TEST_CASE( "Testing a RND", "[test RND]" )
+TEST_CASE( "Testing RND", "[test RND]" )
 {
+    std::cout << "Testing RND - [...]\n";
     Test_RND_Generator tg = Test_RND_Generator();
-    //REQUIRE(tg.get_tick() == 1 );
+    // REQUIRE(tg.get_tick() == 4);
 }
-
 
 TEST_CASE( "Testing a rabbit", "[Constructor]" )
 {
@@ -73,34 +87,47 @@ TEST_CASE( "Testing a rabbit", "[Constructor]" )
     // REQUIRE(tr.get_r()->Get_Step() == 0 );
 }
 
-void SetConsoleColour(WORD* Attributes, DWORD Colour)
-{
-    CONSOLE_SCREEN_BUFFER_INFO Info;
-    HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-    GetConsoleScreenBufferInfo(hStdout, &Info);
-    *Attributes = Info.wAttributes;
-    SetConsoleTextAttribute(hStdout, Colour);
-}
-
-void ResetConsoleColour(WORD Attributes)
-{
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), Attributes);
-}
-
 TEST_CASE( "Testing a winner", "[Constructor]" )
 {
     WORD Attributes = 0;
 
     // yellow FOREGROUND_RED | FOREGROUND_GREEN );
-    // Cyan FOREGROUND_BLUE | FOREGROUND_GREEN 
+    // Cyan FOREGROUND_BLUE | FOREGROUND_GREEN
     // SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);
     // SetConsoleColour(&Attributes,  FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE);
-    
+
     std::cout << "Testing a winner - [Constructor]\n";
     Winner tw = Winner();
+    std::cout << "Testing a winner - [winner == FALSE]\n";
     REQUIRE(tw.win(1) == false);
-    ResetConsoleColour(Attributes);    
+    std::cout << "Testing a winner - [Name == None]\n";
+    REQUIRE(tw.getWinnerName() == "None");
+    ResetConsoleColour(Attributes);
 }
+
+TEST_CASE( "Testing real winner", "[Check winner]" )
+{
+    WORD Attributes = 0;
+
+    // yellow FOREGROUND_RED | FOREGROUND_GREEN );
+    // Cyan FOREGROUND_BLUE | FOREGROUND_GREEN
+    // SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);
+    // SetConsoleColour(&Attributes,  FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE);
+
+    std::cout << "Testing real winner!\n";
+    Winner tw = Winner();
+    tw.setWinner("Rabbit");
+    REQUIRE(tw.win(1) == true);
+    REQUIRE(tw.getWinnerName() == "Rabbit");
+
+    tw.setWinner("Turtle");
+    REQUIRE(tw.win(1) == true);
+    REQUIRE(tw.getWinnerName() == "Rabbit");
+    std::cout << "Testing a winner - [Rabbit]\n";
+
+    ResetConsoleColour(Attributes);
+}
+
 
 /*
 TEST_CASE( "Testing a rabbit position", "[Set Position]" )
