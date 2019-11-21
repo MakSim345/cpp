@@ -1,6 +1,63 @@
 #include "gen.h"
 #include "utils.h"
 
+
+class COPSvCommunication
+{
+public:
+    COPSvCommunication()
+        : isCOPSvM(true)
+    {
+
+    }
+
+    // simply get references to value created in main and change them
+    void getParams(int &getWeightP, int &getAgeP)
+    {
+        getWeightP = weight;
+        getAgeP = age;
+    }
+    
+    const char* getModuleVersionString()
+    {
+        return this->getString();
+    }
+
+    const char* getString () const
+    {
+        char vstrM[] = " COP SW Pr. 889071-3.2   1996-04-26"; 
+        return vstrM;
+    }
+
+    bool isModuleCompatible() const
+    {
+        int minorVer = 9;
+        int majorVer = 3;// rConfigurationM.getModuleVersions(&minorVer);
+
+        // rConfigurationM.getModuleVersionString();
+
+        // std::lock_guard<Os::Mutex> lock(mutexM);
+
+        if (isCOPSvM || // all COPSv are supported
+            (majorVer == 3 && minorVer >= 2) || (majorVer > 3) || // all COP versions >= 3.2 are supported
+            (majorVer == 0 && minorVer == 3)) // this is an exception. The module with the 
+            // version 0.3 is also compatible
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+private:
+    int weight;
+    int age;
+    bool isCOPSvM;
+    enum { maxSlowStringChar = 64 };
+    // char vstrM[maxSlowStringChar];
+    
+};
+
 class Programmers
 {
 public:
@@ -27,8 +84,38 @@ private:
     int age;
 };
 
+void testProgrammers()
+{
+    // long g_lTimeTick = 0;
+    const int ARR_SIZE = 9;
+    Programmers *prog [ARR_SIZE];
+    Programmers *ptr = nullptr;
 
-long g_lTimeTick = 0;
+    for (int i=0; i < ARR_SIZE; i++)
+    {
+        ptr = new Programmers(i + 100, i);
+        prog[i] = ptr;
+    }
+
+    int w, a;
+    int count = ARR_SIZE;
+
+    //create pointer to pointer,
+    //array's name ("prog") is a pointer to it's first element
+    Programmers **iter = prog;
+
+    for (int i=0; i < count; i++)
+    {
+        ptr = *iter++;
+        ptr->getParams(w, a);
+        if( *(iter-1) != nullptr )
+        {
+            delete *(iter-1);
+            ptr = nullptr;
+        }
+        cout << w << "\t" << a << endl;
+    }
+}
 
 int main(int argc, char *argv[], char *envp[])
 {
@@ -63,55 +150,23 @@ int main(int argc, char *argv[], char *envp[])
     fprintf(fi, "Start time: %d\n", Get1msTime());
 #endif// FILE_OUTPUT
 
-    const int ARR_SIZE = 9;
-    Programmers *prog [ARR_SIZE];
-    Programmers *ptr = nullptr;
+    char *FileNameF = "TimeSt.log";
+    COPSvCommunication *tRun = new COPSvCommunication();
+    
+    printf ("string - %s\n", tRun->getModuleVersionString() );
 
-    for (int i=0; i < ARR_SIZE; i++)
+    const char* snIndex = strstr(tRun->getModuleVersionString(), "Pr. 8");
+
+   //if (strstr(tRun->getModuleVersionString(), "Pr. 8") == 0)
+    if (snIndex)
     {
-        ptr = new Programmers(i + 100, i);
-        prog[i] = ptr;
+        printf ("Compare - MATCH, OK\n");
     }
-
-    int w, a;
-    int count = ARR_SIZE;
-
-    //create pointer to pointer,
-    //array's name ("prog") is a pointer to it's first element
-    Programmers **iter = prog;
-
-    for (int i=0; i < count; i++)
+    else
     {
-        ptr = *iter++;
-        ptr->getParams(w, a);
-        if( *(iter-1) != nullptr )
-        {
-            delete *(iter-1);
-            ptr = nullptr;
-        }
-        cout << w << "\t" << a << endl;
+        printf ("Compare - NOT MATCH\n");
     }
-
-//*************MAIN LOOP*****************//
- do
- {
-   //This is simple Windows way:
-   Sleep(1000);
-
-   nResult = produceRND();
-   printf ("1-Time: %ld. RND: %d\n",Get1msTimeMS(), nResult);
-
-   nResult = produceRND();
-   printf ("2-Time: %ld. RND: %d\n",Get1msTimeMS(), nResult);
-
-  // control of endless loop (may be also in monitor.cpp)
-    if (_kbhit())  // has anything been pressed from keyboard ?
-    {
-      RValue = true; // END mark
-    }
-
-
-}while (!RValue);
+    
 
 #ifdef FILE_OUTPUT
  if (1 == nOpenFileToken)
@@ -120,7 +175,7 @@ int main(int argc, char *argv[], char *envp[])
  }
 #endif
 
-printf ("Application complete.\n");
+printf ("\nApplication complete.\n");
 
 system ("PAUSE"); // wait for press any key in VS mode
 
