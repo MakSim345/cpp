@@ -11,15 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Dropbox\[2] dev\cpp\_simple_template\_ReadMe.log" />
+    <ClInclude Include="gen.h" />
+    <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_simple_template\gen.h" />
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_simple_template\utils.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_simple_template\mainc.cpp" />
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_simple_template\utils.cpp" />
+    <ClCompile Include="mainc.cpp" />
+    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DD4347F6-C40E-4CEE-B31C-74549E845627}</ProjectGuid>

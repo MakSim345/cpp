@@ -4,6 +4,10 @@
 #define WIN32_APP
 #define RND_MAX 65536
 
+#ifdef WIN32_APP
+    #include <Windows.h>
+#endif
+
 #include "TCHAR.h"
 #include "stdlib.h"
 #include "time.h"
@@ -14,6 +18,7 @@
 #include <string.h>
 #include <sys/timeb.h>
 #include <vector>
+
 
 using namespace std;
 

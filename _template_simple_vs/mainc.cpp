@@ -27,6 +27,46 @@ private:
     int age;
 };
 
+class Log
+{
+public:
+    static const int LogLevelError   = 0;
+    static const int LogLevelWarning = 1;
+    static const int LogLevelInfo    = 2;
+
+    Log():
+        mLogLebel(LogLevelInfo)
+    {
+        // mLogLebel = LogLevelInfo;
+    }
+
+private:
+    int mLogLebel;
+
+public:
+    void SetLevel(int pLevel)
+    {
+        mLogLebel = pLevel;
+    }
+
+    void Warn(const char* pMessage)
+    {   
+        if (mLogLebel >= LogLevelWarning)
+            std::cout << "[WARNING]:" << pMessage << "\n";
+    }
+
+    void Info(const char* pMessage)
+    {
+        if (mLogLebel >= LogLevelInfo)
+            std::cout << "[INFO]:" << pMessage << "\n";
+    }
+
+    void Error(const char* pMessage)
+    {
+        if (mLogLebel >= LogLevelError)
+            std::cout << "[ERROR]:" << pMessage << "\n";
+    }
+};
 
 long g_lTimeTick = 0;
 
@@ -39,65 +79,49 @@ int main(int argc, char *argv[], char *envp[])
     int CaptureModeHex = 0;
     int NewChar=0;
     int nResult = 0;
+    int nTdiff = 100; // 1000 is one second
 
     printf ("main - start\n");
 
-#ifdef FILE_OUTPUT
-    int nOpenFileToken = 0;
-    char *FileNameF = "TimeSt.log";
-    FILE *fi = NULL;
+    Log log;
+    log.SetLevel(log.LogLevelWarning);
+    log.Warn("Hello");
+    // std::cout << "enter somethig:\n";
+    // std::cin.get();
 
-    // open the file for input:
-    if ( (fi = fopen(FileNameF, "a+") ) != NULL)
-    {
-        // printf ("file %s was open succesfully\n", FileNameF);
-        nOpenFileToken = 1;
-    }
-    else
-    {
-        printf ("file %s was not open\n", FileNameF);
-        getchar(); // pause, xyLe...
-        nOpenFileToken = 0;
-    }
-
-    fprintf(fi, "Start time: %d\n", Get1msTime());
-#endif// FILE_OUTPUT
-
-
-
-
-
-
+    printf ("1. Time: %ld\n", Get1msTimeMS());
+    msTimer t;
+    for (int i = 0; i < 5000000; i++)
+        ;
+    std::cout << "Elapsed time:" << t.elapsedMs() << endl;
+    printf ("2. Time: %ld\n", Get1msTimeMS());
 
 
 
 //*************MAIN LOOP*****************//
  do
  {
-   //This is simple Windows way:
-   Sleep(1000);
+    //This is simple Windows way:
+    // Sleep(1000);
+    
+    // and this is complicated one-thread way:
+    if ((( Get1msTimeMS() - LastTimeInMS) > nTdiff - 1) || (LastTimeInMS > Get1msTimeMS() ))
+    {    
+        nResult = produceRND();
+        printf ("Time: %ld. Random: %d\n",Get1msTimeMS(), nResult);
+        std::cout << "Elapsed time:" << t.elapsedMs() << endl;
 
-   nResult = produceRND();
-   printf ("1-Time: %ld. RND: %d\n",Get1msTimeMS(), nResult);
+        Sleep(1);
 
-   nResult = produceRND();
-   printf ("2-Time: %ld. RND: %d\n",Get1msTimeMS(), nResult);
-
-  // control of endless loop (may be also in monitor.cpp)
+        LastTimeInMS = Get1msTimeMS();
+    }        
+   
+    // control of endless loop (may be also in monitor.cpp)
     if (_kbhit())  // has anything been pressed from keyboard ?
     {
-      RValue = true; // END mark
+        RValue = true; // END mark
     }
-
-
-}while (!RValue);
-
-#ifdef FILE_OUTPUT
- if (1 == nOpenFileToken)
- {
-   fclose (fi);
- }
-#endif
+} while (!RValue);
 
 printf ("Application complete.\n");
 

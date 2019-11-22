@@ -18,6 +18,33 @@ void SendStr(char * SendString, int dest, int length);
 
 int produceRND();
 
+#include <sys/timeb.h>
+
+class msTimer 
+{
+public:
+    msTimer()
+    { 
+        restart(); 
+    }
+
+    void restart()
+    { 
+        ftime(&t_start); 
+    }
+
+    float elapsedMs()
+    {
+        timeb t_now;
+        ftime(&t_now);
+        return (float)(t_now.time - t_start.time) * 1000.0f +
+            (float)(t_now.millitm - t_start.millitm);
+    }
+
+private:
+    timeb t_start;
+};
+
 class CTimer
 {
 public:

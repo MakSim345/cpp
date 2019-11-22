@@ -15,21 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Dropbox\[2] dev\cpp\_simple_template\_ReadMe.log" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_simple_template\gen.h">
+    <ClInclude Include="gen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_simple_template\utils.h">
+    <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_simple_template\mainc.cpp">
+    <ClCompile Include="mainc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_simple_template\utils.cpp">
+    <ClCompile Include="utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
