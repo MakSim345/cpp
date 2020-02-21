@@ -50,7 +50,8 @@ private:
     int mProgramCounter;
     int mInstructionRegister;
     int mOpCode;
-    int mOperand;//
+    int mOperand;
+    int mStopFlag;
 
     std::string getOpCodeDesctiption(int _opCode);
 

@@ -1,26 +1,26 @@
-//
 #include "processor.h"
-
 
 //*****************************************
 // Class Processor implementation
+//*****************************************
 
 void Processor::runProgramInMemory(const int isTraceP)
     /*
-      MemCell* memory //pointer to an array!,
-      Processor* pProc,
-      int Trace*/
+     * MemCell* memory //pointer to an array!,
+     * Processor* pProc,
+     * int Trace
+     */
 {
-    int  StopFlag = 0;
     std::string cInput("0");
     std::string cInTrace("0");
+    mStopFlag = 0;
 
     setProgramCounter(MEMORY_START_ADDRESS); // set counter to the start == 0
 
     do
      {
         // copy next memory cell to the instruction register IR:
-        this->setInstructionRegister(mMemory->getCellValue(this->getProgramCounter()) );
+        this->setInstructionRegister(mMemory->getCellValue(this->getProgramCounter()));
         // get an operation code and operand from IR:
         this->decodeInstruction();
         // save an address of memory cell where data is:
@@ -37,7 +37,7 @@ void Processor::runProgramInMemory(const int isTraceP)
                 printf ("*******************************************************\n");
                 printf ("STOP. TRACE interrupted by user!\n");
                 printf ("\n*******************************************************\n");
-                StopFlag = 1;
+                mStopFlag = 1;
                 break;
             }
         }
@@ -61,32 +61,35 @@ void Processor::runProgramInMemory(const int isTraceP)
             this->incProgramCounter();
             break;
 
-         case LOAD: // 20 - save a word from the memory cell to an accumulator
+         case LOAD: // 20 - load a word from the memory cell to accumulator
             this->setAccumulator( mMemory->getCellValue() );
             this->incProgramCounter();
             break;
 
-        case STORE: // 21 - save a word from accumulator to memory cell
+        case STORE: // 21 - save a word from accumulator to selected memory cell
             mMemory->setCellValue(this->getAccumulator());
             this->incProgramCounter();
             break;
 
-         case ADD: // 30 - 
+        case ADD: // 30 - add number from selected memory address and from accumulator.
+                  // Result to accumulator";
             this->setAccumulator(this->getAccumulator() + mMemory->getCellValue());
             this->incProgramCounter();
             break;
 
-         case SUBTRACT: // 31
+         case SUBTRACT: // 31 - 
             this->setAccumulator(this->getAccumulator() - mMemory->getCellValue()); //
             this->incProgramCounter();
             break;
 
-         case DIVIDE: // 32
+         case DIVIDE: // 32 - 
             if (this->getAccumulator() == 0)
             {
+                printf ("*******************************************************\n");
                 printf ("ERROR: divide to zero!\n");
                 printf ("Program complete by error.\n");
-                StopFlag = 1;
+                printf ("*******************************************************\n");
+                mStopFlag = 1;
             }
             else
             {
@@ -100,36 +103,40 @@ void Processor::runProgramInMemory(const int isTraceP)
             this->incProgramCounter();
             break;
 
-         case BRANCH: //GOTO
+         case BRANCH: // 40 - GOTO address, unconditional
             this->setProgramCounter(getOperand());
             break;
 
-         case BRANCHNEG: // branch if accumulator is negative
+         case BRANCHNEG: // 41 - GOTO address if accumulator is negative
             if (this->getAccumulator() < 0)
                 this->setProgramCounter(getOperand());
             else
                 this->incProgramCounter();
             break;
 
-         case BRANCHZERO:
+         case BRANCHZERO: // 42 - GOTO address if accumulator is ZERO
             if (this->getAccumulator() == 0)
                 this->setProgramCounter(getOperand());
             else
                 this->incProgramCounter();
             break;
 
-         case HALT:
+         case HALT: // 43 - Full STOP
+            printf ("*******************************************************\n");
             printf ("Program complete.\n");
-            StopFlag = 1;
+            printf ("*******************************************************\n");
+            mStopFlag = 1;
             break;
 
-         case NOOP:
-             this->incProgramCounter();
-             break;
+         case NOOP: // 0 - No operation, just take next address.
+            this->incProgramCounter();
+            break;
 
          default:
+            printf ("*******************************************************\n");
             printf ("Unexpected value in the address %d\n", getOperand());
-            StopFlag = 1;
+            printf ("*******************************************************\n");
+            mStopFlag = 1;
         }// case
 
         if (isTraceP)
@@ -140,7 +147,7 @@ void Processor::runProgramInMemory(const int isTraceP)
           //gets_s(cInTrace);
         }
 
-    } while (!StopFlag);
+    } while (!mStopFlag);
 
     mMemory->printMemoryDump ();
     this->printProcessorState();
@@ -148,6 +155,7 @@ void Processor::runProgramInMemory(const int isTraceP)
 };
 // constructor / destructor:
 Processor::Processor()
+     :mStopFlag(0)
 {
     setAccumulator(0);
     setProgramCounter(0);
@@ -208,12 +216,28 @@ void Processor::printProgramCounter()
 
 int Processor::incProgramCounter()
 {
-    return mProgramCounter++;
+    int nRetVal = mProgramCounter;
+    nRetVal++;
+
+    if (nRetVal > MEMORY_SIZE - 1)
+    {
+        mStopFlag = 1;
+        printf ("*******************************************************\n");
+        printf ("Program complete by memory overload!\n");
+        printf ("ProgrCounter = %d, MEMORY_SIZE=%d\n", nRetVal, MEMORY_SIZE-1);
+        printf ("*******************************************************\n");
+        return mProgramCounter;
+    }
+    else
+    {
+        mProgramCounter++;
+        return mProgramCounter;
+    }
 }
 
-void Processor::setInstructionRegister(int newInsRegP)
+void Processor::setInstructionRegister(int newInstrRegP)
 {
-    mInstructionRegister = newInsRegP;
+    mInstructionRegister = newInstrRegP;
 }
 
 int Processor::getInstructionRegister()
@@ -262,7 +286,7 @@ std::string Processor::getOpCodeDesctiption(int _opCode)
     static std::map<int, std::string> OpCodeMap;
     if(OpCodeMap.empty()) // Only runs once.
     {
-        OpCodeMap[0]  = "NO OPERATION - program will stop";
+        OpCodeMap[0]  = "NO OPERATION - goto next address";
         OpCodeMap[10] = "READ - read from terminal to selected memory address";
         OpCodeMap[11] = "WRITE - print to terminal value of selected memory";
         OpCodeMap[20] = "LOAD - from selected memory address to accumulator";
