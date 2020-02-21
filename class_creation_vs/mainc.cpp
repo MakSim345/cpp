@@ -68,6 +68,12 @@ public:
     }
 };
 
+
+void HelloWorld()
+{
+    std::cout << "Hello world!" << std::endl;
+}
+
 long g_lTimeTick = 0;
 
 int main(int argc, char *argv[], char *envp[])
@@ -96,8 +102,20 @@ int main(int argc, char *argv[], char *envp[])
     std::cout << "Elapsed time:" << t.elapsedMs() << endl;
     printf ("2. Time: %ld\n", Get1msTimeMS());
 
+    void(*cherno)();
 
+    auto function = HelloWorld;
 
+    cherno = HelloWorld;
+
+    function();
+    cherno();
+
+    printf ("Application complete.\n");
+
+    system ("PAUSE"); // wait for press any key in VS mode
+
+    return 0;
 //*************MAIN LOOP*****************//
  do
  {
