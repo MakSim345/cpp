@@ -14,11 +14,12 @@
 #include "utils.h"
 #include <conio.h>
 #include <iostream>
+#include <vector>
+
 #include <stdio.h>
 #include <string.h>
 #include <sys/timeb.h>
-#include <vector>
-
 
 using namespace std;
 
+#define LOG(x) std::cout << x << std::endl;

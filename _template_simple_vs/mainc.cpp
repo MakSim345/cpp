@@ -68,6 +68,26 @@ public:
     }
 };
 
+
+
+void PrintValue(int value)
+{
+    std::cout << "Value: " << value;
+}
+
+void ForEach(const std::vector<int>& values, void (*func)(int))
+{
+    //for (int value : values) 
+    //    func (values[2]);
+    vector<int>::iterator iter;
+    iter = values.begin(); 
+    values.end();
+    //for(iter = values.begin(); iter != values.end(); iter++ )
+    {
+        // func (values[2]);
+    }
+}
+
 long g_lTimeTick = 0;
 
 int main(int argc, char *argv[], char *envp[])
@@ -80,6 +100,7 @@ int main(int argc, char *argv[], char *envp[])
     int NewChar=0;
     int nResult = 0;
     int nTdiff = 100; // 1000 is one second
+    msTimer t;
 
     printf ("main - start\n");
 
@@ -89,12 +110,25 @@ int main(int argc, char *argv[], char *envp[])
     // std::cout << "enter somethig:\n";
     // std::cin.get();
 
-    printf ("1. Time: %ld\n", Get1msTimeMS());
-    msTimer t;
-    for (int i = 0; i < 5000000; i++)
-        ;
-    std::cout << "Elapsed time:" << t.elapsedMs() << endl;
-    printf ("2. Time: %ld\n", Get1msTimeMS());
+    std::vector <int> values;// = {1, 5, 4, 2, 3};
+    values.push_back(1);
+    values.push_back(5);
+    values.push_back(4);
+    values.push_back(2);
+    values.push_back(3);
+
+    vector<int>::iterator iter;
+    iter = values.begin(); 
+    values.end();
+
+    ForEach(values, PrintValue);
+
+    //printf ("1. Time: %ld\n", Get1msTimeMS());
+    
+    //for (int i = 0; i < 5000000; i++)
+    //    ;
+    //std::cout << "Elapsed time:" << t.elapsedMs() << endl;
+    //printf ("2. Time: %ld\n", Get1msTimeMS());
 
 
 
@@ -130,6 +164,3 @@ system ("PAUSE"); // wait for press any key in VS mode
 return 0;
 
 }
-
-
-
