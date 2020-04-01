@@ -1,4 +1,5 @@
 #include "gen.h"
+#include "cTimer.h"
 
 uint32_t pack_color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a=255)
 {
@@ -58,6 +59,7 @@ int main(int argc, char *argv[], char *envp[])
     int CaptureModeHex = 0;
     int NewChar=0;
     int nResult = 0;
+    long lNexTime;
 
     printf ("main - start\n");
     CTimer *_time = new CTimer ();
@@ -119,11 +121,11 @@ if (argc >= 2)
  do
   {
     //This is simple Windows way:
-    Sleep(1000);
-    std::cout << "Time GetTickCount:" << GetTickCount() << "\n";
+    // Sleep(1000);
+    // std::cout << "Time GetTickCount:" << GetTickCount() << "\n";
 
     // nResult = produceRND();
-    printf ("1-Time: %ld. RND: %d\n", _time->Get1msTimeMS(), nResult);
+    // printf ("1-Time: %ld. RND: %d\n", _time->Get1msTimeMS(), nResult);
 
     //nResult = produceRND();
     //printf ("2-Time: %ld. RND: %d\n", _time->Get1msTimeMS(), nResult);
@@ -138,17 +140,29 @@ if (argc >= 2)
         LastTimeInMS = Get1msTimeMS();
     }
     ***************************************/
-
+    long lStartTime = get_time_ms();
+    printf("Elapsed time: %ld milliseconds\n", lStartTime);
+    for (int i = 0;i < 5000000; i++)
+        ;
+    
+    lNexTime = get_time_ms();
+    printf("Elapsed time: %ld milliseconds\n", lNexTime - lStartTime);
+    sleep(2);
+    
+    lNexTime = get_time_ms();
+    printf("Elapsed time: %ld milliseconds\n", lNexTime - lStartTime);    
     // control of endless loop (may be also in monitor.cpp)
-    if (_kbhit())  // has anything been pressed from keyboard ?
+    /*
+    if (kbhit())  // has anything been pressed from keyboard ?
     {
         RValue = true;
-        NewChar=(unsigned char)_getch();
+        NewChar=(unsigned char)getch();
         if ((NewChar & 0xff) == 24)  // CTRL-X   pressed
         {
             RValue = true; // END mark
         }
     }
+    */
 
 
 } while (!RValue);
