@@ -37,7 +37,7 @@ int main(int argc, char *argv[], char *envp[])
     swapRef(aRef, bRef);
     cout << "2: a = " << aRef << " b = " << bRef << endl;
     
-//*************MAIN LOOP*****************//
+/*************MAIN LOOP*****************/
 cout << "\n$ > Press Any Key to exit." << std::endl;
 do 
 {
@@ -68,6 +68,13 @@ do
         }
     }*/
 } while (!RValue);  
+
+#ifdef USE_PAUSE_OR_BUTTON_PRESS
+    std::cout << "\nPress any key to exit...\n";
+    cin.get();
+    system("PAUSE");
+#endif
+
 printf ("Application complete.\n");
 return 0;
 }
