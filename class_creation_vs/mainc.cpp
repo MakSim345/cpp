@@ -1,6 +1,22 @@
 #include "gen.h"
 #include "utils.h"
 
+
+class String
+{
+private:
+    char m_Buffer;
+    unsigned int m_Size;
+
+public:
+    String(const char* stringP)
+    {
+        m_Size = strlen(stringP);
+        m_Buffer = new char[m_Size];
+        memcpy(m_Buffer, stringP, m_Size);
+    }
+};
+
 class Programmers
 {
 public:
