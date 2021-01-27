@@ -3,6 +3,7 @@
 #include "gen.h"
 #include "dos.h"
 #include <stdlib.h>
+#include <stdint.h>
 #include "utils.h"
 #include "dbits.h"
 #include "cube_calc.h"
@@ -24,7 +25,7 @@
 #define FLIPBITMASK(x,y) (x ^= (y))
 #define CHECKBITMASK(x,y) (x & (y))
 
-#endif 
+#endif
 
 // Bit operations for general:
 #define invertbit(x, y) (x^=(1<<y))
@@ -55,7 +56,7 @@ float get_random_float()
 {
     float _ret_value = 0.0;
     int _tmp_random = get_random_int(0, 999);
-    
+
     _ret_value = _tmp_random / 100.0;
     return _ret_value;
 }
@@ -67,70 +68,18 @@ int get_random_int(int _min, int _max)
     return _ret_value;
 }
 
-int main( int argc, char *argv[] )
-{
-#ifdef YS9039384
-    char* FileNameF = "Result.log";
-    FILE *fi = NULL;
-#endif
-    init_rnd();
-    // Res = 549755813.0;
-    int iRes = 255;
-    int iSub = 10;
-/*
-    showInt(iRes);
-    showInt(iSub);
-
-    invertbit(iRes, 7);
-    showInt(iRes);
-    showInt(iSub);
-*/
-    // 
-    // CubeCalc *cc = new CubeCalc();
-    int _to_show = 128;
-    int orig = 0xF;
-    int _sft = 1;
-    printf("Test: %d\n", orig);
-    printf("Test: 0x%X\n", orig);
-    showInt(orig);
-    // orig |= 1<<7; 
-    biton(orig, 7);
-    // orig<<_sft;
-    printf("Test: %d\n", orig);
-    printf("Test: 0x%X\n", orig);
-    showInt(orig);
-
-    showInt(orig<<_sft);
-
-    showInt(_to_show);
-    _to_show |= 1<<5; 
-    
-    showInt(_to_show);
-    
-    bitoff(_to_show, 1);
-    showInt(_to_show);
-    
-    set_number_int(get_random_int(0, 99));
-    float _fl_tmp = get_random_float();
-    printf("_fl_tmp: %lf\n", _fl_tmp);
-    set_number_float(_fl_tmp);
-
-    printf("\nApp end.\n");
-    return 0;
-}
-
 
 void set_number_int(int _to_write)
 {
     int firdstDigit = (_to_write - _to_write % 10)/10;
     int secondDigit = _to_write % 10;
-    
+
     printf("set_number_int: firdstDigit %d\n", firdstDigit);
     printf("set_number_int: secondDigit %d\n", secondDigit);
     // TODO: perform range check for _LED: from 1 to 3.
     // int leftLED = _LED*2 - 1;
     // int rightLED = _LED*2;
-    
+
     //max7219_Write(leftLED, firdstDigit);
     //max7219_Write(rightLED, secondDigit);
 }
@@ -140,13 +89,13 @@ void set_number_float(float _to_write)
     int _tmp = int(_to_write * 10);
     int firdstDigit = (_tmp - _tmp % 10)/10;
     int secondDigit = _tmp % 10;
-    
+
     printf("set_number_float: firdstDigit %d\n", firdstDigit);
     printf("set_number_float: secondDigit %d\n", secondDigit);
     // TODO: perform range check for _LED: from 1 to 3.
     // int leftLED = _LED*2 - 1;
     // int rightLED = _LED*2;
-    
+
     //max7219_Write(leftLED, firdstDigit);
     //max7219_Write(rightLED, secondDigit);
 }
@@ -179,7 +128,7 @@ void showDouble()
         dispBitsToFile(buffer[i], "BinHex.log");
         dispBits(buffer[i], 1);
     }
-    
+
     printf ("number %ld in Hex format:\n", dRes);
     for (i=0; i<8; i++)
     {
@@ -196,4 +145,115 @@ void showDouble()
         dispBits(buffer[i], 1);
     }
     // return 0;
+}
+
+void rotateLeft(int &nBitsP)
+{
+    // printf("\nrotateLeft() calls with parameter: ");
+    int high_bit = 0;
+    int bitToTest = 1; // b0000001;
+    int onePosition = 1; // b0000001;
+    int bit_seven_on =  bitToTest<<7; // shift bitToTest 7 positions left
+    printf("\nbitToTest: ");
+    dispBits(bitToTest, 1);
+    printf("\nbit_seven_on: ");
+    dispBits(bit_seven_on, 1);
+
+    printf("\nCheck high bit value for nBitsP: ");
+    dispBits(nBitsP, 1);
+    printf("\nBitsP & %d: ", bit_seven_on);
+    high_bit = nBitsP & (bit_seven_on);
+    printf("\nhigh_bit is: ");
+    dispBits(high_bit, 1);
+    if (high_bit)
+        {
+        high_bit = 1;
+        printf("\nhigh_bit is set to 1: ");
+        dispBits(high_bit, 1);
+        }
+    else
+        {
+        high_bit = 0;
+        printf("\nhigh_bit is set to 0: ");
+        dispBits(high_bit, 1);
+        }
+
+    nBitsP = nBitsP << onePosition;// shift nBitsP 1 position left
+    printf("\nnBitsP << %d: ", onePosition);
+    dispBits(nBitsP, 1);
+
+    printf("\nnBitsP | %d: ", onePosition);
+    nBitsP = nBitsP | onePosition; //set last bit to 1
+    dispBits(nBitsP, 1);
+}
+
+
+int main( int argc, char *argv[] )
+{
+    init_rnd();
+    // Res = 549755813.0;
+    int iRes = 255;
+    int iSub = 145;
+
+    rotateLeft(iSub);
+/*
+    showInt(iRes);
+    showInt(iSub);
+
+    invertbit(iRes, 7);
+    showInt(iRes);
+    showInt(iSub);
+*/
+    //
+    // CubeCalc *cc = new CubeCalc();
+    int _to_show = 128;
+    int orig = 0xF;
+    int _sft = 1;
+    printf("\n");
+    //printf("Test: 0x%X\n", orig);
+    printf("_to_show: %d\n", _to_show);
+    showInt(_to_show);
+    printf("_to_show |= %d\n", _sft);
+    showInt(_to_show |= _sft);
+    printf("_sft << 7 ");
+    showInt(_sft<<1);
+    showInt(_sft<<2);
+    showInt(_sft<<3);
+    showInt(_sft<<4);
+    showInt(_sft<<5);
+    showInt(_sft<<6);
+    showInt(_sft<<7);
+    // orig |= 1<<7;
+
+    printf("Test: %d\n", orig);
+    printf("Test: 0x%X\n", orig);
+    printf("call: biton(orig, 7)");
+    biton(orig, 7);
+    // orig<<_sft;
+    printf("Test: %d\n", orig);
+    printf("Test: 0x%X\n", orig);
+    showInt(orig);
+
+    showInt(orig<<_sft);
+
+    showInt(_to_show);
+    printf("set bit number 5 to one:\n");
+    _to_show |= 1<<5; // set bit number 5 to one
+    showInt(_to_show);
+
+    bitoff(_to_show, 5); // set bit number 5 to ZERO
+    printf("set bit number 5 to ZERO:\n");
+    showInt(_to_show);
+
+    set_number_int(get_random_int(0, 99));
+    float _fl_tmp = get_random_float();
+    printf("_fl_tmp: %lf\n", _fl_tmp);
+    set_number_float(_fl_tmp);
+
+    printf("\nApp end.\n");
+    std::cout << "\nPress any key to exit...\n";
+    cin.get();
+    // system("PAUSE");
+
+    return 0;
 }
