@@ -70,9 +70,14 @@ do
 } while (!RValue);  
 
 #ifdef USE_PAUSE_OR_BUTTON_PRESS
-    std::cout << "\nPress any key to exit...\n";
+    std::cout << "\nPress ENTER to exit...\n";
     cin.get();
-    system("PAUSE");
+
+    // this PAUSE will give a info text - press any key to continue, etc.
+    // system("PAUSE");
+
+    // this pause is silent. You have to know to press any key.
+    // system("pause>0");
 #endif
 
 printf ("Application complete.\n");

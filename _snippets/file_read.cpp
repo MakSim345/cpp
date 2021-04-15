@@ -31,7 +31,15 @@ int main()
     }
     
     fout1.close(); // close the file
-    system("pause");
+    //std::cout << "\nPress ENTER to exit...\n";
+    //cin.get();
+    
+    // this PAUSE will give a info text - press any key to continue, etc.
+    system("PAUSE");
+
+    // this pause is silent. You have to know to press any key.
+    // system("pause>0");
+    
     return 0;
 }
 
