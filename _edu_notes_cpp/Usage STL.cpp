@@ -34,7 +34,7 @@
     Работа с потоками
     Полезные константы
 
-Как показывает практика, студенты по-разному относятся к тому факту, что доля курсовых проектов, которые необходимо выполнять в виде компьютерных приложений, непрерывно растет. Некоторые их очень любят, так как подобные проекты позволяют продемонстрировать неординарность мышления, изобретательность и свой собственный «неподражаемый» стиль программирования, другие ненавидят, так как работающее приложение невозможно создать без тщательной проработки почти всех деталей, в том числе и тех, которые кажутся мелкими и незначительными. Сначала компилятор языка, а затем и операционная система хладнокровно бракуют малейшую неточность, непоследовательность, недоговоренность и пренебрежение деталями. В устном докладе и даже в письменном отчете можно скрыть или завуалировать перечисленные дефекты, но компьютерный проект обнажит их, продемонстрирует со всей очевидностью, а зачастую и усилит.
+Как показывает практика, студенты по-разному относятся к тому факту, что доля курсовых проектов, которые необходимо выполнять в виде компьютерных приложений, непрерывно растет. Некоторые их очень любят, так как подобные проекты позволяют продемонстрировать неординарность мышления, изобретательность и свой собственный "неподражаемый" стиль программирования, другие ненавидят, так как работающее приложение невозможно создать без тщательной проработки почти всех деталей, в том числе и тех, которые кажутся мелкими и незначительными. Сначала компилятор языка, а затем и операционная система хладнокровно бракуют малейшую неточность, непоследовательность, недоговоренность и пренебрежение деталями. В устном докладе и даже в письменном отчете можно скрыть или завуалировать перечисленные дефекты, но компьютерный проект обнажит их, продемонстрирует со всей очевидностью, а зачастую и усилит.
 
 Использование STL
 
@@ -58,13 +58,13 @@ void main()
     // Сортируемый массив n - 0;
     // Счетчик элементов
 
-cout «"Enter some integers (Press Ctrl+z to stop)\n";
+cout <<"Enter some integers (Press Ctrl+z to stop)\n";
 
 //=== Вводим по принципу "пока не надоест". Для выхода
 
 //=== из цикла надо ввести EOF (то есть Ctrl+z, Enter)
 
-while (cin » array[n++])
+while (cin >> array[n++])
 
 //==== Шаг назад, так как мы сосчитали EOF n—;
 
@@ -72,9 +72,9 @@ qsort (array, n, sizeof(int), cmp) ;
 
 for (int i = 0; i < n; i++)
 
-cout « array[i] « endl;
+cout << array[i] << endl;
 
-cout « endl;
+cout << endl;
 
 }
 
@@ -88,15 +88,17 @@ void main ()
 {
     vector<int> v; // Сортируемый контейнер
     int i; // Рабочая переменная
-    cout «"Enter some integers (Press Ctrl+z to stop)\n";
-    while (cin » i) // Вводим те же числа
+    cout <<"Enter some integers (Press Ctrl+z to stop)\n";
+    while (cin >> i) // Вводим те же числа
         v.push_back (i); // Помещаем в конец контейнера
         //======= Сортируем контейнер, используя тип
         //======= упорядочения, принятый по умолчанию
         sort (v.begin () , v.end());
+    
     for (i =0; i < int(v.size()); i++)
-        cout « v[i] « endl;
-    cout « endl;
+        cout << v[i] << endl;
+
+    cout << endl;
 }
 
 По умолчанию алгоритм sort использует для сравнения элементов операцию меньше, то есть сортирует контейнер по возрастанию. Сравнительная оценка эффективности двух реализаций, которую проводили специалисты (числа, конечно, вводились не вручную), показывает, что эффективность второй версии выше в 10-20 раз. Она зависит от размера массива и степени его упорядоченности. Приведем одну из причин такого результата.
@@ -104,7 +106,7 @@ void main ()
     - Универсальность первого алгоритма реализуется на этапе выполнения за счет вызова generic-функции стр () и преобразования типов указателей.
     - Универсальность второго подхода реализуется за счет настройки шаблона на конкретный тип переменных, что происходит на этапе компиляции.
 
-Важно помнить, что рекурсия сама по себе стоит дорого, поэтому важны детали реализации конкретного алгоритма. Над деталями реализации алгоритмов библиотеки STL потрудились специалисты, и результатом их труда является достаточно высокая эффективность, которую отмечают многие разработчики. К сожалению, возможности STL очень скудно описаны в MSDN, хотя в мире существуют книги, где библиотека и технология ее использования для решения конкретных задач описаны достаточно подробно. Среди доступных нам книг на русском языке, конечно, следует отметить последнюю книгу Б. Страуструпа «Язык программирования C++», 3-е изд. — СПб: «Невский Диалект», 1999. Но она описывает библиотеку концептуально. В ней почти нет текстов программ, готовых к употреблению в среде Visual Studio. Поэтому мне захотелось дать быстрый путь к овладению некоторыми возможностями библиотеки тем читателям, которые обладают хорошим алгоритмическим мышлением, имеют некоторый опыт работы с динамическими структурами данных, но не знакомы с особенностями структуры и использования STL. Ниже будут приведены примеры практического использования контейнеров и алгоритмов STL, но не будет подробного описания заложенных в них принципов.
+Важно помнить, что рекурсия сама по себе стоит дорого, поэтому важны детали реализации конкретного алгоритма. Над деталями реализации алгоритмов библиотеки STL потрудились специалисты, и результатом их труда является достаточно высокая эффективность, которую отмечают многие разработчики. К сожалению, возможности STL очень скудно описаны в MSDN, хотя в мире существуют книги, где библиотека и технология ее использования для решения конкретных задач описаны достаточно подробно. Среди доступных нам книг на русском языке, конечно, следует отметить последнюю книгу Б. Страуструпа "Язык программирования C++", 3-е изд., 1999. Но она описывает библиотеку концептуально. В ней почти нет текстов программ, готовых к употреблению в среде Visual Studio. Поэтому мне захотелось дать быстрый путь к овладению некоторыми возможностями библиотеки тем читателям, которые обладают хорошим алгоритмическим мышлением, имеют некоторый опыт работы с динамическими структурами данных, но не знакомы с особенностями структуры и использования STL. Ниже будут приведены примеры практического использования контейнеров и алгоритмов STL, но не будет подробного описания заложенных в них принципов.
 
 "Шаблоны"
 
@@ -136,7 +138,7 @@ Man a("Alex Black", 54), b("Galina Black", 44), с;
 
 с = max (a, b);
 
-cout << "\n Старший: " « с;
+cout << "\n Старший: " << с;
 
 компилятор в сгенерированной по шаблону копии функции max при сравнении объектов класса Man использует функцию operator > (), которая должна быть определена внутри класса Man. Например, так:
 
@@ -144,7 +146,7 @@ int operator >(Man& m) { return m__Age > m. m_Age; }
 
 Если в той же внешней функции встретится оператор:
 
-cout << "\n max (10,011) = " « max (10,011);
+cout << "\n max (10,011) = " << max (10,011);
 
 то компилятор в другой копии функции max, сгенерированной по тому же шаблону, использует операцию >, определенную для стандартного типа данных int. Один раз написав шаблон функции max, мы можем вызывать ее для всех типов данных, для которых определена операция operator> (). Если для какого-то типа
 
@@ -173,7 +175,7 @@ template <class T> T max(Т х, Т у)
 
 "Шаблон функции быстрой сортировки"
 
-Приведем пример реализации вышеупомянутого рекурсивного алгоритма сортировки массива переменных Quicksort. Его идея состоит в том, что меняются местами элементы массива, стоящие слева и справа от выбранного «центрального» (mid) элемента массива, если они нарушают порядок последовательности. Интервал, в котором выбирается центральный элемент, постепенно сжимается, «расправляясь» сначала с левой половиной массива, затем с правой. Функция Quicksort, приведенная ниже, реализует рекурсивный алгоритм быстрой сортировки. Далее следует код, который позволяет протестировать работу функции. Сортируется массив вещественных чисел, элементы которого заданы случайным образом:
+Приведем пример реализации вышеупомянутого рекурсивного алгоритма сортировки массива переменных Quicksort. Его идея состоит в том, что меняются местами элементы массива, стоящие слева и справа от выбранного "центрального" (mid) элемента массива, если они нарушают порядок последовательности. Интервал, в котором выбирается центральный элемент, постепенно сжимается, "расправляясь" сначала с левой половиной массива, затем с правой. Функция Quicksort, приведенная ниже, реализует рекурсивный алгоритм быстрой сортировки. Далее следует код, который позволяет протестировать работу функции. Сортируется массив вещественных чисел, элементы которого заданы случайным образом:
 
 void Quicksort (double *ar, int 1, int r)
 {
@@ -309,7 +311,7 @@ puts("\n");
 
 Шаблоны классов
 
-Шаблон классов (class template) в руководствах программиста иногда называется generic class или class generator. Шаблон действительно помогает компилятору сгенерировать определение конкретного класса по образу и подобию заданной схемы. Разработчики компилятора C++ различают два термина: class template и template class. Первый означает абстрактный шаблон классов, а второй — одно из его конкретных воплощений. Пользователь может сам создать template class для какого-то типа данных. В этом случае созданный класс отменяет (overrides) автоматическую генерацию класса по шаблону для этого типа данных. Рассмотрим стандартный пример, иллюстрирующий использование шаблона для автоматического создания классов, которые реализуют функционирование абстрактного типа данных «Вектор линейного пространства». Элементами вектора могут быть объекты различной природы. В примере создаются векторы целых, вещественных, объектов некоторого класса circle (вектор окружностей) и указателей на функции. Для вектора из элементов любого типа тела методов шаблона одинаковы, поэтому и есть смысл объединить их в шаблоне:
+Шаблон классов (class template) в руководствах программиста иногда называется generic class или class generator. Шаблон действительно помогает компилятору сгенерировать определение конкретного класса по образу и подобию заданной схемы. Разработчики компилятора C++ различают два термина: class template и template class. Первый означает абстрактный шаблон классов, а второй — одно из его конкретных воплощений. Пользователь может сам создать template class для какого-то типа данных. В этом случае созданный класс отменяет (overrides) автоматическую генерацию класса по шаблону для этого типа данных. Рассмотрим стандартный пример, иллюстрирующий использование шаблона для автоматического создания классов, которые реализуют функционирование абстрактного типа данных "Вектор линейного пространства". Элементами вектора могут быть объекты различной природы. В примере создаются векторы целых, вещественных, объектов некоторого класса circle (вектор окружностей) и указателей на функции. Для вектора из элементов любого типа тела методов шаблона одинаковы, поэтому и есть смысл объединить их в шаблоне:
 
 #include <iostream>
 
@@ -441,11 +443,11 @@ for ( int i=0; i < x.SizeO; ++i)
 
 x[i] = i; // Инициализация
 
-cout « x[i] « ' ' ; // Вывод
+cout << x[i] << ' ' ; // Вывод
 
 }
 
-cout « ' \n ' ;
+cout << ' \n ' ;
 
 //===== Генерируется вектор вещественных Vector <float> y(10);
 
@@ -453,11 +455,11 @@ for (i=0; i < y.SizeO; ++i)
 
 {
 
-y[i] = float (i); // Инициализация cout « y[i] « ' ' ; // Вывод
+y[i] = float (i); // Инициализация cout << y[i] << ' ' ; // Вывод
 
 }
 
-cout « ' \n' ;
+cout << ' \n' ;
 
 //==== Генерируется вектор объектов класса Circle
 
@@ -467,17 +469,17 @@ for (i=0; i< z.SizeO; ++i) // Инициализация
 
 z[i] = Circle(i+100,i + 100,i+20) ;
 
-cout « z[i].area() « " "; // Вывод
+cout << z[i].area() << " "; // Вывод
 
 }
 
-cout « ' \n' ;
+cout << ' \n' ;
 
 //==== Генерируется вектор указателей на функции
 
 Vector <Tfunc> f(3);
 
-cout«"\nVector of function pointers: " ;
+cout<<"\nVector of function pointers: " ;
 
 f[0] = sqrt; // Инициализация
 
@@ -487,7 +489,7 @@ f[2] = tan;
 
 for (i=0; i< f.Size(); ++i)
 
-cout « f[i](3.) « ' '; // Вывод cout « "\n\n";
+cout << f[i](3.) << ' '; // Вывод cout << "\n\n";
 
 }
 
@@ -563,7 +565,7 @@ Man(const Man& m)
 
 {
 
-cout « "\n+ + " « m_Name « " is leaving";
+cout << "\n+ + " << m_Name << " is leaving";
 
 m_Name.erase (); }
 
@@ -585,17 +587,17 @@ return m_Name < m.m_Name;
 
 }
 
-friend ostreams operator«(ostreams os, const Mans m);
+friend ostreams operator<<(ostreams os, const Mans m);
 
 };
 
 //========= Внешняя реализация операции вывода
 
-ostream& operator«(ostreams os, const Mans m)
+ostream& operator<<(ostreams os, const Mans m)
 
 {
 
-return os « m.m_Name « ", Age: " « m.m_Age;
+return os << m.m_Name << ", Age: " << m.m_Age;
 
 }
 
@@ -677,13 +679,13 @@ Man("Winton Marsales", 50) ,
 
 Vector <Man> men (sizeof (some) /sizeof (Man) , some);
 
-cout«"\nVector of Man: ";
+cout<<"\nVector of Man: ";
 
 //====== Вывод вектора
 
 for (i=0; i< men. Size (); ++i)
 
-cout « men[i] « "; ";
+cout << men[i] << "; ";
 
 В шаблоне классов могут быть объявлены static данные и функции. При этом следует иметь в виду, что каждый конкретный класс, образованный по шаблону,
 
@@ -711,7 +713,8 @@ template <class T> struct Buffer {...};
 
 Buffer <Buffer <int> > buf;
 
-Между двумя закрывающими угловыми скобками » надо вставить символ пробела, так как в языке C++ операция >> имеет самостоятельный смысл, и не один. Существует возможность генерировать по шаблону классы, которые являются производными от какого-то базового класса. Например, если описать базовый класс TList, в котором не определен тип элементов хранения, то есть используется тип void, то целесообразно ввести описание шаблона производных классов:
+Между двумя закрывающими угловыми скобками ">>" надо вставить символ пробела, так как в языке C++ операция 
+">>" имеет самостоятельный смысл, и не один. Существует возможность генерировать по шаблону классы, которые являются производными от какого-то базового класса. Например, если описать базовый класс TList, в котором не определен тип элементов хранения, то есть используется тип void, то целесообразно ввести описание шаблона производных классов:
 
 class TList
 
@@ -775,12 +778,12 @@ return TList::order(pi, p2, n);
 
 vector<class T, allocator<class T> >
 
-Объект, который управляет динамическим выделением и освобождением памяти типа т, называется allocator. Для большинства типов контейнеров он обычно объявляется по умолчанию в конструкторе. Для «хитрых» данных, например требующих памяти в глобальном heap, видимо, можно изобрести индивидуальный распределитель памяти. Но в большинстве случаев работает вариант по умолчанию. Кроме того, с типом vector обычно связаны.4 типа сущностей:
+Объект, который управляет динамическим выделением и освобождением памяти типа т, называется allocator. Для большинства типов контейнеров он обычно объявляется по умолчанию в конструкторе. Для "хитрых" данных, например требующих памяти в глобальном heap, видимо, можно изобрести индивидуальный распределитель памяти. Но в большинстве случаев работает вариант по умолчанию. Кроме того, с типом vector обычно связаны 4 типа сущностей:
 
-    Pointer — ведет себя как указатель на тип т;
-    const pointer — не позволяет изменить данные типа т, на которые он указывает;
-    reference — ссылки на данные типа т;
-    const reference— не позволяет изменить данные типа т, на которые она ссылается.
+    1. Pointer — ведет себя как указатель на тип т;
+    2. const pointer — не позволяет изменить данные типа т, на которые он указывает;
+    3. reference — ссылки на данные типа т;
+    4. const reference— не позволяет изменить данные типа т, на которые она ссылается.
 
 Обычно эти сущности являются тем, чем и должны являться, но это не гарантируется. Они могут быть более сложными объектами.
 
@@ -804,7 +807,7 @@ void main ()
 
 vector<int> v(4);
 
-cout « "\nlnt Vector:\n";
+cout << "\nlnt Vector:\n";
 
 for (uint i=0; i<v.size(); i++)
 
@@ -812,75 +815,75 @@ for (uint i=0; i<v.size(); i++)
 
 v[i] = rand()%10 + 1;
 
-cout « v[i] « "; ";
+cout << v[i] << "; ";
 
 }
 
 //======= Сортировка по умолчанию sort (v.begin (), v.end());
 
-cout « "\n\nAfter default sort\n";
+cout << "\n\nAfter default sort\n";
 
-for (i=0; i<v.size(); i++) cout « v[i] « "; ";
+for (i=0; i<v.size(); i++) cout << v[i] << "; ";
 
 //======== Удаление элементов
 
 v.erase(v.begin());
 
-cout « "\n\nAfter first element erasure\n";
+cout << "\n\nAfter first element erasure\n";
 
-for (i=0; i<v.size(); i++) cout « v[i] « "; ";
+for (i=0; i<v.size(); i++) cout << v[i] << "; ";
 
 v. erase (v. end ()-2, v.endO);
 
-cout « "\n\nAfter last 2 elements erasure\n";
+cout << "\n\nAfter last 2 elements erasure\n";
 
 for (i=0; i<v.size(); i++)
 
-cout « v[i] « "; ";
+cout << v[i] << "; ";
 
 //======== Изменение размеров
 
 int size = 2; v.resize(size);
 
-cout « "\n\nAfter resize, the new size: " « v.size()
+cout << "\n\nAfter resize, the new size: " << v.size()
 
-« endl; for (i=0; i<v.size(); i++)
+<< endl; for (i=0; i<v.size(); i++)
 
-cout « v[i] « "; ";
+cout << v[i] << "; ";
 
 v.resize(6,-1);
 
-cout « "\n\nAfter resize, the new size: " « v.size()« endl;
+cout << "\n\nAfter resize, the new size: " << v.size()<< endl;
 
 for (i=0; i<v.size(); i++)
 
-cout « v[i] « "; ";
+cout << v[i] << "; ";
 
 //======== Статистика .
 
-cout « "\n\nVector's maximum size: " « v.max_size() « "XnVector's capacity: " « v.capacity() « endl
+cout << "\n\nVector's maximum size: " << v.max_size() << "XnVector's capacity: " << v.capacity() << endl
 
 //======== Резервирование
 
 v.reserve (100);
 
-cout « "\nAfter reserving storage for 100 elements:\n"
+cout << "\nAfter reserving storage for 100 elements:\n"
 
-« "Size: " « v.sizeO « endl :
+<< "Size: " << v.sizeO << endl :
 
-« "Maximum size: " « v.max_size() « endl
+<< "Maximum size: " << v.max_size() << endl
 
-« "Capacity: " « v.capacity() « endl;
+<< "Capacity: " << v.capacity() << endl;
 
 v.resize(2000);
 
-cout « "\nAfter resizing storage to 2000 elements:\n"
+cout << "\nAfter resizing storage to 2000 elements:\n"
 
-« "Size: " « v.size() « endl
+<< "Size: " << v.size() << endl
 
-« "Maximum size: " « v.max_size() « endl
+<< "Maximum size: " << v.max_size() << endl
 
-« "Capacity: " « v.capacity() « endl; cout « "\n\n";
+<< "Capacity: " << v.capacity() << endl; cout << "\n\n";
 
 }
 
@@ -936,7 +939,7 @@ template <class T> void pr(T& v, string s)
 
 {
 
-cout«"\n\n\t"«s«" # Sequence: \n";
+cout<<"\n\n\t"<<s<<" # Sequence: \n";
 
 //====== Итератор для любого контейнера
 
@@ -946,7 +949,7 @@ int i;
 
 for (p = v.begin(), i=0; p != v.end(); p++, i++)
 
-cout « endl « i + 1 «". "« *p; cout « '\n';
+cout << endl << i + 1 <<". "<< *p; cout << '\n';
 
 }
 
@@ -1006,7 +1009,7 @@ sort(v.begin(), v.end(), greater<string>()) ;
 
 pr(v, "After predicate sort");
 
-cout « "\nDistance from the 1st element to the end: ";
+cout << "\nDistance from the 1st element to the end: ";
 
 vector<string>::iterator p = v.begin ();
 
@@ -1018,23 +1021,23 @@ d = distance(p, v.end());
 
 //========= за концом последовательности
 
-cout « d « endl;
+cout << d << endl;
 
-cout « "\n\nAdvance to the half of that distanceXn";
+cout << "\n\nAdvance to the half of that distanceXn";
 
 advance (p, d/2);
 
-cout « "Now current element is: " « *p « endl;
+cout << "Now current element is: " << *p << endl;
 
 d = distance(v.begin (), p);
 
-cout « "\nThe distance from the beginning: " « d « endl;
+cout << "\nThe distance from the beginning: " << d << endl;
 
 d = distance(p, v.begin ());
 
-cout « "\nThe distance to the beginning: "
+cout << "\nThe distance to the beginning: "
 
-« d « endl;
+<< d << endl;
 
 }
 
@@ -1099,11 +1102,11 @@ vector<Man> men(ar, ar+size); pr(men,"Man Vector");
 
 reverse(ar, ar+size);
 
-cout « "\n\tAfter reversing the array\n\n";
+cout << "\n\tAfter reversing the array\n\n";
 
 for (uint i=0; i<size; i++)
 
-cout « i+1 « ". " « ar[i] « '\n';
+cout << i+1 << ". " << ar[i] << '\n';
 
 //======== Сортиуем по умолчанию
 
@@ -1117,7 +1120,7 @@ sort (men .begin () , men.endO, LessAge);
 
 pr(men,"After predicate LessAge sort");
 
-cout « "\n\n";
+cout << "\n\n";
 
 }
 
@@ -1339,19 +1342,19 @@ while (p != men.end())
 
 {
 
-cout « "\nTeen: " « *p;
+cout << "\nTeen: " << *p;
 
 p = find_if(++p, men.endO, Teen);
 
 }
 
-cout « "\nNo more Teens\n";
+cout << "\nNo more Teens\n";
 
 //======== Подсчет всех teenagers
 
 uint teen = count_if (men.begin (),men.endO , Teen);
 
-cout << "\n\n Teen totals: " « teen;
+cout << "\n\n Teen totals: " << teen;
 
 //======== Выполняем функцию для всех объектов
 
@@ -1399,7 +1402,7 @@ plus<int>() ) ;
 
 pr(v2,"Plus");
 
-cout « "\n\n";
+cout << "\n\n";
 
 }
 
@@ -1413,7 +1416,7 @@ void OutTeen(Man& m)
 
 if (Teen(m))
 
-cout « "\nTeen: " « m;
+cout << "\nTeen: " << m;
 
 }
 
@@ -1453,7 +1456,7 @@ int pos = m_Name.find_first_of(string(" "),0);
 
 string name = m_Name.substr(0, pos);
 
-cout « '\n' « name;
+cout << '\n' << name;
 
 return *this;
 
@@ -1471,7 +1474,7 @@ int pos = m_Name.find_last_of(" "), num = m_Name.length () - pos;
 
 string name = m_Name.substr(pos + 1, num);
 
-cout « '\n' « name; return *this;
+cout << '\n' << name; return *this;
 
 }
 
@@ -1505,19 +1508,19 @@ men.end(), bind2nd(less<Man>(), win));
 
 if (p != men.end())
 
-cout « "\nFound a man less than " « win « "\n\t" « *p;
+cout << "\nFound a man less than " << win << "\n\t" << *p;
 
 //======= Использование метода класса (mem_fun_ref)
 
-cout « "\n\nMen Names:\n";
+cout << "\n\nMen Names:\n";
 
 for_each (men.begin(), men.end(), mem_fun_ref(&Man::SurName));
 
-cout « "\n\nMen First Names:\n";
+cout << "\n\nMen First Names:\n";
 
 for_each (men.begin (), men.end(), mem_fun_ref(&Man::FirstName));
 
-cout « "\n\n";
+cout << "\n\n";
 
 }
 
@@ -1539,7 +1542,7 @@ virtual bool print()
 
 {
 
-cout « "\nl'm a Stud";
+cout << "\nl'm a Stud";
 
 return true;
 
@@ -1555,7 +1558,7 @@ bool print ()
 
 {
 
-cout « "\nl'm a Good Stud";
+cout << "\nl'm a Good Stud";
 
 return true;
 
@@ -1573,7 +1576,7 @@ bool print ()
 
 {
 
-cout « "XnI'm a Bad Stud";
+cout << "XnI'm a Bad Stud";
 
 return true;
 
@@ -1675,7 +1678,7 @@ d.insert (d.begin ()+1, dd.begin(), dd.end());
 
 pr(d,"After inserting another deque");
 
-cout«"\n\n";
+cout<<"\n\n";
 
 }
 
@@ -1713,7 +1716,7 @@ p = find(men.begin(),men.end(),joy);
 
 if (p == men.end())
 
-cout « '\n' « joy « " not found!";
+cout << '\n' << joy << " not found!";
 
 men.push_front(win); men.push_back(win);
 
@@ -1735,7 +1738,7 @@ d.assign(3,win);
 
 d.swap(men);
 
-pr(men,"After swap with another deque"); cout«"\n\n";
+pr(men,"After swap with another deque"); cout<<"\n\n";
 
 }
 
@@ -1791,9 +1794,9 @@ pr(men,"After merging with simons list");
 
 //==== После слияния второй список полностью исчез
 
-cout « "\n\tAfter merging simons li.size: "
+cout << "\n\tAfter merging simons li.size: "
 
-« li.size() « endl;
+<< li.size() << endl;
 
 men.remove(s imon);
 
@@ -1983,7 +1986,7 @@ for (int i=l; i<5; i++) ss.insert (i*10);
 
 s. insert (++ss. begin () , —s s.end() );
 
-pr(s, "After insertion"); cout«"\n\n";
+pr(s, "After insertion"); cout<<"\n\n";
 
 }
 
@@ -2091,21 +2094,21 @@ set<const char*, LessStr> C;
 
 //======== Выходной итератор привязываем к cout
 
-cout « "Set A: {";
+cout << "Set A: {";
 
 copy (A.begin (), A.end.(),
 
 ostream_iterator<const char*>(cout, "; "));
 
-cout « ' } ' ;
+cout << ' } ' ;
 
-cout « "\n\nSet B:
+cout << "\n\nSet B:
 
 copy (B.begin (), B.end(), .. ostream_iterator<const char*>(cout, ", "));
 
 //======= Создаем и выводим объединение двух множеств
 
-cout « "\n\nUnion A U В: ";
+cout << "\n\nUnion A U В: ";
 
 set_union (A.begin () , A.end(), B.begin(), B.end(),
 
@@ -2115,7 +2118,7 @@ LessStr () )';
 
 //======= Создаем и выводим пересечение двух множеств
 
-cout « "\n\nlntersection А & В: ";
+cout << "\n\nlntersection А & В: ";
 
 set_intersection (A.begin () , A.end(), B.beginO, B.end(), ostream_iterator<const char*>(cout, " "), LessStrO);
 
@@ -2129,7 +2132,7 @@ inserter (С, C.begin()),
 
 LessStr() ) ;
 
-cout « "\n\nDifference A/B: ";
+cout << "\n\nDifference A/B: ";
 
 //===== Копируем множество прямо в выходной поток сору
 
@@ -2147,13 +2150,13 @@ set_dif ference (В. begin () , B.endO, A.begin(), A.end(),
 
 inserter (С, C.begin()), LessStrO);
 
-cout « "\n\nDifference B/A: ";
+cout << "\n\nDifference B/A: ";
 
 copy (C.begin (), C.end(),
 
 ostream_iterator<const char*>(cout, " "));
 
-cout « "\n\n";
+cout << "\n\n";
 
 //====== Выводим разделитель
 
@@ -2169,17 +2172,17 @@ char D[] = { 'a', 'b', 'с', 'd', ' e', 'f' };
 
 char E[] = { 'A', 'B', 'C1, 'G', 'H1, 'H' };
 
-cout « "\n\nSet D: ";
+cout << "\n\nSet D: ";
 
-for (int i=0; i<N; i++) cout « D[i] « ", ";
+for (int i=0; i<N; i++) cout << D[i] << ", ";
 
-cout « "\n\nSet E: ";
+cout << "\n\nSet E: ";
 
 for (int i=0; i<N; i + -i-)
 
-cout « E[i]«",";
+cout << E[i]<<",";
 
-cout « "\n\nSymmetric Difference D/E (nocase): ";
+cout << "\n\nSymmetric Difference D/E (nocase): ";
 
 //====== Используем алгоритм set_symmetric_difference
 
@@ -2189,7 +2192,7 @@ set_symmetric_difference(D, D + N, E, E + N,
 
 ostream_iterator<char>(cout, " "), NoCase);
 
-cout«"\n\n"; }
+cout<<"\n\n"; }
 
 Новые возможности STL, которые использованы в этом фрагменте, — это использование адаптера insert_iterator и копирование содержимого контейнера прямо в выходной поток (см. ostream_iterator). Вывод в поток осуществляется с помощью особого типа итератора ostream_iterator, который осуществляет форматируемый вывод объектов типа Т в указанный выходной поток (ostream). Шаблон класса ostream_iterator настраивается на тип данных, в нашем случае const char*, а затем char, и берет в качестве параметров объект потокового вывода (cout) и разделитель, который мы специально изменяем по ходу дела для того, чтобы вы его обнаружили.
 
@@ -2245,7 +2248,7 @@ if (p != s.end() )
 
 s.erase(p);
 
-cout « "\n\n"« joy «" found and erased";
+cout << "\n\n"<< joy <<" found and erased";
 
 }
 
@@ -2261,23 +2264,23 @@ pib = s.insert(joy);
 
 //========== Анализируем результат вставки
 
-cout « "\n\nlnserting: " « *pib.first « "\nResult is: " « pib.second;
+cout << "\n\nlnserting: " << *pib.first << "\nResult is: " << pib.second;
 
 //========== Пробуем вставить повторно
 
 pib = s.insert(joy);
 
-cout « "\n\nlnserting: " « *pib.first « "\nResult is: " « pib.second;
+cout << "\n\nlnserting: " << *pib.first << "\nResult is: " << pib.second;
 
 //========== Сравниваем ключи
 
-cout « "\n\ns.key_comp() (zoran,count) returned "
+cout << "\n\ns.key_comp() (zoran,count) returned "
 
-« s.key_comp()(zoran,ar[0]);
+<< s.key_comp()(zoran,ar[0]);
 
-cout « "\n\ns.key_comp()(count,zoran) returned "
+cout << "\n\ns.key_comp()(count,zoran) returned "
 
-« s.key_comp()(ar[0],zoran);
+<< s.key_comp()(ar[0],zoran);
 
 cout <<"\n\n";
 
@@ -2341,23 +2344,23 @@ p.second = 2;
 
 pib = m.insert(p);
 
-cout « "\n\nlnserting: "
+cout << "\n\nlnserting: "
 
-« (*pib.first).first « ","
+<< (*pib.first).first << ","
 
-« (*pib.first).second
+<< (*pib.first).second
 
-« "\nResult is: " « pib.second;
+<< "\nResult is: " << pib.second;
 
 pib = m.insert(p);
 
-cout « "\n\nlnserting: "
+cout << "\n\nlnserting: "
 
-« (*pib.first).first « ","
+<< (*pib.first).first << ","
 
-« (*pib.first).second
+<< (*pib.first).second
 
-« "\nResult is: " « pib.second;
+<< "\nResult is: " << pib.second;
 
 //========= Работаем с индексом
 
@@ -2375,15 +2378,15 @@ m.iftsert(*pp);
 
 delete pp;
 
-cout«"\n\n\t <string,int> pairs :\n";
+cout<<"\n\n\t <string,int> pairs :\n";
 
 for (it = m.begin ();
 
 if != m.end(); it++)
 
-cout « "\n(" « it->first«","<<it->second«") ";
+cout << "\n(" << it->first<<","<<it->second<<") ";
 
-cout«"\n\n";
+cout<<"\n\n";
 
 }
 
@@ -2467,15 +2470,15 @@ h.insert TManPair (115, joy));
 
 //====== При выводе пользуемся парой
 
-cout « "Contents of Hash Multimap\n\n";
+cout << "Contents of Hash Multimap\n\n";
 
 for (ManMapIt p = h.begin();
 
 p != h.end(); p++)
 
-cout « "\n" « p->first
+cout << "\n" << p->first
 
-«". " « p->second;
+<<". " << p->second;
 
 //====== Выбираем диапазон (сотрудники 100-го отдела)
 
@@ -2483,13 +2486,13 @@ pair<ManMap!t, ManMapIt> pp = h.equal_range(100);
 
 //====== Вновь пользуемся парой
 
-cout « "\n\nEmployees of 100 department\n\n";
+cout << "\n\nEmployees of 100 department\n\n";
 
 for (p = pp.first; p != pp.second; ++p)
 
-cout « "\n" « p->first
+cout << "\n" << p->first
 
-«"." « p->second; cout « "\n\n";
+<<"." << p->second; cout << "\n\n";
 
 }
 
@@ -2541,13 +2544,13 @@ assert (s.size () == 3);
 
 assert(s.top() == Charlie);
 
-cout « "Stack contents:\n\n";
+cout << "Stack contents:\n\n";
 
 while (s.size())
 
 {
 
-cout « s.top() « "; ";
+cout << s.top() << "; ";
 
 //========= Уничтожает top-элемент
 
@@ -2559,7 +2562,7 @@ assert(s.empty());
 
 Контейнеры типа queue
 
-Очередь — это тоже,адаптер, который предоставляет ограниченное подмножество функциональности контейнера. Говорят, что очередь — это структура данных с дисциплиной доступа "first in first out" (FIFO). Элементы, вставляемые в конец очереди, могут быть выбраны спереди. Это означает, что метод queue:: front () возвращает самый «старый» элемент, то есть тот, который был вставлен в очередь least recently — первым из тех, что еще живы. Очередь, так же как и стек, не допускает итераций прохода по своим элементам. По умолчанию она основана на контейнере типа deque. Сравнение стека и очереди приведены в следующем фрагменте (Подключите <queue>):
+Очередь — это тоже,адаптер, который предоставляет ограниченное подмножество функциональности контейнера. Говорят, что очередь — это структура данных с дисциплиной доступа "first in first out" (FIFO). Элементы, вставляемые в конец очереди, могут быть выбраны спереди. Это означает, что метод queue:: front () возвращает самый "старый" элемент, то есть тот, который был вставлен в очередь least recently — первым из тех, что еще живы. Очередь, так же как и стек, не допускает итераций прохода по своим элементам. По умолчанию она основана на контейнере типа deque. Сравнение стека и очереди приведены в следующем фрагменте (Подключите <queue>):
 
 void main ()
 
@@ -2583,13 +2586,13 @@ stack<Man> s;
 
 for (uint i=0; i<size; i++) s.push(ar[i]);
 
-cout « "Stack of Man:\n\n";
+cout << "Stack of Man:\n\n";
 
 while (s.size ())
 
 {
 
-cout « s.top() « "; ";
+cout << s.top() << "; ";
 
 s.pop ();
 
@@ -2601,17 +2604,17 @@ queue<Man> q;
 
 for (i=0; Ksize; i++) q.push(ar[i]);
 
-cout « "\n\nQueue of Man:\n\n";
+cout << "\n\nQueue of Man:\n\n";
 
 while (q.size ())
 
 {
 
-cout « q.frontO « "; ";
+cout << q.frontO << "; ";
 
 q.pop(); }
 
-cout«"\n\n";
+cout<<"\n\n";
 
 }
 
@@ -2649,7 +2652,7 @@ men.push (joy);
 
 men.push (mela); men.push (win);
 
-cout«"priority_queue size: "«men. size () «endl;
+cout<<"priority_queue size: "<<men. size () <<endl;
 
 int i=0;
 
@@ -2657,7 +2660,7 @@ while ('men.empty())
 
 {
 
-cout « "\n"« ++i«". "«men.top();
+cout << "\n"<< ++i<<". "<<men.top();
 
 men.pop();
 
@@ -2703,9 +2706,9 @@ pr(v,"Before writing to file");
 
 //========== Запрашиваем имя файла
 
-cout « "\nEnter File Name: ";
+cout << "\nEnter File Name: ";
 
-string fn, text; cin » fn;
+string fn, text; cin >> fn;
 
 //========== Приписываем расширение
 
@@ -2745,25 +2748,25 @@ if stream is(fn.c_str());
 
 is.seekg(17) ;
 
-is » text;
+is >> text;
 
-cout « "\n\nStream Positioning:\n\n" « "17 bytes:\t\t" « text « endl;
+cout << "\n\nStream Positioning:\n\n" << "17 bytes:\t\t" << text << endl;
 
 //========== Устанавливаем в начало потока
 
 is.seekg(0, ios_base::beg);
 
-is » text;
+is >> text;
 
-cout « "0 bytes:\t\t" « text « endl;
+cout << "0 bytes:\t\t" << text << endl;
 
 //========== Сдвигаем на 8 символов от конца
 
 is.seekg(-8, ios_base::end);
 
-is » text;
+is >> text;
 
-cout « "-8 bytes from end:\t" « text « "\n\n";
+cout << "-8 bytes from end:\t" << text << "\n\n";
 
 //========== Устанавливаем в начало потока
 
@@ -2777,7 +2780,7 @@ copy(Strln(is),Strln(),back_inserter(v));
 
 pr(v,"After reading from file");
 
-cout«"\n\n"; }
+cout<<"\n\n"; }
 
 Программа производит следующий выход:
 
@@ -2831,7 +2834,7 @@ After reading from file # Sequence:
 
 typedef basic_string<char> string;
 
-Шаблон basic_string предоставляет типы и методы, схожие с теми, что предоставляют стандартные контейнеры, но он имеет много специфических методов, которые позволяют достаточно гибко манипулировать как строками, так и их частями (подстроками). Минимизация операций копирования строк, которой гордится MFC-класс cstring, на самом деле приводит к труднообнаруживаемым и невоспроизводимым (irreproducible) ошибкам, которые очень сильно портят жизнь программистам. Я с интересом узнал, что члены комиссии по утверждению стандарта C++ анализируют ошибки, возникающие из-за совместного использования двумя переменными строкового типа одной и той же области памяти, и пытаются выработать спецификации относительно времени жизни ссылок на символы строки. Если вы запутались в этой фразе, то следующий фрагмент программы, который комиссия использует в качестве теста, должен прояснить ситуацию. При выполнении он выведет строку «Wrong» или «Right», что означает, что ваша реализация string ненадежна или, скорее всего, надежна. Если она выведет строку «Right», то это еще не означает, что ваша реализация надежна. Ошибки могут всплыть в многопоточных приложениях, когда разные потоки работают с одной строкой символов:
+Шаблон basic_string предоставляет типы и методы, схожие с теми, что предоставляют стандартные контейнеры, но он имеет много специфических методов, которые позволяют достаточно гибко манипулировать как строками, так и их частями (подстроками). Минимизация операций копирования строк, которой гордится MFC-класс cstring, на самом деле приводит к труднообнаруживаемым и невоспроизводимым (irreproducible) ошибкам, которые очень сильно портят жизнь программистам. Я с интересом узнал, что члены комиссии по утверждению стандарта C++ анализируют ошибки, возникающие из-за совместного использования двумя переменными строкового типа одной и той же области памяти, и пытаются выработать спецификации относительно времени жизни ссылок на символы строки. Если вы запутались в этой фразе, то следующий фрагмент программы, который комиссия использует в качестве теста, должен прояснить ситуацию. При выполнении он выведет строку "Wrong" или "Right", что означает, что ваша реализация string ненадежна или, скорее всего, надежна. Если она выведет строку "Right", то это еще не означает, что ваша реализация надежна. Ошибки могут всплыть в многопоточных приложениях, когда разные потоки работают с одной строкой символов:
 
 //====== Две тестовые текстовые строки
 
@@ -2851,13 +2854,13 @@ target = source;
 
 //====== Этот тест позволяет выяснить ситуацию
 
-cout « (target[l] == 'z1 ? "\nWrong" : "\nRight");
+cout << (target[l] == 'z1 ? "\nWrong" : "\nRight");
 
 Здесь мы использовали ссылку, но аналогичное поведение обнаруживает и итератор. Вы можете объявить и использовать его так:
 
 string::iterator it = source.begin()+1; *it = z1 ;
 
-В рассматриваемой версии Studio.Net я с удовлетворением отметил, что тест выводит строку «Right». Следующий фрагмент демонстрирует технику обрезания «пустого» текста в начале и конце строки. Она не очень эффективна, но вполне пригодна для строк небольшого размера:
+В рассматриваемой версии Studio.Net я с удовлетворением отметил, что тест выводит строку "Right". Следующий фрагмент демонстрирует технику обрезания "пустого" текста в начале и конце строки. Она не очень эффективна, но вполне пригодна для строк небольшого размера:
 
 //====== Множество пустых символов
 
@@ -2879,7 +2882,7 @@ s = s.substr(s.find_first_not_of(White));
 
 reverse (s .begin (), s.end());
 
-Интересный пример, иллюстрирующий работу со строками, я увидел в MSDN. Нечто вроде секретного детского языка под названием Pig Latin (свинячья латынь). Алгоритм засекречивания слов состоит в том, что от каждого слова отрывают первую букву, переставляют ее в конец слова, а затем добавляют туда окончание «ау». Игра, очевидно, имеет свою историю. Приведем коды функции, которая реализует этот алгоритм и возвращает засекреченную строку:
+Интересный пример, иллюстрирующий работу со строками, я увидел в MSDN. Нечто вроде секретного детского языка под названием Pig Latin (свинячья латынь). Алгоритм засекречивания слов состоит в том, что от каждого слова отрывают первую букву, переставляют ее в конец слова, а затем добавляют туда окончание "ау". Игра, очевидно, имеет свою историю. Приведем коды функции, которая реализует этот алгоритм и возвращает засекреченную строку:
 
 //====== Преобразование строки по принципу Pig Latin
 
@@ -2931,9 +2934,9 @@ string s("she,sells;
 
 sea shells by the sea shore");
 
-cout « "Source string: " « s « endl;
+cout << "Source string: " << s << endl;
 
-cout « "\nPig Latin(s): " « PigLatin(s);
+cout << "\nPig Latin(s): " << PigLatin(s);
 
 В результате вы увидите такой текст:
 
@@ -2961,171 +2964,171 @@ STL имеет много полезных констант. Проверьте 
 
 //===== Сначала простые, которые знают все
 
-cout « "\n Is a char signed? "
+cout << "\n Is a char signed? "
 
-« numeric_limits<char>::is_signed;
+<< numeric_limits<char>::is_signed;
 
-cout « "\n The minimum value for char is: "
+cout << "\n The minimum value for char is: "
 
-« (int)numeric_limits<char>::min();
+<< (int)numeric_limits<char>::min();
 
-cout « "\n The maximum value for char is: "
+cout << "\n The maximum value for char is: "
 
-« (int)numeric_limits<char>::max();
+<< (int)numeric_limits<char>::max();
 
-cout « "\n The minimum value for int is: "
+cout << "\n The minimum value for int is: "
 
-« numeric_limits<int>::min();
+<< numeric_limits<int>::min();
 
-cout « "\n The maximum value for int is: "
+cout << "\n The maximum value for int is: "
 
-« numeric_limits<int>::max();
+<< numeric_limits<int>::max();
 
-cout « "\n Is a integer an integer? "
+cout << "\n Is a integer an integer? "
 
-« numeric_limits<int>::is_integer;
+<< numeric_limits<int>::is_integer;
 
-cout « "\n Is a float an integer? "
+cout << "\n Is a float an integer? "
 
-« numeric_limits<float>::is_integer;
+<< numeric_limits<float>::is_integer;
 
-cout « "\n Is a integer exact? "
+cout << "\n Is a integer exact? "
 
-« numeric_limits<int>::is_exact;
+<< numeric_limits<int>::is_exact;
 
-cout « "\n Is a float exact? "
+cout << "\n Is a float exact? "
 
-« numeric_limits<float>::is_exact;
+<< numeric_limits<float>::is_exact;
 
 //===== Теперь более сложные
 
-cout « "\n Number of bits in mantissa (double) : "
+cout << "\n Number of bits in mantissa (double) : "
 
-« DBL_MANT_DIG; cout « "\n Number of bits in mantissa (float): "
+<< DBL_MANT_DIG; cout << "\n Number of bits in mantissa (float): "
 
-« FLT_MANT_DIG;
+<< FLT_MANT_DIG;
 
 cout <<"\n The number of digits representble " "in base 10 for float is "
 
-« numeric_limits<float>::digitslO;
+<< numeric_limits<float>::digitslO;
 
-cout « "\n The radix for float is: "
+cout << "\n The radix for float is: "
 
-« numeric_limits<float>::radix;
+<< numeric_limits<float>::radix;
 
-cout « "\n The epsilon for float is: "
+cout << "\n The epsilon for float is: "
 
-« numeric_limits<float>::epsilon() ;
+<< numeric_limits<float>::epsilon() ;
 
-cout « "\n The round error for float is: "
+cout << "\n The round error for float is: "
 
-« numeric_limits<float>::round_error();
+<< numeric_limits<float>::round_error();
 
-cout « "\n The minimum exponent for float is: "
+cout << "\n The minimum exponent for float is: "
 
-« numeric_limits<float>::min_exponent;
+<< numeric_limits<float>::min_exponent;
 
-cout « "\n The minimum exponent in base 10: "
+cout << "\n The minimum exponent in base 10: "
 
-« numeric_limits<float>::min_exponentlO;
+<< numeric_limits<float>::min_exponentlO;
 
-cout « "\n The maximum exponent is: "
+cout << "\n The maximum exponent is: "
 
-« numeric_limits<float>::max_exponent;
+<< numeric_limits<float>::max_exponent;
 
-cout « "\n The maximum exponent in base 10: "
+cout << "\n The maximum exponent in base 10: "
 
-« numeric_limits<float>::max_exponentlO;
+<< numeric_limits<float>::max_exponentlO;
 
-cout « "\n Can float represent positive infinity? "
+cout << "\n Can float represent positive infinity? "
 
-« numeric_limits<float>::has_infinity;
+<< numeric_limits<float>::has_infinity;
 
-cout « "\n Can double represent positive infinity? "
+cout << "\n Can double represent positive infinity? "
 
-« numeric_limits<double>::has_infinity;
+<< numeric_limits<double>::has_infinity;
 
-cout « "\n Can int represent positive infinity? "
+cout << "\n Can int represent positive infinity? "
 
-« numeric_limits<int>::has_infinity;
+<< numeric_limits<int>::has_infinity;
 
-cout « "\n Can float represent a NaN? "
+cout << "\n Can float represent a NaN? "
 
-« numeric_limits<float>::has_quiet_NaN;
+<< numeric_limits<float>::has_quiet_NaN;
 
-cout « "\n Can float represent a signaling NaN? "
+cout << "\n Can float represent a signaling NaN? "
 
-« numeric_limits<float>::has_signaling_NaN;
+<< numeric_limits<float>::has_signaling_NaN;
 
 //===== Теперь еще более сложные
 
-cout « "\n Does float allow denormalized values? "
+cout << "\n Does float allow denormalized values? "
 
-« numeric_limits<float>::has_denorm;
+<< numeric_limits<float>::has_denorm;
 
-cout « "\n Does float detect denormalization loss? "
+cout << "\n Does float detect denormalization loss? "
 
-« numeric_limits<float>::has_denorm_loss;
+<< numeric_limits<float>::has_denorm_loss;
 
-cout « "\n Representation of positive infinity for"
+cout << "\n Representation of positive infinity for"
 
-" float: "« numeric_limits<float>::infinity();
+" float: "<< numeric_limits<float>::infinity();
 
-cout « "\n Representation of quiet NaN for float: "
+cout << "\n Representation of quiet NaN for float: "
 
-« numeric_limits<float>::quiet_NaN();
+<< numeric_limits<float>::quiet_NaN();
 
-cout « "\n Minimum denormalized number for float: "
+cout << "\n Minimum denormalized number for float: "
 
-« numeric_limits<float>::denorm_min();
+<< numeric_limits<float>::denorm_min();
 
-cout « "\n Minimum positive denormalized value for"
+cout << "\n Minimum positive denormalized value for"
 
-" float " « numeric_limits<float>::denorm_min();
+" float " << numeric_limits<float>::denorm_min();
 
-cout « "\n Does float adhere to IEC 559 standard? "
+cout << "\n Does float adhere to IEC 559 standard? "
 
-« numeric_limits<float>::is_iec559; cout « "\n Is float bounded? "
+<< numeric_limits<float>::is_iec559; cout << "\n Is float bounded? "
 
-« numeric_limits<float>::is_bounded;
+<< numeric_limits<float>::is_bounded;
 
-cout « "\n Is float modulo? "
+cout << "\n Is float modulo? "
 
-« numeric_limits<float>::is_modulo;
+<< numeric_limits<float>::is_modulo;
 
-cout « "\n is int modulo? "
+cout << "\n is int modulo? "
 
-« numeric_limits<float>::is_modulo;
+<< numeric_limits<float>::is_modulo;
 
-cout « "\n Is trapping implemented for float? "
+cout << "\n Is trapping implemented for float? "
 
-« numeric_limits<float>::traps;
+<< numeric_limits<float>::traps;
 
-cout « "\n Is tinyness detected before rounding? "
+cout << "\n Is tinyness detected before rounding? "
 
-« numeric_limits<float>::tinyness_before;
+<< numeric_limits<float>::tinyness_before;
 
-cout « "\n What is the rounding style for float? "
+cout << "\n What is the rounding style for float? "
 
-« (int)numeric_limits<float>::round_style;
+<< (int)numeric_limits<float>::round_style;
 
-cout « "\n What is the rounding style for int? "
+cout << "\n What is the rounding style for int? "
 
-« (int)numeric_limits<int>::round_style;
+<< (int)numeric_limits<int>::round_style;
 
 //===== Теперь из другой оперы
 
-cout « "\n Floating digits " « FLT_DIG;
+cout << "\n Floating digits " << FLT_DIG;
 
-cout « "\n Smallest such that 1.0+DBL_EPSILON !=1.0: "
+cout << "\n Smallest such that 1.0+DBL_EPSILON !=1.0: "
 
-« DBL_EPSILON;
+<< DBL_EPSILON;
 
-cout « "\n LDBL_MIN_EXP: " « LDBL_MIN_EXP;
+cout << "\n LDBL_MIN_EXP: " << LDBL_MIN_EXP;
 
-cout « "\n LDBL_EPSILON: " « LDBL_EPSILON;
+cout << "\n LDBL_EPSILON: " << LDBL_EPSILON;
 
-cout « "\n Exponent radix: " « _DBL_RADIX;
+cout << "\n Exponent radix: " << _DBL_RADIX;
 
 Незнание констант типа DBL_EPSILON или DBL_MANT_DIG довольно сильно ограничивает квалификацию программиста, поэтому советую внимательно исследовать вывод, производимый данным фрагментом, и, возможно, обратиться к специальным изданиям по архитектуре компьютера или учебникам с целью ликвидировать пробелы в знаниях в этой области.
 
@@ -3173,11 +3176,11 @@ for (double х=0.;
 
 vy = sin(vx);
 
-cout«"Valarrays of x and sin(x)\n";
+cout<<"Valarrays of x and sin(x)\n";
 
 for (i=0; i < size; i++)
 
-cout«"\nx = " « vx[i] «" у = "« vy[i];
+cout<<"\nx = " << vx[i] <<" у = "<< vy[i];
 
 }
 
@@ -3199,11 +3202,11 @@ vd /= dx;
 
 //======= Мы проверяем результат
 
-cout«"\n\nValarray of differences\n";
+cout<<"\n\nValarray of differences\n";
 
 for (i=l; i < size; i++)
 
-cout«"\nx = " « vx[i] «" у = "« vd[i];
+cout<<"\nx = " << vx[i] <<" у = "<< vd[i];
 
 Отметьте, что в первой точке (с нулевым индексом) будет ошибка, поэтому мы ее не выводим. Остальные элементы результирующей последовательности чисел (valarray vd) должны вести себя как у = cos(x). В качестве третьего параметра функции adjacent_dif ference нельзя задать просто vd, так как в отличие от обычного массива имя vd не является адресом его первого элемента. Шаблон классов valarray имеет некоторое, весьма ограниченное количество методов, которые позволяют производить манипуляции с данными, среди которых стоит отметить: min, max, sum, shift, cshift, apply. Приведем фрагмент, иллюстрирующий их использование:
 
@@ -3225,13 +3228,13 @@ void out(char* head, valarray<double>& v)
 
 {
 
-cout « '\n' « head << '\n';
+cout << '\n' << head << '\n';
 
 for (unsigned i=0; i < v.size(); i++)
 
-cout«"\nv[" « i « "] = " « v[i];
+cout<<"\nv[" << i << "] = " << v[i];
 
-cout «'\n';
+cout <<'\n';
 
 }
 
@@ -3257,7 +3260,7 @@ out("Initial valarray", vx);
 
 //======== Вычисляем сумму всех элементов
 
-cout « "\nsum = " « vx.sum() « endl;
+cout << "\nsum = " << vx.sum() << endl;
 
 //======== Применяем свое преобразование
 
@@ -3269,7 +3272,7 @@ out("After apply", vy);
 
 //======== Вычисляем min и max
 
-cout « "\n\nmin = " « vy.min() « " max = " « vy.max();
+cout << "\n\nmin = " << vy.min() << " max = " << vy.max();
 
 }
 
