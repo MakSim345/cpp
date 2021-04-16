@@ -63,7 +63,7 @@ superType fuct(superType value)
 }
 
 //*******************INT and Double example*************
-template < class sTemplate >
+template <class sTemplate>
 class Funct
 {
 public:
