@@ -56,7 +56,7 @@ void testProgrammers()
     }
 }
 
-struct Dog 
+struct Dog
 {
     Dog (int ageP)
         : m_age(ageP)
@@ -70,7 +70,7 @@ struct DoSomethingFunctor
     DoSomethingFunctor (int x)
         : m_x (x)
     {}
-    
+
     int operator () (int y) const
     {
         return m_x + y;
@@ -79,32 +79,50 @@ struct DoSomethingFunctor
     int m_x;
 };
 
-namespace MyMSF
+struct Eventfunctor
 {
-class Entity
-{
-public:
-    Entity()
+    Eventfunctor():
+        evenSum(0),
+        evenCount(0)
+    { }
+
+    void operator () (int valueP)
     {
-        std::cout << "Created Entity!" << std::endl;
+        if (valueP %2 == 0)
+        {
+            evenSum += valueP;
+            evenCount++;
+        }
     }
 
-    ~Entity()
+    void ShowEventSum()
     {
-        std::cout << "Destroyed Entity!" << std::endl;
+        std::cout << "Sum even numbers:" <<  evenSum << std::endl;
     }
 
-    void Print()
+    void ShowEventCount()
     {
-        std::cout << "Print Entity!" << std::endl;
+        std::cout << "Count even numbers:" <<  evenCount << std::endl;
     }
+
+    int evenSum;
+    int evenCount;
 };
-} // end MyMSF namespace
+
 
 void PrintValue(int valueP)
 {
     std::cout << "Value:" <<  valueP << std::endl;
 }
+
+struct Mult
+{
+    int operator()(int argP)
+    {
+        return argP<<1; // argP *= 2;
+    }
+
+};
 
 class AddValue
 {
@@ -126,20 +144,51 @@ void ForEach(const std::vector<int>& values, void (*p_funcP)(int))
 }
 
 
+template <typename T>
+int sink (int arg [], int size, T op)
+{
+    int sum = 0;
+    for (int i = 0; i<size; i++)
+    {
+        sum += op(arg[i]);
+    }
+    return sum;
+}
+
 int main(int argc, char *argv[], char *envp[])
 {
     printf ("main - start\n");
     auto function = testProgrammers;
-    
-    function();
 
-    {
-        std::unique_ptr<MyMSF::Entity> my_Entity(new MyMSF::Entity);
-        my_Entity->Print();
-    }
-    
+    // function();
     // DoSomethingFunctor my_functor(7);
     // std::cout << "Functor 23: " << my_functor(23) << std::endl;
+
+    // lambda:
+    int xl = 1;
+    auto l1 = []{cout << "Hello from Lambda 1." << endl;};
+    auto l2 = [](int n){cout << "Hello from Lambda 2: " << n << endl;};
+    auto l3 = [xl](int n){cout << "Hello from Lambda 3: " << n+xl << endl;};
+    auto l4 = [&xl](int n){xl=55; cout << "Hello from Lambda 4: " << n+xl << endl;};
+    l1();
+    l2(0x1234567u);
+    l3(12);
+    l4(50);
+
+    Eventfunctor ef;
+    int arr[] = {1,2,55,99,44,3};
+    const int arr_size = sizeof(arr)/sizeof(int);
+    // for (auto element:arr)
+    Mult mult_1;
+    std::cout << sink(arr, arr_size, mult_1);
+
+    for (int i = 0; i < arr_size; i++)
+    {
+        ef(arr[i]);
+    }
+    ef.ShowEventCount();
+    ef.ShowEventSum();
+
 
     int x = 2;
     vector <int> vec;
