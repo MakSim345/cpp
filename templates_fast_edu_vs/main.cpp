@@ -1,5 +1,12 @@
 #include <iostream>
+#include <string>
 #include "utils.h"
+
+/**
+ * Check in video:
+ * https://www.youtube.com/watch?v=I-hZkUa9mIs
+ * https://www.youtube.com/watch?v=W0aoAm6eYSk
+*/
 
 using namespace std;
 
@@ -18,6 +25,44 @@ public:
     superTypeT bigger();
 };
 
+
+class String
+{
+private:
+    char *m_Buffer;
+    unsigned int m_Size;
+
+public:
+    String(const char* stringP)
+    {
+        m_Size = strlen(stringP);
+        m_Buffer = new char[m_Size+1]; // null character to add
+        memcpy(m_Buffer, stringP, m_Size);
+        m_Buffer[m_Size] = 0;
+    }
+    // use friend to give access to a private member m_Buffer:
+    friend std::ostream& operator<<(std::ostream& streamP, const String& stringP);
+};
+
+// Function:
+std::ostream& operator<<(std::ostream& streamP, const String& stringP)
+{
+    // in case use friend:
+    streamP << stringP.m_Buffer;
+    // streamP << stringP.GetBuffer();
+    return streamP;
+}
+
+template <typename T, int ARRAY_SIZE_N>
+class Array
+{
+private:
+    T mArray[ARRAY_SIZE_N];
+
+public:
+    T GetSize() const {return ARRAY_SIZE_N;}
+};
+
 template <class superTypeT>
 superTypeT Bucky<superTypeT>::bigger() 
 {
@@ -30,10 +75,38 @@ FIRST smaller(FIRST a, SECOND b)
     return (a<b?a:b);
 }
 
+// template <class T> // REM: class is same as typename!
+template <typename T>
+void Print (T valueP)
+{
+    std::cout << valueP << std::endl;
+}
+
+// REM: template does not exist before it has been used
+template <typename T>
+void Print_with_error (T valueP)
+{
+    std::cout << value << std::endl; // incorrect parameter value used!
+}
+/*
+void Print (int valueP)
+{
+    std::cout << valueP << std::endl;
+}
+
+void Print (std::string valueP)
+{
+    std::cout << valueP << std::endl;
+}
+*/
 
 int main()
 {   
     // Bucky <float> *bucky_float;
+    
+    String test_string = "Cherno";
+    std::cout << test_string << std::endl;
+    
     // bucky_float = new Bucky(12.5, 2.4);
     Bucky <float> bucky_float(12.5, 2.4);
     cout << "Float comparation: " << bucky_float.bigger() << endl;
@@ -45,8 +118,22 @@ int main()
     double y = 56.78;
     cout << "Universal comparation: " << smaller(x, y) << endl;
 
+    Print(x); // parameter is implicit
+    Print <int>(x); // same as above
+    Print("->hello");
+    Print(y);
+
+    Array <int, 50> array;
+    Print (array.GetSize());
+    // Array *array = new Array <5>;
+    // Print (array->GetSize());
+
     system("PAUSE");
+    //system("pause>0");
     
+    // std::cout << "\nPress ENTER to exit...\n";
+    //cin.get();
+
     return 1;
 }
 
