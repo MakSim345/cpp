@@ -227,6 +227,7 @@ int main( int argc, char *argv[] )
 
     printf("Test: %d\n", orig);
     printf("Test: 0x%X\n", orig);
+    showInt(orig);
     printf("call: biton(orig, 7)");
     biton(orig, 7);
     // orig<<_sft;
