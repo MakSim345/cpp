@@ -26,6 +26,30 @@ public:
 };
 
 
+template <class T, class U>
+class Person
+{
+public:
+    T height;
+    U weight;
+    static int numOfPeople;
+
+    Person(T h, U w)
+    {
+        height = h;
+        weight = w;
+        numOfPeople++;
+    }
+
+    void getData()
+    {
+        std::cout << "Height: " << height << "and Weight: " << weight << "\n";
+    }
+};
+
+template <typename T, typename U> int Person <T, U>::numOfPeople;
+
+
 class String
 {
 private:
@@ -100,16 +124,49 @@ void Print (std::string valueP)
 }
 */
 
+
+template <typename T>
+void Times2 (T val)
+{
+    std::cout << val << " * 2 = " << val * 2 << "\n";
+}
+
+template <typename T>
+T Add (T val, T val2)
+{
+    return val + val2;
+}
+
+template <typename T>
+T Max (T val, T val2)
+{
+    return (val < val2) ? val2 : val;
+}
+
 int main()
 {   
     // Bucky <float> *bucky_float;
+    Bucky <float> *bucky_float;
+    bucky_float = new Bucky<float>(12.5, 2.4);
+
+    Times2(5);
+    Times2(4.9);
     
+    std::cout << "5 + 4 = " << Add(5,4) << "\n";
+    std::cout << "5.5 + 4.6 = " << Add(5.5, 4.6) << "\n";
+    std::cout << "Max of 4 or 8 = " << Max(4, 8) << "\n";
+    std::cout << "Max of A or B = " << Max('A', 'B') << "\n";
+    std::cout << "Max of Dog or Cat = " << Max("Dog", "Cat") << "\n";
+
+    Person <int, int> mikeTyson(67, 105);
+    mikeTyson.getData();
+    std::cout << "Number of people: " << mikeTyson.numOfPeople << "\n";
+
     String test_string = "Cherno";
-    std::cout << test_string << std::endl;
+    std::cout << test_string << std::endl;    
     
-    // bucky_float = new Bucky(12.5, 2.4);
-    Bucky <float> bucky_float(12.5, 2.4);
-    cout << "Float comparation: " << bucky_float.bigger() << endl;
+    //Bucky <float> bucky_float(12.5, 2.4);
+    //cout << "Float comparation: " << bucky_float.bigger() << endl;
     
     Bucky <int> bucky(67, 105);
     cout << "Int comparation: " << bucky.bigger() << endl;
