@@ -15,7 +15,7 @@
 #include <conio.h>
 #include <iostream>
 #include <stdio.h>
-#include <string.h>
+#include <string>
 #include <sys/timeb.h>
 #include <vector>
 

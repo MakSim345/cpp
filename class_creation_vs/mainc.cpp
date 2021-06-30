@@ -1,11 +1,10 @@
 #include "gen.h"
 #include "utils.h"
 
-
 class String
 {
 private:
-    char m_Buffer;
+    char* m_Buffer;
     unsigned int m_Size;
 
 public:
@@ -51,35 +50,35 @@ public:
     static const int LogLevelInfo    = 2;
 
     Log():
-        mLogLebel(LogLevelInfo)
+        mLogLevel(LogLevelInfo)
     {
         // mLogLebel = LogLevelInfo;
     }
 
 private:
-    int mLogLebel;
+    int mLogLevel;
 
 public:
     void SetLevel(int pLevel)
     {
-        mLogLebel = pLevel;
+        mLogLevel = pLevel;
     }
 
     void Warn(const char* pMessage)
     {   
-        if (mLogLebel >= LogLevelWarning)
+        if (mLogLevel >= LogLevelWarning)
             std::cout << "[WARNING]:" << pMessage << "\n";
     }
 
     void Info(const char* pMessage)
     {
-        if (mLogLebel >= LogLevelInfo)
+        if (mLogLevel >= LogLevelInfo)
             std::cout << "[INFO]:" << pMessage << "\n";
     }
 
     void Error(const char* pMessage)
     {
-        if (mLogLebel >= LogLevelError)
+        if (mLogLevel >= LogLevelError)
             std::cout << "[ERROR]:" << pMessage << "\n";
     }
 };
@@ -88,6 +87,66 @@ public:
 void HelloWorld()
 {
     std::cout << "Hello world!" << std::endl;
+}
+
+class Entity
+{
+public:
+    float X;
+    float Y;
+
+    Entity()
+    {
+        X = 10.0;
+        Y = 12.0;
+    }
+
+    std::string GetName()  {return "I am Entity";}
+    
+    // void Erase()
+    virtual void Erase()
+    {
+        std::cout << "I am virtual Eraser() " << std::endl;   
+    }
+
+    void Move (float xaP, float yaP)
+    {
+        X += xaP;
+        Y += yaP;
+    }
+};
+
+class Player : public Entity
+{
+public:
+    std::string m_Name;
+
+    Player(const std::string& nameP)
+        :m_Name(nameP) {}
+
+    void Erase()
+    // void Erase() override // override means it is originally virtual function and recreated here    
+    {
+        std::cout << "Erased: " << m_Name << std::endl;   
+    }
+
+    void PrintName ()
+    {
+        std::cout << "Hi my name is: " << m_Name << std::endl;
+    }
+
+    std::string GetName()  {return m_Name;}
+};
+
+
+void PrintName(Entity* entityP)
+{
+    std::cout << entityP->GetName() << std::endl;
+    //nPlayerP->Name = "Cherno";
+    //nPlayerP->PrintName();
+    
+    // std::cout << "eP->X = " << eP->X << std::endl;
+    // std::cout << "eP->Y = " << eP->Y << std::endl;
 }
 
 long g_lTimeTick = 0;
@@ -113,20 +172,36 @@ int main(int argc, char *argv[], char *envp[])
 
     printf ("1. Time: %ld\n", Get1msTimeMS());
     msTimer t;
-    for (int i = 0; i < 5000000; i++)
+    for (int i = 0; i < 500000; i++)
         ;
     std::cout << "Elapsed time:" << t.elapsedMs() << endl;
     printf ("2. Time: %ld\n", Get1msTimeMS());
 
+    /*
     void(*cherno)();
-
     auto function = HelloWorld;
-
     cherno = HelloWorld;
-
     function();
     cherno();
+    */
 
+    Entity *en = new Entity();    
+    PrintName(en);
+    // std::cout << en->GetName() << std::endl;
+    
+    Player* newPlayer = new Player("Cherno");
+    PrintName(newPlayer);
+    // std::cout << newPlayer->GetName() << std::endl;
+    
+    Entity* entity = newPlayer;
+    PrintName(entity);
+    // std::cout << entity->GetName() << std::endl;
+    
+    en = newPlayer;
+    en->Erase(); 
+    
+    // testPlayer(newPlayer);
+    
     printf ("Application complete.\n");
 
     system ("PAUSE"); // wait for press any key in VS mode
