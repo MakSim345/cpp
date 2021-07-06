@@ -31,6 +31,7 @@ public:
 
 private:
     char m_cTurtle;
+    std::string m_strName;
     int m_nPosition;
     int m_step;
     Winner *winner;
