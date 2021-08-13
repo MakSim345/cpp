@@ -150,6 +150,11 @@ int main(int argc, char *argv[], char *envp[])
     fprintf(fi, "Start time: %d\n", Get1msTime());
 #endif// FILE_OUTPUT
 
+    char* buffer = new char[8];
+    memset(buffer, 1, 8);
+    
+    char** ptr = &buffer;
+
     char *FileNameF = "TimeSt.log";
     COPSvCommunication *tRun = new COPSvCommunication();
     
