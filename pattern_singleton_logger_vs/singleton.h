@@ -7,6 +7,20 @@
 //============================================================
 #include "gen.h"
 
+class Singleton
+{
+private:
+    // static Singleton*  s_Instance;
+
+public:
+    static Singleton& Get() 
+    {
+        static Singleton s_Instance;
+        return s_Instance;
+    }
+    void Hello () {}
+};
+
 class OnlyOne
 {
 public:
@@ -38,16 +52,16 @@ public:
     bool writeLogFile(T _str)
     {   
         // std::string _str = "Test" ;
-        std_ofstream << _str << endl;
+        std_ofstream_log_file << _str << endl;
         return true;
     }
 
 private:
     static Logger *myInstance;
-    Logger(){}; // Private so it cannot be called    
+    Logger() {};           // Private, so it cannot be called    
     Logger(Logger const&); // copy constructor
     Logger& operator=(Logger const&);
-    std::ofstream std_ofstream;
+    std::ofstream std_ofstream_log_file;
 };
 
 #endif

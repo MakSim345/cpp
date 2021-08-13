@@ -33,7 +33,9 @@ int main(int argc, char *argv[], char *envp[])
     WaveForms[b] = speed_slow;
 
     
-    printf ("result = %.2f", WaveForms[a]);
+    printf ("result = %.2f\n", WaveForms[a]);
+    system ("PAUSE");
+    return 0;
     
     //*************MAIN LOOP*****************//
     cout << "\n$ > Press Any KEY to EXIT!" << std::endl;

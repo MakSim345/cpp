@@ -7,7 +7,6 @@
 
 OnlyOne* OnlyOne::theSingleInstance=NULL;
 
-
 // Global static pointer used to ensure a single instance of the class.
 Logger* Logger::myInstance = NULL; 
 
@@ -22,13 +21,13 @@ Logger* Logger::Instance()
 
 bool Logger::openLogFile(std::string _logFile)
 {
-    std_ofstream.open(_logFile, std::ios::binary);
+    std_ofstream_log_file.open(_logFile, std::ios::binary);
     return true;
 }
 
 bool Logger::closeLogFile()
 {
-    std_ofstream.close();
+    std_ofstream_log_file.close();
     return true;
 }
 
