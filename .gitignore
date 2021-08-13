@@ -52,6 +52,7 @@ stino.settings
 *.o
 *.exe
 *.out
+.vs
 ipch/
 obj/
 [Bb]in
