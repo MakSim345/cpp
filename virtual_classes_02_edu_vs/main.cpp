@@ -99,6 +99,7 @@ void test_Cats()
 int main()
 {
     test_Cats();
+    constexpr size_t SENSOR_READ_THREAD_QUEUE_NR_ELEMENTS = 8;
     // test_Clock();
 
     // test_CallFunction();
@@ -113,6 +114,6 @@ int main()
     // test_foo();    
 
     printf ("Application complete.\n");
-    system ("PAUSE");
+    // system ("PAUSE");
     return 1;
 }

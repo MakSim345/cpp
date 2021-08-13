@@ -21,7 +21,7 @@ class CheshireCat : public Cat
 {
 public:
     ~CheshireCat() {sayGoodBye();}
-    virtual void speak() const {std::cout << " WTF! Where is my milk? =)" << std::endl;}
+    void speak() const override {std::cout << " WTF! Where is my milk? =)" << std::endl;}
     // virtual void eat()   const {std::cout << " *yami-yami* " << std::endl;}
     virtual void sayGoodBye() const {std::cout << " Bye-Bye! " << std::endl;}
 };
@@ -92,13 +92,13 @@ public:
     virtual int base_foo(const int &d)
     //int base_foo(const int &d)
     {
-        std::cout << "MyBase: call f()\n";
+        std::cout << "mathBaseClass: call f()\n";
         return 2*d;
     }
 
     int CallFunction(const int &d)
     {
-        std::cout << "MyBase: CallFunction()\n";
+        std::cout << "mathBaseClass: CallFunction()\n";
         return base_foo(d) + 1;
     }
 };
@@ -108,7 +108,7 @@ class mathDerivedClass: public mathBaseClass
 public:
     int base_foo(const int &d)
     {
-        std::cout << "Derived: call f()\n";
+        std::cout << " mathBaseClass Derived: call f()\n";
         return d*d;
     }
 };
