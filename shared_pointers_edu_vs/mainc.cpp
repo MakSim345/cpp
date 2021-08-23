@@ -1,5 +1,24 @@
 #include "gen.h" 
 
+
+class Entity
+{
+public:
+    Entity()
+    { 
+            std::cout << "Created Entity" << std::endl;
+    }
+
+    ~Entity()
+    { 
+        std::cout << "Destroyed Entity" << std::endl;
+    }
+
+    void Print() {}
+
+private:
+};
+
 class Dog 
 {
 public:
@@ -79,8 +98,19 @@ int main(int argc, char *argv[], char *envp[])
     
     foo();
     // foo_shared_pointers();
-    //error_foo();
+    // error_foo();
+    {
+        // unique - cannot copy this pointer:
+        std::unique_ptr<Entity> entity(new Entity());
+        // std::unique_ptr<Entity> entity1 = std::make_unique<Entity>(); - not working in VS2010
+        // std::unique_ptr<Entity> e0 = entity; // this will give an error
+        entity->Print();        
+    }
 
+    {
+        // shared
+        std::shared_ptr<Entity> sharedEntity =  std::make_shared<Entity>();
+    }
 
 
 //*************MAIN LOOP*****************//
@@ -110,8 +140,9 @@ int main(int argc, char *argv[], char *envp[])
         }
     } while (!RValue);  
     
-    printf ("Application complete.\n");
-    // system ("PAUSE");
+    //printf ("Application complete.\n");
+    //system ("PAUSE");
+
     return 0;
 }
 

@@ -11,6 +11,7 @@
 #include <fstream>
 #include <map>
 #include <math.h>
+#include <memory>
 #include <Windows.h>
 
 using namespace std;
