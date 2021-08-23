@@ -1,5 +1,5 @@
 //
-#include "gen.h" 
+#include "gen.h"
 #include "virtual_foo.h"
 #include "my_smart_pointer.h"
 #include "my_templates.h"
@@ -11,15 +11,15 @@ int game()
 {
     int _size = 1640 * 1480;
     int *myPixels = new int[_size];
-    
+
     // this->myPixels = new int[_size];
 
     for (int i = 0; i<_size; i++)
     {
         int a = rand() % _size;
-        myPixels[i] = a;        
+        myPixels[i] = a;
     }
-    
+
     // simulate exception:
     if (_size > 0)
         return 1;
@@ -37,8 +37,8 @@ void memory_leack_test()
     // str.assign(reserv);
     strcpy(&_my_str[0], "memory leak");
     strcpy(&_my_str_old[0], "memory leak");
-    
-    for( int i = 0; i < _my_str.size(); i++ ) 
+
+    for( int i = 0; i < _my_str.size(); i++ )
     {
         cout << _my_str[i] << " ";
     }
@@ -54,7 +54,7 @@ void Run(SuperType* functor)
     functor();
 }
 
-int main(int argc, char *argv[], char *envp[]) 
+int main(int argc, char *argv[], char *envp[])
 {
 	int RValue = false;
 	int CaptureModeHex = 0;
@@ -78,7 +78,7 @@ int main(int argc, char *argv[], char *envp[])
 
     video_buffer screen;
     screen.makeFrame();
-    
+
     //int a = game();
 
     int *p;
@@ -89,23 +89,23 @@ int main(int argc, char *argv[], char *envp[])
     cout << "Value of i: " << *p << "\n";
 
 
-    //my_smart_pointer<video_buffer> pMyVideoBuffer (new video_buffer());    
+    //my_smart_pointer<video_buffer> pMyVideoBuffer (new video_buffer());
     //pMyVideoBuffer->makeFrame();
-    
+
     _CrtDumpMemoryLeaks();
 
 //*************MAIN LOOP*****************//
 cout << "\n$ > Press Any Key to exit." << std::endl;
-do 
+do
 {
     //This is simple Windows way:
     Sleep(55);
     // active_matrix->run_matrix();
-   
-   //nResult = produceRND();   
+
+   //nResult = produceRND();
    //printf ("1-Time: %ld. RND: %d\n", _time->Get1msTimeMS(), nResult);
-   
-   //nResult = produceRND();   
+
+   //nResult = produceRND();
    //printf ("2-Time: %ld. RND: %d\n", _time->Get1msTimeMS(), nResult);
 
    // control of endless loop (may be also in monitor.cpp)
@@ -116,16 +116,16 @@ do
         if ((NewChar & 0xff) == 24)  // CTRL-X   pressed
         {
             RValue = true; // END mark
-        }     
+        }
         if (NewChar == 'd')  // pressed
         {
-            if (1 == CaptureModeHex) 
+            if (1 == CaptureModeHex)
                 CaptureModeHex = 1;
 		    else
                 CaptureModeHex = 0;
         }
     }
-} while (!RValue);  
+} while (!RValue);
 printf ("Application complete.\n");
 return 0;
 }
