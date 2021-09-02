@@ -83,6 +83,11 @@ void error_foo()
     shared_ptr<Dog> p3 = make_shared<Dog>("SuperTank");
 } 
 
+std::string GetName ()
+// char* GetName ()
+{
+    return "Cherno";
+}
 
 int main(int argc, char *argv[], char *envp[]) 
 {
@@ -96,6 +101,26 @@ int main(int argc, char *argv[], char *envp[])
 
     printf ("main - start\n");
     
+    auto name = GetName();    
+    std::cout << name << std::endl;
+
+    auto i = name.size();
+    
+    std::vector <std::string> strings;
+    strings.push_back("apple");
+    strings.push_back("orange");
+
+    // for (std::vector<std::string>::iterator it = strings.begin();it != strings.end(); it++)
+    // for (auto &string : strings)
+    for (auto it = strings.begin();it != strings.end(); it++)
+    {
+        std::cout << *it << std::endl;
+    }
+    
+    printf ("Application complete.\n");
+    system ("PAUSE");
+    return 1;
+
     foo();
     // foo_shared_pointers();
     // error_foo();
@@ -139,11 +164,7 @@ int main(int argc, char *argv[], char *envp[])
             }
         }
     } while (!RValue);  
-    
-    //printf ("Application complete.\n");
-    //system ("PAUSE");
 
     return 0;
 }
-
 
