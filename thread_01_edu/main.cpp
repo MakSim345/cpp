@@ -5,6 +5,24 @@
 #include <cassert>
 #include <thread>
 
+static std::atomic<int> av;
+static int gv;
+const uint32_t incrementLoop = 100000;
+
+static void entry()
+{
+    for (uint32_t i = 0; i<incrementLoop; i++)
+    {
+        // Atomic increment
+        ++av;
+
+        // unsafe code alert
+        ++gv;
+
+     // cout << "thread: av=" << av << " gv=" << gv << endl;
+    }
+}
+
 class DivideByZeroError
 {
  public:
@@ -79,8 +97,31 @@ int test_catch_01()
     }
 }
 
-int main( int argc, char *argv[] )
+void run_test()
 {
-    return test_catch_01();
-    // return test_catch_02();
+    std::thread ta(entry);
+    std::thread tb(entry);
+    ta.join();
+    tb.join();
+    // assert(static_cast<int>(av) != gv);
+    cout << "run increment in thread " << incrementLoop << " times:" << endl;
+    cout << "Results:" << endl;
+    cout << "atomic:     av=" << av << endl;
+    cout << "Non-atomic: gv=" << gv << endl;
+}
+
+void run_loop()
+{
+    for (auto i = 0; i<100; i++)
+    {
+        run_test();
+    }
+}
+
+int main()
+{
+    cout << "This thread id: " << this_thread::get_id() << endl;
+    std::cout << "run test: \n";
+    run_test();
+    return 0;
 }
