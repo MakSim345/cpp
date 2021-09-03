@@ -6,7 +6,28 @@
 
 using namespace std;
 
-namespace 
+class TimerClass
+{
+public:
+    TimerClass()
+    {
+        startTime = std::chrono::high_resolution_clock::now();
+    }
+   ~TimerClass()
+    {
+        endTime = std::chrono::high_resolution_clock::now();
+        duration = endTime - startTime;
+        float ms = duration.count() * 1000.0f;
+        std::cout << "Timer took " << ms << " ms. \n";
+    }
+
+
+private:
+    std::chrono::time_point<std::chrono::steady_clock> startTime, endTime;
+    std::chrono::duration<float> duration;
+};
+
+namespace
 {
     class empty { }; // even empty classes take up 1 byte of space, minimum
 
@@ -33,15 +54,15 @@ int test_one()
     std::clock_t duration = std::clock() - start;
     std::cout << "stack allocation took " << duration << " clock ticks\n";
     start = std::clock();
-    
-    for (int i = 0; i < 100000; ++i) 
+
+    for (int i = 0; i < 100000; ++i)
     {
         empty* e = new empty;
         delete e;
     };
-    
+
     duration = std::clock() - start;
-    
+
     std::cout << "heap allocation took " << duration << " clock ticks\n";
     std::cout << "END:" << std::clock() << " \n";
 
@@ -57,10 +78,10 @@ int main()
         on_stack();
     //auto end = std::chrono::system_clock::now();
     //std::printf("on_stack took %f seconds\n", std::chrono::duration<double>(end - begin).count());
-    
+
     std::clock_t duration = std::clock() - start;
     std::cout << "stack allocation took " << duration << " clock ticks\n";
-    
+
     start = std::clock();
 
     //begin = std::chrono::system_clock::now();
@@ -68,10 +89,14 @@ int main()
         on_heap();
     //end = std::chrono::system_clock::now();
     //std::printf("on_heap took %f seconds\n", std::chrono::duration<double>(end - begin).count());
-    duration = std::clock() - start;    
+    duration = std::clock() - start;
     std::cout << "heap allocation took " << duration << " clock ticks\n";
+
+    // use seconds instead:
+    std::cout << "Execution time " << " took " << duration/double(CLOCKS_PER_SEC) << " seconds\n";
+
     std::cout << "END:" << std::clock() << " \n";
-    
+
     return 0;
 }
 
