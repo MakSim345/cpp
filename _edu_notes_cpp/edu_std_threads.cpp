@@ -1,5 +1,5 @@
 What is Multithreading.
---------
+========================================================================================
 Multithreading is an ability of a platform (Operating System, Virtual Machine  etc.) or application to create a process that consists of multiple threads of execution (threads). A thread of execution is the smallest sequence of programming instructions that can be managed independently by a scheduler. These threads can run parallel and it can increase efficiency of programs.
 
 In Multicore and Multiprocessor systems multithreading means that different threads are executed at the same time on different cores or processors.
@@ -10,7 +10,7 @@ Multithreading is used when the parallel execution of some tasks leads to a more
 
 Built in support for multithreading was introduced in C++11. Header file thread.h provides functionality for creating multithreaded C++ programs.
 
---------
+========================================================================================
 How to create a thread?
 
 First, you have to include thread header in your program:
@@ -43,14 +43,15 @@ When you create a thread, you can pass a pointer of a function to its constructo
 	    thread funcTest1(threadFunc);
     }
 
-Try to compile and run this program. It compiles without any errors but you will get a runtime error.
+Try to compile and run this program. It compiles without any errors but you will get a "runtime error".
 
-As you can see, main thread creates new thread funcTest1 with a parameter threadFunc. Main thread does not wait for funcTest1 thread termination. It continues its work. The main thread finishes execution, but funcTest1 is still running. This causes error. All the threads must be terminated before main thread is terminated.
+As you can see, main thread creates new thread "funcTest1" with a parameter "threadFunc". 
+Main thread does not wait for "funcTest1" thread termination. It continues its work. The main thread finishes execution, but "funcTest1" is still running. This causes error. All the threads must be terminated before main thread is terminated.
 
-Join threads
+========================================================================================
+"Join threads"
 
 Thread joining is done by using join() member function of a thread class:
-
 
 void join();
 
@@ -91,10 +92,10 @@ if (funcTest1.joinable())
 	funcTest1.join();
 }
 
-Detaching thread
+========================================================================================
+"Detaching thread"
 
 As we mentioned above, thread becomes not joinable after detach() member function is called:
-
 
 void detach()
 
@@ -135,11 +136,10 @@ public:
 
 Now you can initialize a thread by passing an object of the class myFunctor to the constructor of a thread:
 
-
-myFunctor myFunc;
-thread functorTest(myFunc);
-if (functorTest.joinable())
-functorTest.join();
+    myFunctor myFunc;
+    thread functorTest(myFunc);
+    if (functorTest.joinable())
+        functorTest.join();
 
 If you want to initialize a thread with a public member function of a class, you have to specify the identifier of this function and pass an object of the class, which defines this member function:
 
@@ -160,7 +160,8 @@ thread functorTest(&myFunctor::publicFunction,myFunc);
 if (functorTest.joinable())
 	functorTest.join();
 
-Passing arguments to thread
+========================================================================================
+"Passing arguments to thread"
 
 In the previous examples, we used only functions and objects without passing any arguments to these functions and objects.
 
@@ -170,20 +171,17 @@ We can use a function with parameters for thread initialization. Create new func
 void printSomeValues(int val, char* str, double dval)
 {
 	cout << val << " " << str <<" " << dval << endl;
-
 }
 
 As you can see, this function takes three arguments. If you want to initialize a thread with this function, first you have to pass a pointer to this function, then pass the arguments to the function in the same order as they are in the parameter list of the function:
-
 
 char* str = "Hello";
 //5, str and 3.2 are passed to printSomeValues function
 thread paramPass(printSomeValues, 5, str, 3.2);
 if (paramPass.joinable())
-paramPass.join();
+    paramPass.join();
 
 When you want to initialize a thread with an object with parameters, we have to add corresponding parameter list to the overloading version of operator ():
-
 
 class myFunctorParam
 {
@@ -228,8 +226,9 @@ void changeSign(int* arr, int length)
 	}
 }
 
-Passing arguments to member function:
 
+========================================================================================
+"Passing arguments to member function:"
 
 int arr2[5] = { -1, 3, 5, -7, 0 };
 //initialize thread with member function
@@ -396,7 +395,7 @@ Class mutex is a synchronization primitive that is used to protect shared data f
 
 After this, you have to create a global variable of mutex type. It will be used to synchronize access to the shared data:
 
-Once you want that a portion of program to be executed only by one thread in the same period, you have to “lock” it using mutex:
+Once you want that a portion of program to be executed only by one thread in the same period, you have to "lock" it using mutex:
 
 
 void push()
@@ -462,7 +461,7 @@ Pop 0
 
 We can examine another example of mutex usage. Imagine the following situation:
 
-“A lot of people run to a call-box to talk to their friend. The first person to catch the door-handle of the call box is the only one who is allowed to use the phone. He must keep holding on to the handle of the door as long as he uses the call box. Otherwise, someone else will catch hold of the handle, throw him out and talk to his friend. There is no queue system as in real life. When the person finishes his call, exits the call-box and leaves the door handle, the next person that gets hold of the door handle will be allowed to use the phone.”
+A lot of people run to a call-box to talk to their friend. The first person to catch the door-handle of the call box is the only one who is allowed to use the phone. He must keep holding on to the handle of the door as long as he uses the call box. Otherwise, someone else will catch hold of the handle, throw him out and talk to his friend. There is no queue system as in real life. When the person finishes his call, exits the call-box and leaves the door handle, the next person that gets hold of the door handle will be allowed to use the phone.
 
 In this case, you have to imagine a problem of simultaneous access to data in the following way:
 
@@ -514,5 +513,5 @@ Hello my friend, this is 3636
 Hello my friend, this is 5680
 Hello my friend, this is 928
 
-C++ Interview Questions
+#C++ Interview Questions
 
