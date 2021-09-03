@@ -8,14 +8,14 @@
 
 using namespace std;
 
-/* 
+/*
  *
- * 2018-FEB. A multi thread example with an error. 
+ * 2018-FEB. A multi thread example with an error.
  * It is using C++ 14.
- * 
+ *
 */
 
-struct My_Semaphore_Class 
+struct My_Semaphore_Class
 {
     std::mutex mutex_m;
     std::condition_variable condition_variable_m;
@@ -24,13 +24,13 @@ struct My_Semaphore_Class
 
     My_Semaphore_Class() : counter_m{} {}
 
-    void acquire() 
+    void acquire()
     {
         My_LOCK_Type l(mutex_m);
         ++counter_m;
     }
 
-    void release() 
+    void release()
     {
         {
             My_LOCK_Type l(mutex_m);
@@ -43,14 +43,14 @@ struct My_Semaphore_Class
         condition_variable_m.notify_all();
     }
 
-    void wait() 
+    void wait()
     {
         My_LOCK_Type l(mutex_m);
         condition_variable_m.wait(l, [&]{return counter_m == 0; });
     }
 };
 
-void forwardToAnotherThread() 
+void forwardToAnotherThread()
 {
     std::thread* treadM{nullptr};
     {
@@ -63,12 +63,15 @@ void forwardToAnotherThread()
     delete treadM;
 }
 
-int main() 
+int main()
 {
     std::thread* thread_array[800];
-    for (auto& p: thread_array) p = new std::thread(&forwardToAnotherThread);
-    
-    for (auto& p: thread_array) 
+    for (auto& p: thread_array)
+    {
+        p = new std::thread(&forwardToAnotherThread);
+    }
+
+    for (auto& p: thread_array)
     {
         p->join();
         delete p;
@@ -76,5 +79,3 @@ int main()
 
     return 0;
 }
-
-
