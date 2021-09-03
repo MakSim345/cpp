@@ -1,5 +1,4 @@
-#ifndef TIMER_UTIL_H
-#define TIMER_UTIL_
+#pragma once
 /*********************************************************************
 
   utils.h
@@ -26,4 +25,3 @@ private:
 // long  Get1msTime(void);
 long  Get1msTimeMS(void);
 
-#endif

@@ -1,3 +1,4 @@
+#pragma once
 
 #include <stdio.h>
 #include "utils.h"
@@ -11,6 +12,13 @@
 #include <fstream>
 #include <map>
 #include <math.h>
+#include <thread> // since C++11
+#include <chrono> // since C++11
+
+// those 2 need for mutex:
+#include <mutex> 
+#include <condition_variable>
+
 
 #define WIN32_APP
 #ifdef WIN32_APP

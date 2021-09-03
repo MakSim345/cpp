@@ -10,5 +10,6 @@
 		
 
 void PrintIntroduction();
+int produceRND(int maxP);
 
 #endif

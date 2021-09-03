@@ -7,6 +7,13 @@
 //============================================================
 #include "gen.h"
 
+#ifdef YS_TEST_20210827
+    bool isAdult(Person& p);
+    void checkDasha();
+    int produceRND();
+#endif 
+
+
 struct Person
 {
     int age;
@@ -16,10 +23,6 @@ struct Person
     string name;
     string job;
 };
-
-bool isAdult(Person &p);
-void checkDasha();
-int produceRND();
 
 class _my_template_class_t
 {

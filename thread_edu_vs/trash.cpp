@@ -5,6 +5,67 @@
 //============================================================
 #include "trash.h"
 
+class String
+{
+public:
+    String() = default;
+
+    String(const char* stringP)
+    {
+        printf("Created!\n");
+        m_Size = strlen(stringP);
+        m_Data = new char[m_Size];
+        memcpy(m_Data, stringP, m_Size);
+    }
+
+    // copy constructor:
+    String(const String& otherP)
+    {
+        printf("Copied!\n");
+        m_Size = otherP.m_Size;
+        m_Data = new char[m_Size];
+        memcpy(m_Data, otherP.m_Data, m_Size);
+    }
+    ~String()
+    {
+        delete m_Data;
+    }
+
+    void Print()
+    {
+        for (uint32_t i = 0; i < m_Size; i++)
+        {
+            printf("%c", m_Data[i]);
+        }
+        printf("\n");
+    }
+
+private:
+    uint32_t   m_Size;
+    char* m_Data;
+
+};
+
+class Entity
+{
+public:
+    Entity(const String& nameP)
+        : m_Name(nameP)
+    {
+
+    }
+
+    // ~Entity();
+    void PrintName()
+    {
+        m_Name.Print();
+    }
+
+private:
+    String m_Name;
+};
+
+#ifdef YS_TEST_20210827
 int produceRND()
 {
     static int nFirstTime = 1;
@@ -79,3 +140,5 @@ void _my_template_class_t::run()
     cout << endl;
 }
 //---------------END of CLASS Definition--------------
+
+#endif
