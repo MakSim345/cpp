@@ -10,6 +10,7 @@ public:
     ~fizz_buzz();
 
     void Run();
+    void Run_Default();
 
 private:
     int nMaxVal;
@@ -19,6 +20,7 @@ private:
     void alg_one();
     void alg_two();
     void alg_three();
+    void alg_four();
 
 };
 

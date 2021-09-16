@@ -11,13 +11,24 @@ fizz_buzz::~fizz_buzz()
 
 }
 
+void fizz_buzz::Run_Default()
+{
+    
+    nMaxVal = 10000;
+    cout << "------------START-----------\n";
+    // alg_one();   // 10000: 6.8 seconds
+    // alg_two();   // 10000: 11.9 seconds
+    // alg_three(); // 10000: 6.4 seconds
+    alg_four();     // 10000: 3.25 seconds
+}
+
 void fizz_buzz::Run()
 {
     cout << "Enter max value: \n";
     cin >> nMaxVal;
     cout << "------------START-----------\n";
-    // alg_one();
-    alg_three();
+    alg_one();
+    // alg_three();
 }
 
 void fizz_buzz::alg_one()
@@ -62,6 +73,20 @@ void fizz_buzz::alg_two()
         {
             cout << ": " << i << "\n";
         }
+    }
+}
+
+void fizz_buzz::alg_four()
+{
+    int i = 1;
+
+    while(i <= nMaxVal)
+    {
+        printf("%d", i);
+        if(i%3 == 0) printf(" - fizz");
+        if(i%5 == 0) printf(" - buzz");
+        printf("\n");
+        i++;
     }
 }
 
