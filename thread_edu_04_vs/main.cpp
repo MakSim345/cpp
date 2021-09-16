@@ -1,5 +1,9 @@
 #include "gen.h"
-
+/*
+* Multi thread programming (RUS):
+* #SimpleCode
+* https://www.youtube.com/watch?v=UEtWLpDOg68
+*/
 bool s_Finished = false;
 
 class Semaphore
@@ -78,12 +82,23 @@ void doSomeWork( void )
     return;
 }
 
+void doAddWork(int operandAxP, int operandBxP)
+{    
+    std::this_thread::sleep_for(chrono::milliseconds(500));
+    std::cout << "doAddWork: STARTED thread id = " << std::this_thread::get_id() << std::endl;
+    std::this_thread::sleep_for(chrono::milliseconds(1500));
+    std::cout << "a+b=" << operandAxP + operandBxP << std::endl;
+    std::this_thread::sleep_for(chrono::milliseconds(500));
+    std::cout << "doAddWork: STOPPED thread id = " << std::this_thread::get_id() << std::endl;
+}
+
+
 void doWork(void)
 {   
     std::cout << "Started thread id = " << std::this_thread::get_id() << std::endl;
     while (!s_Finished)
     {
-        std::cout << "doWork is working....\n";
+        std::cout << "doWork is working. Press any key to stop it.\n";
         // std::this_thread::sleep_for(1s);
         std::this_thread::sleep_for(chrono::milliseconds(200));
     }
@@ -103,23 +118,25 @@ int main(int argc, char *argv[], char *envp[])
     
     srand(time(NULL));
 
-    std::thread worker(doWork);
+    // doAddWork(34, 98);
+
+    // std::thread worker(doWork);    
+    // std::cin.get();
+    // s_Finished = true;
+    // worker.join();
+
+    std::thread threadAdder(doAddWork, 3009, 8990);
     
-    std::cin.get();
-    s_Finished = true;
-
-    worker.join();
-    std::cout << "Main() thread id = " << std::this_thread::get_id() << std::endl;
-
-    /*
     for (size_t i = 0; i < 1000; i++)
     {
-        auto randomDelay = rand() % 5000 + 1000;
-        printf("%d, ", randomDelay);
-    }    
-    printf("---\n");
-    */
-
+        //auto randomDelay = rand() % 5000 + 1000;
+        //printf("%d, ", randomDelay);
+        std::cout << "Main() thread id = " << std::this_thread::get_id() << ". iteration: " << i << std::endl;
+        this_thread::sleep_for(chrono::milliseconds(300));
+    } 
+    // printf("---\n");
+    threadAdder.join();
+    
     // runPhonesThreads();
 
     /*
