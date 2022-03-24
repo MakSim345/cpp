@@ -14,7 +14,7 @@ class SomeClass
     int *ptr; // pointer to a memory allocation
 public:
 
-    SomeClass() //
+    SomeClass()
     {
         cout << "\nSomeClass: usual constructor called.\n";
     }
@@ -139,5 +139,4 @@ int main()
 
     // std::cout << "\nPress ENTER to exit...\n";
     //cin.get();
-
 }
