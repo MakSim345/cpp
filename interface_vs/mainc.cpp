@@ -1,6 +1,6 @@
 /*
-* By
-* Cherno - https://www.youtube.com/watch?v=UWAdd13EfM8
+* By Cherno - 
+* https://www.youtube.com/watch?v=UWAdd13EfM8
 */
 #include "gen.h"
 
@@ -67,7 +67,7 @@ void HelloWorld()
     std::cout << "Hello world!" << std::endl;
 }
 
-class Printable
+class Printable // interface.
 {
 public:
     // pure virtual method:
@@ -121,6 +121,18 @@ private:
     std::string m_Name;
 };
 
+class myClassA : public Printable
+{
+public:
+    myClassA()
+        :m_Name("myClassA") {}
+    
+    std::string GetClassName() override {return m_Name;}
+
+private:
+    std::string m_Name;
+};
+
 void PrintName(Entity* entityP)
 {
     std::cout << entityP->GetName() << std::endl;
@@ -158,18 +170,19 @@ int main(int argc, char *argv[], char *envp[])
     printf ("2. Time: %ld\n", Get1msTimeMS());
     */
 
-    Entity *en = new Player();
+    Entity *entity = new Player();
     // PrintName(en);
-    PrintMyClassName (en);
+    // PrintMyClassName (entity);
     // std::cout << en->GetName() << std::endl;
     
-    Player* newPlayer = new Player("Cherno");
-    //PrintName(newPlayer);
-    PrintMyClassName (newPlayer);
+    Player* newPlayer = new Player("Player - Cherno");
+    //PrintName(newPlayer);    
     // std::cout << newPlayer->GetName() << std::endl;
     
-    Entity* entity = new Player();
+    // Entity* entity = new Player();
+    PrintMyClassName (newPlayer);
     PrintMyClassName (entity);
+    PrintMyClassName(new myClassA());
     //PrintName(entity);
     // std::cout << entity->GetName() << std::endl;
     
@@ -178,7 +191,7 @@ int main(int argc, char *argv[], char *envp[])
     
     // testPlayer(newPlayer);
 
-    const StrEntity* es = new StrEntity("Cherno - tut");
+    const StrEntity* es = new StrEntity("Cherno - StrEntity");
 
     std::cout << es->GetName() << std::endl;
     
