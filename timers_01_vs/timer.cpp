@@ -5,6 +5,7 @@ TimerClass::TimerClass()
 {
     startTime = std::chrono::high_resolution_clock::now();
 }
+
 TimerClass::~TimerClass()
 {
     endTime = std::chrono::high_resolution_clock::now();
