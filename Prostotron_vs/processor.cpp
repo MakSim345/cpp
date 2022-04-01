@@ -281,7 +281,6 @@ void Processor::printOperand()
 }
 
 std::string Processor::getOpCodeDesctiption(int _opCode)
-
 {
     static std::map<int, std::string> OpCodeMap;
     if(OpCodeMap.empty()) // Only runs once.
