@@ -1,18 +1,28 @@
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
-#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
-
-#define TIME_TICK_INTERVAL 1000
-
-#define WIN32_APP
-
-#include <stdio.h>
+// #define WIN32_APP
 #include "utils.h"
-#include <conio.h>
 #include "time.h"
+
+#include <sys/time.h>
+
+#include <ctime>
+
+#include <unistd.h> // for sleep()
+#include <stdio.h>      /* printf */
+#include <string.h>     /* strcat */
+#include <stdlib.h>     /* strtol */
+// #include <conio.h> // for kbhit()
+
 #include <vector>
-#include <string.h>
-#include "stdlib.h"
 #include <iostream>
+#include <sstream>
+#include <memory>
+#include <cstdio>
+#include <atomic>
+#include <cassert>
+#include <mutex>
+#include <thread>
+#include <chrono>
+
+using namespace std;

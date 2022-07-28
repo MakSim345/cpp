@@ -23,8 +23,8 @@ public:
     void printResult();
 
 protected:
-    void init_alphabet(); 
-    string _result_pass;
+    void initAlphabet(); 
+    string strResultPassM;
 
     vector<string> alphabet;
 };
