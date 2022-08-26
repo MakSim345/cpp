@@ -22,6 +22,10 @@ int main()
 
     long long int n;
     printf("%lld", n);   
+
+    // %d is for signed int, 
+    // %u is for unsigned int, 
+    // %hh is for char instead of a wider type.)
     
     unsigned long long n;
     printf("0x%016llX", n); // "0x" followed by "0-padded", "16 char wide", "long long", "HEX with 0-9A-F"
