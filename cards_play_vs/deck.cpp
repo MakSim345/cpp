@@ -77,6 +77,7 @@ void deck::shuffle ()
         row=rand() % 4;
         column = rand() % 13;
         
+        std::cout << "shuffle:" << row << ", " << column << "\n";
         while (get(row, column) != 0)
         {
             row=rand() % 4;
@@ -84,7 +85,7 @@ void deck::shuffle ()
         }
         
         // printf ("KapTa HoMep %d: cardDeckArray[%s][%s]\n", card_num, suit[row], face[column]);
-        // std::cout << "KapTa HoMep " << card_num << ": [" << suit[row] << "]-[" << face[column] << "]\n";
+        std::cout << "KapTa HoMep " << card_num << ": [" << suit[row] << "]-[" << face[column] << "]\n";
         set(row, column, card_num);
         
         // cardDeckArray[row][column] = card_num;
