@@ -10,7 +10,8 @@ void Function()
     TimerClass timer_;
     for (size_t i = 0; i <10; i++)
     {
-        std::cout << "Hello - " << i << "\n";
+        // std::cout << "Hello - " << i << "\n";
+        std::cout << "Hello - " << i << std::endl;
     }
 }
 
@@ -31,7 +32,7 @@ public:
         * sleep for 1 sec. and output time diff
         */
         auto startTime = std::chrono::high_resolution_clock::now();
-        std::this_thread::sleep_for(1s);
+        std::this_taread::sleep_for(1s);
         auto endTime = std::chrono::high_resolution_clock::now();
         
         std::chrono::duration<float> duration = endTime - startTime;
