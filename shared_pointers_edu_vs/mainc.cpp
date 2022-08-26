@@ -83,8 +83,8 @@ void error_foo()
     shared_ptr<Dog> p3 = make_shared<Dog>("SuperTank");
 } 
 
-std::string GetName ()
 // char* GetName ()
+std::string GetName ()
 {
     return "Cherno";
 }
@@ -98,43 +98,54 @@ int main(int argc, char *argv[], char *envp[])
     int arraySize = 2000;
 
     srand(time(NULL));
-
+    
     printf ("main - start\n");
     
-    auto name = GetName();    
+    foo_shared_pointers();
+    // error_foo();
+    {
+        // unique - cannot copy this pointer:
+        // std::unique_ptr<Entity> entity(new Entity());
+        
+        // make_unique() - not working in VS2010!
+        std::unique_ptr<Entity> unique_entity = std::make_unique<Entity>(); 
+
+        // made another copy of that "unique_ptr" will give an error:
+        // std::unique_ptr<Entity> e0 = unique_entity; 
+
+        unique_entity->Print();
+    }
+
+    {
+        // shared pointer:
+        std::shared_ptr<Entity> sharedEntity =  std::make_shared<Entity>();
+        std::shared_ptr<Entity> shEnt = sharedEntity;
+
+        // weak pointer:
+        std::weak_ptr<Entity> weakEntity = sharedEntity;
+    }
+
+
+    printf("Application complete.\n");
+    system("PAUSE");    
+    return 1;
+
+    foo();
+
+    auto name = GetName();
     std::cout << name << std::endl;
 
     auto i = name.size();
-    
+
     std::vector <std::string> strings;
     strings.push_back("apple");
     strings.push_back("orange");
 
     // for (std::vector<std::string>::iterator it = strings.begin();it != strings.end(); it++)
     // for (auto &string : strings)
-    for (auto it = strings.begin();it != strings.end(); it++)
+    for (auto it = strings.begin(); it != strings.end(); it++)
     {
         std::cout << *it << std::endl;
-    }
-    
-    printf ("Application complete.\n");
-    system ("PAUSE");
-    return 1;
-
-    foo();
-    // foo_shared_pointers();
-    // error_foo();
-    {
-        // unique - cannot copy this pointer:
-        std::unique_ptr<Entity> entity(new Entity());
-        // std::unique_ptr<Entity> entity1 = std::make_unique<Entity>(); - not working in VS2010
-        // std::unique_ptr<Entity> e0 = entity; // this will give an error
-        entity->Print();        
-    }
-
-    {
-        // shared
-        std::shared_ptr<Entity> sharedEntity =  std::make_shared<Entity>();
     }
 
 
