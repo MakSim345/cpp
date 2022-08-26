@@ -19,24 +19,22 @@ using String = std::string;
 class Entity
 {
 public:
-    Entity() : m_Name("Unknown") {};
-    Entity(const String& nameP) : m_Name(nameP) {};
+    Entity() : sNameM("Unknown") {};
+    Entity(const String& nameP) : sNameM(nameP) {};
 
     // ~Entity();
-    const String& GetName() const { return m_Name; }
+    const String& GetName() const { return sNameM; }
 
 private:
-    String m_Name;
+    String sNameM;
 };
 
 void hello()
 {
-    std::cout <<
-        "Hello world, I'm a thread!"
-        << std::endl;
+    std::cout <<  "Hello world, I'm a thread!" << std::endl;
 }
 
-static void entry()
+static void counterIncrement()
 {
     for (auto i = 0; i < 1000; i++)
     {
@@ -45,8 +43,8 @@ static void entry()
 
         // unsafe code alert
         ++gv;
-
-        // cout << "thread: av=" << av << " gv=" << gv << endl;
+        // cout << std::this_thread.get_id();
+        cout << "thread: av=" << av << " gv=" << gv << endl;
     }
 }
 
@@ -73,14 +71,13 @@ void calculate_factorial()
     }
     cout << "The Factorial of " << factArg << " is: " << fact << endl;
 }
-/*
-int main(int argc, char* argv[])
+
+int test_hello_thread()
 {
-  boost::thread thrd(&hello);
+  std::thread thrd(&hello);
   thrd.join();
   return 0;
 }
-*/
 
 int GetRandom(int maxP)
 {
@@ -94,12 +91,10 @@ int GetRandom(int maxP)
     return retVal;
 }
 
-
-
 int main()
 {
-    std::thread ta(entry);
-    std::thread tb(entry);
+    std::thread ta(counterIncrement);
+    std::thread tb(counterIncrement);
     ta.join();
     tb.join();
     
