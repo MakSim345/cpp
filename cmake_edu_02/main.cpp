@@ -11,11 +11,12 @@ public:
     int Run()
     {
         std::cout << "Let's get a random fact about Chuck Norris...\n";
-        
 		std::cout << std::endl;
+
         ChuckNorris chuckNorris;
         std::string fact = chuckNorris.getFact();
-		std::cout << fact << std::endl;
+		
+        std::cout << fact << std::endl;
 		std::cout << std::endl;
 
         // make the product:
@@ -37,7 +38,6 @@ public:
     {
         std::cout << "App: Good bye!\n";
     }
-
 };
 
 int main(int argc, char** argv)
