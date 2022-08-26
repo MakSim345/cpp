@@ -41,8 +41,10 @@ int main()
         std::cout << "EXCEPTION_EXECUTE_HANDLER has number - " << EXCEPTION_EXECUTE_HANDLER << "\n";
     }    
     */
-    std::string p;
-    std::cout << "\nPress any key to exit...\n";
-    cin >> p;
+    //std::string p;
+    //std::cout << "\nPress any key to exit...\n";
+    //cin >> p;
+    // this PAUSE will give a info text - press any key to continue, etc.
+    system("PAUSE");
     return 1;
 }

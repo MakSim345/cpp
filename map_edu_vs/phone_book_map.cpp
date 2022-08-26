@@ -12,11 +12,15 @@
 
 #include "phone_book_map.h"
 
-phoneBook::phoneBook()   {_dataBaseFilename = "text.txt"; }
+phoneBook::phoneBook()
+{
+    _dataBaseFilename = "text.txt"; 
+}
 
 phoneBook::phoneBook(std::string _new_filename)
+    :_dataBaseFilename(_new_filename)
 {
-    _dataBaseFilename = _new_filename;
+    // _dataBaseFilename = _new_filename;
     // this->read_data_file();
 }
 

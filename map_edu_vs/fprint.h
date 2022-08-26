@@ -16,7 +16,7 @@ public:
          ;
     }
 
-    void operator () (const pair <const int, const Person> &map_item) const
+    void operator() (const pair <const int, const Person> &map_item) const
     {
      m_os << "# " << map_item.first << " - name :"
          << map_item.second.GetName()
