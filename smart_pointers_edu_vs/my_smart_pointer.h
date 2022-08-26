@@ -11,22 +11,22 @@ template <typename T>
 class my_smart_pointer
 {
 public: 
-    T *m_obj;
+    T *objM;
 
     my_smart_pointer( T *obj)
-        :m_obj(obj)
+        :objM(obj)
     {
      // empry constructor;
     }
 
     ~my_smart_pointer()
     {
-     delete m_obj;
+     delete objM;
     }
     
-    // overload operators:
-    T* operator-> () {return m_obj;}
-    T& operator*  () {return *m_obj;}
+    // overload operators "->" and "*":
+    T* operator-> () {return objM;}
+    T& operator*  () {return *objM;}
 
 private:    
     

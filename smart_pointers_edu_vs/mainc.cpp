@@ -88,9 +88,8 @@ int main(int argc, char *argv[], char *envp[])
     cout << "Address of i: " << p << "\n";
     cout << "Value of i: " << *p << "\n";
 
-
-    //my_smart_pointer<video_buffer> pMyVideoBuffer (new video_buffer());
-    //pMyVideoBuffer->makeFrame();
+    my_smart_pointer<video_buffer> pMyVideoBuffer (new video_buffer());
+    pMyVideoBuffer->makeFrame();
 
     _CrtDumpMemoryLeaks();
 
