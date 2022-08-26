@@ -1,9 +1,18 @@
-1. Create a directory, i.e. "build"
-2. goto that directory
-3. run follow:
-	> cmake -G Ninja ..
-4. run Ninja:
-	> ninja 
+CMake edu:
+
+"https://www.johnlamp.net/cmake-tutorial-1-getting-started.html"
+
+1. To use "cl.exe" from Visual Studio:
+    - create "CMakeLists.txt"
+    - create "build" directory:
+        > mkdir build && cd build
+    - call "cmake" and give compiler name:
+        > cmake -G "Ninja" -DCMAKE_C_COMPILER=cl -DCMAKE_CXX_COMPILER=cl ..
+    - run "ninja":
+        > ninja
+
+
+
 
 
 ============================================

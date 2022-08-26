@@ -110,7 +110,7 @@ void Print (T valueP)
 template <typename T>
 void Print_with_error (T valueP)
 {
-    std::cout << value << std::endl; // incorrect parameter value used!
+    std::cout << valueP << std::endl; // incorrect parameter value used!
 }
 /*
 void Print (int valueP)

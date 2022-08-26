@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8) # check the version of CMake
+cmake_minimum_required(VERSION 3.16) # check the version of CMake
 
 set(PROJECT_NAME app)
 project(${PROJECT_NAME} ASM C CXX)
