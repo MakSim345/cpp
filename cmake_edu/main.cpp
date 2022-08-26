@@ -31,7 +31,8 @@ public:
 
 int main()
 {
-    std::auto_ptr <ToDo> main_object(new ToDo());
+    std::unique_ptr <ToDo> main_object(new ToDo());
+    // std::auto_ptr <ToDo> main_object(new ToDo());
     try
     {
         main_object->run();
