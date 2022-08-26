@@ -6,30 +6,19 @@
 #ifndef _RANDOM_NUMBERS_H_
 #define _RANDOM_NUMBERS_H_
 
-#pragma once
+#include "gen.h"
 
-#include <vector>
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-#include <map>
+// #define _ARRAY_OF_INT vector <int>
 
-using namespace std;
-#define _ARRAY_INT vector <int>
-
-class CRandomNumbers
+class RandomNumbers
 {
-
 public:
-
     static int getRandomNumber(int iMin, int iMax);
-    static _ARRAY_INT getRandomNumbers(int iMin, int iMax, int iSize, bool bUniqueOnlyFlag);
-
-protected:
+    // static _ARRAY_OF_INT getRandomNumbers(int iMin, int iMax, int iSize, bool bUniqueOnlyFlag);
+    static vector <int> getRandomNumbers(int iMin, int iMax, int iSize, bool bUniqueOnlyFlag);
 
 private:
     static void initialize();
-
 };
 
 #endif

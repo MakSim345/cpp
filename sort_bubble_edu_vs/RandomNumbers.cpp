@@ -6,7 +6,7 @@
 
 #include "RandomNumbers.h"
 
-int CRandomNumbers::getRandomNumber(int iMin, int iMax)
+int RandomNumbers::getRandomNumber(int iMin, int iMax)
 {
     static bool bIsInitialized = false;
     int _tmp_rand_value = 0;
@@ -23,16 +23,18 @@ int CRandomNumbers::getRandomNumber(int iMin, int iMax)
     return _retValue;
 }
 
-void CRandomNumbers::initialize()
+void RandomNumbers::initialize()
 {
     srand((unsigned)time(0));
     rand();
     return;
 }
 
-_ARRAY_INT CRandomNumbers::getRandomNumbers(int iMin, int iMax, int iSize, bool bUniqueOnlyFlag)
+// _ARRAY_OF_INT RandomNumbers::getRandomNumbers(int iMin, int iMax, int iSize, bool bUniqueOnlyFlag)
+vector <int> RandomNumbers::getRandomNumbers(int iMin, int iMax, int iSize, bool bUniqueOnlyFlag)
 {
-    _ARRAY_INT viRandomNumbers;
+    // _ARRAY_OF_INT viRandomNumbers;
+    vector <int> viRandomNumbers;
     map <int, int> viUniqueRandomNumbers;
 
     viRandomNumbers.clear();

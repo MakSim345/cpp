@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 3.16) # check the version of CMake
+
+set(PROJECT_NAME sort_exe)
+
+project(${PROJECT_NAME} ASM C CXX)
+
+set(CMAKE_CXX_FLAGS -pthread)
+
+set(sources
+        bubble_sort.cpp
+        create_array.cpp
+        cTimer.cpp
+        main.cpp
+        printIntro.cpp
+        RandomNumbers.cpp
+        utils.cpp
+    )
+
+add_executable( ${PROJECT_NAME} ${sources} )

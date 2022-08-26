@@ -4,22 +4,22 @@
 //
 // Description:
 //============================================================
-#include "gen.h" 
+#include "gen.h"
 
 class CTimer
 {
 public:
     CTimer();
     ~CTimer();
-    long Get1msTimeMS();
-    void Start();
-    unsigned int GetElapsedTimeMs() const;
-    unsigned __int64 GetElapsedTimeMks() const; 
-    
+    //long Get1msTimeMS();
+    //void Start();
+    //unsigned int GetElapsedTimeMs() const;
+    //unsigned __int64 GetElapsedTimeMks() const;
+
 private:
-    LARGE_INTEGER m_liFreq;
-    LARGE_INTEGER m_liStart;
-    LARGE_INTEGER m_liEnd;
+    //LARGE_INTEGER m_liFreq;
+    //LARGE_INTEGER m_liStart;
+    //LARGE_INTEGER m_liEnd;
 };
 
 #endif

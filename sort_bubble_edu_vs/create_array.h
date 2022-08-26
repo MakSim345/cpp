@@ -8,21 +8,21 @@
 #include "gen.h"
 #include "RandomNumbers.h"
 
-class Create_RND_Array
+class create_array
 {
 public:    
-    Create_RND_Array();
-    Create_RND_Array(std::string _file_name);
-    ~Create_RND_Array();
-    void save_to_file(int arraySize);
+    create_array();
+    create_array(std::string _file_name);
+    ~create_array();
+    void save_to_file(const int arraySizeP);
 
 protected:    
     void create_file();
-    CRandomNumbers *_myRND;
+    RandomNumbers *rndArrayM;
 
 private:
-    std::string _rnd_filename;
-    ofstream rnd_file;
+    std::string rndFilenameM;
+    ofstream rndFileM;
 };
 
 
