@@ -42,6 +42,11 @@ public:
 
 int Auto::gCounter = 0;
 
+void Increment(int &valueP)
+{
+    valueP++;
+}
+
 void myPointers()
 {
     int a =  10;
@@ -49,14 +54,21 @@ void myPointers()
     int *pointer = &a;
 
     cout << "a = " << a << "\n";
-    cout << "pointer to a = " << pointer << "\n";
+    cout << "Address of a = " << pointer << "\n";
+    cout << "b = " << b << "\n";
+
+    Increment(a);
+
+    cout << "a = " << a << "\n";
+    cout << "Address of a = " << pointer << "\n";
     cout << "b = " << b << "\n";
 
     a = 3004;
     cout << "\na set to: " << a << "\n\n";
 
     cout << "a = " << a << "\n";
-    cout << "pointer to a = " << pointer << "\n";
+    cout << "Address of a = " << pointer << "\n";
+    cout << "Address of b = " << &b << "\n";
     cout << "b = " << b << "\n";
 }
 
@@ -94,7 +106,7 @@ void do_something(big_data d)
 
 int main()
 {
-   // myPointers();
+   myPointers();
    // showDay();
    //Auto *_my_auto = makeAuto();
    //cout << "my auto name = " << _my_auto->_name() << "\n";
@@ -102,6 +114,8 @@ int main()
    //Auto *_my_auto;
    //_my_auto = new Auto();
     
+    return 1;
+
     std::cout << "create big data...\n";
     big_data d;
     std::cout << "call do_something...: \n";
