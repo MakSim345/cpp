@@ -1,5 +1,4 @@
-#include <conio.h>
-#include <iostream>
+//#include <iostream>
 #include "utils.h"
 
 using namespace std;
@@ -130,7 +129,9 @@ int main()
     model->performFly();
 
     cout << "Duck simulator end." << endl;
-    getch();
+
+    system("PAUSE");
+    // getch();
 }
 
 
