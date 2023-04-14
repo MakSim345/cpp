@@ -1,18 +1,21 @@
 #pragma once
 
 #include <stdio.h>
-#include <conio.h>
 #include <ctime>
 #include <string.h>
 #include "stdlib.h"
-#include <conio.h>
 #include <vector>
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <map>
 #include <math.h>
-#include <Windows.h>
+
+// #define WIN32_APP
+#ifdef WIN32_APP
+    #include <conio.h>
+    #include <Windows.h>
+#endif
 
 #include <chrono>
 #include <thread>
@@ -24,5 +27,4 @@ using namespace std;
 
 #define TIME_TICK_INTERVAL 1000
 
-#define WIN32_APP
 #define RND_MAX 65536
