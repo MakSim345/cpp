@@ -42,6 +42,7 @@ int add (std::string numbers)
         ss >> next;
         result += next;
         _tellg = ss.tellg();
+        std::cout << "_tellg: " << _tellg << "\n";
     }   
 
     return result;
@@ -51,29 +52,34 @@ int add (std::string numbers)
 TEST(add_emptyString, returns0)
 {
     int result = add("");
+    std::cout << "TEST add_emptyString" << "\n";
     EXPECT_EQ(result, 0);
 }
 // A single number returns the value:
 TEST(add_oneNumberString, returns1)
 {
     int result = add("1");
+    std::cout << "TEST add_oneNumberString" << "\n";
     EXPECT_EQ(result, 1);
 }
 // Two numbers, comma delimited, returns the sum:
 TEST(add_twoNumberString, returns3)
 {
     int result = add("1,2");
+    std::cout << "TEST add_twoNumberString" << "\n";
     EXPECT_EQ(result, 3);
 }
 // Three numbers, delimited either way, returns the sum:
 TEST(add_threeNumberString, returns3)
 {
     int result = add("1,1,1");
+    std::cout << "TEST add_threeNumberString" << "\n";
     EXPECT_EQ(result, 3);
 }
 TEST(add_fiveNumberString, returns5)
 {
     int result = add("1,1,1,1,1");
+    std::cout << "TEST add_fiveNumberString" << "\n";
     EXPECT_EQ(result, 5);
 }
 
@@ -98,6 +104,6 @@ int main(int argc, char** argv)
     testing::InitGoogleTest(&argc, argv);
     returnValue = RUN_ALL_TESTS();
     printf ("Application complete.\n");
-    system ("PAUSE");
+    // system ("PAUSE");
     return returnValue;
 }
