@@ -11,6 +11,7 @@
 // Description:
 //============================================================
 #include "gen.h"
+#include "map_tst.h"
 
 struct Number
 {
@@ -25,6 +26,13 @@ public:
     {
         filename = "text.txt";
     }
+    
+    phone_book(std::string _new_filename)
+    {
+        filename = _new_filename;
+        // this->read_data_file();
+    }
+
     int Run()
     {
         std::cout << "Hello cruel world! \nLet's make some product...\n";
@@ -32,7 +40,11 @@ public:
         read_data_file();
         print_map();
         long num_to_search = 345345325;
+        std::string name_to_search = "MAK";
         std::cout << "search by number " << num_to_search << " - "<< search_by_number(num_to_search) << "\n";
+        
+        std::cout << "search by name " << name_to_search << " - "<< search_by_name(name_to_search) << "\n";
+        
         Number t;
         std::cout << "\nEnter new name:\n";
         cin >> t.name;
@@ -100,11 +112,21 @@ public:
         std::cout << "\nGood bye!\n";
     }
 
-    long search_by_name(std::string name )
+    std::string search_by_name(std::string name )
     {
         map<long, string>::iterator by_name;
         //by_name = Employees.find(name);
-        return by_name->first;
+        by_name = find_value(Employees.begin(), Employees.end(), name);
+        if (by_name != Employees.end())
+        {
+            std::stringstream ss;
+            ss << by_name->first;
+
+            std::cout << ss.str();
+            return ss.str(); // by_name->first;
+        }
+        else
+            return "DO NOT EXIST!";
     }
 
     std::string search_by_number(long number_to_search)
@@ -118,8 +140,8 @@ public:
     {
         Employees[num] = name;
 
-        cout << "Employees[" << num  << "]" << Employees[num] << endl << endl;
-        cout << "Map size: " << Employees.size() << endl;
+        //cout << "Employees[" << num  << "]" << Employees[num] << endl << endl;
+        //cout << "Map size: " << Employees.size() << endl;
     }
 
     void init_map()
@@ -145,6 +167,7 @@ public:
         }
 
     }
+
     map<long, string> Employees; 
     map<long, string>::iterator ii;
     std::string filename;
