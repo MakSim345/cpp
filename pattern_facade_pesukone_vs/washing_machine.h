@@ -11,20 +11,20 @@
 class WashingMashine
 {
 public:
-    WashingMashine() 
-    { 
-        cout << "WashingMashine created" << endl;
-        water = new WaterManagement();        
+    WashingMashine()
+    {
+        std::cout << "WashingMashine created" << endl;
+        water = new WaterManagement();
         thermo = new Thermo();
         engine = new Engine();
         dryer = new Dryer();
     }
-   
-   ~WashingMashine() 
-    { 
-    cout << "Dryer complete" << endl;
+
+   ~WashingMashine()
+    {
+        std::cout << "Dryer complete" << endl;
     }
-    
+
     void wash_cotton()
     {
         // cotton
@@ -47,13 +47,13 @@ public:
     }
 
     void start_machine()
-    { 
-        cout << "WashingMashine: start " << endl;
+    {
+        std::cout << "WashingMashine: start " << endl;
         this->wash_cotton();
-        cout << "WashingMashine: stop " << endl;        
+        std::cout << "WashingMashine: stop " << endl;
     }
-    
-private:    
+
+private:
     WaterManagement *water;
     Thermo *thermo;
     Engine *engine;
