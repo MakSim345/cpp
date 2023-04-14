@@ -21,9 +21,9 @@
 
 using namespace std;
 
-#define ERROR(x) Trace::Instance().getStream() << x;\
+#define TRACE_ERROR(x) Trace::Instance().getStream() << x;\
 	Trace::Instance().printTrace()
-#define LOG(x) Trace::Instance().getStream() << x;\
+#define TRACE_LOG(x) Trace::Instance().getStream() << x;\
 	Trace::Instance().printTrace()
 
 #define MAX_FILENAME_LEN 20
@@ -72,7 +72,7 @@ public:
     static void Shutdown();
     static Trace& Instance();
         
-	ostringstream m_ss;
+	ostringstream stringStreamM;
 	ios_base::fmtflags m_format;
 	
 	void printTrace();
@@ -100,26 +100,26 @@ public:
 	
 private:
 
-    static Trace* m_gInstance;
+    static Trace* gTraceInstanceM;
 
     Trace();
-    Trace(string sUserFileName);
-	Trace(int toFile, int toConsole, string sUserFileName);
+    Trace(std::string sUserFileName);
+	Trace(int toFile, int toConsole, std::string sUserFileName);
 	Trace(int toFile, int toConsole, int nFileNameAuto = 0);
    ~Trace();
 
     //Trace(const Trace&);
     //Trace& operator = (const Trace&);
     
-    string putTimeStampToFilename();
-    void selectMonth(int nMonthVal);
-    void traceInit(string sLogFileName);
-    string m_sDefFileName; //  "allegro.log";
-    string m_sLogFileName;
-	ofstream fInput;
-	int m_FileIsOpen;
-	int m_TraceToFile;
-	int m_TraceToCons;
+    std::string putTimeStampToFilename();
+    void selectMonth(const int nMonthVal);
+    void traceInit(std::string sLogFileNameP);
+    std::string sDefFileNameM; //  "allegro.log";
+    std::string sLogFileNameM;
+	ofstream fileInputM;
+	int isFileOpenM;
+	int traceToFileM;
+	int traceToConsoleM;
 };
 
 

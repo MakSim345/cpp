@@ -15,40 +15,40 @@ using namespace std;
 
 void Trace::Initialize()
 {
-   delete m_gInstance;
-   m_gInstance = new Trace();
+   delete gTraceInstanceM;
+   gTraceInstanceM = new Trace();
 }
 
 void Trace::Initialize(string sUserFileName)
 {
-   delete m_gInstance;
-   m_gInstance = new Trace(1, 0, sUserFileName);
+   delete gTraceInstanceM;
+   gTraceInstanceM = new Trace(1, 0, sUserFileName);
    //m_gInstance = new Trace();
 }
 
 void Trace::Initialize(int toFile, int toConsole, string sUserFileName)
 {
-   delete m_gInstance;
-   m_gInstance = new Trace(toFile, toConsole, sUserFileName);
+   delete gTraceInstanceM;
+   gTraceInstanceM = new Trace(toFile, toConsole, sUserFileName);
 }
 
 void Trace::Initialize(int toFile, int toConsole, int nFileNameAuto)
 {
-   delete m_gInstance;
-   m_gInstance = new Trace(toFile, toConsole, nFileNameAuto);
+   delete gTraceInstanceM;
+   gTraceInstanceM = new Trace(toFile, toConsole, nFileNameAuto);
 }
 
 /*static*/
 void Trace::Shutdown()
 {
-   delete m_gInstance;
-   m_gInstance = 0;
+   delete gTraceInstanceM;
+   gTraceInstanceM = 0;
 }
 
 /*static*/
 Trace& Trace::Instance()
 {
-   return *m_gInstance;
+   return *gTraceInstanceM;
 }
 
 
@@ -64,11 +64,11 @@ Trace& Trace::Instance()
 
 *********************************************************************/
 Trace::Trace():
-   m_FileIsOpen(0),
-   m_TraceToFile(0),
-   m_TraceToCons(1)   
+   isFileOpenM(0),
+   traceToFileM(0),
+   traceToConsoleM(1)   
 {
- Trace(m_TraceToFile, m_TraceToCons, 0);
+ Trace(traceToFileM, traceToConsoleM, 0);
 }
 
 /********************************************************************
@@ -82,17 +82,17 @@ Trace::Trace():
 
 *********************************************************************/
 Trace::Trace(int toFile, int toConsole, int nFileNameAuto):
-   m_FileIsOpen(0),
-   m_TraceToFile(toFile),
-   m_TraceToCons(toConsole)
+   isFileOpenM(0),
+   traceToFileM(toFile),
+   traceToConsoleM(toConsole)
 {
-    if (!m_TraceToFile)
+    if (!traceToFileM)
        return;
        
     if (!nFileNameAuto)
      { 
        setDefaultFileName("allegro.log");
-       traceInit(m_sDefFileName);     
+       traceInit(sDefFileNameM);     
      }
     else
      {     
@@ -112,9 +112,9 @@ Trace::Trace(int toFile, int toConsole, int nFileNameAuto):
 
 *********************************************************************/
 Trace::Trace(int toFile, int toConsole, string sUserFileName):
-   m_FileIsOpen(0),
-   m_TraceToFile(toFile),
-   m_TraceToCons(toConsole)
+   isFileOpenM(0),
+   traceToFileM(toFile),
+   traceToConsoleM(toConsole)
 {
     const int nFNameLen = MAX_FILENAME_LEN;
     
@@ -124,7 +124,7 @@ Trace::Trace(int toFile, int toConsole, string sUserFileName):
        setDefaultFileName("allegro.log");
        //printf ("ATTN! Filename '%s' has more than %d characters.\n", cUserFileName, nFNameLen);
        //printf ("All TRACE will go to file '%s'\n", m_sDefFileName.c_str());
-       traceInit(m_sDefFileName);
+       traceInit(sDefFileNameM);
      }
      else
      { 
@@ -144,10 +144,10 @@ Trace::Trace(int toFile, int toConsole, string sUserFileName):
 Trace::~Trace()
 {  
   //TRACEY("End time: %d\n", Get1msTimeMS());
-  if (1 == m_FileIsOpen)
+  if (1 == isFileOpenM)
   {
    //fclose (fi);
-   fInput.close();
+   fileInputM.close();
   }
 }
 
@@ -163,7 +163,7 @@ Trace::~Trace()
 *********************************************************************/
 ostringstream& Trace::getStream()
 {
- return m_ss;
+ return stringStreamM;
 }
 
 /********************************************************************
@@ -177,16 +177,16 @@ ostringstream& Trace::getStream()
 *********************************************************************/
 void Trace::printTrace()
 {
-    m_format = m_ss.flags();
+    m_format = stringStreamM.flags();
     
-    if (1 == m_TraceToFile)
-      fInput << m_ss.str() << endl;
-    if (1 == m_TraceToCons)
-      cout << m_ss.str() << endl;
+    if (1 == traceToFileM)
+      fileInputM << stringStreamM.str() << endl;
+    if (1 == traceToConsoleM)
+      cout << stringStreamM.str() << endl;
       
-    m_ss.clear();
-    m_ss.str("");
-    m_ss.flags(m_format);
+    stringStreamM.clear();
+    stringStreamM.str("");
+    stringStreamM.flags(m_format);
 }
 
 /********************************************************************
@@ -198,22 +198,22 @@ void Trace::printTrace()
   26.05.2008 Initial coding
 
 *********************************************************************/
-void Trace::traceInit(string sLogFileName)
+void Trace::traceInit(std::string sLogFileNameP)
 {
-  if (!m_TraceToFile) 
+  if (!traceToFileM) 
     return; // no file for output!       
    
-  const char *cLogFileName = sLogFileName.c_str();
+  const char *cLogFileName = sLogFileNameP.c_str();
   // open the file for input:    
   
-  fInput.open(cLogFileName, ios::out /*ios::app*/);    // open the streams
-  m_FileIsOpen = 1;
+  fileInputM.open(cLogFileName, ios::out /*ios::app*/);    // open the streams
+  isFileOpenM = 1;
   printTimeStamp();
 }
 
 void Trace::setDefaultFileName(string sFileName)
 {
- m_sDefFileName = sFileName;
+ sDefFileNameM = sFileName;
 }
 
 /********************************************************************
@@ -264,13 +264,13 @@ void Trace::printHex()
 {    
   unsigned char tmpchr;
   
-  string strStr = m_ss.str();
+  string strStr = stringStreamM.str();
   
   int NbrOfReadBytes = (int)strStr.length();
   const char *sStrC = strStr.c_str();
   
-  m_ss.clear();
-  m_ss.str("");
+  stringStreamM.clear();
+  stringStreamM.str("");
   
   getStream() << "Bytes: ";
   printTrace();
@@ -278,9 +278,9 @@ void Trace::printHex()
   for (int j=0; j < NbrOfReadBytes; j++)
   {
    tmpchr=(unsigned char) sStrC[j];
-   if (1 == m_TraceToFile)
-      fInput << "\\" << hex << showbase << (int)tmpchr;
-   if (1 == m_TraceToCons)
+   if (1 == traceToFileM)
+      fileInputM << "\\" << hex << showbase << (int)tmpchr;
+   if (1 == traceToConsoleM)
       cout << "\\" << hex << showbase << (int)tmpchr;
   }
   
@@ -353,8 +353,8 @@ string Trace::putTimeStampToFilename()
     }
     
     sprintf_s(ctmpFileName, strlen(cBuf), cBuf, stime.wYear, m_MonthValue, stime.wDay, stime.wHour, stime.wMinute, stime.wSecond);
-    m_sLogFileName = ctmpFileName;
-    return m_sLogFileName;
+    sLogFileNameM = ctmpFileName;
+    return sLogFileNameM;
 }
 
 /********************************************************************
@@ -366,9 +366,9 @@ string Trace::putTimeStampToFilename()
   10.06.2008 Initial coding.
 
 *********************************************************************/
-void Trace::selectMonth(int nMonthVal)
+void Trace::selectMonth(const int nMonthValP)
 {
- int i = nMonthVal;    
+ int i = nMonthValP;
 }
 
 /********************************************************************

@@ -7,7 +7,7 @@
 //#include "ProductConfigBase.h"
 //#include "Localization.h"
 
-// Miscellanous time related constants
+// Misc. time-related constants
 const unsigned long DOTime::MS_PER_TICK_COUNT = 1;
 const unsigned long DOTime::MS_PER_SECOND = 1000;
 const unsigned long DOTime::SECONDS_PER_MINUTE = 60;

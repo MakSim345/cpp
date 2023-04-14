@@ -69,7 +69,4 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="_ReadMe.log" />
-  </ItemGroup>
 </Project>

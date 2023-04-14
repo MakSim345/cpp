@@ -31,9 +31,6 @@
     <ClInclude Include="timectr.h" />
     <ClInclude Include="trace.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="_ReadMe.log" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9B871583-FE04-480E-ABAC-FD3F8AF27A61}</ProjectGuid>
     <RootNamespace>dev05</RootNamespace>
@@ -44,10 +41,12 @@
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">

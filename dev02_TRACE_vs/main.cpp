@@ -94,7 +94,7 @@ int getInt()
 }
 
 // Trace trc(1,1);
-Trace* Trace::m_gInstance = 0;
+Trace* Trace::gTraceInstanceM = 0;
 
 int main(int argc, _TCHAR* argv[])
 {
@@ -127,7 +127,7 @@ int main(int argc, _TCHAR* argv[])
   }
  else
   {
-   // printf ("file %s was open succesfully\n", FileNameF);
+   // printf ("file %s was open successfully\n", FileNameF);
    nOpenFileToken = 1;
   }
       
@@ -172,7 +172,7 @@ int main(int argc, _TCHAR* argv[])
     int test_q = 234;
     //int i = 0;
     printf ("START\n");
-    printf("strBuffSat has a %d chars\n", strlen(strBuffSat));
+    printf("strBuffSat has %d characters\n", strlen(strBuffSat));
     while(i > 0)
     {    
         // STRACE(strBuffSat[i--]);
@@ -185,7 +185,7 @@ int main(int argc, _TCHAR* argv[])
     
     // Trace::Shutdown();
 
-    LOG("Test 2 - i: " << showbase << hex << i);
+    TRACE_LOG("Test 2 - i: " << showbase << hex << i);
     i = 0xAA;
     int test[12] = {1,23,3,42342,5,6,7,58,9,4310,234};
     list<int> mylist(test, test + sizeof(test) / sizeof(int));
