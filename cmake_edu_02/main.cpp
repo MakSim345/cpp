@@ -22,14 +22,14 @@ public:
         // make the product:
         // Bread *_my_bread = breadmaker.doBakeBread(gas_oven);
         // print_message();
-    	int side;
-    	int a = 34;
-	    std::cout << "Enter cube dimention: " ;
-    	std::cin >> side;
+    	// int side;
+    	// int a = 34;
+	    // std::cout << "Enter cube dimention: " ;
+    	// std::cin >> side;
     	// cout << "Cube with side " << side << " is equal to " << cube(side) << endl;
-    	printf("side = %d \n", side);
-    	float res = a / side;
-    	printf("result %d DIV %d = %d\n",a, side, res); 
+    	// printf("side = %d \n", side);
+    	// float res = a / side;
+    	// printf("result %d DIV %d = %d\n",a, side, res); 
 
         return 0;
     }
@@ -42,7 +42,6 @@ public:
 
 int main(int argc, char** argv)
 {
-    // std::auto_ptr <App> bakery(new App());
     std::unique_ptr <App> chkNor(new App());
     try
     {
