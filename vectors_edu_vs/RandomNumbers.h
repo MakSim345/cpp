@@ -19,9 +19,7 @@ using namespace std;
 
 class CRandomNumbers
 {
-
 public:
-
     static int getRandomNumber(int iMin, int iMax);
     static _ARRAY_INT getRandomNumbers(int iMin, int iMax, int iSize, bool bUniqueOnlyFlag);
 

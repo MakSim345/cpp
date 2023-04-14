@@ -20,10 +20,9 @@ void smpl_map()
     {
         std::cout << (it)->first << " = " << (it)->second << std::endl;
     }
-
 }
 
-void map_test ()
+void map_test()
 {
     map<int, string> Employees;
     // Assignment using array index notation

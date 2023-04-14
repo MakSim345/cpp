@@ -8,70 +8,66 @@
 #include <algorithm>
 #include <ctime>
 
-
 class SuperList
 {
 public:
     SuperList()
     {
-        mRandomNumbers.push_back(23);
-        mRandomNumbers.push_back(24);
-        mRandomNumbers.push_back(25);
+        rndNumbersVectorM.push_back(23);
+        rndNumbersVectorM.push_back(24);
+        rndNumbersVectorM.push_back(25);
         // mRandomNumbers (10, 23);
         // mRandomNumbers{ 10, 20, 30 };
     }
-   ~SuperList();
+   ~SuperList() = default;
 
    vector <int>& getMyListUnsafely()
    {
        // call getMyListUnsafely().clear() will erase the list
-       return mRandomNumbers;
+       return rndNumbersVectorM;
    }
 
    const vector <int>& getMyListSafely() // rem: const keyword !
    {
-       return mRandomNumbers;
+       return rndNumbersVectorM;
    }
 
    int getMySize()
    {
-       return mRandomNumbers.size();
+       return rndNumbersVectorM.size();
    }
 
 private:
-
-    vector <int> mRandomNumbers;
-
+    vector <int> rndNumbersVectorM;
 };
 
 typedef struct {
     long len;
     float *data;
-} vec;
+} myDefinedVector;
 
-long vec_len(vec *v)
+long vec_len(myDefinedVector *defVectorP)
 {
-    return v->len;
+    return defVectorP->len;
 }
 
-void combine0(vec *v, float *dest)
-{
-    long i;
-    *dest = 1;
-    for (i = 0; i <vec_len(v); i++ )
+void combine0(myDefinedVector *defVectorP, float *destP)
+{   
+    *destP = 1;
+    for (int i = 0; i <vec_len(defVectorP); i++ )
     {
-        *dest *= v->data[i];
+        *destP *= defVectorP->data[i];
     }
 }
 
-template <class My_Type>
-My_Type maximum (My_Type value_1, My_Type value_2)
+template <class superType>
+superType selectMaximumValue (superType valOneP, superType valTwoP)
 {
-    My_Type max = value_1;
-    if (value_2 > max)
-        max = value_2;
+    superType retValMax = valOneP;
+    if (valTwoP > retValMax)
+        retValMax = valTwoP;
 
-    return max;
+    return retValMax;
 }
 
 template <class superType>
@@ -103,17 +99,17 @@ int main(int argc, char *argv[], char *envp[])
         }
     }
 
-
     char* word1 = "Hello";
     char* word2 = "Hello";
 
-    float a[SIZE5000];
-    vec v = {SIZE5000, a};
+    float aFloatArray[SIZE_5000];
+    myDefinedVector v = {SIZE_5000, aFloatArray};
 
     float res;
-    for (long i = 0; i < SIZE5000; i++ )
+
+    for (long i = 0; i < SIZE_5000; i++ )
     {
-        a[i] = rand();
+        aFloatArray[i] = rand();
     }
 
     combine0(&v, &res);
@@ -126,12 +122,15 @@ int main(int argc, char *argv[], char *envp[])
     mySuperList->getMyListUnsafely().clear();
     a = mySuperList->getMySize();
     */
-    
 
     if( word1 == word2 )
+      {
         printf("equal\n");
+      }
     else
+      {
         printf("not equal\n");
+      }
 
     vector <int> viRandomNumbers;
     vector <int> mImageArray;
@@ -147,8 +146,8 @@ int main(int argc, char *argv[], char *envp[])
     std::cout << "Time end:" << std::clock() << "\n";
     // vector_string();
 
-    cout << "Result maximum(23.6, 45.7): " << maximum(23.6, 45.7) << "\n";
-    cout << "Result       maximum(2, 5): " << maximum(2, 5) << "\n";
+    cout << "Result selectMaximumValue(23.6, 45.7): " << selectMaximumValue(23.6, 45.7) << "\n";
+    cout << "Result selectMaximumValue(2, 5)      : " << selectMaximumValue(2, 5) << "\n";
 
     std::cout << "Time Start:" << std::clock() << "\n";
     sort(viRandomNumbers.begin(), viRandomNumbers.end());
