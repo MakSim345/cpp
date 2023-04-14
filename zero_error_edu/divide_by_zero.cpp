@@ -5,15 +5,16 @@
 #include "divide_by_zero.h"
 
 DivideByZeroError::DivideByZeroError() : 
-    message("geLeHue Ha HoLb!\n")
+    messageP("ERROR (customer handler) - Divide to ZERO!\n")
 {
  
 }
 void DivideByZeroError::printMesage() const 
 {
-    printf ("%s", message);
+    printf ("%s", messageP);
 }
-    
+
+
 float quotient(int num1, int num2)
 {
  if (num2==0)

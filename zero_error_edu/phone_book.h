@@ -18,7 +18,8 @@ public:
     string number;
     Number(const Number &v);
     Number();
-    const Number &operator=(const Number &v)    
+
+    const Number &operator=(const Number &v)
     {
         name = v.name;
         number = v.number;
@@ -26,4 +27,4 @@ public:
     }
 };
 
-#endif 
+#endif

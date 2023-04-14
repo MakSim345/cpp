@@ -12,7 +12,7 @@ class DivideByZeroError
     DivideByZeroError();
     void printMesage() const;
  private:
-    const char * message;
+    const char* messageP;
 };
     
 float quotient(int num1, int num2);
