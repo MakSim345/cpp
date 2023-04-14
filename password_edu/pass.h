@@ -13,12 +13,12 @@ public:
     void factorial();
 
     int genRnd(int max);
-    string run(int length);
+    std::string run(int length);
 
 private:
     void init();
-    vector<string> get_alphabet();
-    vector<string> letters;
+    vector<std::string> get_alphabet();
+    vector<std::string> letters;
 };
 
 #endif

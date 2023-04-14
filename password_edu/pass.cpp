@@ -1,8 +1,5 @@
 #include "gen.h"
 #include "pass.h"
-#include <cstdlib>
-#include <vector>
-#include <string>
 
 using namespace std;
 
