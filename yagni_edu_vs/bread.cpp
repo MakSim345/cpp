@@ -5,11 +5,11 @@ Bread::Bread()
     std::cout << "The new product is done!\n";
 }
 
-Bread* BreadMaker::doBakeBread(ovenIf &oven)
+Bread* BreadMaker::doBakeBread(ovenIf &ovenP)
 {
     //return new Bread();
 
-    if (true == oven.canBake())
+    if (true == ovenP.canBake())
     {
         // somehow making bread and:
         return new Bread();

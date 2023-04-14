@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 3.16) # check the version of CMake
 
 set(PROJECT_NAME yagni_exe)
 
-project(${PROJECT_NAME} ASM C CXX)
+project(${PROJECT_NAME} C CXX)
 
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS -pthread)
 
 set(sources

@@ -13,7 +13,7 @@ public:
     virtual ~ovenIf(){}
 
 private:
-    int _oven_type;
+    int mOvenType;
 };
 
 
