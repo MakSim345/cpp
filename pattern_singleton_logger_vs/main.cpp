@@ -16,10 +16,44 @@ int main(int argc, char *argv[], char *envp[])
     
     //std::vector < boost::shared_ptr<myABC> > BunchOfObjects;
     //BunchOfObjects.push_back(boost::shared_ptr<A>(new B));
-    Logger::Instance()->openLogFile("my_new_file.txt");    
-    Logger::Instance()->writeLogFile("START:\n");
 
-    Logger *l = Logger::Instance();
+    // test Singleton - incorrect way:
+    // Singleton bad_singleton;
+
+    // correct way:
+    // no instances, get it from class.
+    Singleton &singleton1 = Singleton::getSingletonInstance();
+    singleton1.dataM = 20;
+
+    std::cout << "singleton1.dataM = " << singleton1.dataM << std::endl;
+
+    Singleton& singleton2 = Singleton::getSingletonInstance();
+    std::cout << "singleton2.dataM = " << singleton2.dataM << std::endl;
+    // Note that singleton2.dataM is also equal to 20!
+    // so, singleton1 == singleton2
+
+    // Directly change dataM to 50 and check it is still one singleton:
+    Singleton::getSingletonInstance().dataM = 50;
+
+    std::cout << "singleton1.dataM = " << singleton1.dataM << std::endl;
+    std::cout << "singleton2.dataM = " << singleton2.dataM << std::endl;
+    std::cout << "Direct:    dataM = " << Singleton::getSingletonInstance().dataM << std::endl;
+
+    /* 
+    * Test the Copy Constructor.
+    * Note: comment out "Singleton(Singleton const&) = delete;"
+    * to see the difference.
+    * 
+    Singleton singletonN = singleton1;
+    singletonN.dataM = 100;
+    std::cout << "singleton1.dataM = " << singleton1.dataM << std::endl;
+    std::cout << "singletonN.dataM = " << singletonN.dataM << std::endl;
+    */
+
+    Logger::getLoggerInstance()->openLogFile("my_new_file.txt");    
+    Logger::getLoggerInstance()->writeLogFile("START:\n");
+
+    Logger *l = Logger::getLoggerInstance();
     l->writeLogFile("Ax-Xa");
     // Logger::Instance()->closeLogFile();
     float a = 12.5;

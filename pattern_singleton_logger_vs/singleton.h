@@ -1,22 +1,37 @@
-#ifndef _MY_SINGLETON_H_
-#define _MY_SINGLETON_H_
+#ifndef _SINGLETON_H_
+#define _SINGLETON_H_
 //============================================================
-//
 // Description:
-// <purpose of this file>
 //============================================================
 #include "gen.h"
 
 class Singleton
 {
 private:
-    // static Singleton*  s_Instance;
+    // static Singleton sInstanceM;
+    Singleton() = default;
 
 public:
-    static Singleton& Get() 
+
+    int dataM;
+    
+    // Explicitly prevent Copy Constructor from the usage:
+    Singleton(const Singleton&) = delete;
+
+    // Move Constructor:
+    Singleton(Singleton&&) = delete; 
+
+    // Copy Assignment operator:
+    Singleton& operator=(const Singleton&) = delete;
+
+    // Move Assignment operator:
+    Singleton& operator=(Singleton&&) = delete;
+
+    static Singleton& getSingletonInstance() 
     {
-        static Singleton s_Instance;
-        return s_Instance;
+        // Note: return static, to keep it after.
+        static Singleton sInstanceM;
+        return sInstanceM;
     }
     void Hello () {}
 };
@@ -24,26 +39,26 @@ public:
 class OnlyOne
 {
 public:
-    static OnlyOne* Instance()
+    static OnlyOne* getOnlyOneInstance()
     {
-        if(theSingleInstance == 0)
+        if(theOnlyOneInstanceM == 0)
         {
-            theSingleInstance = new OnlyOne;
+            theOnlyOneInstanceM = new OnlyOne;
         }
-        return theSingleInstance;
+        return theOnlyOneInstanceM;
     }
 private:
 
-    static OnlyOne* theSingleInstance;
+    static OnlyOne* theOnlyOneInstanceM;
     OnlyOne(){};
 };
 
 class Logger
 {
 public:
-    static Logger* Instance();
+    static Logger* getLoggerInstance();
     
-    ~Logger();
+    ~Logger() = default;
     bool openLogFile(std::string logFile);
     // bool writeLogFile(std::string _str);
     bool closeLogFile();
@@ -52,16 +67,20 @@ public:
     bool writeLogFile(T _str)
     {   
         // std::string _str = "Test" ;
-        std_ofstream_log_file << _str << endl;
+        stdOfstreamLogFileM << _str << endl;
         return true;
     }
 
 private:
-    static Logger *myInstance;
-    Logger() {};           // Private, so it cannot be called    
-    Logger(Logger const&); // copy constructor
+    // Private, so it cannot be called:
+    Logger() {};           
+    //copy constructor to prevent copy:
+    Logger(Logger const&);
+
     Logger& operator=(Logger const&);
-    std::ofstream std_ofstream_log_file;
+
+    static Logger* loggerInstanceM;
+    std::ofstream stdOfstreamLogFileM;
 };
 
-#endif
+#endif // _SINGLETON_H_

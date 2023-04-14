@@ -17,7 +17,7 @@ public:
 
     virtual void set()
     {
-        std::cout << "ClassA is increasing" << std::endl;
+        std::cout << "ClassA: incrementing data..." << std::endl;
         data++;
     }
 
@@ -36,7 +36,7 @@ class ClassB : public ClassA
 public:
     void set()
     {
-        std::cout << "ClassB is decreasing" << std::endl;
+        std::cout << "ClassB (based on ClassA): decrementing data" << std::endl;
         data--;
     }
 };
