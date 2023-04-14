@@ -1,24 +1,55 @@
+#include <map>
 #include <iostream>
-#include <map> 
 #include <vector>
-#include <ctype.h>
-#include <errno.h>
-#include <string>
-#include <ctime>
-#include <sstream>
-#include <fstream>
-#include <algorithm>
-#include <iterator>
-#include <functional>
 
+// #include <ctype.h>
+// #include <errno.h>
+// #include <string>
+// #include <ctime>
+// 
+// #include <sstream>
+// #include <fstream>
+// #include <algorithm>
+// #include <iterator>
+// #include <functional>
 // #include "utils.h"
 
 /*
-REM: improper list of parameters in the class definition 
+REM: improper list of parameters in the class definition
      cause undefined behavior
 */
 
 using namespace std;
+
+void vector_string()
+{
+    vector<string> v_names(10, "Name - Not initialized");
+
+    cout << "Capacity vector =" << v_names.capacity() << endl;
+    cout << "Size vector =" << v_names.size() << endl;
+
+    v_names.insert(v_names.begin(), "AAAA");
+
+    /*
+    for( int i = 0; i < v_names.size(); i++ )
+    {
+        cout << v_names[i] << " ";
+    }
+    cout << endl;
+    */
+
+    v_names.resize(5);
+    cout << "After RESIZE:" << endl;
+    cout << "Capacity vector =" << v_names.capacity() << endl;
+    cout << "Size vector =" << v_names.size() << endl;
+
+    vector<string>::iterator iter;
+
+    for( iter = v_names.begin(); iter != v_names.end(); iter++ )
+    {
+        cout << *iter << endl;
+    }
+}
 
 class ToTest
 {
@@ -37,7 +68,7 @@ public:
         std::cout << "ToTest (ToTest& x): x.data= " << x.data << "\n";
         data = x.data;
     }
-    
+
     int dump ()
     {
         return data;
@@ -45,7 +76,7 @@ public:
 
     ~ToTest ()
     {
-        std::cout << "~ToTest (): x.data= " << this->data << "\n";        
+        std::cout << "~ToTest (): x.data= " << this->data << "\n";
     }
 
 };
@@ -55,7 +86,7 @@ class Base
 {
 public:
     virtual ~Base () {};
-        
+
     virtual void dump () {};
 };
 
@@ -65,14 +96,14 @@ private:
     ToTest a;
     ToTest b;
 public:
-    WrongInit (int x) : 
-        b(x), 
+    WrongInit (int x) :
+        b(x),
         a(b)
         { /* constructor body*/}
-    void dump () 
+    void dump ()
     {
         std::cout << "a=" << a.dump() << " b=" << b.dump() << "\n";
-    }    
+    }
 };
 
 
@@ -94,7 +125,7 @@ void print_map(map<T, int> &temp_map)
         */
     }
 
-template <class T1, class T2> 
+template <class T1, class T2>
 void print_map2(map<T1, T2> &temp_map)
     {
         // for( map<int, string>::iterator ii=temp_map.begin(); ii!=temp_map.end(); ++ii)
@@ -115,22 +146,24 @@ void print_map2(map<T1, T2> &temp_map)
 int main()
 {
     map<long, string> Employees;
-    /* ATTN: this init needs C++11
-    map <string, int> myFirstMap = {{"Moter", 37},
-                                    {"Father", 40},
-                                    {"BigBrother", 17},
-                                    {"Brother", 15},
-                                    {"Sister", 12} };*/
-    map<string, int> myFirstMap; 
+    /* ATTN: this init needs C++11*/
+    map <string, int> myFamilyMap =
+            {{"Moter", 37},
+             {"Father", 40},
+             {"BigBrother", 17},
+             {"Brother", 15},
+             {"Sister", 12} };
 
-    myFirstMap["Mother"] = 37;
-    myFirstMap["Father"] = 40;
-    myFirstMap["BigBrother"] = 17;
-    myFirstMap["Brother"] = 15;
-    myFirstMap["Sister"] = 12;
+    print_map(myFamilyMap);
 
+    map<string, int> anotherFamilyMap;
+    anotherFamilyMap["Mother"] = 27;
+    anotherFamilyMap["Father"] = 30;
+    anotherFamilyMap["BigBrother"] = 7;
+    anotherFamilyMap["Brother"] = 1;
+    anotherFamilyMap["Sister"] = 2;
     
-    print_map(myFirstMap);
+    print_map(anotherFamilyMap);
 
     map<int, string> ProstotronMap;
     ProstotronMap[10] = "READ - from terminal to selected memory address";
@@ -146,19 +179,24 @@ int main()
     ProstotronMap[42] = "BRANCHZERO - Goto selected memory address, if accumulator is zero";
     ProstotronMap[43] = "HALT - full stop";
 
-    // print_map2(ProstotronMap);
-    cout << "ProstotronMap[12] = " << ProstotronMap[12] << "\n";
-    
+    print_map2(ProstotronMap);
+
+    // cout << "ProstotronMap[12] = " << ProstotronMap[12] << "\n";
+    // cout << "ProstotronMap[32] = " << ProstotronMap[32] << "\n";
+
     //--------------------//
+    const unsigned long counter = 15;
     char c;
     map <char, int> mySecondMap;
 
-    for (int i = 0,c = 'a'; i < 5; ++i,++c)
+    for (int i = 0, c = 'a'; i < counter; ++i,++c)
     {
-        mySecondMap.insert ( pair<char,int>(c,i) );
+        mySecondMap.insert (pair<char, int> (c,i));
     }
-    
+
     print_map(mySecondMap);
+    
+    vector_string();
 
     return 0;
 }
