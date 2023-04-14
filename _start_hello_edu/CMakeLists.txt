@@ -11,6 +11,7 @@ set(sources
         # utils.cpp
     )
 
-# set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
+# set(CMAKE_CXX_STANDARD 14)
+
 add_executable( ${PROJECT_NAME} ${sources} )
