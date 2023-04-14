@@ -2,85 +2,84 @@
 #include "memory.h"
 
 Memory::Memory()
-    : m_nCellValue(0)
-    , m_nCellNumber(0)
-    , activeCellNumber(0)
+    :cellValueM(0)
+    ,cellNumberM(0)
+    ,activeCellNumberM(0)
 {
     for (int i=0; i<MEMORY_SIZE; i++)
     {
-     RAM[i].setCellNumber(i);
+        RAM[i].setCellNumber(i);
     }
 }
 
 void Memory::printCurCellNumber()
 {
-    RAM[activeCellNumber].printCellNumber();
+    RAM[activeCellNumberM].printCellNumber();
 }
 
-int Memory::setCellValue(const char* cVal)
+int Memory::setCellValueChar(const char* cVal)
 {
     // Method takes a number as a string and 
     // load it to a currently active cell.
-    return RAM[activeCellNumber].setCellValue(cVal);
+    return RAM[activeCellNumberM].setCellValue(cVal);
 }
 
-int Memory::setCellValue(int nVal)
+int Memory::setCellValueInt(const int valP)
 {
-
-    // Method takes an int number and 
+    // Method takes an integer number and
     // load it to a currently active cell. 
-    return RAM[activeCellNumber].setCellValue(nVal);
+    return RAM[activeCellNumberM].setCellValue(valP);
 }
 
-int Memory::getCellValue(int _index)
+int Memory::getCellValue(const int indexP)
 {
-    return RAM[_index].getCellValue();
+    return RAM[indexP].getCellValue();
 }
 
 int Memory::getCellValue()
 {
-    /************************************************************************/
-    /*  returns currently selected cell value
-    /************************************************************************/
-    return RAM[activeCellNumber].getCellValue();
+    /***********************************************************************
+    *  Method returns value of currently selected cell
+    ************************************************************************/
+    return RAM[activeCellNumberM].getCellValue();
 }
-
 
 int Memory::getCellNumber()
 {
-    return RAM[activeCellNumber].getCellNumber();
+    return RAM[activeCellNumberM].getCellNumber();
 }
 
 void Memory::cellCtrIncrement()
 {
-    int _tmp = activeCellNumber;
+    int _tmp = activeCellNumberM;
     _tmp++;
     this->setCellCounter(_tmp);
 }
 
 void Memory::cellCtrDecrement()
 {
-    int _tmp = activeCellNumber;
+    int _tmp = activeCellNumberM;
     _tmp--;
     this->setCellCounter(_tmp);
 }
 
-void Memory::setCellCounter(int nValue)
+void Memory::setCellCounter(int newCellNumberP)
 {
-    if (nValue > MEMORY_SIZE - 1)
+    if (newCellNumberP > MEMORY_SIZE - 1)
     {
         printf ("ERROR! Number %d is the last memory address.", MEMORY_SIZE - 1);
-        activeCellNumber = MEMORY_SIZE - 1;
+        activeCellNumberM = MEMORY_SIZE - 1;
         return;
     }
 
-    if (nValue < 0)
+    if (newCellNumberP < 0)
     {
-        activeCellNumber = 1;
+        /* value can not be less than 0, so set it to 1:*/
+        activeCellNumberM = 1;
         return;
     }
 
-    activeCellNumber = nValue;
+    activeCellNumberM = newCellNumberP;
 }
 
 void Memory::printMemoryDump()
@@ -88,7 +87,7 @@ void Memory::printMemoryDump()
     int row;
     int column;
     int RowsNumber;
-    // MemCell* memory /*pointer to an array!*/
+    /* MemCell* memory - pointer to an array!*/
 
     RowsNumber = (MEMORY_SIZE / 10);
 
@@ -117,7 +116,7 @@ void Memory::printCellValue(int index)
 
 void Memory::printCellValue()
 {
-    RAM[activeCellNumber].printCellValue();
+    RAM[activeCellNumberM].printCellValue();
 }
 
 Memory::~Memory()

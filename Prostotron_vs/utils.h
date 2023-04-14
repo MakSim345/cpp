@@ -6,7 +6,7 @@
 void PrintIntroduction();
 void PrintHelpInfo(int);
 
-void formatMemoryCellToPrint(int nClNum, int nClVal, char *tmpbuf);
+void formatMemoryCellToPrint(const int nClNum, const int cellValP, char* aTmpBuf);
 
 #endif
 

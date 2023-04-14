@@ -81,7 +81,7 @@ void MemCell::printCellValue()
     else if (MemCell::m_nCellValue < 10000)
         printf ("  +%d", m_nCellValue);
     }
-    else// (m_nCellValue < 0)
+    else// (cellValueM < 0)
     {
     if (MemCell::m_nCellValue > -10)
         printf ("  -000%d", m_nCellValue *(-1) );

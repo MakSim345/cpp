@@ -20,19 +20,18 @@ public:
     void cellCtrIncrement();
     void cellCtrDecrement();
     
-    int setCellValue(const char *);
-    int setCellValue(int nVal);
+    int setCellValueChar(const char *);
+    int setCellValueInt(const int valP);
 
-    int getCellValue(int _index);
+    int getCellValue(const int indexP);
     int getCellValue();
 
     int getCellNumber();
-      
-    int  activeCellNumber;
-      
+
 private:
-    int m_nCellNumber;
-    int m_nCellValue;
+    int activeCellNumberM;
+    int cellNumberM;
+    int cellValueM;
       
     MemCell RAM [MEMORY_SIZE];
 };

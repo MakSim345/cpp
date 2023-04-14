@@ -9,7 +9,7 @@ class Processor
 {
 /* Simulates a CPU device in a PC.
  * Accepts set of main Assembler's commands.
- * by Yuriy Senishch, 2005*/
+ * by Yuriy S, 2005*/
 
 public:
 

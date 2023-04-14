@@ -1,14 +1,11 @@
 #include "gen.h"
 #include "utils.h"
 #include "memory.h"
-#include "mem_cell.h"
 #include "processor.h"
-
 
 class Prostotron
 {
 public:
-
     Prostotron()
         :strInput("0")
         ,strDump("dump")
@@ -33,8 +30,8 @@ public:
       { 
         if (memory->getCellNumber() == 0)
         {
-              memory->printMemoryDump();
-              // do nothing, because dump print anyway.
+            memory->printMemoryDump();
+            // do nothing, because dump print anyway.
         }
         memory->printCurCellNumber();
         std::cout << " [";
@@ -74,7 +71,7 @@ public:
           }
         else
           {
-            if (memory->setCellValue(strInput.c_str())) // avoid incorrect values!
+            if (memory->setCellValueChar(strInput.c_str())) // avoid incorrect values!
             {
                 // and increment cell counter:
                 memory->cellCtrIncrement();
@@ -210,7 +207,6 @@ public:
 
     pProc->printProcessorState();
     memory->printMemoryDump();
-    // printf("*** Program complete. Bye***\n" );
     }
 
     ~Prostotron()

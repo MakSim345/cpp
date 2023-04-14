@@ -11,14 +11,13 @@ void PrintIntroduction()
        printf ("%c", 205);
     }
     printf ("%c\n", 187);
-    printf ("\t%c Welcome to the PROSTOTRON!                                %c\n", 186, 186);
-    printf ("\t%c Please, enter one by one commands of                      %c\n", 186, 186);
-    printf ("\t%c your program. I will print numbers of                     %c\n", 186, 186);
-    printf ("\t%c memory's cell and question mark (?)                       %c\n", 186, 186);
-    printf ("\t%c After this you can enter a word to this                   %c\n", 186, 186);
-    printf ("\t%c memory cell. Enter 'cmd' to go to command mode.           %c\n", 186, 186);
+    printf ("\t%c Welcome to the PROSTOTRON.                                %c\n", 186, 186);
+    printf ("\t%c Enter commands of your program one by one.                %c\n", 186, 186);
+    printf ("\t%c I will print a number of memory cell and a question       %c\n", 186, 186);
+    printf ("\t%c mark (?) After that you can enter a word to that          %c\n", 186, 186);
+    printf ("\t%c memory cell.                                              %c\n", 186, 186);
+    printf ("\t%c Enter 'cmd' to go to command mode.                        %c\n", 186, 186);
     printf ("\t%c Type '/?' for help screen                                 %c\n", 186, 186);
-
     printf ("\t%c", 200);
     for (i=0; i<nFrame; i++)
        printf ("%c", 205);
@@ -61,45 +60,43 @@ void PrintHelpInfo(int is_asm)
 };
 
 
-// char * formatMemoryCellToPrint(int nClNum, int nClVal)
-void formatMemoryCellToPrint(int nClNum, int nClVal, char* tmpbuf)
+void formatMemoryCellToPrint(const int cellNumP, const int cellValP, char* aTmpBuf)
 {
-    // char tmpbuf[20];
+    /**
+     * Return value is in aTmpBuf array.
+     */
 
-    // sprintf(tmpbuf, "%s", cInput.c_str() + PRINT_LEN);
-    // tmpbuf += sprintf( tmpbuf, "0%d :", nClNum);
-    
-    if (nClNum < 10)
-        tmpbuf += sprintf( tmpbuf, "0%d :", nClNum);
+    if (cellNumP < 10)
+        aTmpBuf += sprintf(aTmpBuf, "0%d :", cellNumP);
     else
-        tmpbuf += sprintf( tmpbuf, "%d :", nClNum);
+        aTmpBuf += sprintf(aTmpBuf, "%d :", cellNumP);
 
-    if (nClVal == 0)
+    if (cellValP == 0)
     {
-        sprintf (tmpbuf, "  +0000");
+        sprintf (aTmpBuf, "  +0000");
     }
-    else if (nClVal > 0)
+    else if (cellValP > 0)
     {
-        if (nClVal < 10)
-            sprintf ( tmpbuf, "  +000%d", nClVal);
-        else if (nClVal < 100)
-            sprintf ( tmpbuf, "  +00%d", nClVal);
-        else if (nClVal < 1000)
-            sprintf ( tmpbuf, "  +0%d", nClVal);
-        else if (nClVal < 10000)
-            sprintf ( tmpbuf, "  +%d", nClVal);
+        if (cellValP < 10)
+            sprintf (aTmpBuf, "  +000%d", cellValP);
+        else if (cellValP < 100)
+            sprintf (aTmpBuf, "  +00%d", cellValP);
+        else if (cellValP < 1000)
+            sprintf (aTmpBuf, "  +0%d", cellValP);
+        else if (cellValP < 10000)
+            sprintf (aTmpBuf, "  +%d", cellValP);
     }
     else
     {
-        if (nClVal > -10)
-            sprintf ( tmpbuf, "  -000%d", nClVal *(-1) );
-        else if (nClVal > -100 )
-            sprintf ( tmpbuf, "  -00%d", nClVal *(-1));
-        else if (nClVal > -1000)
-            sprintf ( tmpbuf, "  -0%d", nClVal *(-1));
-        else if (nClVal > -10000)
-            sprintf ( tmpbuf, "  -%d", nClVal *(-1));
+        if (cellValP > -10)
+            sprintf (aTmpBuf, "  -000%d", cellValP * (-1) );
+        else if (cellValP > -100 )
+            sprintf (aTmpBuf, "  -00%d", cellValP * (-1));
+        else if (cellValP > -1000)
+            sprintf (aTmpBuf, "  -0%d", cellValP * (-1));
+        else if (cellValP > -10000)
+            sprintf (aTmpBuf, "  -%d", cellValP * (-1));
     }
 
-    // return tmpbuf;
+    // return aTmpBuf;
 }

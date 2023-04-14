@@ -47,8 +47,7 @@ void Processor::runProgramInMemory(const int isTraceP)
          case READ: // 10 - read a word from the terminal to the memory cell
             std::cout << " Enter value: > ";
             std::getline (std::cin, cInput);
-
-            mMemory->setCellValue(cInput.c_str()); //
+            mMemory->setCellValueChar(cInput.c_str()); //
             this->incProgramCounter();
             break;
 
@@ -67,7 +66,7 @@ void Processor::runProgramInMemory(const int isTraceP)
             break;
 
         case STORE: // 21 - save a word from accumulator to selected memory cell
-            mMemory->setCellValue(this->getAccumulator());
+            mMemory->setCellValueInt(this->getAccumulator());
             this->incProgramCounter();
             break;
 
