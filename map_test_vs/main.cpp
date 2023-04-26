@@ -1,18 +1,5 @@
-#include <map>
-#include <iostream>
-#include <vector>
-
-// #include <ctype.h>
-// #include <errno.h>
-// #include <string>
-// #include <ctime>
-// 
-// #include <sstream>
-// #include <fstream>
-// #include <algorithm>
-// #include <iterator>
-// #include <functional>
-// #include "utils.h"
+#include "gen.h"
+#include "utils.h"
 
 /*
 REM: improper list of parameters in the class definition
@@ -53,35 +40,34 @@ void vector_string()
 
 class ToTest
 {
-private:
-    int data;
-
 public:
     ToTest (int x)
     {
         std::cout << "ToTest (int x): x= " << x << "\n";
-        data = x;
+        dataM = x;
     }
 
     ToTest (ToTest& x)
     {
-        std::cout << "ToTest (ToTest& x): x.data= " << x.data << "\n";
-        data = x.data;
+        std::cout << "ToTest (ToTest& x): x.data= " << x.dataM << "\n";
+        dataM = x.dataM;
     }
 
-    int dump ()
+    int getTestData ()
     {
-        return data;
+        return dataM;
     }
 
     ~ToTest ()
     {
-        std::cout << "~ToTest (): x.data= " << this->data << "\n";
+        std::cout << "~ToTest (): x.data= " << this->dataM << "\n";
     }
 
+private:
+    int dataM;
 };
 
-
+/*
 class Base
 {
 public:
@@ -99,13 +85,13 @@ public:
     WrongInit (int x) :
         b(x),
         a(b)
-        { /* constructor body*/}
+        { //constructor body}
     void dump ()
     {
         std::cout << "a=" << a.dump() << " b=" << b.dump() << "\n";
     }
 };
-
+*/
 
 // This function shall accept string and char as one parameter:
 template <class T>
@@ -142,9 +128,31 @@ void print_map2(map<T1, T2> &temp_map)
         */
     }
 
+struct CityRecord
+{
+    std::string Name;
+    uint16_t Population;
+    double Latitude;
+    double Longitude;
+};
+
 
 int main()
-{
+{    
+    std::vector<CityRecord> citiesVector;
+    citiesVector.emplace_back("Melbourne", 50000, 2.4, 9.4);
+    citiesVector.emplace_back("Lol-Town", 50000, 2.4, 9.4);
+    citiesVector.emplace_back("Berlin", 50000, 2.4, 9.4);
+    citiesVector.emplace_back("Paris", 50000, 2.4, 9.4);
+    citiesVector.emplace_back("London", 50000, 2.4, 9.4);
+    citiesVector.emplace_back("Helsinki", 50000, 2.4, 9.4);
+    
+    for (const auto& city : citiesVector)
+    {
+        if (city.Name == "Berlin")
+            std::cout << "Berlin. Population: " << city.Population << "\n";
+    }
+
     map<long, string> Employees;
     /* ATTN: this init needs C++11*/
     map <string, int> myFamilyMap =
@@ -186,10 +194,10 @@ int main()
 
     //--------------------//
     const unsigned long counter = 15;
-    char c;
+    // char c;
     map <char, int> mySecondMap;
 
-    for (int i = 0, c = 'a'; i < counter; ++i,++c)
+    for (int i = 0, c = 'a'; i < counter; ++i, ++c)
     {
         mySecondMap.insert (pair<char, int> (c,i));
     }
@@ -197,6 +205,7 @@ int main()
     print_map(mySecondMap);
     
     vector_string();
+    system("PAUSE");
 
     return 0;
 }
