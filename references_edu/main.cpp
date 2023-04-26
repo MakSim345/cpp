@@ -1,6 +1,11 @@
 #include <iostream>
 #include <string>
 #include "utils.h"
+/*
+* Cherno:
+* https://www.youtube.com/watch?v=IzoFn3dfsPA&list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb&index=17
+*/
+
 
 inline float cube (const float s) {return s*s*s;}
 
@@ -10,44 +15,46 @@ enum day {SUN, MON, TUE, WED, THU, FRI, SAT};
 
 class Auto
 {
-private:
-    string _auto_name;
-
 public:
-    static int gCounter;
+    static int gCounterM;
 
     Auto()
-        :_auto_name("noname-")
+        :strAutoNameM("noname-")
     {
-        gCounter++;
-        set_name("noname-");
-        std::cout << "New Auto " << _auto_name << " created\n";
+        gCounterM++;
+        setAutoName("noname-");
+        std::cout << "New Auto " << strAutoNameM << " created\n";
     }
    ~Auto() 
    {
-       std::cout << _auto_name << ": deleted!\n";
+       std::cout << strAutoNameM << ": deleted!\n";
    }
 
-    void set_name(string new_name)
+    void setAutoName(string new_name)
     {
         char str[12];
         int num = 3;
-        sprintf(str, "%d", gCounter); // str now contains "3"
-        _auto_name = new_name + str;
+        sprintf(str, "%d", gCounterM); // str now contains "3"
+        strAutoNameM = new_name + str;
         // std::cout << _auto_name << "\n";
         // printf ("my auto name = %s\n", this-> _auto_name);
     }
-    string _name() {return _auto_name;}
+    
+    std::string getAutoName() {return strAutoNameM;}
+
+private:
+    std::string strAutoNameM;
+
 };
 
-int Auto::gCounter = 0;
+int Auto::gCounterM = 0;
 
 void Increment(int &valueP)
 {
     valueP++;
 }
 
-void myPointers()
+void testReferencesAndPointers()
 {
     int a =  10;
     int &b = a;
@@ -84,8 +91,8 @@ Auto* makeAuto()
 {
     Auto *_my_auto;
     _my_auto = new Auto();
-    _my_auto->set_name("super_car");
-    string _tmp = _my_auto->_name();
+    _my_auto->setAutoName("super_car");
+    string _tmp = _my_auto->getAutoName();
     std::cout << "_auto_name: " << _tmp << "\n";
     // printf ("my auto name = %s\n", _my_auto->_name());
     // printf ("my auto name = %s\n", _tmp);
@@ -100,13 +107,13 @@ struct big_data
 
 void do_something(big_data d)
 {
-    std::cout << "d[0]._name: " << d.data[0]._name() << "\n";
+    std::cout << "d[0]._name: " << d.data[0].getAutoName() << "\n";
     std::cout << "do_something - over\n";
 }
 
 int main()
 {
-   myPointers();
+   testReferencesAndPointers();
    // showDay();
    //Auto *_my_auto = makeAuto();
    //cout << "my auto name = " << _my_auto->_name() << "\n";
