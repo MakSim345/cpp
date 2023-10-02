@@ -1,10 +1,12 @@
 #include <iostream>
+#include <cstring>
 #include "utils.h"
 
 /**
- * Check in video:
- * 2021-APR e-Spectre
+ * 2021-APR
+ * Cherno video:
  * https://www.youtube.com/watch?v=BvR1Pgzzr38
+ * "Copying and Copy Constructors in C++"
 */
 
 using namespace std;
@@ -142,7 +144,7 @@ void PrintString(const String& stringP)
 {
     //1. note: if parameter stringP was not "const", we could change it:
     // stringP[2] = 'o';
-    
+
     //2. note: "String&" is needed for prevent extra Copy Constructor calling!
     std::cout << stringP << std::endl;
 }
@@ -167,7 +169,7 @@ void testMyStringsCrash()
     test_string_2[2] = 'a';
     PrintString(test_string_1);
     PrintString(test_string_2);
-    //std::cout << test_string_2 << std::endl;    
+    //std::cout << test_string_2 << std::endl;
     //std::cout << test_string_1 << std::endl;
 }
 
