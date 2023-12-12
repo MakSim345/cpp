@@ -1,37 +1,42 @@
 #pragma once
 
-#include <stdio.h>
-#include <conio.h>
-#include "time.h"
-#include <string.h>
-#include "stdlib.h"
-#include <vector>
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <map>
-#include <math.h>
-#include <thread> // since C++11
-#include <chrono> // since C++11
-
-// those 2 need for mutex:
-#include <mutex> 
-#include <condition_variable>
-
-#include <queue> 
-
-
-#define WIN32_APP
+// #define WIN32_APP
 #ifdef WIN32_APP
   #include <Windows.h>
+  #include <conio.h>
 #endif
 
-using namespace std;
+#include <cstdio>
+#include <iostream>
+#include <cassert>
 
-#define TIME_TICK_INTERVAL 1000
+#include <ctime>
 
-// This didn't work:
-// #define rdtsc __asm __emit 0fh __asm __emit 031h
-#define RND_MAX 65536
+// #include <stdio.h>
 
+// #include "time.h"
+// #include <string.h>
+// #include "stdlib.h"
+// #include <vector>
+// #include <sstream>
+// #include <fstream>
+// #include <math.h>
 
+// #include <unistd.h> // needed for getpid()
+
+#include <map>
+#include <thread> // since C++11
+#include <chrono> // since C++11
+#include <atomic>
+
+// those 2 need for mutex:
+#include <mutex>
+#include <shared_mutex>
+#include <condition_variable>
+
+#include <queue>
+
+// using namespace std;
+
+using namespace std::chrono_literals; // for 2000ms literal
+using namespace std::chrono;
