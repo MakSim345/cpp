@@ -4,7 +4,7 @@
 * #SimpleCode
 * https://www.youtube.com/watch?v=UEtWLpDOg68
 */
-bool s_Finished = false;
+bool is_Finished = false; // (origin - s_Finished )
 
 class Semaphore
 {
@@ -78,12 +78,12 @@ void doSomeWork( void )
         std::cout << "hello from thread " << this_thread::get_id() << "\tdoSomeWork\t" << i << std::endl;
         this_thread::sleep_for(chrono::milliseconds(200));
     }
-    
+
     return;
 }
 
 void doAddWork(int operandAxP, int operandBxP)
-{    
+{
     std::this_thread::sleep_for(chrono::milliseconds(500));
     std::cout << "doAddWork: STARTED thread id = " << std::this_thread::get_id() << std::endl;
     std::this_thread::sleep_for(chrono::milliseconds(1500));
@@ -94,15 +94,15 @@ void doAddWork(int operandAxP, int operandBxP)
 
 
 void doWork(void)
-{   
+{
     std::cout << "Started thread id = " << std::this_thread::get_id() << std::endl;
-    while (!s_Finished)
+    while (!is_Finished)
     {
         std::cout << "doWork is working. Press any key to stop it.\n";
         // std::this_thread::sleep_for(1s);
         std::this_thread::sleep_for(chrono::milliseconds(200));
     }
-    std::cout << "s_Finished == TRUE. doWork completed.\n";
+    std::cout << "is_Finished == TRUE. doWork completed.\n";
 }
 
 
@@ -115,28 +115,28 @@ int main(int argc, char *argv[], char *envp[])
     int arraySize = 2000;
 
     printf ("Info: main() started. \n");
-    
+
     srand(time(NULL));
 
     // doAddWork(34, 98);
 
-    // std::thread worker(doWork);    
+    // std::thread worker(doWork);
     // std::cin.get();
-    // s_Finished = true;
+    // is_Finished = true;
     // worker.join();
 
     std::thread threadAdder(doAddWork, 3009, 8990);
-    
+
     for (size_t i = 0; i < 1000; i++)
     {
         //auto randomDelay = rand() % 5000 + 1000;
         //printf("%d, ", randomDelay);
         std::cout << "Main() thread id = " << std::this_thread::get_id() << ". iteration: " << i << std::endl;
         this_thread::sleep_for(chrono::milliseconds(300));
-    } 
+    }
     // printf("---\n");
     threadAdder.join();
-    
+
     // runPhonesThreads();
 
     /*
@@ -146,17 +146,17 @@ int main(int argc, char *argv[], char *envp[])
     {
         std::cout << "hello from thread " << this_thread::get_id() << "\tMAIN\t" << i << std::endl;
         this_thread::sleep_for(chrono::milliseconds(200));
-    } 
+    }
     th.join();
     */
-    
+
 //*************MAIN LOOP*****************//
     cout << "\n$ > Press Any Key to exit." << std::endl;
     do
     {
         //This is simple Windows way:
         Sleep(55);
-                
+
         // control of endless loop (may be also in monitor.cpp)
         if (_kbhit())  // has anything been pressed from keyboard ?
         {
@@ -175,9 +175,7 @@ int main(int argc, char *argv[], char *envp[])
             }
         }
     } while (!RValue);
-    
+
     printf ("Application complete.\n");
     return 0;
 }
-
-
