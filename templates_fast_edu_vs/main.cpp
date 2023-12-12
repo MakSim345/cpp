@@ -15,9 +15,9 @@ class Bucky
 {
     superTypeT first, second;
 public:
-    Bucky(superTypeT a, superTypeT b) 
+    Bucky(superTypeT a, superTypeT b)
     {
-        std::cout << "Bucky constructor" << std::endl; 
+        std::cout << "Bucky constructor" << std::endl;
         first = a;
         second = b;
     }
@@ -88,7 +88,7 @@ public:
 };
 
 template <class superTypeT>
-superTypeT Bucky<superTypeT>::bigger() 
+superTypeT Bucky<superTypeT>::bigger()
 {
     return (first>second?first:second);
 }
@@ -144,14 +144,14 @@ T Max (T val, T val2)
 }
 
 int main()
-{   
+{
     // Bucky <float> *bucky_float;
     Bucky <float> *bucky_float;
     bucky_float = new Bucky<float>(12.5, 2.4);
 
     Times2(5);
     Times2(4.9);
-    
+
     std::cout << "5 + 4 = " << Add(5,4) << "\n";
     std::cout << "5.5 + 4.6 = " << Add(5.5, 4.6) << "\n";
     std::cout << "Max of 4 or 8 = " << Max(4, 8) << "\n";
@@ -163,14 +163,14 @@ int main()
     std::cout << "Number of people: " << mikeTyson.numOfPeople << "\n";
 
     String test_string = "Cherno";
-    std::cout << test_string << std::endl;    
-    
+    std::cout << test_string << std::endl;
+
     //Bucky <float> bucky_float(12.5, 2.4);
     //cout << "Float comparation: " << bucky_float.bigger() << endl;
-    
+
     Bucky <int> bucky(67, 105);
     cout << "Int comparation: " << bucky.bigger() << endl;
-    
+
     int x = 89;
     double y = 56.78;
     cout << "Universal comparation: " << smaller(x, y) << endl;
@@ -187,7 +187,7 @@ int main()
 
     system("PAUSE");
     //system("pause>0");
-    
+
     // std::cout << "\nPress ENTER to exit...\n";
     //cin.get();
 
