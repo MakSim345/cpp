@@ -19,4 +19,12 @@
 
 using namespace std;
 
+struct CityRecord
+{
+    std::string Name;
+    uint64_t Population;
+    double Latitude;
+    double Longitude;
+};
+
 #endif
