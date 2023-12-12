@@ -1,7 +1,6 @@
 #pragma once
 
-//#define WIN32_APP
-
+#define WIN32_APP
 #ifdef WIN32_APP
     #include <Windows.h>
     #include <conio.h> // for kbhit()
@@ -28,7 +27,6 @@
 #include <chrono>
 #include <fstream>
 #include <map>
-// #include <math.h>
 
 
 #define TIME_TICK_INTERVAL 1000
