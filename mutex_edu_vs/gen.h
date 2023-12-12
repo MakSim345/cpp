@@ -1,7 +1,6 @@
 #pragma once
 
 #include <stdio.h>
-#include <ctime>
 #include <string.h>
 #include "stdlib.h"
 #include <vector>
@@ -17,6 +16,7 @@
     #include <Windows.h>
 #endif
 
+#include <ctime>
 #include <chrono>
 #include <thread>
 #include <mutex>

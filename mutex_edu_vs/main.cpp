@@ -38,14 +38,15 @@ void printFunctionForThread(char toPrintP)
 
 int main()
 {
-    std::auto_ptr <App> my_stack(new App());
+    // std::auto_ptr <App> my_stack(new App());
+    App* my_stack = new App();
     my_stack->Run();
 
     // TimerClass timer_;
     try
     { 
         // long a1 = std::clock();
-        auto a1 = std::chrono::high_resolution_clock::now();
+        auto startTimeStamp = std::chrono::high_resolution_clock::now();
         // std::cout << "Time Start: " << a1 << "\n";        
         //printFunctionForThread('*');
         //printFunctionForThread('#');
@@ -57,10 +58,10 @@ int main()
         threadToRun_02.join();
 
         // long b1 = std::clock();
-        auto b1 = std::chrono::high_resolution_clock::now();
+        auto currentTimeStamp = std::chrono::high_resolution_clock::now();
         // std::cout << "Time END: " << b1 << "\n\n";
-        std::chrono::duration<float> duration = a1 - b1;
-        std::cout << duration.count() << " sec." << std::endl;
+        std::chrono::duration<float> duration = currentTimeStamp - startTimeStamp;
+        std::cout << "Application took " << duration.count() << " seconds to run." << std::endl;
         // std::cout << "Open file Time TOTAL: " << (b1-a1)/1000.0 << " sec.\n";
 
     }

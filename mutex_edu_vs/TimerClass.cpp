@@ -24,7 +24,7 @@ int App::Run()
 {
     std::cout << "Hello cruel world! \n";
     cout << '\n';
-   return 0;
+    return 0;
 }
 
 void App::sleep_and_count()
