@@ -1,23 +1,23 @@
-class employee 
+class employee
 {
 public:
    virtual int salary();
 };
 
-class manager : public employee 
+class manager : public employee
 {
 public:
    int salary();
 };
 
-class programmer : public employee 
+class programmer : public employee
 {
 public:
    int salary();
 };
 
 
-void payroll( employee *pe ) 
+void payroll( employee *pe )
 {
    pe->salary()
 }
@@ -25,6 +25,6 @@ void payroll( employee *pe )
 
 int main()
 {
-    
+
     return 0;
 }

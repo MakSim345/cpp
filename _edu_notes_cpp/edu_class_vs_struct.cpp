@@ -24,8 +24,8 @@ For example program 1 fails in compilation and program 2 works fine.
 
 // Program 1
 #include <stdio.h>
- 
-class Test 
+
+class Test
 {
     int x; // x is private
 };
@@ -39,8 +39,8 @@ int main()
 }
 // Program 2
 #include <stdio.h>
- 
-struct Test 
+
+struct Test
 {
     int x; // x is public
 };
@@ -57,15 +57,15 @@ int main()
 For example program 3 fails in compilation and program 4 works fine.
 // Program 3
 #include <stdio.h>
- 
-class Base 
+
+class Base
 {
 public:
     int x;
 };
-                    
+
 class Derived : Base { }; // is equilalent to class Derived : private Base {}
- 
+
 int main()
 {
   Derived d;
@@ -75,15 +75,15 @@ int main()
 }
 // Program 4
 #include <stdio.h>
- 
-class Base 
+
+class Base
 {
 public:
     int x;
 };
- 
+
 struct Derived : Base { }; // is equilalent to struct Derived : public Base {}
- 
+
 int main()
 {
   Derived d;
