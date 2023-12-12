@@ -1,9 +1,11 @@
 #pragma once
 /*********************************************************************
 
-  utils.h  
-  
+  utils.h
+
 **********************************************************************/
+#include <sys/timeb.h>
+#include "gen.h"
 
 void AddTimeStamp(int *pos,char * msg);
 void AddStringPan(char * destStr, char * strToAdd,int len);
@@ -18,19 +20,33 @@ void SendStr(char * SendString, int dest, int length);
 
 int produceRND();
 
-#include <sys/timeb.h>
+class CTimer
+{
+public:
+    CTimer();
+    ~CTimer() = default;
 
-class msTimer 
+    long Get1msTimeMS();
+    void Start();
+    unsigned int GetElapsedTimeMs() const;
+    uint64_t GetElapsedTimeMks() const;
+
+private:
+    std::chrono::time_point<std::chrono::high_resolution_clock>  startTimeM;
+    bool isTimerStarted;
+};
+
+class msTimer
 {
 public:
     msTimer()
-    { 
-        restart(); 
+    {
+        restart();
     }
 
     void restart()
-    { 
-        ftime(&t_start); 
+    {
+        ftime(&t_start);
     }
 
     float elapsedMs()
@@ -43,19 +59,4 @@ public:
 
 private:
     timeb t_start;
-};
-
-class CTimer
-{
-public:
-    CTimer();
-	~CTimer();
-    void Start();
-    unsigned int GetElapsedTimeMs() const;
-	unsigned __int64 GetElapsedTimeMks() const; 
-    
-private:
-    LARGE_INTEGER m_liFreq;
-    LARGE_INTEGER m_liStart;
-    LARGE_INTEGER m_liEnd;
 };

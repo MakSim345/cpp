@@ -30,7 +30,7 @@ public:
         this->age = iAgeP;
     }
 
-    // simply get references to value created in main and change them    
+    // simply get references to value created in main and change them
     void getParams(int &getWeightP, int &getAgeP)
     {
         getWeightP=weight;
@@ -65,7 +65,7 @@ public:
     }
 
     void Warn(const char* pMessage)
-    {   
+    {
         if (mLogLevel >= LogLevelWarning)
             std::cout << "[WARNING]:" << pMessage << "\n";
     }
@@ -102,11 +102,11 @@ public:
     }
 
     std::string GetName()  {return "I am Entity";}
-    
+
     // void Erase()
     virtual void Erase()
     {
-        std::cout << "I am virtual Eraser() " << std::endl;   
+        std::cout << "I am virtual Eraser() " << std::endl;
     }
 
     void Move (float xaP, float yaP)
@@ -125,9 +125,9 @@ public:
         :m_Name(nameP) {}
 
     void Erase()
-    // void Erase() override // override means it is originally virtual function and recreated here    
+    // void Erase() override // override means it is originally virtual function and recreated here
     {
-        std::cout << "Erased: " << m_Name << std::endl;   
+        std::cout << "Erased: " << m_Name << std::endl;
     }
 
     void PrintName ()
@@ -144,7 +144,7 @@ void PrintName(Entity* entityP)
     std::cout << entityP->GetName() << std::endl;
     //nPlayerP->Name = "Cherno";
     //nPlayerP->PrintName();
-    
+
     // std::cout << "eP->X = " << eP->X << std::endl;
     // std::cout << "eP->Y = " << eP->Y << std::endl;
 }
@@ -160,7 +160,7 @@ int main(int argc, char *argv[], char *envp[])
     int CaptureModeHex = 0;
     int NewChar=0;
     int nResult = 0;
-    int nTdiff = 100; // 1000 is one second
+    int DelayInMiliseconds = 1000; // 1000 is one second
 
     printf ("main - start\n");
 
@@ -185,37 +185,36 @@ int main(int argc, char *argv[], char *envp[])
     cherno();
     */
 
-    Entity *en = new Entity();    
+    Entity *en = new Entity();
     PrintName(en);
     // std::cout << en->GetName() << std::endl;
-    
+
     Player* newPlayer = new Player("Cherno");
     PrintName(newPlayer);
     // std::cout << newPlayer->GetName() << std::endl;
-    
+
     Entity* entity = newPlayer;
     PrintName(entity);
     // std::cout << entity->GetName() << std::endl;
-    
+
     en = newPlayer;
-    en->Erase(); 
-    
+    en->Erase();
+
     // testPlayer(newPlayer);
-    
-    printf ("Application complete.\n");
 
-    system ("PAUSE"); // wait for press any key in VS mode
+    //printf ("Application complete.\n");
+    //system ("PAUSE"); // wait for press any key in VS mode
+    // return 0;
 
-    return 0;
 //*************MAIN LOOP*****************//
  do
  {
     //This is simple Windows way:
     // Sleep(1000);
-    
+
     // and this is complicated one-thread way:
-    if ((( Get1msTimeMS() - LastTimeInMS) > nTdiff - 1) || (LastTimeInMS > Get1msTimeMS() ))
-    {    
+    if ((( Get1msTimeMS() - LastTimeInMS) > DelayInMiliseconds - 1) || (LastTimeInMS > Get1msTimeMS() ))
+    {
         nResult = produceRND();
         printf ("Time: %ld. Random: %d\n",Get1msTimeMS(), nResult);
         std::cout << "Elapsed time:" << t.elapsedMs() << endl;
@@ -223,8 +222,8 @@ int main(int argc, char *argv[], char *envp[])
         Sleep(1);
 
         LastTimeInMS = Get1msTimeMS();
-    }        
-   
+    }
+
     // control of endless loop (may be also in monitor.cpp)
     if (_kbhit())  // has anything been pressed from keyboard ?
     {
