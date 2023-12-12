@@ -2,15 +2,15 @@
 #include <string>
 #include "utils.h"
 /*
-* Cherno:
+* The Cherno:
+* 1. REFERENCES in C++
 * https://www.youtube.com/watch?v=IzoFn3dfsPA&list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb&index=17
+* 2. POINTERS in C++
+* https://www.youtube.com/watch?v=DTxHyVn0ODg&list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb&index=20
 */
 
-
 inline float cube (const float s) {return s*s*s;}
-
 using namespace std;
-
 enum day {SUN, MON, TUE, WED, THU, FRI, SAT};
 
 class Auto
@@ -34,7 +34,7 @@ public:
     {
         char str[12];
         int num = 3;
-        sprintf(str, "%d", gCounterM); // str now contains "3"
+        sprintf_s(str, "%d", gCounterM); // str now contains "3"
         strAutoNameM = new_name + str;
         // std::cout << _auto_name << "\n";
         // printf ("my auto name = %s\n", this-> _auto_name);
@@ -44,13 +44,15 @@ public:
 
 private:
     std::string strAutoNameM;
-
 };
 
 int Auto::gCounterM = 0;
 
 void Increment(int &valueP)
 {
+    /* Increment a variable by reference, i.e. 
+     *  original variable will change!
+     */
     valueP++;
 }
 
@@ -83,7 +85,7 @@ void showDay()
 {
     day x = SUN;
     cout << "x = " << x << "\n";
-    //++x;
+    // ++x; // Note: does not work with enum!
     cout << "x = " << x << "\n";
 }
 
@@ -113,14 +115,17 @@ void do_something(big_data d)
 
 int main()
 {
-   testReferencesAndPointers();
-   // showDay();
-   //Auto *_my_auto = makeAuto();
-   //cout << "my auto name = " << _my_auto->_name() << "\n";
-   // printf ("my auto name = %s\n", _my_auto->_name());
-   //Auto *_my_auto;
-   //_my_auto = new Auto();
+    print_message();
+    testReferencesAndPointers();
     
+    // showDay();
+    Auto *_my_auto = makeAuto();
+    //cout << "my auto name = " << _my_auto->_name() << "\n";
+    // printf ("my auto name = %s\n", _my_auto->_name());
+    //Auto *_my_auto;
+    //_my_auto = new Auto();
+    
+    system("PAUSE");
     return 1;
 
     std::cout << "create big data...\n";
