@@ -1,5 +1,8 @@
 #include <iostream>
 #include "utils.h"
+/*
+"https://www.youtube.com/watch?v=jyaxGwOHFJ4"
+*/
 
 inline float cube (const float s) {return s*s*s;}
 
@@ -8,24 +11,36 @@ using namespace std;
 class Base
 {
  public:
-    Base() { cout << "-Base constructor called." << endl;}
-
- // protected:
-    ~Base() {cout << "-Base destructor called." << endl;}
+    Base()
+    {
+        cout << "[o]Base constructor called." << endl;
+    }
+    // ~Base()
+    virtual ~Base()
+    {
+        cout << "[x]Base destructor called." << endl;
+    }
 };
 
 class Derived: public Base
 {
- public:    
-    Derived(){cout << "*Derived constructor called." << endl;}
-    ~Derived() { cout << "*Derived destructor called." << endl;}
+ public:
+    Derived()
+    {
+        cout << "[o]Derived constructor called." << endl;
+    }
+
+    ~Derived() override
+    {
+        cout << "[x]Derived destructor called." << endl;
+    }
 };
 
 class Auto
 {
  public:
-    Auto() {cout << "*Auto constructor called." << endl;} 
-    ~Auto() {cout << "----Auto destructor called." << endl;} 
+    Auto() {cout << "*Auto constructor called." << endl;}
+    ~Auto() {cout << "----Auto destructor called." << endl;}
 };
 
 void _my_swap(int* source, int* dest)
@@ -38,7 +53,7 @@ void _my_swap(int* source, int* dest)
 }
 
 void _my_swap_ref(int& source, int& dest)
-{   
+{
     int t = source;
     source = dest;
     dest = t;
@@ -83,20 +98,30 @@ int main()
 {
     // print_message();
     cout << "Main app start." << endl ;
-    Base *_base;
-    _base = new Derived();
-    
-    delete _base;// undefined behaviour    
+
+    cout << "Create basePtr=new Derived():" << endl ;
+    Base *basePtr;
+    basePtr = new Derived();
+    delete basePtr;// Note: undefined behaviour if no virtual!
+
+    cout << "Create derivedPtr = new Derived():" << endl ;
+    Derived *derivedPtr;
+    derivedPtr = new Derived();
+    delete derivedPtr;
+
+    cout << "END." << endl ;
+    return 1;
+
     int a = 12;
     int b = 99;
     printf ("Before swap: %d, %d\n", a, b);
     _my_swap(&a, &b);
     printf ("After swap: %d, %d\n", a, b);
-    
+
     printf ("Before swap2: %d, %d\n", a, b);
     _my_swap_ref(a, b);
     printf ("After swap2: %d, %d\n", a, b);
-    
+
     show_delete();
 
     my_time _mt;
