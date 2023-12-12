@@ -10,28 +10,28 @@ using namespace std;
 int main()
 {
     // printf for different types:
-    
+
     unsigned long long n;
     printf("%llu", n);
-    
+
     unsigned long n;
     printf("%lu", n);   // unsigned long
-    
+
     long n;
     printf("%ld", n);   // signed long
 
     long long int n;
-    printf("%lld", n);   
+    printf("%lld", n);
 
-    // %d is for signed int, 
-    // %u is for unsigned int, 
+    // %d is for signed int,
+    // %u is for unsigned int,
     // %hh is for char instead of a wider type.)
-    
+
     unsigned long long n;
     printf("0x%016llX", n); // "0x" followed by "0-padded", "16 char wide", "long long", "HEX with 0-9A-F"
-    
+
     printf ("Val = %d(0x%X)\n", Val, Val);
-    
+
     printf ("Characters: %c %c \n", 'a', 65);
     printf ("Decimals: %d %ld\n", 1977, 650000L);
     printf ("Preceding with blanks: %10d \n", 1977);
@@ -46,7 +46,7 @@ int main()
     char buffer [33];
     itoa (i, buffer,2); // problem with itoa() function!
     printf ("binary: %s\n",buffer);
-    
+
     {
         /* binary string to int */
         char *tmp;
