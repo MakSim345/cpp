@@ -1,6 +1,7 @@
 /*
-* By Cherno - 
+* By Cherno -
 * https://www.youtube.com/watch?v=UWAdd13EfM8
+* Interfaces in C++ (Pure Virtual Functions)
 */
 #include "gen.h"
 
@@ -43,7 +44,7 @@ public:
     }
 
     void Warn(const char* pMessage)
-    {   
+    {
         if (mLogLevel >= LogLevelWarning)
             std::cout << "[WARNING]:" << pMessage << "\n";
     }
@@ -79,22 +80,22 @@ class Entity : public Printable
 public:
     std::string GetName()  {return "I am Entity";}
     // virtual std::string GetName();
-    
+
     // override pure virtual method from Printable
-    std::string GetClassName() override 
+    std::string GetClassName() override
     {
         return "I am Entity";
     }
-        
+
     virtual void Erase()
     {
-        std::cout << "I am virtual Eraser() " << std::endl;   
+        std::cout << "I am virtual Eraser() " << std::endl;
     }
 };
 
 class Player : public Entity
 {
-public:    
+public:
 
     Player()
         :m_Name("I am Player (default)") {}
@@ -103,9 +104,9 @@ public:
         :m_Name(nameP) {}
 
     void Erase()
-    // void Erase() override // override means it is originally virtual function and recreated here    
+    // void Erase() override // override means it is originally virtual function and recreated here
     {
-        std::cout << "Erased: " << m_Name << std::endl;   
+        std::cout << "Erased: " << m_Name << std::endl;
     }
 
     void PrintName ()
@@ -126,7 +127,7 @@ class myClassA : public Printable
 public:
     myClassA()
         :m_Name("myClassA") {}
-    
+
     std::string GetClassName() override {return m_Name;}
 
 private:
@@ -151,7 +152,7 @@ int main(int argc, char *argv[], char *envp[])
 {
     long LastTimeIn=0;
     long LastTimeInMS = 0;
-    int RValue = false;    
+    int RValue = false;
     int nResult = 0;
     int nTdiff = 100; // 1000 is one second
 
@@ -174,27 +175,27 @@ int main(int argc, char *argv[], char *envp[])
     // PrintName(en);
     // PrintMyClassName (entity);
     // std::cout << en->GetName() << std::endl;
-    
+
     Player* newPlayer = new Player("Player - Cherno");
-    //PrintName(newPlayer);    
+    //PrintName(newPlayer);
     // std::cout << newPlayer->GetName() << std::endl;
-    
+
     // Entity* entity = new Player();
     PrintMyClassName (newPlayer);
     PrintMyClassName (entity);
     PrintMyClassName(new myClassA());
     //PrintName(entity);
     // std::cout << entity->GetName() << std::endl;
-    
+
     //en = newPlayer;
-    //en->Erase(); 
-    
+    //en->Erase();
+
     // testPlayer(newPlayer);
 
     const StrEntity* es = new StrEntity("Cherno - StrEntity");
 
     std::cout << es->GetName() << std::endl;
-    
+
     printf ("Application complete.\n");
 
     system ("PAUSE"); // wait for press any key in VS mode
@@ -205,10 +206,10 @@ int main(int argc, char *argv[], char *envp[])
  {
     //This is simple Windows way:
     // Sleep(1000);
-    
+
     // and this is complicated one-thread way:
     if ((( Get1msTimeMS() - LastTimeInMS) > nTdiff - 1) || (LastTimeInMS > Get1msTimeMS() ))
-    {    
+    {
         nResult = produceRND();
         printf ("Time: %ld. Random: %d\n",Get1msTimeMS(), nResult);
         // std::cout << "Elapsed time:" << t.elapsedMs() << endl;
@@ -216,8 +217,8 @@ int main(int argc, char *argv[], char *envp[])
         Sleep(1);
 
         LastTimeInMS = Get1msTimeMS();
-    }        
-   
+    }
+
     // control of endless loop (may be also in monitor.cpp)
     if (_kbhit())  // has anything been pressed from keyboard ?
     {
