@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 3.16) # check the version of CMake
 
-
 # To use it with Visual Studio use follow:
 # call set_visual_studio_2019.bat
 # > mkdir build && cd build
 # > cmake -G "Ninja" -DCMAKE_C_COMPILER=cl -DCMAKE_CXX_COMPILER=cl ..
 
+# Give the name to executable:
+# NOTE: ".exe" will be added in win32 automatically.
 set(PROJECT_NAME Example)
 project(${PROJECT_NAME} C CXX)
 
@@ -17,6 +18,8 @@ enable_testing()
 # Specify the binary directory for GoogleTest
 set(GTEST_BINARY_DIR ${CMAKE_BINARY_DIR}/googletest)
 add_subdirectory(C:/googletest ${GTEST_BINARY_DIR})
+
+set(CMAKE_CXX_FLAGS -pthread)
 
 set (headers
     gen.h
