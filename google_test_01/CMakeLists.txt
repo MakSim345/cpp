@@ -1,4 +1,10 @@
-cmake_minimum_required(VERSION 3.14) # check the version of CMake
+cmake_minimum_required(VERSION 3.16) # check the version of CMake
+
+
+# To use it with Visual Studio use follow:
+# call set_visual_studio_2019.bat
+# > mkdir build && cd build
+# > cmake -G "Ninja" -DCMAKE_C_COMPILER=cl -DCMAKE_CXX_COMPILER=cl ..
 
 # Give the name to executable:
 # NOTE: ".exe" will be added in win32 automatically.
@@ -8,32 +14,24 @@ project(${PROJECT_NAME})
 # GoogleTest requires at least C++14
 set(CMAKE_CXX_STANDARD 14)
 
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-  # GIT_REPOSITORY https://github.com/google/googletest.git
-  # GIT_TAG        release-1.10.0
-)
-# For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
-
 enable_testing()
+# add_subdirectory (googletest) - works only for local subdir, not global!
+# Specify the binary directory for GoogleTest
+set(GTEST_BINARY_DIR ${CMAKE_BINARY_DIR}/googletest)
+add_subdirectory(C:/googletest ${GTEST_BINARY_DIR})
+
+set(CMAKE_CXX_FLAGS -pthread)
 
 set(sources
         test.cpp
         person.cpp
         counter.cpp
     )
+
 add_executable( ${PROJECT_NAME} ${sources} )
 
-# Locate gtest (?)
-# find_package (GTest REQUIRED)
-# include_directories (${GTEST_INCLUDE_DIRS})
-
-target_link_libraries(${PROJECT_NAME} GTest::gtest_main)
-# target_link_libraries(${PROJECT_NAME} ${GTEST_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} gtest) # Link against the GoogleTest library
+target_include_directories(${PROJECT_NAME} PUBLIC C:/googletest/include) # Include GoogleTest headers
 
 include(GoogleTest)
 gtest_discover_tests(${PROJECT_NAME})

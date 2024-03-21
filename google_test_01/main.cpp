@@ -23,9 +23,9 @@ int main()
     std::unique_ptr <Person> pers(new Person());
     pers->setName("Ada Lovelace");
     pers->setAge(19);
-    
+
     // boost::array<int, 4> arr = {{1,2,3,4}};
-    std::cout << "My Name:" << pers->getName() << "\n"; 
-    std::cout << "-age:" << pers->getAge() << "\n"; 
+    std::cout << "My Name:" << pers->getName() << "\n";
+    std::cout << "-age:" << pers->getAge() << "\n";
     return 0;
 }
