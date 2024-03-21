@@ -1,4 +1,4 @@
-#include "gen.h" 
+#include "gen.h"
 #include "deck.h"
 
 struct Time
@@ -33,17 +33,17 @@ void print_my_struct(my_time* _to_print)
 int main( int argc, char *argv[] )
 {
     //char *suit[4] = {"4epBu", "6y6HbI", "TpeFbI", "nuku"};
-    
+
     std::string suit[4] = {"4epBu", "6y6HbI", "TpeFbI", "nuku"};
 
-    std::string face[13] = {"Ty3", "gBojka", "Tpojka", "4eTBepka", 
+    std::string face[13] = {"Ty3", "gBojka", "Tpojka", "4eTBepka",
                       "nqTepka", "wecTepka", "ceMepka", "BocMepka",
                       "geBqTka", "gecqTka", "BaLeT", "gaMa", "KopoLb"};
-    
+
     // int deck[4][13] = {0};
-    
+
     srand (time(NULL));
-    
+
     // shuffle (deck);
     deck _deck = deck();
     _deck.shuffle();
@@ -55,9 +55,6 @@ int main( int argc, char *argv[] )
     print_my_struct(&_mt);
     std::cout << Timestamp() << "\n";
     _deck.print_deck();
-    system("PAUSE");
-    return 0;   
+    // system("PAUSE");
+    return 0;
 }
-
-
- 
