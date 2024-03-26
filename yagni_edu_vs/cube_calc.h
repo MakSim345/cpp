@@ -7,11 +7,11 @@ class CubeCalc
 {
 public:
     CubeCalc();
-    ~CubeCalc();    
+    ~CubeCalc();
     int run();
-    
+
 private:
-    float side; 
+    float side;
     float calculation(float s);
 };
 

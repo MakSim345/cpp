@@ -19,7 +19,7 @@ class BreadMaker
 {
 public:
 
-    Bread* doBakeBread(ovenIf &oven);    
+    Bread* doBakeBread(ovenIf &oven);
 
     int run() {return _number;}
 

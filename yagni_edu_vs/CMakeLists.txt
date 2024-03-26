@@ -7,13 +7,22 @@ project(${PROJECT_NAME} C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS -pthread)
 
-set(sources
-        main.cpp
-        bread.cpp
-        error_message.cpp
-        factorial.cpp
-        hello.cpp
-        oven.cpp
+set (headers
+    gen.h
+    bread.h
+    error_message.h
+    factorial.h
+    hello.h
+    oven.h
     )
 
-add_executable( ${PROJECT_NAME} ${sources} )
+set(sources
+    main.cpp
+    bread.cpp
+    error_message.cpp
+    factorial.cpp
+    hello.cpp
+    oven.cpp
+    )
+
+add_executable( ${PROJECT_NAME} ${sources} ${headers})

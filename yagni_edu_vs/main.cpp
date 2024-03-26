@@ -33,7 +33,6 @@ public:
     {
         std::cout << "App: Good bye!\n";
     }
-
 };
 
 

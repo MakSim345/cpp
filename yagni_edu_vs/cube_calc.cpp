@@ -11,7 +11,7 @@ CubeCalc::~CubeCalc()
 {
     std::cout << "Good bye!\n";
 }
-    
+
 int CubeCalc::run()
 {
     std::cout << "Enter cube dimention: ";

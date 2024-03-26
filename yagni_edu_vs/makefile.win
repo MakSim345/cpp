@@ -2,7 +2,7 @@
 
 # !include <win32.mak>
 
-GEN = gen.h 
+GEN = gen.h
 PROGRAM = bread.exe
 GCC = cl
 ALL_OBJ = main.obj bread.obj hello.obj oven.obj factorial.obj error_message.obj

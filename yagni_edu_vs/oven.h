@@ -22,8 +22,8 @@ class electricOven: public ovenIf
 public:
     electricOven();
     virtual ~electricOven();
-    
-    virtual bool canBake();   
+
+    virtual bool canBake();
     virtual void start();
     virtual void stop();
 
@@ -38,12 +38,12 @@ class gasOven: public ovenIf
 {
 public:
     gasOven();
-    
+
     virtual ~gasOven();
-    
+
     virtual void start();
     virtual void stop();
-    virtual bool canBake();   
+    virtual bool canBake();
 
 private:
     int _gas_level;

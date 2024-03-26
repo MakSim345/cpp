@@ -11,7 +11,7 @@ public:
 private:
     const char* message;
 };
-    
+
 float quotient(int num1, int num2);
 
 #endif

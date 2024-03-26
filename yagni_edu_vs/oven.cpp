@@ -41,14 +41,14 @@ gasOven::gasOven()
     std::cout << "GasOven object created" << std::endl;
     std::cout << "_gas_level:" << _gas_level <<std::endl;
 }
-    
+
 gasOven::~gasOven()
 {
     std::cout << "GasOven destroyed" << std::endl;
 
 }
 
-void gasOven::start() 
+void gasOven::start()
 {
     std::cout << "GasOven started" << std::endl;
 }
