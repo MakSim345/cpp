@@ -4,23 +4,23 @@ extern long g_lTimeTick;
 
 int produceRND()
 {
-static int nFirstTime = 1;
-int random;
+    static int nFirstTime = 1;
+    int random;
 
- if (1 == nFirstTime)
- {
-  srand ((unsigned)time (NULL));
-  nFirstTime = 0;
- }
- random = 1 + (rand() % RND_MAX);
- return random;
+    if (1 == nFirstTime)
+    {
+        srand ((unsigned)time (NULL));
+        nFirstTime = 0;
+    }
+    random = 1 + (rand() % RND_MAX);
+    return random;
 }
 
 CTimer::CTimer() :
     isTimerStarted(false)
-{
-    this->Start();
-}
+    {
+        this->Start();
+    }
 
 long CTimer::Get1msTimeMS()
 {
@@ -54,7 +54,34 @@ uint64_t CTimer::GetElapsedTimeMks() const
         (endTime - startTimeM).count();
 }
 
+/*
+ * Note: Follow works only for Win32! Not cross-platformed.
+CTimer::CTimer()
+{
+    ::QueryPerformanceFrequency(&m_liFreq);
+    Start();
+    // printf ("QueryPerformanceFrequency : %u\n", m_liFreq.QuadPart);
+}
 
+void CTimer::Start()
+{
+ ::QueryPerformanceCounter(&m_liStart);
+}
+
+unsigned int CTimer::GetElapsedTimeMs() const
+{
+  LARGE_INTEGER liEnd;
+  ::QueryPerformanceCounter(&liEnd);
+  return static_cast<unsigned int>((liEnd.QuadPart - m_liStart.QuadPart) * 1000 / m_liFreq.QuadPart);
+}
+
+unsigned __int64 CTimer::GetElapsedTimeMks() const
+{
+  LARGE_INTEGER liEnd;
+  ::QueryPerformanceCounter(&liEnd);
+  return static_cast<unsigned __int64>((liEnd.QuadPart - m_liStart.QuadPart) * 1000000 / m_liFreq.QuadPart);
+}
+*/
 
 /********************************************************************
 
@@ -100,13 +127,12 @@ long  Get1msTimeMS(void)
 
 /*
    if (1 == nFirsTime)
-	{
+    {
       t.Start();
-	  nFirsTime = 0;
-	}
+      nFirsTime = 0;
+    }
  */
    return t->GetElapsedTimeMs();
-   //return t.GetElapsedTimeMs();
    //return t.GetElapsedTimeMks();
 }
 
@@ -119,16 +145,20 @@ void PrintIntroduction()
     printf ("%c", 205);
 
     printf ("%c\n", 187);
-	printf ("\t%c The wait command is used within a computer batch file     %c\n", 186, 186);
-	printf ("\t%c and allows the computer to pause the currently running    %c\n", 186, 186);
-	printf ("\t%c batch file for an amount of milliseconds .                %c\n", 186, 186);
-	printf ("\t%c Usage: 'WAIT 1000' will wait for 1 second.                %c\n", 186, 186);
-	printf ("\t%c                                                           %c\n", 186, 186);
-	printf ("\t%c                   GE (c) 2007.                            %c\n", 186, 186);
+    printf ("\t%c The wait command is used within a computer batch file     %c\n", 186, 186);
+    printf ("\t%c and allows the computer to pause the currently running    %c\n", 186, 186);
+    printf ("\t%c batch file for an amount of milliseconds .                %c\n", 186, 186);
+    printf ("\t%c Usage: 'WAIT 1000' will wait for 1 second.                %c\n", 186, 186);
+    printf ("\t%c                                                           %c\n", 186, 186);
+    printf ("\t%c                   GE (c) 2007.                            %c\n", 186, 186);
 
-	printf ("\t%c", 200);
-	for (i=0; i<nFrame; i++)
-	   printf ("%c", 205);
-	printf ("%c\n", 188);
+    printf ("\t%c", 200);
 
+    for (i=0; i<nFrame; i++)
+    {
+       printf ("%c", 205);
+    }
+
+    printf ("%c\n", 188);
 };
+
