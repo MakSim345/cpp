@@ -3,42 +3,41 @@
 
 #include "gen.h"
 
-class figure
+class Figure
 {
 protected:
     double x; 
     double y;
 
 public:
-    void set_dim( double i, double j) 
+    void setDimentions(double i, double j) 
     {
         x = i;
         y = j;
     }
 
-    figure() 
+    Figure(): x(0.0), y(0.0)
     {
-        std::cout << "figure object created" << std::endl;
+        std::cout << "Figure object created" << std::endl;
     }
     
-    virtual void show_area() = 0
+    virtual void showArea() = 0
     {
         cout << "No area computation defined ";
         cout << "for this class. \n";
     }
 };
 
-
-class triangle: public figure 
+class Triangle: public Figure 
 {
 public:
-    triangle()
+    Triangle()
     {
         //this->x = 10.0;
         //this->y = 20.0;
     }
 
-    void show_area() 
+    void showArea() override
     {
         cout << "Triangle with height ";
         cout << x << " and base " << y;
@@ -47,10 +46,10 @@ public:
     }
 };
 
-class square: public figure 
+class Square: public Figure 
 {
 public:
-    void show_area() 
+    void showArea() 
     {
         cout << "Square with dimensions ";
         cout << x << " x " << y;
@@ -59,10 +58,10 @@ public:
     }
 };
 
-class circle: public figure 
+class Circle: public Figure 
 {
 public:
-    void show_area() 
+    void showArea() 
     {
         cout << "Circle with radius ";
         cout << x;
