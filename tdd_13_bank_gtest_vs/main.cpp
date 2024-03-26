@@ -24,7 +24,7 @@ struct BankAccount
 
     }
 
-    explicit BankAccount(const int pBalance) 
+    explicit BankAccount(const int pBalance)
         : ballance (pBalance)
     {
     }
@@ -62,24 +62,24 @@ struct BankAccountTest
 };
 
 TEST_F(BankAccountTest, BancAccountStartsEmpty)
-{   
+{
     EXPECT_EQ(0, account->ballance);
 }
 
 TEST_F(BankAccountTest, CanDepositMoney)
-{   
+{
     account->deposit(100);
     EXPECT_EQ(100, account->ballance);
 }
 
 TEST(TestSuite, CreateFileTest)
-{   
+{
     ifstream fout1;
-    char buff1[500];    
+    char buff1[500];
     // ASSERT_THROW(fout1->open("gen.h"), WinApiException);
     ASSERT_NO_THROW(fout1.open("main.cpp"));
     /*
-    while(!fout1.eof()) //read file 
+    while(!fout1.eof()) //read file
     {
         fout1.getline(buff1, 500);
         std::cout << buff1 << endl;
@@ -120,6 +120,6 @@ int main(int argc, char** argv)
 
     printf ("Application complete.\n");
     system ("PAUSE");
-    
+
     return returnValue;
 }
