@@ -10,14 +10,20 @@ class App
 public:
     void create_big_file()
     {
+        std::chrono::time_point<std::chrono::steady_clock> startTime, endTime;
+        std::chrono::duration<float> duration;
+
         phone_book *pb = new phone_book("big_file.txt");
         CRandomNumbers *my_rnd = new CRandomNumbers();
         PassGenerator *my_name = new PassGenerator();
-        
+
         long a = std::clock();
+
+        startTime = std::chrono::high_resolution_clock::now();
+
         std::cout << "Time Start: " << a << "\n";
 
-        for (int i = 0; i < 1000000; i++)
+        for (int i = 0; i < MAX_NUMBER_LIST; i++)
         {
             long _number = my_rnd->getRandomNumber(100, 10000000);
             int _lenght_name =  my_rnd->getRandomNumber(3, 7);
@@ -25,10 +31,15 @@ public:
 
             pb->add_data_to_file(_name, _number);
         }
-        
+
         long b = std::clock();
         std::cout << "Time END: " << b << "\n\n";
         std::cout << "Time TOTAL: " << (b-a)/1000.0 << " sec.\n";
+
+        endTime = std::chrono::high_resolution_clock::now();
+        duration = endTime - startTime;
+        float ms = duration.count() * 1000.0f;
+        std::cout << "Timer took " << ms << " ms. \n";
     }
 
     void search_by_name()
@@ -77,13 +88,13 @@ public:
         std::cout << "Hello cruel world! \nLet's make some product...\n";
         //init_map();
         phone_book *pb = new phone_book();
-        
+
         pb->read_data_file();
         pb->print_map();
-                
+
         long num_to_search = 345345325;
         std::cout << "search by number " << num_to_search << " - "<< pb->search_by_number(num_to_search) << "\n";
-        
+
         std::string name_to_search = "MAK";
         std::cout << "search by name " << name_to_search << " - "<< pb->search_by_name(name_to_search) << "\n";
 
@@ -93,15 +104,15 @@ public:
 
         std::string quit(":q");
         bool if_compare = t.name.compare(0, quit.length(), quit);
-        
+
         if (!if_compare)
             return 0;
 
         std::cout << "Enter new number:\n";
         cin >> t.number;
-        
+
         pb->add_data_to_file(t.name, atol(t.number.c_str()));
-        
+
         return 0;
     }
 
@@ -114,7 +125,7 @@ public:
 
 int main()
 {
-    std::unique_ptr <App> my_maps(new App());    
+    std::unique_ptr <App> my_maps(new App());
     try
     {
         // my_maps->Run();
@@ -129,7 +140,7 @@ int main()
     __except (EXCEPTION_EXECUTE_HANDLER)
     {
         std::cout << "EXCEPTION_EXECUTE_HANDLER has number - " << EXCEPTION_EXECUTE_HANDLER << "\n";
-    }    
+    }
     */
     std::string p;
     std::cout << "\nPress any key to exit...\n";
