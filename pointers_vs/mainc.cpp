@@ -17,7 +17,7 @@ public:
         getWeightP = weight;
         getAgeP = age;
     }
-    
+
     const char* getModuleVersionString()
     {
         return this->getString();
@@ -25,7 +25,7 @@ public:
 
     const char* getString () const
     {
-        char vstrM[] = " COP SW Pr. 889071-3.2   1996-04-26"; 
+        char vstrM[] = " COP SW Pr. 889071-3.2   1996-04-26";
         return vstrM;
     }
 
@@ -40,7 +40,7 @@ public:
 
         if (isCOPSvM || // all COPSv are supported
             (majorVer == 3 && minorVer >= 2) || (majorVer > 3) || // all COP versions >= 3.2 are supported
-            (majorVer == 0 && minorVer == 3)) // this is an exception. The module with the 
+            (majorVer == 0 && minorVer == 3)) // this is an exception. The module with the
             // version 0.3 is also compatible
         {
             return true;
@@ -55,7 +55,7 @@ private:
     bool isCOPSvM;
     enum { maxSlowStringChar = 64 };
     // char vstrM[maxSlowStringChar];
-    
+
 };
 
 class Programmers
@@ -152,12 +152,12 @@ int main(int argc, char *argv[], char *envp[])
 
     char* buffer = new char[8];
     memset(buffer, 1, 8);
-    
+
     char** ptr = &buffer;
 
     char *FileNameF = "TimeSt.log";
     COPSvCommunication *tRun = new COPSvCommunication();
-    
+
     printf ("string - %s\n", tRun->getModuleVersionString() );
 
     const char* snIndex = strstr(tRun->getModuleVersionString(), "Pr. 8");
@@ -171,7 +171,7 @@ int main(int argc, char *argv[], char *envp[])
     {
         printf ("Compare - NOT MATCH\n");
     }
-    
+
 
 #ifdef FILE_OUTPUT
  if (1 == nOpenFileToken)
