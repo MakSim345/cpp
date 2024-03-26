@@ -17,7 +17,7 @@ class MyDataBase
     DataBaseConnect& dbC;
 public:
     MyDataBase (DataBaseConnect& _dbC) : dbC(_dbC) {}
-    
+
     int mdbInit (string username, string password)
     {
         if (dbC.login(username, password) != true) {
@@ -27,16 +27,16 @@ public:
             cout<<"DB SUCCESS"<<endl;
             return 1;
         }
-    }        
+    }
 };
 
 class Stack
 {
     vector<int> vstack;
 public:
-    void push(int pValue) 
-    { 
-        vstack.push_back(pValue); 
+    void push(int pValue)
+    {
+        vstack.push_back(pValue);
     }
     int pop()
     {
@@ -77,13 +77,13 @@ const char* NumbersToString(int pNumberToConvert)
 }
 
 TEST(BasicTest, NumberCompare)
-{    
+{
     EXPECT_EQ(1, ONE);
     EXPECT_GT(TWO, ONE);
 }
 
 TEST(BasicTest, ToString)
-{    
+{
     EXPECT_STREQ("one", NumbersToString(1));
     EXPECT_STRCASEEQ("TWO", NumbersToString(2));
     //EXPECT_STREQ("zero", NumbersToString(0));
@@ -128,14 +128,14 @@ TEST_F (stackTest, sizeValidatedTest)
 }
 
 TEST(StackTest, DISABLED_testPop)
-{    
+{
     Stack st;
-    st.push(9);    
+    st.push(9);
     EXPECT_EQ(9, st.pop());
 }
 
 TEST(StackTest, testAll)
-{    
+{
     Stack st;
     st.push(9);
     st.push(28);
@@ -156,6 +156,6 @@ int main(int argc, char** argv)
 
     printf ("Application complete.\n");
     system ("PAUSE");
-    
+
     return returnValue;
 }
