@@ -1,6 +1,6 @@
 @echo off
 
-:INIT 
+:INIT
 set MAIN_OBJ=tdd_start
 set CXX_PYTHON_CONVERT=C:\cxxtest-4.3\cxxtestgen.py
 
