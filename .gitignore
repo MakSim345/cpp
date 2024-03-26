@@ -23,7 +23,7 @@
 #OS junk files
 [Tt]humbs.db
 *.DS_Store
- 
+
 #sublime files:
 stino.settings
 
@@ -73,3 +73,6 @@ _ReSharper*/
 
 # Office Temp Files
 ~$*
+
+# CLion IDE
+/.idea
