@@ -22,7 +22,7 @@ void CropperPlane::stop()
 
 bool CropperPlane::canFly()
 {
-    if (!isFuel)
+    if (!isFuelM)
     {
         std::cout << "CropperPlane can NOT fly!" << std::endl;
         return false;
@@ -36,18 +36,18 @@ bool CropperPlane::canFly()
 
 AirForcePlane::AirForcePlane()
 {
-    _gas_level = -10;
+    gasLevelM = -10;
     std::cout << "AirForcePlane object created" << std::endl;
-    std::cout << "_gas_level:" << _gas_level <<std::endl;
+    std::cout << "gasLevel:" << gasLevelM <<std::endl;
 }
-    
+
 AirForcePlane::~AirForcePlane()
 {
     std::cout << "AirForcePlane destroyed" << std::endl;
 
 }
 
-void AirForcePlane::start() 
+void AirForcePlane::start()
 {
     std::cout << "AirForcePlane started" << std::endl;
 }
@@ -59,7 +59,7 @@ void AirForcePlane::stop()
 
 bool AirForcePlane::canFly()
 {
-    if (_gas_level <= 0)
+    if (gasLevelM = 0)
     {
         std::cout << "AirForcePlane can NOT fly!" << std::endl;
         return false;

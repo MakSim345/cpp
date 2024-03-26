@@ -6,48 +6,45 @@
 class Plane
 {
 public:
-    virtual ~Plane(){}
+    virtual ~Plane() = default;
 
     virtual void start()=0;
     virtual void stop()=0;
     virtual bool canFly()=0;
 
 private:
-    int _plane_type;
+    int planeTypeM;
 };
 
 
 class CropperPlane : public Plane
 {
 public:
-    CropperPlane();
-    ~CropperPlane();
+    explicit CropperPlane();
+    ~CropperPlane() override;
 
-    bool canFly();
-    void start();
-    void stop();
+    bool canFly() override;
+    void start() override;
+    void stop() override;
 
 private:
-    std::string mFuel; //
+    std::string mFuel;
     std::string mColor;
-    bool isFuel;
-    //...
+    bool isFuelM;
 };
 
 class AirForcePlane: public Plane
 {
 public:
-    AirForcePlane();
+    explicit AirForcePlane();
+    ~AirForcePlane() override;
 
-    virtual ~AirForcePlane();
-
-    virtual void start();
-    virtual void stop();
-    virtual bool canFly();
+    void start() override;
+    void stop() override;
+    bool canFly() override;
 
 private:
-    int _gas_level;
-    std::string mColor;
-    //...
+    int gasLevelM;
+    std::string colorM;
 };
 #endif
