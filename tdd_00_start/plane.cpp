@@ -40,14 +40,14 @@ AirForcePlane::AirForcePlane()
     std::cout << "AirForcePlane object created" << std::endl;
     std::cout << "_gas_level:" << _gas_level <<std::endl;
 }
-    
+
 AirForcePlane::~AirForcePlane()
 {
     std::cout << "AirForcePlane destroyed" << std::endl;
 
 }
 
-void AirForcePlane::start() 
+void AirForcePlane::start()
 {
     std::cout << "AirForcePlane started" << std::endl;
 }

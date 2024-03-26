@@ -2,10 +2,10 @@
 
 # !include <win32.mak>
 
-GEN = gen.h 
+GEN = gen.h
 PROGRAM = plane.exe
 GCC = g++
-ALL_OBJ = main.o utils.o plane.o error_message.o 
+ALL_OBJ = main.o utils.o plane.o error_message.o
 CFLAGS = -Wall -g -std=c++11
 
 #Link the program:

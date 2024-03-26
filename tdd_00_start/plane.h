@@ -23,12 +23,12 @@ public:
     CropperPlane();
     ~CropperPlane();
 
-    bool canFly();// { return 1;} ;   
+    bool canFly();// { return 1;} ;
     void start();
     void stop();
 
 private:
-    std::string mFuel; // 
+    std::string mFuel; //
     std::string mColor;
     bool isFuel;
     //...
@@ -38,12 +38,12 @@ class AirForcePlane: public Plane
 {
 public:
     AirForcePlane();
-    
+
     virtual ~AirForcePlane();
-    
+
     virtual void start();
     virtual void stop();
-    virtual bool canFly();   
+    virtual bool canFly();
 
 private:
     int _gas_level;

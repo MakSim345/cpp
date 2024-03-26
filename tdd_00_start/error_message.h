@@ -16,7 +16,7 @@ class error_message
  private:
     const char* message;
 };
-    
+
 float quotient(int num1, int num2);
 
 #endif

@@ -5,7 +5,7 @@
 
 class Airplane
 {
-    enum 
+    enum
     {
         MIN_NUMBER_OF_SEATS = 10,
         MAX_NUMBER_OF_SEATS = 200,
@@ -14,7 +14,7 @@ class Airplane
 public:
     Airplane();
 
-    Airplane(size_t numberOfSeats, double fuelTankCapacity) 
+    Airplane(size_t numberOfSeats, double fuelTankCapacity)
         : m_numberOfSeats(numberOfSeats),
           m_fuelTankCapacity(fuelTankCapacity),
           m_fuel(0.0)
@@ -28,8 +28,8 @@ public:
             throw std::invalid_argument("trow: Number of seats is out of range!");
         }
     }
-    
-    void reFuel(double fuel_in_litres) 
+
+    void reFuel(double fuel_in_litres)
     {
         m_fuel = m_fuel + fuel_in_litres;
         if (m_fuel > m_fuelTankCapacity)
@@ -47,12 +47,12 @@ public:
     size_t getNumberOfStewardess() const {return 0;}
     // ~Airplane();
 
-    bool canFly();   
+    bool canFly();
     //void start();
     //void stop();
 
 private:
-    std::string mFuel; // 
+    std::string mFuel; //
     std::string mColor;
     size_t m_numberOfSeats;
     double m_fuelTankCapacity;

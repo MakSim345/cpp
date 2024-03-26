@@ -24,17 +24,17 @@ public:
         TS_ASSERT_EQUALS(airplane100.getFuel(), 0);
         TS_ASSERT_EQUALS(airplane100.getNumberOfPassengers(), 0);
         TS_ASSERT_EQUALS(airplane100.getNumberOfSeats(), 200);
-        
+
         // 201 - number of seats; 500.0 fuel tank capacity
         Airplane airplane(200, 500.0);
         TS_ASSERT_EQUALS(airplane.getFuel(), 0);
         TS_ASSERT_EQUALS(airplane.getNumberOfPassengers(), 0);
         TS_ASSERT_EQUALS(airplane.getNumberOfSeats(), 200);
-        
+
         TS_ASSERT_EQUALS(airplane.getNumberOfPilots(), 0);
         TS_ASSERT_EQUALS(airplane.getNumberOfStewardess(), 0);
         TS_ASSERT_EQUALS(airplane.getFuelTankCapacity(), 500.0);
-        
+
         for (size_t seats = 0; seats <= 300; ++seats)
         {
             if ((seats >= 10) && (seats <= 200))
@@ -51,13 +51,13 @@ public:
         Airplane airplane1(50, 100.0);
         TS_ASSERT_EQUALS(airplane1.getNumberOfSeats(), 50);
         TS_ASSERT_EQUALS(airplane1.getFuelTankCapacity(), 100.0);
-        
+
     }
 
     void TestAirplaneRefuel()
     {
         // 100 - number of seats; 500.0 fuel tank capacity
-        Airplane airplane(100, 500.0);        
+        Airplane airplane(100, 500.0);
         TS_ASSERT_EQUALS (airplane.getFuel(), 0);
         airplane.reFuel(100.0);
         TS_ASSERT_EQUALS (airplane.getFuel(), 100.0);
@@ -65,7 +65,7 @@ public:
         TS_ASSERT_EQUALS (airplane.getFuel(), 200.0 + 100.0);
         // test fuel overflow:
         airplane.reFuel(300.0);
-        TS_ASSERT_EQUALS (airplane.getFuel(), airplane.getFuelTankCapacity() );    
+        TS_ASSERT_EQUALS (airplane.getFuel(), airplane.getFuelTankCapacity() );
     }
 };
-    
+

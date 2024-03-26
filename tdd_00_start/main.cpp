@@ -57,7 +57,7 @@ public:
             }
         } while(!done);
     }
-    
+
 private:
     int edu_num;
     int max_num;
@@ -72,7 +72,7 @@ int main()
     {
         app->Run();
     }
-    
+
     catch (error_message err)
     {
         std::cout << "ERROR: ";

@@ -1,6 +1,6 @@
 @echo off
 
-:INIT 
+:INIT
 ::set MAIN_OBJ=my_test
 set MAIN_OBJ=plane_test
 
