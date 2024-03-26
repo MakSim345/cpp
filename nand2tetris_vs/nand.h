@@ -2,15 +2,15 @@
 
 /*********************************************************************
 
-  utils.h  
-  01.10.2017 Initial coding YS 
-  
+  utils.h
+  01.10.2017 Initial coding YS
+
 **********************************************************************/
 class NAND
 {
 public:
-    NAND();   
-    
+    NAND();
+
     int a;
     int b;
 
@@ -23,7 +23,7 @@ private:
 
     bool b_a;
     bool b_b;
-    bool b_out;    
+    bool b_out;
 };
 
 
@@ -32,7 +32,7 @@ class NOT
 public:
     NOT();
 
-    int in;    
+    int in;
 
     int out;
     void run();
@@ -45,5 +45,5 @@ private:
 
     bool b_a;
     bool b_b;
-    bool b_out;    
+    bool b_out;
 };

@@ -18,7 +18,7 @@ public:
     {
         NOT* not = new NOT();
         printf("\n");
-    
+
         not->in = 0;
         not->run();
         printf("not(%d) out=%d\n", not->in, not->out);

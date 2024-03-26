@@ -1,15 +1,15 @@
 #ifndef UTILS_H
-#define UTILS_H		
+#define UTILS_H
 /*********************************************************************
 
-  utils.h  
-  01.10.2004 Initial coding YS 
-  
+  utils.h
+  01.10.2004 Initial coding YS
+
 **********************************************************************/
 #ifdef WIN32_APP
   #include <Windows.h>
 #endif
-		
+
 void AddTimeStamp(int *pos,char * msg);
 void AddStringPan(char * destStr, char * strToAdd,int len);
 void AddShortTimeStamp(int *pos,char * msg);
@@ -30,8 +30,8 @@ public:
 	~CTimer();
     void Start();
     unsigned int GetElapsedTimeMs() const;
-	unsigned __int64 GetElapsedTimeMks() const; 
-    
+	unsigned __int64 GetElapsedTimeMks() const;
+
 private:
     LARGE_INTEGER m_liFreq;
     LARGE_INTEGER m_liStart;

@@ -1,9 +1,9 @@
-#include "gen.h" 
+#include "gen.h"
 #include "nand.h"
 
 NAND::NAND()
-    :a(0)
-    ,b(0)    
+    :a(0),
+     b(0)
 {
     run();
 }
@@ -29,7 +29,7 @@ void NAND::run()
     b_a = toBool(a);
     b_b = toBool(b);
     b_out = !(b_a && b_b);
-    out = toInt(b_out);    
+    out = toInt(b_out);
 }
 
 /************************************/
