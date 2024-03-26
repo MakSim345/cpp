@@ -1,36 +1,44 @@
 #pragma once
 /*********************************************************************
-
-  utils.h  
-  
+  utils.h
 **********************************************************************/
-
-void AddTimeStamp(int *pos,char * msg);
-void AddStringPan(char * destStr, char * strToAdd,int len);
-void AddShortTimeStamp(int *pos,char * msg);
-
-int RND_Array(int);
-long  Get1msTime(void);
-long  Get1msTimeMS(void);
-char* PrintTime(void); // return string with time
-void PrintIntroduction();
-void SendStr(char * SendString, int dest, int length);
-
 int produceRND();
 
+#include "gen.h"
 #include <sys/timeb.h>
 
-class msTimer 
+class CTimer
+{
+public:
+    CTimer();
+    ~CTimer() = default;
+
+    long Get1msTimeMS();
+    void Start();
+    unsigned int GetElapsedTimeMs() const;
+    uint64_t GetElapsedTimeMks() const;
+    // unsigned __int64 GetElapsedTimeMks() const;
+
+private:
+    std::chrono::time_point<std::chrono::high_resolution_clock>  startTimeM;
+    bool isTimerStarted;
+    //LARGE_INTEGER m_liFreq;
+    //LARGE_INTEGER m_liStart;
+    //LARGE_INTEGER m_liEnd;
+};
+
+
+class msTimer
 {
 public:
     msTimer()
-    { 
-        restart(); 
+    {
+        restart();
     }
 
     void restart()
-    { 
-        ftime(&t_start); 
+    {
+        ftime(&t_start);
     }
 
     float elapsedMs()
@@ -43,19 +51,4 @@ public:
 
 private:
     timeb t_start;
-};
-
-class CTimer
-{
-public:
-    CTimer();
-	~CTimer();
-    void Start();
-    unsigned int GetElapsedTimeMs() const;
-	unsigned __int64 GetElapsedTimeMks() const; 
-    
-private:
-    LARGE_INTEGER m_liFreq;
-    LARGE_INTEGER m_liStart;
-    LARGE_INTEGER m_liEnd;
 };

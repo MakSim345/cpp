@@ -4,6 +4,9 @@
 * Interfaces in C++ (Pure Virtual Functions)
 */
 #include "gen.h"
+#include "utils.h"
+
+long g_lTimeTick = 0;
 
 // using String = std::string
 #define String std::string
@@ -146,7 +149,6 @@ void PrintMyClassName(Printable* objToPrintP)
     std::cout << objToPrintP->GetClassName() << std::endl;
 }
 
-long g_lTimeTick = 0;
 
 int main(int argc, char *argv[], char *envp[])
 {
@@ -156,20 +158,16 @@ int main(int argc, char *argv[], char *envp[])
     int nResult = 0;
     int nTdiff = 100; // 1000 is one second
 
+    // msTimer t;
+    CTimer t;
+
     printf ("main - start\n");
 
     Log log;
     log.SetLevel(log.LogLevelWarning);
     log.Warn("Hello");
 
-    /*
-    printf ("1. Time: %ld\n", Get1msTimeMS());
-    msTimer t;
-    for (int i = 0; i < 500000; i++)
-        ;
-    std::cout << "Elapsed time:" << t.elapsedMs() << endl;
-    printf ("2. Time: %ld\n", Get1msTimeMS());
-    */
+    printf("1. Time: %ld\n", t.Get1msTimeMS());
 
     Entity *entity = new Player();
     // PrintName(en);
@@ -208,15 +206,15 @@ int main(int argc, char *argv[], char *envp[])
     // Sleep(1000);
 
     // and this is complicated one-thread way:
-    if ((( Get1msTimeMS() - LastTimeInMS) > nTdiff - 1) || (LastTimeInMS > Get1msTimeMS() ))
+    if ((( t.Get1msTimeMS() - LastTimeInMS) > nTdiff - 1) || (LastTimeInMS > t.Get1msTimeMS() ))
     {
         nResult = produceRND();
-        printf ("Time: %ld. Random: %d\n",Get1msTimeMS(), nResult);
+        printf ("Time: %ld. Random: %d\n", t.Get1msTimeMS(), nResult);
         // std::cout << "Elapsed time:" << t.elapsedMs() << endl;
 
         Sleep(1);
 
-        LastTimeInMS = Get1msTimeMS();
+        LastTimeInMS = t.Get1msTimeMS();
     }
 
     // control of endless loop (may be also in monitor.cpp)
@@ -227,11 +225,8 @@ int main(int argc, char *argv[], char *envp[])
 } while (!RValue);
 
 printf ("Application complete.\n");
-
 system ("PAUSE"); // wait for press any key in VS mode
-
 return 0;
-
 }
 
 
