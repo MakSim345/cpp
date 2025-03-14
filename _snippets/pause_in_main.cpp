@@ -21,10 +21,10 @@ int get_rnd_number(int iMin=0, int iMax=101)
 int main()
 {
     try
-    { 
+    {
         long a1 = std::clock();
         std::cout << "Time Start: " << a1 << "\n";
-        
+
 
         long b1 = std::clock();
         std::cout << "Time END: " << b1 << "\n\n";
@@ -38,17 +38,17 @@ int main()
     __except (EXCEPTION_EXECUTE_HANDLER)
     {
         std::cout << "EXCEPTION_EXECUTE_HANDLER has number - " << EXCEPTION_EXECUTE_HANDLER << "\n";
-    }    
+    }
     */
-    
+
     //std::cout << "\nPress ENTER to exit...\n";
     //cin.get();
-    
+
     // this PAUSE will give a info text - press any key to continue, etc.
     system("PAUSE");
 
     // this pause is silent. You have to know to press any key.
     // system("pause>0");
-    
+
     return 1;
 }

@@ -1,12 +1,12 @@
 #ifndef _TIMER_H_
-#define _TIMER_H_      
+#define _TIMER_H_
 /*********************************************************************
 
-  timer.h  
-  01.10.2004 Initial coding YS 
-  
+  timer.h
+  01.10.2004 Initial coding YS
+
 **********************************************************************/
-#include "gen.h" 
+#include "gen.h"
 
 long  Get1msTime(void);
 long  Get1msTimeMS(void);
@@ -18,8 +18,8 @@ public:
     ~CTimer();
     void Start();
     unsigned int GetElapsedTimeMs() const;
-    unsigned __int64 GetElapsedTimeMks() const; 
-    
+    unsigned __int64 GetElapsedTimeMks() const;
+
 private:
     LARGE_INTEGER m_liFreq;
     LARGE_INTEGER m_liStart;
@@ -28,7 +28,7 @@ private:
 
 //====================================================================
 #include <sys/timeb.h>
-class msTimer 
+class msTimer
 {
 public:
     msTimer() { restart(); }
@@ -53,7 +53,7 @@ private:
 
 using namespace std;
 
-int main(int argc, char** argv) 
+int main(int argc, char** argv)
 {
     msTimer t;
     for (int i = 0; i < 5000000; i++)
@@ -61,7 +61,7 @@ int main(int argc, char** argv)
     std::cout << t.elapsedMs() << endl;
     return 0;
 }
-* 
+*
 * */
 
 #endif

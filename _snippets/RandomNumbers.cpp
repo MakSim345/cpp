@@ -9,7 +9,7 @@ int CRandomNumbers::getRandomNumber(int iMin, int iMax)
 
     if ( !bIsInitialized )
     {
-        initialize();    
+        initialize();
         bIsInitialized = true;
     }
 
@@ -38,7 +38,7 @@ _ARRAY_INT CRandomNumbers::getRandomNumbers(int iMin, int iMax, int iSize, bool 
         {
             viRandomNumbers.push_back(getRandomNumber(iMin, iMax));
         }
-    
+
         return viRandomNumbers;
     }
 
@@ -46,7 +46,7 @@ _ARRAY_INT CRandomNumbers::getRandomNumbers(int iMin, int iMax, int iSize, bool 
     for ( int i = 0; i < iSize; )
     {
         int iRandomNumber = getRandomNumber(iMin, iMax);
-    
+
         if ( viUniqueRandomNumbers.find(iRandomNumber) == viUniqueRandomNumbers.end() )
         {
             viRandomNumbers.push_back(iRandomNumber);

@@ -1,6 +1,6 @@
 
 template<class T>
-void swapVal(T obj1, T obj2) 
+void swapVal(T obj1, T obj2)
 {
     T temp = obj1;
     obj1 = obj2;
@@ -8,7 +8,7 @@ void swapVal(T obj1, T obj2)
 }
 
 template<class superType>
-void swapRef(superType &obj1, superType &obj2) 
+void swapRef(superType &obj1, superType &obj2)
 {
     cout << "called swapRef..." << endl;
     superType temp = obj1;
@@ -17,7 +17,7 @@ void swapRef(superType &obj1, superType &obj2)
 }
 
 
-int main(int argc, char *argv[], char *envp[]) 
+int main(int argc, char *argv[], char *envp[])
 {
     int RValue = false;
     int CaptureModeHex = 0;
@@ -36,20 +36,20 @@ int main(int argc, char *argv[], char *envp[])
     cout << "1: a = " << aRef << " b = " << bRef << endl;
     swapRef(aRef, bRef);
     cout << "2: a = " << aRef << " b = " << bRef << endl;
-    
+
 /*************MAIN LOOP*****************/
 cout << "\n$ > Press Any Key to exit." << std::endl;
-do 
+do
 {
     //This is simple Windows way:
     Sleep(55);
 
-    // control of endless loop (may be also in monitor.cpp)    
+    // control of endless loop (may be also in monitor.cpp)
     if (_kbhit())  // has anything been pressed from keyboard ?
     {
         NewChar=(unsigned char)_getch();
-        RValue = true;            
-    } 
+        RValue = true;
+    }
     /*
     if (_kbhit())  // has anything been pressed from keyboard ?
     {
@@ -58,16 +58,16 @@ do
         if ((NewChar & 0xff) == 24)  // CTRL-X   pressed
         {
             RValue = true; // END mark
-        }     
+        }
         if (NewChar == 'd')  // pressed
         {
-            if (1 == CaptureModeHex) 
+            if (1 == CaptureModeHex)
                 CaptureModeHex = 1;
             else
                 CaptureModeHex = 0;
         }
     }*/
-} while (!RValue);  
+} while (!RValue);
 
 #ifdef USE_PAUSE_OR_BUTTON_PRESS
     std::cout << "\nPress ENTER to exit...\n";

@@ -5,7 +5,7 @@
 
 class TraceLogger
 {
-public:    
+public:
     TraceLogger (const char* fileName, const char* funcName, int lineNumber);
     ~TraceLogger();
 
@@ -18,7 +18,7 @@ private:
 #ifdef DEBUG
     #define LOG_TRACE TraceLogger traceLogger(__FILE__, __FUNCTION__, __LINE__);
 #else
-    #define LOG_TRACE 
+    #define LOG_TRACE
 #endif
 
 #endif
