@@ -1,100 +1,103 @@
 #include "gen.h"
 
-inline float cube(const float s) {return s*s*s;}
-
-class App
-{
-public:
-    int Run()
-    {
-        std::cout << "Hello cruel world!\n";
-        return 0;
-    }
-    ~App()
-    {
-        std::cout << "Good bye!\n";
-    }
-
-};
-
 class MonteCarloSimulator
 {
 public:
     MonteCarloSimulator()
     {
-        std::cout << "Hello! Monte Carlo Simulator online\n";
+        std::cout << "Hello! Monte Carlo Simulator started!\n";
     }
     ~MonteCarloSimulator()
     {
         std::cout << "Good bye!\n";
     }
-    
+
     double getRandomValue()
     {
         return static_cast<double>(rand()) / static_cast<double>(RAND_MAX);
+    }
+
+    double getRandomNumber()
+    {
+        // Create a random device and use it to seed the random number generator
+        std::random_device rd;
+        std::mt19937 gen(rd()); // Mersenne Twister engine
+
+        std::uniform_int_distribution<> distr(1, RAND_MAX);
+
+        return distr(gen) / static_cast<double>(RAND_MAX); // Generate and return the random number
+
     }
 
     int run()
     {
         srand(time(NULL));
         cout.precision(10);
-        const int nNumberTotal[] = {1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9};
-        // const int nNumberTotal[] = {1e3};
+        // const int nNumberTotal[] = {1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9};
+        const double nNumberTotal[] = {1e3, 1e4, 1e5};
         const float fRadius = 1.0;
 
         for (int j = 0; j < (sizeof(nNumberTotal) / sizeof(nNumberTotal[0])); j ++)
         {
+            // startTimeM = std::clock();
+            auto iterationStart = std::chrono::high_resolution_clock::now();
+            // std::cout << "Time Start: " << startTimeM << "\n";
+
             int dotsInCircle = 0;
             for (int i = 0; i < nNumberTotal[j]; i ++)
             {
-                double x = getRandomValue();
-                double y = getRandomValue();
+                //calcXvalM = getRandomValue();
+                //calcYvalM = getRandomValue();
 
-                //cout << " x=" << x;
-                //cout << " y=" << y;
+                calcXvalM = getRandomNumber();
+                calcYvalM = getRandomNumber();
 
-                if ((x*x + y*y) <= fRadius)
+                //cout << " x=" << calcXvalM;
+                //cout << " y=" << calcYvalM;
+
+                if ((calcXvalM*calcXvalM + calcYvalM*calcYvalM) <= fRadius)
                 {
                     dotsInCircle++;
                 }
             }
 
-            cout << nNumberTotal[j] << (char)9 << (char)9 << (double)dotsInCircle / nNumberTotal[j] * 4.0 << endl;
+            cout << "For " << nNumberTotal[j] << " iterations PI =" << (char)9 << (double)dotsInCircle / nNumberTotal[j] * 4.0 << endl;
+            auto stopTimeM = std::chrono::high_resolution_clock::now();
+
+            // std::cout << "Time END: " << stopTimeM << "\n";
+            // std::cout << "Time to calculate: " << (stopTimeM - startTimeM)/1000.0 << " sec.\n\n";
+            // End measuring time for this iteration
+            auto iterationEnd = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double, std::milli> iterationDuration = iterationEnd - iterationStart;
+
+            // Output the time taken for this iteration
+            std::cout << "Iteration " << j  + 1 << " took " << iterationDuration.count() << " ms" << std::endl;
+            std::cout << std::endl;
         }
-        /*
-        std::cout << "Enter cube dimention: ";
-        std::cin >> side;
 
-        long a = std::clock();
-        std::cout << "Time Start: " << a << "\n";
-
-        cout << "Cube with side " << side << " is equal to " << calculation(side) << "\n";
-
-        long b = std::clock();
-
-        std::cout << "Time END: " << b << "\n\n";
-        std::cout << "Time TOTAL: " << (b-a)/1000.0 << " sec.\n";
-        */
         return 1;
     }
 
 private:
-    float side;
+    //static auto startTimeM;
+    //static auto stopTimeM;
 
-    float calculation(float s)
-    {
-        return s*s*s;
-    }
-
+    float calcXvalM;
+    float calcYvalM;
 };
 
 int main()
 {
-    std::auto_ptr <MonteCarloSimulator> cube_calc(new MonteCarloSimulator());
-    cube_calc->run();
+    auto totalStart = std::chrono::high_resolution_clock::now();
 
+    std::unique_ptr <MonteCarloSimulator> pi_calc(new MonteCarloSimulator());
+    pi_calc->run();
+
+    // Output the total runtime of the app:
+    auto totalEnd = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> totalDuration = totalEnd - totalStart;
+    std::cout << "Total application runtime: " << totalDuration.count() << " ms" << std::endl;
     printf ("Application complete.\n");
-    system ("PAUSE");
-
+    // system ("PAUSE");
     return 1;
 }
