@@ -13,21 +13,21 @@ class my_class
 {
 public:
     int get_var() {return var;}
-    void run (int a) {var = a;} 
-    
+    void run (int a) {var = a;}
+
     void print_my_vector()
     {
         for (int i = 0; i < int_arr.size(); ++i)
         {
-            cout << "int_arr[" << i << "] = " << int_arr[i] << "." << endl;    
+            cout << "int_arr[" << i << "] = " << int_arr[i] << "." << endl;
         }
     }
-    
+
     void make_my_vector(int _var, int _count)
-    {     
+    {
         int_arr = vector <int>(_var, _count);
     }
-    
+
     void add_to_vector(int _var)
     {
         int_arr.push_back(_var);
@@ -46,7 +46,7 @@ private:
 
 int fact(int n)
 /*
- * Function for calculate a factoorial
+ * Function for calculate a factorial
  * */
 {
     LOG_TRACE;
@@ -57,7 +57,7 @@ int fact(int n)
     else
     {
         return n * fact(n - 1);
-    }    
+    }
 }
 
 
@@ -67,10 +67,10 @@ int main()
     int _fact = 4;
     cout << "Enter a number for a factorial" << "\n";
     cin >> _fact;
-    // std::cout << array << std::endl; 
+    // std::cout << array << std::endl;
     // cout << "Your name is " << name << "." << endl;
-    // vector <int> int_arr (23, 10);   
-    
+    // vector <int> int_arr (23, 10);
+
     // vector<my_class> my_class_array;
     cout << "Factorial of " << _fact << " = " << fact(_fact) << endl;
     return 0;

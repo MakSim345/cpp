@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "xlocnum": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

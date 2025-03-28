@@ -11,18 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_super_template\cTimer.cpp" />
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_super_template\mainc.cpp" />
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_super_template\printIntro.cpp" />
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_super_template\RandomNumbers.cpp" />
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_super_template\utils.cpp" />
+    <ClCompile Include="cTimer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="printIntro.cpp" />
+    <ClCompile Include="RandomNumbers.cpp" />
+    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_super_template\cTimer.h" />
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_super_template\gen.h" />
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_super_template\printIntro.h" />
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_super_template\RandomNumbers.h" />
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_super_template\utils.h" />
+    <ClInclude Include="cTimer.h" />
+    <ClInclude Include="gen.h" />
+    <ClInclude Include="printIntro.h" />
+    <ClInclude Include="RandomNumbers.h" />
+    <ClInclude Include="utils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{379337B2-251A-4180-9F98-BF871BA59A46}</ProjectGuid>
@@ -35,10 +35,12 @@
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">

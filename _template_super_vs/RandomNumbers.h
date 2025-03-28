@@ -6,15 +6,8 @@
 #ifndef _RANDOM_NUMBERS_H_
 #define _RANDOM_NUMBERS_H_
 
-#pragma once
+#include "gen.h"
 
-#include <vector>
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-#include <map>
-
-using namespace std;
 #define _ARRAY_INT vector <int>
 
 class CRandomNumbers

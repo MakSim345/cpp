@@ -15,7 +15,7 @@ public:
         this->age = iAgeP;
     }
 
-    // simply get references to value created in main and change them    
+    // simply get references to value created in main and change them
     void getParams(int &getWeightP, int &getAgeP)
     {
         getWeightP=weight;
@@ -50,7 +50,7 @@ public:
     }
 
     void Warn(const char* pMessage)
-    {   
+    {
         if (mLogLebel >= LogLevelWarning)
             std::cout << "[WARNING]:" << pMessage << "\n";
     }
@@ -75,12 +75,13 @@ void PrintValue(int value)
     std::cout << "Value: " << value;
 }
 
+/*
 void ForEach(const std::vector<int>& values, void (*func)(int))
 {
-    //for (int value : values) 
+    //for (int value : values)
     //    func (values[2]);
     vector<int>::iterator iter;
-    iter = values.begin(); 
+    iter = values.begin();
     values.end();
     //for(iter = values.begin(); iter != values.end(); iter++ )
     {
@@ -88,19 +89,19 @@ void ForEach(const std::vector<int>& values, void (*func)(int))
     }
 }
 
+*/
 long g_lTimeTick = 0;
 
 int main(int argc, char *argv[], char *envp[])
 {
-    long LastTimeIn=0;
-    long LastTimeInMS = 0;
     int RValue = false;
-    int Counter=0;
-    int CaptureModeHex = 0;
-    int NewChar=0;
-    int nResult = 0;
-    int nTdiff = 100; // 1000 is one second
-    msTimer t;
+    int nRandomVal = -1;
+    auto mainCounter = 0;
+    int msTarget = 100;  // 1000 is one second
+
+    // msTimer t;
+
+    CTimer* cTimerCtr = new CTimer();
 
     printf ("main - start\n");
 
@@ -118,48 +119,57 @@ int main(int argc, char *argv[], char *envp[])
     values.push_back(3);
 
     vector<int>::iterator iter;
-    iter = values.begin(); 
+    iter = values.begin();
     values.end();
 
-    ForEach(values, PrintValue);
+    // ForEach(values, PrintValue);
 
     //printf ("1. Time: %ld\n", Get1msTimeMS());
-    
+
     //for (int i = 0; i < 5000000; i++)
     //    ;
     //std::cout << "Elapsed time:" << t.elapsedMs() << endl;
     //printf ("2. Time: %ld\n", Get1msTimeMS());
 
-
-
-//*************MAIN LOOP*****************//
- do
- {
-    //This is simple Windows way:
-    // Sleep(1000);
-    
-    // and this is complicated one-thread way:
-    if ((( Get1msTimeMS() - LastTimeInMS) > nTdiff - 1) || (LastTimeInMS > Get1msTimeMS() ))
-    {    
-        nResult = produceRND();
-        printf ("Time: %ld. Random: %d\n",Get1msTimeMS(), nResult);
-        std::cout << "Elapsed time:" << t.elapsedMs() << endl;
-
-        Sleep(1);
-
-        LastTimeInMS = Get1msTimeMS();
-    }        
-   
-    // control of endless loop (may be also in monitor.cpp)
-    if (_kbhit())  // has anything been pressed from keyboard ?
+    auto start = std::chrono::steady_clock::now();
+    cout << "Press Ctr-X to exit." << std::endl;
+    //*************MAIN LOOP****************
+    //
+    do
     {
-        RValue = true; // END mark
-    }
-} while (!RValue);
 
-printf ("Application complete.\n");
+        auto now = std::chrono::steady_clock::now();
+        // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-system ("PAUSE"); // wait for press any key in VS mode
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(now - start)>= std::chrono::milliseconds(msTarget))
+        {
+            mainCounter++;
+            nRandomVal = produceRND();
+            printf ("%d - Time: %u. RND: %d\n", mainCounter, cTimerCtr->GetElapsedTimeMs(), nRandomVal);
+            printf ("Time: %ld.\n", cTimerCtr->Get1msTimeMS());
+            start = now;
+        }
+
+        if (nRandomVal == 0) // wait for random ZERO!
+        {
+            RValue = true;
+        }
+
+        // std::string cInTrace("0");
+        // std::getline (std::cin, cInTrace);
+    } while (!RValue);
+
+#ifdef FILE_OUTPUT
+ if (1 == nOpenFileToken)
+   fclose (fi);
+#endif
+
+    auto endTime = cTimerCtr->GetElapsedTimeMs();
+    std::cout << "Application complete after " << mainCounter << " iterations. EndTime: " << endTime <<"\n";
+    
+    // wait for press any key in VS mode: 
+    // Note: "Tool->Options->Debugging->Automatically close console"
+    //system ("PAUSE"); 
 
 return 0;
 

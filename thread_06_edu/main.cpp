@@ -1,4 +1,4 @@
-/* Computes and prints n! for a given n. 
+/* Computes and prints n! for a given n.
    Uses several basic elements of C++. */
 
 #include "gen.h"
@@ -14,14 +14,14 @@ void hello()
     "Hello world, I'm a thread!"
     << std::endl;
 }
- 
+
 static void entry()
 {
     for (auto i = 0; i<1000; i++)
     {
         // Atomic increment
         ++av;
-        
+
         // unsafe code alert
         ++gv;
 
@@ -33,24 +33,24 @@ static void entry()
 void calculate_factorial()
 {
 // Declarations of variables
-    int factArg = 0 ;         
-    long fact(1.0) ;            
-    do 
+    int factArg = 0 ;
+    long fact(1.0) ;
+    do
     {
-        cout << "Factorial of: "; 
-        cin >> factArg;      
+        cout << "Factorial of: ";
+        cin >> factArg;
         if ( factArg < 0 )
         {
             cout << "No negative values, please!" << endl;
-        } 
+        }
     }
-    while (factArg < 0) ; 
+    while (factArg < 0) ;
     int i = 2;
-    while ( i <= factArg ) 
-    {   
-        fact = fact * i; 
+    while ( i <= factArg )
+    {
+        fact = fact * i;
         i = i + 1;
-    } 
+    }
     cout << "The Factorial of " << factArg << " is: " << fact << endl;
 }
 /*
@@ -62,8 +62,12 @@ int main(int argc, char* argv[])
 }
 */
 
-int main() 
-{ 
+int main()
+{
+    long a1 = std::clock();
+    std::cout << "Time Start: " << a1 << "\n";
+    auto start_time = Clock::now();
+
     std::thread ta(entry);
     std::thread tb(entry);
     ta.join();
@@ -71,5 +75,12 @@ int main()
     // assert(static_cast<int>(av) != gv);
     cout << "av=" << av << " gv=" << gv << endl;
 
-    return 0; 
+    auto end_time = Clock::now();
+    std::cout << "Time difference: "
+        // << std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time).count()
+        << std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count()
+        << " milliseconds" << std::endl;
+
+
+    return 0;
 }

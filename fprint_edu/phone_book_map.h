@@ -30,13 +30,13 @@ public:
     {
         filename = "text.txt";
     }
-    
+
     phone_book(std::string _new_filename)
     {
         filename = _new_filename;
         // this->read_data_file();
     }
-        
+
     int Run()
     {
         std::cout << "Hello cruel world! \nLet's make some product...\n";
@@ -56,7 +56,7 @@ public:
         // removed which would lead to a crash. See Josuttis p 205.
 
         cout << "Erasing people of age 100" << endl;
-    
+
         for (people_map::iterator j = people.begin (); j != people.end (); )
             {
                 if (j->second.GetAge () == 100)
@@ -64,7 +64,7 @@ public:
                 else
                     ++j;                  // advance the iterator
             } // end of erase loop
-    
+
 
         // now display who is left
         cout << "Printing people left after erase ..." << endl;
@@ -84,8 +84,8 @@ public:
     {
         std::ofstream data_file;
         data_file.open (this->filename.c_str(), ios::app);
-        
-        // std::cout << "Writing this to a file.\n";    
+
+        // std::cout << "Writing this to a file.\n";
 
         // data_file << name. << " " << number << std::endl;
         // name
@@ -115,28 +115,28 @@ public:
                 break;
 
             std::string name;
-            data_file >> name;          
+            data_file >> name;
 
             if (data_file.eof())
-                break;     
+                break;
 
             std::string email;
-            data_file >> email;          
+            data_file >> email;
 
             if (data_file.eof())
-                break;   
-            
+                break;
+
             std::string age;
-            data_file >> age;          
+            data_file >> age;
             long _age = atol(age.c_str());
             if (data_file.eof())
-                break;   
+                break;
             // insert_value(number, t.name);
             // Employees[number] = t.name;
-            
+
             //std::cout << " - Number: " << t.number;
             //std::cout << "\n";
-            
+
             // telBook.push_back(t);
             //people.insert(std::make_pair(num, Person(name, email, _age)));
             people[number] = Person(name, email, _age);
@@ -149,11 +149,11 @@ public:
     {
         std::ofstream data_file;
         data_file.open (this->filename.c_str(), ios::app);
-        
-        // std::cout << "Writing this to a file.\n";    
+
+        // std::cout << "Writing this to a file.\n";
 
         data_file << name << " " << number << std::endl;;
-    
+
         data_file.close();
     }
 
@@ -171,7 +171,7 @@ public:
         while (true)
         {
             Number t;
-           
+
             data_file >> t.name;
             //std::cout << "Name:" << t.name << " ";
 
@@ -183,11 +183,11 @@ public:
             // data_file >> number;
 
             if (data_file.eof())
-                break;           
-            
+                break;
+
             insert_value(number, t.name);
             // Employees[number] = t.name;
-            
+
             //std::cout << " - Number: " << t.number;
             //std::cout << "\n";
             telBook.push_back(t);
@@ -216,7 +216,7 @@ public:
         else
             return "DO NOT EXIST!";
     }
-    
+
     void find_by_key(int _number_to_search)
     {
         fPrint crazy_printer(std::cout);
@@ -241,7 +241,7 @@ public:
         by_number = Employees.find(number_to_search);
         return by_number->second;
     }
-    
+
     void insert_value(long num, std::string name)
     {
         Employees[num] = name;
@@ -253,11 +253,11 @@ public:
     void init_map()
     {
         // Assignment using array index notation
-        
+
         people[1234] = Person("Nick", "nick@yahoo.com", 21);
         people[4422] = Person ("Fred", "fred@nurk.com.au", 100);
         people[8811]   = Person ("John", "john@smith.com.au", 35);
-        
+
         people[5234] = Person("Mike C.", "Mike@yahoo.com", 21);
         people[3374] = Person("Charlie M.", "CharlieM@slash.com.uk", 40);
         people[1923] = Person("David D.", "David_and_Goliaph@gmail.com", 35);
@@ -283,7 +283,7 @@ public:
         */
     }
 
-    map<long, string> Employees; 
+    map<long, string> Employees;
     map<long, string>::iterator ii;
     std::string filename;
     people_map people;

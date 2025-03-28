@@ -15,7 +15,7 @@ How to create a thread?
 
 First, you have to include thread header in your program:
 
-    #include <thread> 
+    #include <thread>
 
 When you want to create a thread, you have to create an object of a thread class.
 
@@ -30,12 +30,12 @@ When you create a thread, you can pass a pointer of a function to its constructo
 
 
     #include <iostream>
-    #include <thread> 
+    #include <thread>
     using namespace std;
     void threadFunc()
     {
 	    cout << "Welcome to Multithreading" << endl;
-    
+
     }
     int main()
     {
@@ -45,7 +45,7 @@ When you create a thread, you can pass a pointer of a function to its constructo
 
 Try to compile and run this program. It compiles without any errors but you will get a "runtime error".
 
-As you can see, main thread creates new thread "funcTest1" with a parameter "threadFunc". 
+As you can see, main thread creates new thread "funcTest1" with a parameter "threadFunc".
 Main thread does not wait for "funcTest1" thread termination. It continues its work. The main thread finishes execution, but "funcTest1" is still running. This causes error. All the threads must be terminated before main thread is terminated.
 
 ========================================================================================
@@ -301,8 +301,8 @@ This is an example of using these functions:
 
 
 #include <iostream>
-#include <iomanip> 
-#include <thread> 
+#include <iomanip>
+#include <thread>
 #include <chrono>
 #include <ctime>
 
@@ -391,7 +391,7 @@ Mutex
 Class mutex is a synchronization primitive that is used to protect shared data from simultaneous access. A mutex can be locked and unlocked. Once a mutex is locked, current thread owns mutex until it is not unlocked. It means that no other thread can execute any instructions from the block of code surrounded by mutex until thread that owns mutex unlocks it. If you want to use mutex, you have to include mutex header in the program:
 
 
-#include <mutex>  
+#include <mutex>
 
 After this, you have to create a global variable of mutex type. It will be used to synchronize access to the shared data:
 

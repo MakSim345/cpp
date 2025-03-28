@@ -1,6 +1,7 @@
 /*
 * By Cherno -
 * https://www.youtube.com/watch?v=UWAdd13EfM8
+*
 * Interfaces in C++ (Pure Virtual Functions)
 */
 #include "gen.h"

@@ -10,7 +10,7 @@ public:
 
 class FlyCanDo: public FlyBehaviorIf
 {
-public:    
+public:
     void fly() { cout << "Flying hight!" << endl; }
 };
 

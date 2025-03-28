@@ -31,7 +31,7 @@ int main()
     cout << "    *ptr = " << *ptr << endl;
     cout << "    ptr = " << ptr << endl;
     cout << "    &ptr = " << &ptr << endl;
-    
+
     x = 78;
     cout << "----x = " << x << endl << endl;
     cout << "    x = " << x << endl;
@@ -41,7 +41,7 @@ int main()
     cout << "    *ptr = " << *ptr << endl;
     cout << "    ptr = " << ptr << endl;
     cout << "    &ptr = " << &ptr << endl;
-    
+
     // getch();
 }
 

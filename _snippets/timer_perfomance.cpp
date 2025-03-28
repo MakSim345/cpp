@@ -100,4 +100,44 @@ int main()
     return 0;
 }
 
+#include <iostream>
+#include <chrono>
 
+int main()
+{
+    // Start measuring total application runtime
+    auto totalStart = std::chrono::high_resolution_clock::now();
+
+    // Example: Loop with iterations
+    int numIterations = 10; // Number of iterations in the loop
+
+    for (int i = 0; i < numIterations; ++i)
+    {
+        // Start measuring time for this iteration
+        auto iterationStart = std::chrono::high_resolution_clock::now();
+
+        // Simulate some work (e.g., computation or I/O)
+        // Replace this with your actual logic
+        std::cout << "Processing iteration " << i + 1 << "..." << std::endl;
+        for (int j = 0; j < 1000000; ++j)
+        {
+            volatile int x = j * j; // Dummy computation to simulate work
+        }
+
+        // End measuring time for this iteration
+        auto iterationEnd = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> iterationDuration = iterationEnd - iterationStart;
+
+        // Output the time taken for this iteration
+        std::cout << "Iteration " << i + 1 << " took " << iterationDuration.count() << " ms" << std::endl;
+    }
+
+    // End measuring total application runtime
+    auto totalEnd = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> totalDuration = totalEnd - totalStart;
+
+    // Output the total runtime of the application
+    std::cout << "Total application runtime: " << totalDuration.count() << " ms" << std::endl;
+
+    return 0;
+}

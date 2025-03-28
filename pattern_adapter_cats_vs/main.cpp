@@ -12,7 +12,7 @@ public:
     int Run()
     {
         std::cout << "Hello cruel world! \nLet's make some product...\n";
-        
+
         iHomeCat* vaska = new StreetCat();
         vaska->setName("Bacbka");
 
@@ -26,23 +26,23 @@ public:
         cip->PrintCatInfo(*wagner);
 
         HomeCatAdapter *hca = new HomeCatAdapter(*my_tiger);
-        
+
         // cip->PrintCatInfo(*my_tiger); // error, wrong parameter type!!
         cip->PrintCatInfo(*hca);
 
         /*
         std::cout << "New cat name: " << vaska->Name() << "\n";
         std::cout << "    -info : ";
-        vaska->Meow();         
+        vaska->Meow();
         std::cout << "    -info : ";
-        vaska->Scratch(); 
+        vaska->Scratch();
 
-        
+
         std::cout << "New cat name: " << vagner->Name() << "\n";
         std::cout << "    -info : ";
-        vagner->Meow();         
+        vagner->Meow();
         std::cout << "    -info : ";
-        vagner->Scratch(); 
+        vagner->Scratch();
         */
 
         return 0;
@@ -58,11 +58,10 @@ public:
 
 int main()
 {
-    //std::auto_ptr <App> fact_calc(new App());
-    //fact_calc->run();
-    std::auto_ptr <MainApp> _my_cats(new MainApp());
+    // std::auto_ptr <MainApp> _my_cats(new MainApp());
+    std::unique_ptr <MainApp> _my_cats(new MainApp());
     _my_cats->Run();
-    
+
     /*
     catch (std::runtime_error)
     {

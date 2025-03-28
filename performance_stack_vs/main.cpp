@@ -1,25 +1,23 @@
-#include <iostream>
+#include "gen.h"
 #include "utils.h"
-#include <ctime>
-#include <cstdio>
-#include <chrono>
-
-using namespace std;
 
 class Foo
 {
     public:
-    Foo() { std::cout << "Foo's constructor" << std::endl; }
+    Foo()
+        { std::cout << "Foo's constructor" << std::endl; }
 };
+
 class Bar : public Foo
 {
     public:
-    Bar() { std::cout << "Bar's constructor" << std::endl; }
+    Bar()
+        { std::cout << "Bar's constructor" << std::endl; }
 };
 
-namespace 
+namespace MyNamespace
 {
-    class empty { }; // even empty classes take up 1 byte of space, minimum
+    class Empty { }; // even empty classes take up 1 byte of space, minimum
 
     void on_stack()
     {
@@ -39,20 +37,20 @@ int test_one()
     std::cout << "START:" << start << " \n";
     for (int i = 0; i < 100000; ++i)
     {
-        empty e;
+        MyNamespace::Empty e;
     }
     std::clock_t duration = std::clock() - start;
     std::cout << "stack allocation took " << duration << " clock ticks\n";
     start = std::clock();
-    
-    for (int i = 0; i < 100000; ++i) 
+
+    for (int i = 0; i < 100000; ++i)
     {
-        empty* e = new empty;
+        MyNamespace::Empty* e = new MyNamespace::Empty;
         delete e;
     };
-    
+
     duration = std::clock() - start;
-    
+
     std::cout << "heap allocation took " << duration << " clock ticks\n";
     std::cout << "END:" << std::clock() << " \n";
 
@@ -65,29 +63,29 @@ int main()
     std::clock_t start = std::clock();
     std::cout << "Application start. Time :" << start << " \n";
     std::cout << "Will count " << cycle_counter << " allocations from stack\n";
-    
+
     // auto begin = std::chrono::system_clock::now();
-    
+
     for (int i = 0; i < cycle_counter; ++i)
-        on_stack();
+        MyNamespace::on_stack();
     // auto end = std::chrono::system_clock::now();
     // std::printf("on_stack took %f seconds\n", std::chrono::duration<double>(end - begin).count());
-    
+
     std::clock_t duration = std::clock() - start;
     std::cout << "- stack allocation took " << duration << " clock ticks\n";
-    
+
     std::cout << "Next - start heap allocation for " << cycle_counter << ". Please wait...\n";
     start = std::clock();
 
     //begin = std::chrono::system_clock::now();
     for (int i = 0; i < cycle_counter; ++i)
-        on_heap();
+        MyNamespace::on_heap();
     //end = std::chrono::system_clock::now();
     //std::printf("on_heap took %f seconds\n", std::chrono::duration<double>(end - begin).count());
-    duration = std::clock() - start;    
+    duration = std::clock() - start;
     std::cout << "- heap allocation took " << duration << " clock ticks\n";
     std::cout << "END:" << std::clock() << " \n";
-    
+
     return 0;
 }
 

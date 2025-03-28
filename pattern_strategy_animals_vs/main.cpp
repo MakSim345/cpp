@@ -1,9 +1,6 @@
-#include <conio.h>
-#include <iostream>
+#include "gen.h"
 #include "utils.h"
 #include "animals.h"
-#include "gen.h"
-
 
 int main()
 {
@@ -11,22 +8,22 @@ int main()
 
     Animal *sparky = new Dog();
     Animal *tweety = new Bird();
-    
-    cout << "Dog: " << endl; 
+
+    cout << "Dog: " << endl;
     sparky->tryTofly();
 
-    cout << "Bird: " << endl; 
+    cout << "Bird: " << endl;
     tweety->tryTofly();
 
     // This allows dynamic changes for FlyBehavior:
 
     sparky->setFlyingAbility(new FlyCanDo());
-    cout << "Dog (matrix): " << endl; 
+    cout << "Dog (matrix): " << endl;
     sparky->tryTofly();
 
 
     cout << "APP end." << endl;
-    
+
     system("PAUSE");
 }
 

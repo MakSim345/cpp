@@ -2,10 +2,12 @@
 /*********************************************************************
   utils.h
 **********************************************************************/
-int produceRND();
-
 #include "gen.h"
 #include <sys/timeb.h>
+
+int produceRND();
+//void multiPlatformSleep(unsigned int milliseconds);
+//void Sleep_(unsigned int milliseconds);
 
 class CTimer
 {

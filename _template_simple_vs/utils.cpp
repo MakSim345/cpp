@@ -2,7 +2,7 @@
 #include "utils.h"
 
 extern long g_lTimeTick;
-
+/*
 int produceRND()
 {
  static int nFirstTime = 1;
@@ -16,115 +16,13 @@ int produceRND()
  random = 1 + (rand() % RND_MAX);
  return random;
 }
- 
-
-// Timer class
-// Constructor:
-CTimer::CTimer() 
-{ 
- ::QueryPerformanceFrequency(&m_liFreq);
- Start();
- // printf ("QueryPerformanceFrequency : %u\n", m_liFreq.QuadPart);
-}
-
-/********************************************************************
-
-  Declaration:  
-  Call: 
-  Input:
-  Returns:
-  	  
-*********************************************************************/ 
-void CTimer::Start()
-{ 
- ::QueryPerformanceCounter(&m_liStart);  
-}
-
-/********************************************************************
-
-  Declaration:  
-  Call: 
-  Input:
-  Returns:
-  	  
-*********************************************************************/ 
-unsigned int CTimer::GetElapsedTimeMs() const
+*/
+int produceRND()
 {
-  LARGE_INTEGER liEnd;
-  ::QueryPerformanceCounter(&liEnd);  
-  return static_cast<unsigned int>((liEnd.QuadPart - m_liStart.QuadPart) * 1000 / m_liFreq.QuadPart);
-}
-
-/********************************************************************
-
-  Declaration:  
-  Call: 
-  Input:
-  Returns:
-  	  
-*********************************************************************/ 
-unsigned __int64 CTimer::GetElapsedTimeMks() const 
-{
-  LARGE_INTEGER liEnd;
-  ::QueryPerformanceCounter(&liEnd);
-  return static_cast<unsigned __int64>((liEnd.QuadPart - m_liStart.QuadPart) * 1000000 / m_liFreq.QuadPart);
-}
-
-// End of the class.
-
-
-/********************************************************************
-
-  Declaration: implementation of Get1msTime() for Microsoft env. 
-  Call: Get1msTimeMS(void)
-  Input: none
-  Returns: milliseconds.
-  	  
-*********************************************************************/ 
-long  Get1msTimeMS(void)
-{
-  /*
-  // 1. Use function  _ftime
-   struct _timeb timebuffer;
-
-  _ftime( &timebuffer );
-  // g_lTimeTick = (timebuffer.time*1000)+timebuffer.millitm;
-  return (timebuffer.time*1000)+timebuffer.millitm;
-  */
-  
-  /*
-  // 2. Use function GetTickCount():
-  // after 49 days it will reset. Check it!
-  return GetTickCount();
-  */
-  
-  /*
-   // 3. Use  QueryPerformanceCounter () function:
-  __int64 nTick, f; 
-
-  // This function must be called once!
-  QueryPerformanceFrequency((PLARGE_INTEGER)&f); 
-  
-  QueryPerformanceCounter((PLARGE_INTEGER)&nTick);
-  // printf ("Freq : %u\n",f);
-  // printf ("nTick: %u, nTick/f:%u\n",nTick, nTick/f);
-  return (long)(nTick/3000000); // divide to processor speed!!!
-  */
-   
-   // 3. Use class based on QueryPerformanceCounter () functions:
-   //static int nFirsTime = 1;
-   static CTimer *t = new CTimer(); // take memory from heap, not from stack!
-    
-/*
-   if (1 == nFirsTime)
-	{
-      t.Start();
-	  nFirsTime = 0;
-	}
- */
-   return t->GetElapsedTimeMs();
-   //return t.GetElapsedTimeMs();
-   //return t.GetElapsedTimeMks();	
+    // Generate a random number between 0 and 100
+    static std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+    std::uniform_int_distribution<int> dist(0, 100);
+    return dist(rng);
 }
 
 void PrintIntroduction()
@@ -149,3 +47,53 @@ void PrintIntroduction()
 	printf ("%c\n", 188);	
 
 };
+
+CTimer::CTimer() :
+    isTimerStarted(false),
+    ctrTimer1MsStartM(0),
+    ctrTimer1MsDiffM(0)
+{
+    this->Start();
+}
+
+long CTimer::Get1msSinceEpoch()
+{
+    return std::chrono::duration_cast<std::chrono::milliseconds>
+        (std::chrono::system_clock::now().time_since_epoch()).count();
+}
+
+long CTimer::Get1msTimeMS()
+{
+    // get 1 ms time since the class created.
+    // use milliseconds since Epoch to count.
+    ctrTimer1MsDiffM = Get1msSinceEpoch() - ctrTimer1MsStartM;
+    return ctrTimer1MsDiffM;
+}
+
+void CTimer::Start()
+{
+    startTimeM = std::chrono::high_resolution_clock::now();
+    ctrTimer1MsStartM = this->Get1msSinceEpoch();
+    isTimerStarted = true;
+}
+
+unsigned int CTimer::GetElapsedTimeMs() const
+{
+    // Returns the elapsed time in number of milliseconds
+    //if (!isTimerStarted)
+    //{
+    //    return 0;
+    //}
+    auto endTime = std::chrono::high_resolution_clock::now();
+    return std::chrono::duration_cast<std::chrono::milliseconds>
+        (endTime - startTimeM).count();
+}
+
+uint64_t CTimer::GetElapsedTimeMks() const
+{
+    // Returns the elapsed time in number of microseconds
+    auto endTime = std::chrono::high_resolution_clock::now();
+    return std::chrono::duration_cast<std::chrono::microseconds>
+        (endTime - startTimeM).count();
+}
+

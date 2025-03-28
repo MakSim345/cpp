@@ -6,12 +6,12 @@ class App
 {
 
 public:
-    
-    int Run();    
+
+    int Run();
     void edu_14();
     App();
     ~App();
-    
+
 private:
     int edu_num;
     int max_num;

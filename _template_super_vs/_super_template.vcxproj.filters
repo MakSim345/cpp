@@ -15,36 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_super_template\cTimer.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_super_template\mainc.cpp">
+    <ClCompile Include="cTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_super_template\printIntro.cpp">
+    <ClCompile Include="printIntro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_super_template\RandomNumbers.cpp">
+    <ClCompile Include="RandomNumbers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Dropbox\[2] dev\cpp\_super_template\utils.cpp">
+    <ClCompile Include="utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_super_template\cTimer.h">
+    <ClInclude Include="gen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_super_template\gen.h">
+    <ClInclude Include="cTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_super_template\printIntro.h">
+    <ClInclude Include="printIntro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_super_template\RandomNumbers.h">
+    <ClInclude Include="RandomNumbers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dropbox\[2] dev\cpp\_super_template\utils.h">
+    <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

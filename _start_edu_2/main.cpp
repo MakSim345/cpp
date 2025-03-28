@@ -25,10 +25,10 @@ int main()
     printf("result %d DIV_10 %d = %d\n",a , b, i);
     float res = a / 10.0;
     printf("result %d DIV %d = %f\n",a , b, res);
-    
+
     int x = 0;
-    while (x < 3) 
-    {        
+    while (x < 3)
+    {
         printf ("%i", x);
         x = x + foo(x);
     }

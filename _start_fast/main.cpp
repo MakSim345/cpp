@@ -22,7 +22,7 @@ class Bar : public Foo
 
 
 int test_constructors()
-{    
+{
     Foo* bar;
     bar = new Bar();
     delete bar;
@@ -56,7 +56,7 @@ void test_switch()
     int a = 3;
     int b = 100;
     switch (a)
-	{	
+    {
         case 1:
         case 2:
         case 3:
@@ -65,42 +65,42 @@ void test_switch()
             break;
         case 4:
         case 5:
-            
+
         /*
         case DRI_ALSRC_ENT_NO_SENSOR : // break intentionally missing
-	    case DRI_ALSRC_ENT_CABLE_OFF : // break intentionally missing
-	    case DRI_ALSRC_ENT_SENSOR_OFF : // break intentionally missing
-	    case DRI_ALSRC_ENT_SENSOR_CHK_FAILED : // break intentionally missing
-	    case DRI_ALSRC_ENT_REPLACE_SENSOR : // break intentionally missing
-	    case DRI_ALSRC_BIS_MODULE_ERROR : // break intentionally missing
-	    case DRI_ALSRC_BIS_DSC_ERROR : // break intentionally missing
-	    case DRI_ALSRC_BIS_SENSOR_DISCONN : // break intentionally missing
-	    case DRI_ALSRC_BIS_CABLE_DISCONN : // break intentionally missing
-	    case DRI_ALSRC_BIS_BAD_IMPEDANCE : // break intentionally missing
-	    case DRI_ALSRC_BIS_SENSOR_FAIL : // break intentionally missing
-	    case DRI_ALSRC_SPO2_INCOMPATIBLE_PROBE : // break intentionally missing
-	    case DRI_ALSRC_ENT_RE : // break intentionally missing
-	    case DRI_ALSRC_ENT_SE : // break intentionally missing
-	    case DRI_ALSRC_BIS : // break intentionally missing
-		    if (p_nFilterDriLevel <= DRI_LEVEL_01)
-		    {
-    //			MSF_LOG_PMSG("Alarm source filtered");
-			    p_rAlSourceId = toLittleEndian16bit(DRI_ALSRC_UNKNOWN);
-		    }
-		    break;
+        case DRI_ALSRC_ENT_CABLE_OFF : // break intentionally missing
+        case DRI_ALSRC_ENT_SENSOR_OFF : // break intentionally missing
+        case DRI_ALSRC_ENT_SENSOR_CHK_FAILED : // break intentionally missing
+        case DRI_ALSRC_ENT_REPLACE_SENSOR : // break intentionally missing
+        case DRI_ALSRC_BIS_MODULE_ERROR : // break intentionally missing
+        case DRI_ALSRC_BIS_DSC_ERROR : // break intentionally missing
+        case DRI_ALSRC_BIS_SENSOR_DISCONN : // break intentionally missing
+        case DRI_ALSRC_BIS_CABLE_DISCONN : // break intentionally missing
+        case DRI_ALSRC_BIS_BAD_IMPEDANCE : // break intentionally missing
+        case DRI_ALSRC_BIS_SENSOR_FAIL : // break intentionally missing
+        case DRI_ALSRC_SPO2_INCOMPATIBLE_PROBE : // break intentionally missing
+        case DRI_ALSRC_ENT_RE : // break intentionally missing
+        case DRI_ALSRC_ENT_SE : // break intentionally missing
+        case DRI_ALSRC_BIS : // break intentionally missing
+            if (p_nFilterDriLevel <= DRI_LEVEL_01)
+            {
+                //MSF_LOG_PMSG("Alarm source filtered");
+                p_rAlSourceId = toLittleEndian16bit(DRI_ALSRC_UNKNOWN);
+            }
+            break;
         */
     default :
-		// do nothing
-		break;   
-    }   
+        // do nothing
+        break;
+    }
 }
 
-enum test_me 
+enum test_me
 {
     ACTIVE = 100,
     PRECONDITION_MET
 };
-    
+
 class RState
 {
 public:
@@ -109,7 +109,7 @@ public:
     void setValue(int i) { _internal_value=i; };
     void printValue() { std::cout << "RState value: " << _internal_value << std::endl; }
 private:
-   int _internal_value;     
+   int _internal_value;
 };
 
 bool checkAlarmCondition()
@@ -119,10 +119,10 @@ bool checkAlarmCondition()
 }
 
 int test_ternar()
-{   
+{
     RState rStateM;
     rStateM.printValue();
-    rStateM.setValue(checkAlarmCondition() ? ACTIVE : PRECONDITION_MET); 
+    rStateM.setValue(checkAlarmCondition() ? ACTIVE : PRECONDITION_MET);
     rStateM.printValue();
     return 1;
 }
@@ -156,6 +156,3 @@ int main (void)
     return 0;
 
 }
-
-
-

@@ -1,5 +1,6 @@
 #include "gen.h"
 #include "utils.h"
+#include "sleep_impl.h"
 
 long g_lTimeTick = 0;
 
@@ -168,15 +169,41 @@ void testEntity()
 class Entity02
 {
 public:
-    int* example;
     Entity02()
     {
-        example = new int[5];
-        for (int i = 0; i < 5; i++)
-        {
-            example[i] = 101;
-        }
+        std::cout << "Created Entity02!\n";
     }
+
+    ~Entity02()
+    {
+        std::cout << "Destroyed Entity02!\n";
+    }
+};
+
+
+int* CreateArray()
+{
+    int array[50];
+    for (int i = 0; i < 50; i++)
+    {
+        array[i] = i;
+    }
+    return array;
+}
+
+class ScopedPtr
+{
+public:
+    ScopedPtr(Entity02* ptrP)
+        : ptrM(ptrP)
+    {
+    }
+    ~ScopedPtr()
+    {
+        delete ptrM;
+    }
+private:
+    Entity02* ptrM;
 };
 
 int main(int argc, char *argv[], char *envp[])
@@ -186,7 +213,7 @@ int main(int argc, char *argv[], char *envp[])
     int nResult = 0;
     int DelayInMiliseconds = 1000; // 1000 is one second
     // msTimer t;
-    CTimer t;
+    CTimer mTimer;
 
     printf ("main - start\n");
 
@@ -197,9 +224,15 @@ int main(int argc, char *argv[], char *envp[])
     // std::cout << "enter somethig:\n";
     // std::cin.get();
 
-    printf("1. Time: %ld\n", t.Get1msTimeMS());
+    printf("1. Time: %ld\n", mTimer.Get1msTimeMS());
+    {
+        // Entity02 e; // Stack allocated variable.
+        // Entity02* e = new Entity02(); // Heap allocated variable!
+        ScopedPtr e = new Entity02(); // smart pointer allocated on the stack
+    }
 
-    Entity02 e;
+    // int* a = CreateArray();
+    // printf("a = %d\n", a[9]);
 
     int example[5];
     int* another = new int[5]; // need a delete [] !
@@ -211,27 +244,28 @@ int main(int argc, char *argv[], char *envp[])
     }
     // testPlayer(newPlayer);
 
-    // printf ("Application complete.\n");
-    // system ("PAUSE"); // wait for press any key in VS mode
-    // return 0;
+    //printf ("Application complete.\n");
+    //system ("PAUSE"); // wait for press any key in VS mode
+    //return 0;
 
 //*************MAIN LOOP*****************//
  do
  {
     //This is simple Windows way:
     // Sleep(1000);
+    // Sleep(1);
+    // Sleep_(1);
 
     // and this is complicated one-thread way:
-    if (((t.Get1msTimeMS() - LastTimeInMS) > DelayInMiliseconds - 1) || (LastTimeInMS > t.Get1msTimeMS() ))
+    if (((mTimer.Get1msTimeMS() - LastTimeInMS) > DelayInMiliseconds - 1) || (LastTimeInMS > mTimer.Get1msTimeMS() ))
     {
         nResult = produceRND();
-        printf ("Time in ms: %ld.\n", t.Get1msTimeMS());
+        // printf ("Time in ms: %ld.\n", mTimer.Get1msTimeMS());
+        std::cout << "Time in ms: " << mTimer.Get1msTimeMS() << endl;
         printf ("Random: %d\n", nResult);
-        std::cout << "Elapsed time:" << t.GetElapsedTimeMs() << endl;
+        std::cout << "Elapsed time:" << mTimer.GetElapsedTimeMs() << endl;
 
-        Sleep(1);
-
-        LastTimeInMS = t.Get1msTimeMS();
+        LastTimeInMS = mTimer.Get1msTimeMS();
     }
 
     // control of endless loop (may be also in monitor.cpp)

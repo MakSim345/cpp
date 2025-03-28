@@ -1,35 +1,39 @@
-#ifndef _GEN_H_
-#define _GEN_H_	
+#pragma once
 
-#if _MSC_VER > 1000
-    #pragma once
-#endif // _MSC_VER > 1000
+// #define WIN32_APP
+#ifdef WIN32_APP
+    #include <Windows.h>
+    #include <conio.h> // for kbhit()
+    #define WIN32_LEAN_AND_MEAN // Exclude rarely-used stuff from Windows headers
+#endif
 
-#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
+#include "time.h"
+#include <ctime>
+
+//#include <unistd.h>  /* for sleep() : in Linux gcc */
+#include <stdio.h>   /* printf */
+#include <string.h>  /* strcat */
+// #include <stdlib.h>  /* strtol */
+
+#include <cstdlib>
+#include <vector>
+#include <iostream>
+#include <sstream>
+#include <memory>
+#include <cstdio>
+#include <atomic>
+#include <mutex>
+#include <thread>
+#include <chrono>
+#include <random>
+#include <map>
+
 
 #define TIME_TICK_INTERVAL 1000
+#define RND_MAX 65536
 
 // This didn't work:
 // #define rdtsc __asm __emit 0fh __asm __emit 031h
 
-#define WIN32_APP
-
-#ifdef WIN32_APP
-  #include <Windows.h>
-#endif
-
-#define RND_MAX 65536
-
-#include <conio.h>
-#include "time.h"
-#include <string.h>
-#include "stdlib.h"
-//#include <vector>
-//#include <stdio.h>
-#include <iostream>
-#include <sstream>
-//#include <map>
-
 using namespace std;
 
-#endif

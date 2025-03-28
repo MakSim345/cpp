@@ -3,7 +3,7 @@
 #define TIME_TICK_INTERVAL 1000
 #define RND_MAX 65536
 
-#define WIN32_APP
+// #define WIN32_APP
 #ifdef WIN32_APP
     #include <Windows.h>
     #include "TCHAR.h"

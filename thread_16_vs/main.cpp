@@ -23,7 +23,7 @@ void doSomeWork( void )
         std::cout << "hello from thread " << this_thread::get_id() << "\tdoSomeWork\t" << i << std::endl;
         this_thread::sleep_for(chrono::milliseconds(produceRND(3)));
     }
-    
+
     return;
 }
 
@@ -38,11 +38,11 @@ std::string GetTime()
 
 void GetMoney(int idP, double withdrawalP)
 {
-    std::lock_guard <std::mutex> lock(acctLock); 
+    std::lock_guard <std::mutex> lock(acctLock);
 
     // put thread to sleep for a random time in seconds:
     std::this_thread::sleep_for(std::chrono::seconds(produceRND(10)));
-    
+
     std::cout << "Thread #" << idP << " tries to withdrawal $"
               << withdrawalP << " on "
               << GetTime() << "\n";
@@ -60,12 +60,12 @@ void GetMoney(int idP, double withdrawalP)
 }
 
 void ExecuteThread(int threadIdP)
-{   
+{
     std::clock_t start = std::clock();
     std::cout << "Thread " << threadIdP << " started " << start << " \n";
     std::this_thread::sleep_for(chrono::milliseconds(produceRND(3000)));
     std::clock_t duration = std::clock() - start;
-    std::cout << "Thread " << threadIdP << " took " << duration << " clock ticks\n";    
+    std::cout << "Thread " << threadIdP << " took " << duration << " clock ticks\n";
 }
 
 
@@ -117,7 +117,7 @@ int main(int argc, char *argv[], char *envp[])
 
     CTimer *_time = new CTimer();
     printf ("main start on time: %ld. \n", _time->GetElapsedTimeMs());
-    
+
     std::cout << "GetTime: " <<  GetTime() << "\n";
 #ifdef TEST_ACCOUNT_YS
     //test thread pool using a bank account:
@@ -132,7 +132,7 @@ int main(int argc, char *argv[], char *envp[])
     {
         threads[i].join();
     }
-#endif 
+#endif
 
     // use thread for calculate prime numbers:
     std::vector < unsigned int> primeVector;
@@ -140,12 +140,12 @@ int main(int argc, char *argv[], char *envp[])
 
     const uint32_t maxNumberToCalc = 10000000;
     // run in one thread:
-    // FindPrimes(1, maxNumberToCalc); 
+    // FindPrimes(1, maxNumberToCalc);
     // For 1000000 - 127 sec.
-    
+
     // run in multi-threads:
     const uint32_t threadsNumber = 10;
-    FindPrimesWithThreads(1, maxNumberToCalc, threadsNumber); 
+    FindPrimesWithThreads(1, maxNumberToCalc, threadsNumber);
     // For 1000000 - 54 sec., 10 threads
 
     for (auto vecElement: primeVectorGlobal)
@@ -153,10 +153,10 @@ int main(int argc, char *argv[], char *envp[])
         std::cout << vecElement << "\n";
     }
     //std::cout << "Thread " << threadIdP << " started " << start << " \n";
-    
+
     std::clock_t duration = std::clock() - startTime;
     std::cout << "Execution time " << " took " << duration/double(CLOCKS_PER_SEC) << " seconds\n";
-    
+
     //std::thread th1(ExecuteThread, 1);
     //std::thread th2(ExecuteThread, 2);
 
@@ -164,15 +164,15 @@ int main(int argc, char *argv[], char *envp[])
     //th2.join();
 
     // std::thread th(doSomeWork);
-        
+
     for (size_t i = 0; i < length; i++)
     {
         // std::cout << "hello from thread " << this_thread::get_id() << "\tMAIN\t" << i << std::endl;
         // this_thread::sleep_for(chrono::milliseconds(200));
-    }    
+    }
 
     // th.join();
-    
+
 //*************MAIN LOOP*****************//
     cout << "\n$ > Press Any Key to exit." << std::endl;
     do
@@ -204,7 +204,7 @@ int main(int argc, char *argv[], char *envp[])
             }
         }
     } while (!RValue);
-    
+
     printf ("Application complete.\n");
     return 0;
 }

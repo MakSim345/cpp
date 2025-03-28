@@ -9,17 +9,21 @@
 int CRandomNumbers::getRandomNumber(int iMin, int iMax)
 {
     static bool bIsInitialized = false;
-    int _tmp_rand_value = 0;
+    // int _tmp_rand_value = 0;
     int _retValue = 0;
 
     if ( !bIsInitialized )
     {
-        initialize();    
+        initialize();
         bIsInitialized = true;
     }
 
-    _tmp_rand_value = rand();
-    _retValue = ( iMin + int( (iMax - iMin + 1) * _tmp_rand_value /(RAND_MAX + 1.0) ) );
+    // Generate a random number between 0 and 100
+    static std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+    std::uniform_int_distribution<int> dist(iMin, iMax);
+    _retValue = dist(rng);
+    // _tmp_rand_value = rand();
+    //_retValue = ( iMin + int( (iMax - iMin + 1) * _tmp_rand_value /(RND_MAX + 1.0) ) );
     return _retValue;
 }
 
@@ -43,7 +47,7 @@ _ARRAY_INT CRandomNumbers::getRandomNumbers(int iMin, int iMax, int iSize, bool 
         {
             viRandomNumbers.push_back(getRandomNumber(iMin, iMax));
         }
-    
+
         return viRandomNumbers;
     }
 
@@ -51,7 +55,7 @@ _ARRAY_INT CRandomNumbers::getRandomNumbers(int iMin, int iMax, int iSize, bool 
     for ( int i = 0; i < iSize; )
     {
         int iRandomNumber = getRandomNumber(iMin, iMax);
-    
+
         if ( viUniqueRandomNumbers.find(iRandomNumber) == viUniqueRandomNumbers.end() )
         {
             viRandomNumbers.push_back(iRandomNumber);

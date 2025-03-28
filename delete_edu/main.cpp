@@ -14,7 +14,7 @@ class Base
 
 class Derived: public Base
 {
- public:    
+ public:
     Derived(){cout << "*Derived constructor called." << endl;}
     ~Derived() { cout << "*Derived destructor called." << endl;}
 };
@@ -22,14 +22,14 @@ class Derived: public Base
 class Auto
 {
  public:
-    Auto() {cout << "*Auto constructor called." << endl;} 
-    ~Auto() {cout << "----Auto destructor called." << endl;} 
+    Auto() {cout << "*Auto constructor called." << endl;}
+    ~Auto() {cout << "----Auto destructor called." << endl;}
 };
 
 void show_delete()
 {
     // [] operators in C++
-    
+
     Auto *ptr_to_car;
     ptr_to_car = new Auto[3];
     delete [] ptr_to_car;
@@ -43,15 +43,15 @@ void simple_delete()
 {
     Auto *ptr_to_car;
     ptr_to_car = new Auto();
-    // now to free the memory 
+    // now to free the memory
     delete ptr_to_car;
 }
 
 void show_delete_2()
 {
-    // NOTE: One can free the memory even by "delete p"; 
+    // NOTE: One can free the memory even by "delete p";
     // but it will free only the first element memory.
-    // You delete [] when you newed an array type, and delete when you didn't. 
+    // You delete [] when you newed an array type, and delete when you didn't.
     // Examples:
 
     cout << "Function show_delete_2():" << endl ;
@@ -62,7 +62,7 @@ void show_delete_2()
     // Auto *c = new auto_array;
     Auto *c = new Auto[5];
 
-    
+
     delete a;
     delete[] b;
     // delete[] c; // this is a must! even if the new-line didn't use [].
@@ -73,7 +73,7 @@ int main()
 {
     // print_message();
     cout << "Main app start." << endl ;
-    
+
     // show_delete();
     show_delete_2();
 

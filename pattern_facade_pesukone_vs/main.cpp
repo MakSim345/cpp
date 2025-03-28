@@ -10,16 +10,16 @@ public:
     int Run()
     {
         std::cout << "----------- make FACADE pesu kone\n";
-        
+
         runFacadeWashingMachine();
-    
-        return 0;   
+
+        return 0;
     }
 
     void runFacadeWashingMachine()
     {
         // Facade Sample:
-        WashingMashine *wm = new WashingMashine();        
+        WashingMashine *wm = new WashingMashine();
         wm->wash_cotton();
     }
 
@@ -46,13 +46,13 @@ int main()
     __except (EXCEPTION_EXECUTE_HANDLER)
     {
         std::cout << "EXCEPTION_EXECUTE_HANDLER has number - " << EXCEPTION_EXECUTE_HANDLER << "\n";
-    }    
+    }
     */
 
     bool RValue = false;
 
     cout << "Press anykey to exit." << std::endl;
-    do 
+    do
     {
         //This is simple Windows way:
         Sleep(1000);
@@ -63,7 +63,7 @@ int main()
             RValue = true;
         }
 
-    } while (!RValue); 
+    } while (!RValue);
 
 
     cout << "Application completed." << std::endl;

@@ -44,10 +44,10 @@ int main()
 
     // TimerClass timer_;
     try
-    { 
+    {
         // long a1 = std::clock();
         auto startTimeStamp = std::chrono::high_resolution_clock::now();
-        // std::cout << "Time Start: " << a1 << "\n";        
+        // std::cout << "Time Start: " << a1 << "\n";
         //printFunctionForThread('*');
         //printFunctionForThread('#');
 
@@ -73,11 +73,11 @@ int main()
     __except (EXCEPTION_EXECUTE_HANDLER)
     {
         std::cout << "EXCEPTION_EXECUTE_HANDLER has number - " << EXCEPTION_EXECUTE_HANDLER << "\n";
-    }    
+    }
     */
-    
+
     //std::cout << "\nPress any key to exit...\n";
     system("PAUSE");
-    
+
     return 1;
 }

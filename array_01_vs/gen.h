@@ -1,13 +1,19 @@
 #pragma once
 
 #define TIME_TICK_INTERVAL 1000
-#define RND_MAX 65536
+// #define RND_MAX 65536
+#define RND_MAX 36
 
-#define WIN32_APP
-#ifdef WIN32_APP
+// Include the appropriate header for each platform
+// #define WIN32_APP
+//#ifdef WIN32_APP
+#ifdef _WIN32
     #include <Windows.h>
     #include <conio.h> // for kbhit()
+#else
+    #include <unistd.h>
 #endif
+
 
 #include <cstdlib>
 #include <vector>

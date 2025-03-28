@@ -8,13 +8,23 @@
     #include <Windows.h>
 #endif
 
-#include "TCHAR.h"
-#include "stdlib.h"
 #include "time.h"
-#include "utils.h"
-#include <conio.h>
-#include <iostream>
+#include <ctime>
+
+//#include <unistd.h>  /* for sleep() : in Linux gcc */
+#include <stdio.h>   /* printf */
+#include <string.h>  /* strcat */
+// #include <stdlib.h>  /* strtol */
+
+#include <cstdlib>
 #include <vector>
+#include <iostream>
+#include <sstream>
+#include <cstdio>
+#include <thread>
+#include <chrono>
+#include <random>
+#include <map>
 
 #include <stdio.h>
 #include <string.h>

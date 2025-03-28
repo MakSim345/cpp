@@ -11,7 +11,7 @@ int main()
     {
         app->Run();
     }
-    
+
     catch (error_message err)
     {
         std::cout << "ERROR: ";

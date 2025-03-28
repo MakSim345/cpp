@@ -6,11 +6,11 @@
 class Figure
 {
 protected:
-    double x; 
+    double x;
     double y;
 
 public:
-    void setDimentions(double i, double j) 
+    void setDimentions(double i, double j)
     {
         x = i;
         y = j;
@@ -20,7 +20,7 @@ public:
     {
         std::cout << "Figure object created" << std::endl;
     }
-    
+
     virtual void showArea() = 0
     {
         cout << "No area computation defined ";
@@ -28,7 +28,7 @@ public:
     }
 };
 
-class Triangle: public Figure 
+class Triangle: public Figure
 {
 public:
     Triangle()
@@ -46,10 +46,10 @@ public:
     }
 };
 
-class Square: public Figure 
+class Square: public Figure
 {
 public:
-    void showArea() 
+    void showArea()
     {
         cout << "Square with dimensions ";
         cout << x << " x " << y;
@@ -58,10 +58,10 @@ public:
     }
 };
 
-class Circle: public Figure 
+class Circle: public Figure
 {
 public:
-    void showArea() 
+    void showArea()
     {
         cout << "Circle with radius ";
         cout << x;

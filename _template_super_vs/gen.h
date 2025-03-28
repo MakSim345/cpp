@@ -1,20 +1,44 @@
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
-
-#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
 #define TIME_TICK_INTERVAL 1000
 
-// This didn't work:
-// #define rdtsc __asm __emit 0fh __asm __emit 031h
-
-#define WIN32_APP
 #define RND_MAX 65536
 
-#include <stdio.h>
-#include "utils.h"
-#include <conio.h>
+// Include the appropriate header for each platform
+// #define WIN32_APP
+// #ifdef WIN32_APP
+#ifdef _WIN32
+    #include <Windows.h>
+    #include <conio.h> // for kbhit()
+#else
+    /* for sleep() : in Linux gcc */
+    #include <unistd.h>
+#endif
+
+
+#include <stdio.h>   /* printf */
+#include <string.h>  /* strcat */
+// #include <stdlib.h>  /* strtol */
+#include <algorithm> // For std::sort
+
+#include <cstdlib>
+#include <vector>
+#include <iostream>
+#include <sstream>
+#include <memory>
+#include <cstdio>
+#include <atomic>
+#include <mutex>
+#include <thread>
+#include <chrono>
+#include <random>
+#include <map>
+#include <ctime>
+#include <sys/timeb.h>
 #include "time.h"
-#include <string.h>
-#include "stdlib.h"
+
+using namespace std;
+
+#define LOG(x) std::cout << x << std::endl;
+
+

@@ -56,7 +56,7 @@ public:
             calcCube(i);
             lastParamCtr = i;
         }
-        
+
         std::cout << "Cube with side " << lastParamCtr << " is equal to " << calcCube(lastParamCtr) << "\n";
 
         long b = std::clock();

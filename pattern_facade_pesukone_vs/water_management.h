@@ -11,17 +11,17 @@ public:
    ~WaterManagement() { cout << "WaterManagement complete" << endl;}
 
     void FillWater(int _liters)
-    { 
+    {
         cout << "WaterManagement: Fill tank with "<< _liters  << " liters of water." << endl;
         _m_liters = _liters;
     }
 
     void EmptyWater()
-    { 
+    {
         cout << "WaterManagement: Empty water tank" << endl;
     }
-    
-private:    
+
+private:
     int _m_liters;
 
 };
