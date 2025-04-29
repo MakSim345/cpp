@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
-#include "../random_generator.h"
-#include "../winner.h"
-#include "../rabbit.h"
-#include "../turtle.h"
+#include "../app/random_generator.h"
+#include "../app/winner.h"
+#include "../app/rabbit.h"
+#include "../app/turtle.h"
 
 // Test for random_generator
 TEST(RandomGeneratorTest, GetTickInRange)
