@@ -3,7 +3,7 @@
 // #include "stdafx.h"
 #include "gen.h"
 
-struct BankAccount 
+struct BankAccount
 {
     int ballance;
 
@@ -11,7 +11,7 @@ struct BankAccount
     {
     }
 
-    explicit BankAccount(const int pBalance) 
+    explicit BankAccount(const int pBalance)
         : ballance (pBalance)
     {
     }
@@ -32,7 +32,7 @@ int add (std::string numbers)
     ss >> result;
     std::cout << "result: " << result << "\n";
     // std::cout << "ss.tellg()    : " << ss.tellg() << "\n";
-    std::cout << "numbers.size(): " << numbers.size() << "\n";    
+    std::cout << "numbers.size(): " << numbers.size() << "\n";
     _tellg = ss.tellg();
     while (_tellg != numbers.size())
     {
@@ -43,7 +43,7 @@ int add (std::string numbers)
         result += next;
         _tellg = ss.tellg();
         std::cout << "_tellg: " << _tellg << "\n";
-    }   
+    }
 
     return result;
 }
@@ -92,7 +92,7 @@ TEST(AccountTest, BancAccountStartsEmpty)
 */
 
 /*
-TEST(blahTest, blah1) 
+TEST(blahTest, blah1)
 {
     EXPECT_EQ(1, 1);
 }

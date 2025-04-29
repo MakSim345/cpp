@@ -16,7 +16,7 @@ void mySleep(int sleepMs)
 }
 
 int main()
-{   
+{
     bool RValue = false;
     int _rabbit_cur_pos = 0;
     int _turtle_cur_pos = 0;
@@ -28,26 +28,26 @@ int main()
     // Turtle *turtle = new Turtle(winner);
     SuperRabbit *rabbit = new SuperRabbit("Rabbit", winner);
     SuperTurtle *turtle = new SuperTurtle("Turtle", winner);
-    
-    random_generator *rg = new random_generator();    
+
+    random_generator *rg = new random_generator();
 
     // srand(time(NULL));
-    
+
     std::cout << "GONG! And they are go!!!\n";
-    
+
     do
     {
         stepCounter++;
         _rabbit_cur_pos = rabbit->move(rg->get_tick());
         _turtle_cur_pos = turtle->move(rg->get_tick());
-        
+
         /*
-        m_step = rabbit->Get_Step();        
+        m_step = rabbit->Get_Step();
         std::cout  << " Rabbit got " << m_step  << " steps" << "\n";
-        
+
         m_step = turtle->Get_Step();
         std::cout  << " Turtle got " << m_step  << " steps" << "\n";
-               
+
          _rabbit_cur_pos = rabbit->pos();
         std::cout  << stepCounter << " - Rabbit on position " << _rabbit_cur_pos << "\n";
 
@@ -65,7 +65,7 @@ int main()
                 }
                 else
                 {
-                    std::cout << turtle->getChar();   
+                    std::cout << turtle->getChar();
                 }
             }
             else if (_rabbit_cur_pos == i)
@@ -83,26 +83,26 @@ int main()
         mySleep(40);
 
         if (true == winner->win(stepCounter))
-        {            
+        {
             RValue = true;
             // std::cout << "Rabbit WIN by running " << stepCounter << " steps!\n";
-        } 
+        }
         /*
         if (rabbit->Get_Winner())
-        {            
+        {
             RValue = true;
             std::cout << "Rabbit WIN by running " << stepCounter << " steps!\n";
         }
 
         if (turtle->Get_Winner())
-        {            
+        {
             RValue = true;
             std::cout << "Turtle WIN by running " << stepCounter << " steps!\n";
         }
         */
 
     } while (!RValue);
-    
+
     // printf("This is output from my first program!\n");
     return 0;
 }

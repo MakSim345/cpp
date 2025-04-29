@@ -10,7 +10,7 @@
 template <typename T>
 class my_smart_pointer
 {
-public: 
+public:
     T *objM;
 
     my_smart_pointer( T *obj)
@@ -23,13 +23,13 @@ public:
     {
      delete objM;
     }
-    
+
     // overload operators "->" and "*":
     T* operator-> () {return objM;}
     T& operator*  () {return *objM;}
 
-private:    
-    
+private:
+
 };
 
 
