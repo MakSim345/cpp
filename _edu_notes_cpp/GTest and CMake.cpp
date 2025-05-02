@@ -126,3 +126,29 @@ ninja
 This will execute your GTest and should display a "Hello, World!" greeting message if the test passes.
 
 Make sure to adapt the paths if you organize your files differently. This example assumes a basic structure for simplicity.
+
+
+===============================================================================================================
+"How to use local googletest on Windows"
+
+1. Create the "C:\googletest" folder
+    Open a terminal (Command Prompt or PowerShell) and run:
+    > mkdir C:\googletest
+
+2. Download and Build GoogleTest
+    Clone the GoogleTest repository into C:\googletest:
+    > git clone https://github.com/google/googletest.git C:\googletest
+
+3. Build GoogleTest:
+    Open a terminal and navigate to the folder:
+    > cd C:\googletest
+
+    Create a build directory and configure the project:
+    > mkdir build && cd build
+    > cmake .. -DCMAKE_INSTALL_PREFIX=C:\googletest\install
+
+    Build and install:
+    > cmake --build . --config Release
+    > cmake --install . --config Release
+
+    This will install the GoogleTest libraries and headers into C:\googletest\install.
