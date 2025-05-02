@@ -6,6 +6,29 @@ project(${PROJECT_NAME} ASM C CXX)
 # GoogleTest requires at least C++14
 set(CMAKE_CXX_STANDARD 17)
 
+# Add GoogleTest
+#==============================================================
+## 1 - By download
+## Set policy to avoid the DOWNLOAD_EXTRACT_TIMESTAMP warning
+# cmake_policy(SET CMP0135 NEW)
+# include(FetchContent)
+# FetchContent_Declare(
+#     googletest
+#     URL https://github.com/google/googletest/archive/refs/heads/main.zip )
+## For Windows: Prevent overriding the parent project's compiler/linker settings
+# set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+# FetchContent_MakeAvailable(googletest)
+
+## Include directories:
+# include_directories()
+# include(GoogleTest)
+#==============================================================
+# 2 - By using precompiled C:\googletest
+set(GTEST_ROOT "C:/googletest/install")
+include_directories(${GTEST_ROOT}/include)
+link_directories(${GTEST_ROOT}/lib)
+#==============================================================
+
 enable_testing()
 # add_subdirectory (googletest)
 
@@ -37,34 +60,26 @@ set(TEST_SOURCES
 
 add_executable( ${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES} ${MAIN_CPP})
 
-# Include directories
-include_directories()
-
-# Find Google Test
-find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
-
-
 # Set a variable for the test executable name
 set(TEST_EXECUTABLE_NAME RabbitRaceTests_exe)
 
 # Add the test executable
 add_executable(${TEST_EXECUTABLE_NAME} ${TEST_SOURCES} ${SOURCE_FILES})
-
 # add_executable(${TEST_EXECUTABLE_NAME} ${TEST_SOURCES} ${HEADER_FILES} ${SOURCE_FILES})
 
 # Include directories for the test executable
 target_include_directories(${TEST_EXECUTABLE_NAME} PRIVATE ${CMAKE_SOURCE_DIR})
 
-# Link Google Test and pthread to the test executable
-target_link_libraries(${TEST_EXECUTABLE_NAME} ${GTEST_LIBRARIES} pthread)
+# Link Google Test and pthread to the test executable:
+## 1. This only fol local builded GoogleTest:
 # target_link_libraries(${TEST_EXECUTABLE_NAME} PRIVATE gtest_main)
+
+## 2. This is for usage in C:\googletest
+target_link_libraries(${TEST_EXECUTABLE_NAME} gtest gtest_main)
 
 # Add the test to CTest
 add_test(
-    NAME ${TEST_EXECUTABLE_NAME}
+    NAME    ${TEST_EXECUTABLE_NAME}
     COMMAND ${TEST_EXECUTABLE_NAME}
 )
-
-# add_subdirectory (test)
 

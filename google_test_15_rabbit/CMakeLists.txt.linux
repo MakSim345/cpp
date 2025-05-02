@@ -44,21 +44,26 @@ include_directories()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
+
+# Set a variable for the test executable name
+set(TEST_EXECUTABLE_NAME RabbitRaceTests_exe)
+
 # Add the test executable
-add_executable(RabbitRaceTests ${TEST_SOURCES} ${SOURCE_FILES})
-# add_executable(RabbitRaceTests ${TEST_SOURCES} ${HEADER_FILES} ${SOURCE_FILES})
+add_executable(${TEST_EXECUTABLE_NAME} ${TEST_SOURCES} ${SOURCE_FILES})
+
+# add_executable(${TEST_EXECUTABLE_NAME} ${TEST_SOURCES} ${HEADER_FILES} ${SOURCE_FILES})
 
 # Include directories for the test executable
-target_include_directories(RabbitRaceTests PRIVATE ${CMAKE_SOURCE_DIR})
+target_include_directories(${TEST_EXECUTABLE_NAME} PRIVATE ${CMAKE_SOURCE_DIR})
 
 # Link Google Test and pthread to the test executable
-target_link_libraries(RabbitRaceTests ${GTEST_LIBRARIES} pthread)
-# target_link_libraries(RabbitRaceTests PRIVATE gtest_main)
+target_link_libraries(${TEST_EXECUTABLE_NAME} ${GTEST_LIBRARIES} pthread)
+# target_link_libraries(${TEST_EXECUTABLE_NAME} PRIVATE gtest_main)
 
 # Add the test to CTest
 add_test(
-    NAME RabbitRaceTests
-    COMMAND RabbitRaceTests
+    NAME ${TEST_EXECUTABLE_NAME}
+    COMMAND ${TEST_EXECUTABLE_NAME}
 )
 
 # add_subdirectory (test)

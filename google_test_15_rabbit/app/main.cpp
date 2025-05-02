@@ -6,11 +6,15 @@
 
 void mySleep(int sleepMs)
 {
+
+/*
 #ifdef _WIN32
     Sleep(sleepMs);
 #else
     usleep(sleepMs * 1000);   // usleep takes sleep time in us
 #endif
+*/
+    std::this_thread::sleep_for(std::chrono::milliseconds(sleepMs));
 }
 
 int main()

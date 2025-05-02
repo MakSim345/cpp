@@ -19,7 +19,6 @@
 
 #include <stdio.h>   /* printf */
 #include <string.h>  /* strcat */
-// #include <stdlib.h>  /* strtol */
 #include <algorithm> // For std::sort
 
 #include <cstdlib>
