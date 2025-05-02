@@ -1,0 +1,80 @@
+cmake_minimum_required(VERSION 3.18) # check the version of CMake
+
+# To use it with Visual Studio use follow:
+# call set_visual_studio_2019.bat
+# > mkdir build && cd build
+# > cmake -G "Ninja" -DCMAKE_C_COMPILER=cl -DCMAKE_CXX_COMPILER=cl ..
+
+# Give the name to executable:
+# NOTE: ".exe" will be added in win32 automatically.
+
+set(PROJECT_NAME gtest_00_start)
+project(${PROJECT_NAME})
+
+# GoogleTest requires at least C++14
+set(CMAKE_CXX_STANDARD 17)
+
+# Add GoogleTest
+#==============================================================
+## 1 - By download
+## Set policy to avoid the DOWNLOAD_EXTRACT_TIMESTAMP warning
+# cmake_policy(SET CMP0135 NEW)
+# include(FetchContent)
+# FetchContent_Declare(
+#     googletest
+#     URL https://github.com/google/googletest/archive/refs/heads/main.zip )
+## For Windows: Prevent overriding the parent project's compiler/linker settings
+# set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+# FetchContent_MakeAvailable(googletest)
+
+## Include directories:
+# include_directories()
+# include(GoogleTest)
+#==============================================================
+# 2 - By using precompiled C:\googletest
+# set(GTEST_ROOT "C:/googletest/install")
+# include_directories(${GTEST_ROOT}/include)
+# link_directories(${GTEST_ROOT}/lib)
+
+# Specify the binary directory for GoogleTest
+set(GTEST_BINARY_DIR ${CMAKE_BINARY_DIR}/googletest)
+add_subdirectory(C:/googletest ${GTEST_BINARY_DIR})
+#==============================================================
+
+enable_testing()
+# add_subdirectory (googletest) - works only for local subdir, not global!
+
+set(sources
+    tdd_start.cpp
+   )
+
+# Add the test executable
+add_executable( ${PROJECT_NAME} ${sources} )
+
+# Include directories for the test executable
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR})
+
+# Link Google Test and pthread to the test executable:
+## 1. This only fol local builded GoogleTest:
+# target_link_libraries(${PROJECT_NAME} PRIVATE gtest_main)
+
+## 2. This is for usage in C:\googletest
+target_link_libraries(${PROJECT_NAME} gtest gtest_main)
+
+# Add the test to CTest
+add_test(
+    NAME    ${PROJECT_NAME}
+    COMMAND ${PROJECT_NAME}
+)
+
+#=================================================
+# Specify the binary directory for GoogleTest
+# set(GTEST_BINARY_DIR ${CMAKE_BINARY_DIR}/googletest)
+# add_subdirectory(C:/googletest ${GTEST_BINARY_DIR})
+
+# target_link_libraries(${PROJECT_NAME} gtest) # Link against the GoogleTest library
+# target_include_directories(${PROJECT_NAME} PUBLIC C:/googletest/include) # Include GoogleTest headers
+
+# include(GoogleTest)
+# gtest_discover_tests(${PROJECT_NAME})
+
