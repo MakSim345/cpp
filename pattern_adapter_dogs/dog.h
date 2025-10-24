@@ -6,15 +6,15 @@
 // Interface class:
 class Dog
 {
-public:    
+public:
     virtual ~Dog() = default;// virtual destructor
-    virtual void Bark() const = 0; // pure virtual function    
+    virtual void Bark() const = 0; // pure virtual function
 };
 
 class PuddleDog: public Dog
 {
 public:
-    PuddleDog()  
+    PuddleDog()
     {
         _breed = "PuddleDog vulgarius";
     }
@@ -23,20 +23,20 @@ public:
     virtual void Bark() const
     {
         std::cout << "Hau-Hau\n";
-    }        
+    }
 
     virtual void  Scratch() const
     {
         std::cout << "Terrible deadly Scratch!\n";
-    } 
-    
+    }
+
     virtual std::string Breed() const
-    {        
+    {
         return _breed;
-    }  
+    }
 
 private:
-    std::string _breed;    
+    std::string _breed;
 
 };
 

@@ -15,16 +15,16 @@ set(CMAKE_CXX_STANDARD 17)
 
 set (headers
     gen.h
-    cat.h    
+    cat.h
     dog.h
-    cat_adapter.h    
+    cat_adapter.h
     )
 
 set(sources
     main.cpp
-    cat.cpp    
+    cat.cpp
     dog.cpp
-    cat_adapter.cpp    
+    cat_adapter.cpp
     )
 
 add_executable( ${PROJECT_NAME} ${sources} ${headers})

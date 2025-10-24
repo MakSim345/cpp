@@ -13,21 +13,21 @@ public:
 
     /*
     virtual std::string Name() const
-    {        
+    {
         return catM->Breed();
-    }        
-    
+    }
+
     */
     virtual void Bark() const override
     {
         catM.Meow();
-    }        
+    }
 
     /*
     virtual void  Scratch() const
     {
         catM->Scratch();
-    } 
+    }
     */
 
 private:
