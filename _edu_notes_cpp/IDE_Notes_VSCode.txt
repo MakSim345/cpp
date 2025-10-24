@@ -1,0 +1,33 @@
+VS Code Notes. (2025-MAY)
+=============================================================================================
+"How To build and run this Google Test project in Visual Studio Code on Windows."
+
+1. Install Required Tools
+Ensure you have the following installed:
+
+    - CMake: Download CMake
+    - Ninja (optional but recommended): Download Ninja
+    - Google Test: Already included in your project via FetchContent.
+    - Compiler: Use cl (MSVC) or another C++ compiler (e.g., GCC/MinGW).
+
+2. Set Up the Build Environment
+    - Open the project folder (google_test_01) in Visual Studio Code.
+    - Install the CMake Tools extension:
+        - Go to the Extensions view ("Ctrl+Shift+X").
+        - Search for "CMake Tools" and install it.
+
+3. Configure CMake Tools
+    - Open the Command Palette ("Ctrl+Shift+P") and search for:
+        "CMake: Configure"
+    - Select your preferred kit (e.g., Visual Studio Build Tools or GCC).
+    - CMake will generate the build files in a "build" folder.
+
+4. Build the Project
+    - Open the Command Palette ("Ctrl+Shift+P") and search for:
+        "CMake: Build"
+    - Select the "runTests01" target (your test executable, from CMakeLists.txt file)
+    - CMake will compile the project and link the Google Test framework.
+
+5. Run the Tests
+    - Open the Command Palette ("Ctrl+Shift+P") and search for:
+        "CMake: Run Tests"
