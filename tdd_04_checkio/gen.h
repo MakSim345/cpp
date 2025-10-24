@@ -1,10 +1,7 @@
 #ifndef _GEN_H_
 #define _GEN_H_
 
-#define WIN32_APP
-
 #include <stdio.h>
-#include <conio.h>
 #include <ctime>
 #include "stdlib.h"
 #include <sstream>
@@ -15,7 +12,16 @@
 #include <algorithm>    // std::count
 #include <vector>       // std::vector
 
-#include <Windows.h>
+// Include the appropriate header for each platform
+// #define WIN32_APP
+// #ifdef WIN32_APP
+#ifdef _WIN32
+    #include <Windows.h>
+    #include <conio.h> // for kbhit()
+#else
+    /* for sleep() : in Linux gcc */
+    #include <unistd.h>
+#endif
 
 using namespace std;
 

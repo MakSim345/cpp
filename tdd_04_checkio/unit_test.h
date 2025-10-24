@@ -16,26 +16,26 @@ public:
         // assert isinstance(checkio([1]), list), "The result must be a list"
         vector <int> viNumbers;
         checkio _obj = checkio();
-        
+
         int _my_max = 100;
         _obj.set_max(_my_max);
-        
+
         TS_ASSERT_EQUALS(typeid(viNumbers).name(), typeid(_obj.run(viNumbers)).name() );
 
     }
 
     void testArrayMax()
     {
-        // assert isinstance(checkio([1]), list), "The result must be a list"        
+        // assert isinstance(checkio([1]), list), "The result must be a list"
         checkio _obj = checkio();
-        
+
         int _my_max = 100;
         int _my_max_bad = 10;
         _obj.set_max(_my_max);
         TS_ASSERT_EQUALS( _my_max, _obj.get_max() );
-       
+
     }
-    
+
     void testArray1stExample()
     {
         // assert checkio([1, 2, 3, 1, 3]) == [1, 3, 1, 3], "1st example"
@@ -54,7 +54,7 @@ public:
         viEtalon.push_back(1);
         viEtalon.push_back(3);
 
-        
+
         TS_ASSERT_EQUALS( viEtalon, _obj.run(viNum) );
     }
 
@@ -71,7 +71,7 @@ public:
         viNum.push_back(5);
 
         vector <int> viEtalon;
-        
+
         TS_ASSERT_EQUALS( viEtalon, _obj.run(viNum) );
     }
 
@@ -93,7 +93,7 @@ public:
         viEtalon.push_back(5);
         viEtalon.push_back(5);
         viEtalon.push_back(5);
-        
+
         TS_ASSERT_EQUALS( viEtalon, _obj.run(viNum) );
     }
 
@@ -116,7 +116,7 @@ public:
         viEtalon.push_back(10);
         viEtalon.push_back(10);
         viEtalon.push_back(9);
-        
+
         TS_ASSERT_EQUALS( viEtalon, _obj.run(viNum) );
     }
     /*
@@ -126,8 +126,8 @@ public:
     +assert checkio([1, 2, 3, 4, 5]) == [], "2nd example"
     +assert checkio([5, 5, 5, 5, 5]) == [5, 5, 5, 5, 5], "3rd example"
     +assert checkio([10, 9, 10, 10, 9, 8]) == [10, 9, 10, 10, 9], "4th example"
-     
+
      */
 
 };
- 
+
