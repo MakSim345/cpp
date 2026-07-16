@@ -2,5 +2,6 @@
     "files.associations": {
         "xlocnum": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "C_Cpp.default.compilerPath": ""
 }
