@@ -58,7 +58,7 @@ void test_CallFunction()
     cout << "mathDerived.CallFunction(5) = " << mathDerived.CallFunction(5)<< endl;      // which f() to call?
 }
 
-void settime(Clock &d)    
+void settime(Clock &d)
 {
     d.print(); // assuming Base class calling
 }
@@ -73,11 +73,11 @@ void test_Clock()
     Alarm derivedAlarm;                  // derived class object
     settime(derivedAlarm);               // referring to derived class, not base!
 
-    std::cout << "Create Clock *baseClock02:" << std::endl;    
+    std::cout << "Create Clock *baseClock02:" << std::endl;
     Clock *baseClock02 = &baseClock;// the address of a base class object
     std::cout << "baseClock02->print()" << std::endl;
     baseClock02->print();               // calling base class method!
-    
+
 
     std::cout << "Reassign baseClock02 = &derivedAlarm:" << std::endl;
     // Clock *baseClock02 = new Alarm();
@@ -110,8 +110,8 @@ int main()
 
     //std::auto_ptr <App> virt_test(new App());
     //virt_test->Run();
-    
-    // test_foo();    
+
+    // test_foo();
 
     printf ("Application complete.\n");
     // system ("PAUSE");
