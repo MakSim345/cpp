@@ -28,3 +28,23 @@ int getRandomNumber()
 
     return distr(gen); // Generate and return the random number
 }
+
+void create_random_vector(std::vector<int>* numbersP)
+{
+    if (numbersP == nullptr) return;
+
+    constexpr int rndCount = 10;
+    constexpr int rndMinValue = 0;
+    constexpr int rndMaxValue = 20;
+
+    numbersP->clear();
+    numbersP->reserve(rndCount);
+
+    std::mt19937 rng(static_cast<unsigned int>(std::time(nullptr)));
+    std::uniform_int_distribution<int> dist(rndMinValue, rndMaxValue);
+
+    for (int i = 0; i < rndCount; ++i)
+    {
+        numbersP->push_back(dist(rng));
+    }
+}
