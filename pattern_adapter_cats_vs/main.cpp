@@ -3,6 +3,8 @@
 #include "cats.h"
 #include "tiger.h"
 #include "home_cat_adapter.h"
+#include "polar_bear.h"
+#include "polar_bear_adapter.h"
 #include "cat_info_printer.h"
 
 
@@ -20,6 +22,7 @@ public:
         wagner->setName("Wagner");
 
         iWildCat* my_tiger = new Tiger();
+        PolarBear* my_polar_bear = new PolarBear();
 
         CatInfoPrinter* cip = new CatInfoPrinter();
         cip->PrintCatInfo(*vaska);
@@ -29,6 +32,9 @@ public:
 
         // cip->PrintCatInfo(*my_tiger); // error, wrong parameter type!!
         cip->PrintCatInfo(*hca);
+
+        PolarBearAdapter *pba = new PolarBearAdapter(*my_polar_bear);
+        cip->PrintCatInfo(*pba);
 
         /*
         std::cout << "New cat name: " << vaska->Name() << "\n";
