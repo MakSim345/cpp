@@ -3,12 +3,17 @@ cmake_minimum_required(VERSION 3.16) # check the version of CMake
 set(PROJECT_NAME map_test_vs_exe)
 project(${PROJECT_NAME} ASM C CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(sources
         main.cpp
     )
 
+set(headers
+        gen.h
+    )
+
 include_directories(include)
 
-add_executable( ${PROJECT_NAME} ${sources} )
+add_executable( ${PROJECT_NAME} ${sources} ${headers})

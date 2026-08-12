@@ -1,3 +1,6 @@
+#include <unordered_map>
+#include <random>
+
 #include "gen.h"
 #include "utils.h"
 
@@ -195,7 +198,7 @@ void test_city_vector()
 
 void test_city_map()
 {
-    std:map<std::string, CityRecord> cityMap;
+    std::map<std::string, CityRecord> cityMap;
 
     CityRecord mlbrn {"Melbourne", 24500, 101.4, 91.4};
     cityMap["Melbourne"] = mlbrn;
@@ -224,10 +227,203 @@ void test_city_map()
 
 }
 
-int main(){
-    // test_city_vector();
+void printHashMap(const unordered_map<int, int>& hashTableP)
+{
+    std::cout << "  Hash table: {";
+    for (const auto& pair : hashTableP)
+    {
+        // std::cout << pair.first << ":" << pair.second << " ";
+        std::cout << "[" << pair.second << "]->" << pair.first << ", ";
+    }
+    std::cout << "}\n";
+}
 
-    test_city_map();
+void create_random_vector(std::vector<int>* numbersP)
+{
+    if (numbersP == nullptr) return;
+
+    constexpr int rndCount = 10;
+    constexpr int rndMinValue = 0;
+    constexpr int rndMaxValue = 20;
+
+    numbersP->clear();
+    numbersP->reserve(rndCount);
+
+    std::mt19937 rng(static_cast<unsigned int>(std::time(nullptr)));
+    std::uniform_int_distribution<int> dist(rndMinValue, rndMaxValue);
+
+    for (int i = 0; i < rndCount; ++i)
+    {
+        numbersP->push_back(dist(rng));
+    }
+}
+
+
+void test_vector_hash_index()
+{
+    std::vector<int> numbers;
+    numbers.reserve(10);
+
+    std::mt19937 rng(static_cast<unsigned int>(std::time(nullptr)));
+    std::uniform_int_distribution<int> dist(0, 19);
+
+    for (int i = 0; i < 10; ++i)
+    {
+        numbers.push_back(dist(rng));
+    }
+
+    // value -> all positions where the value appears
+    std::unordered_map<int, std::vector<std::size_t>> index_by_value;
+    for (std::size_t i = 0; i < numbers.size(); ++i)
+    {
+        index_by_value[numbers[i]].push_back(i);
+    }
+
+    std::cout << "Vector values (index:value):\n";
+    for (std::size_t i = 0; i < numbers.size(); ++i)
+    {
+        std::cout << i << ":" << numbers[i] << "  ";
+    }
+    std::cout << "\n\n";
+
+    int target = numbers[3];
+    auto it = index_by_value.find(target);
+    if (it != index_by_value.end())
+    {
+        std::cout << "Found " << target << " at positions: ";
+        for (std::size_t pos : it->second)
+        {
+            std::cout << pos << " ";
+        }
+        std::cout << "\n";
+    }
+
+    int missing = 99;
+    if (index_by_value.find(missing) == index_by_value.end())
+    {
+        std::cout << "Value " << missing << " is not in the vector.\n";
+    }
+
+    std::cout << "\nIf there are duplicate numbers, all of their indexes are stored "
+                 "in the hash map (vector of positions).\n";
+}
+
+vector <int> TwoSumBruteForce(vector <int>& nums, int target)
+{
+    vector <int> targetIndexes;
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        for (int j = i+1; j < nums.size(); j++)
+        {
+            std::cout << nums[i] << "+" << nums.at(j) << "=" << nums.at(i) + nums.at(j) <<" \n";
+            if(nums.at(i) + nums.at(j) == target)
+            {
+                targetIndexes.push_back(i);
+                targetIndexes.push_back(j);
+                std::cout << "Found indexes: " << i << " and " << j << "\n";
+                return targetIndexes;
+            }
+        }
+    }
+
+    return targetIndexes;
+}
+
+vector <int> TwoSumHashMap(vector <int>& vectorNumsP, const int targetP)
+{
+    /*
+    Input: vector of numbers and target sum.
+    Output: vector of indexes that form valid pair(s).
+    */
+
+    unordered_map <int, int> hash_table; //Hash map declaration value -> index
+
+    for (std::size_t i = 0; i < vectorNumsP.size(); ++i)
+    {
+        std::cout << "[" << i << "]:" << vectorNumsP[i] << " ";
+    }
+    std::cout << "\n";
+
+    for (int i = 0; i < vectorNumsP.size(); i++)
+    {
+        int current_integer = vectorNumsP.at(i);
+        // std::cout << "Current int in vectorNumsP[{}]: " << current_integer << "\n";
+        std::cout << "Current vectorNumsP[" << i << "]: " << current_integer << "\n";
+
+        int second_integer = targetP - current_integer;
+
+        std::cout << "Looking for second_integer: " << second_integer << "\n";
+
+        auto found_it = hash_table.find(second_integer);
+
+        if (found_it != hash_table.end())
+        {
+            std::cout << "*** OK *** " << second_integer << " found in hash map. \n";
+            std::cout << "Found indexes: " << found_it->second << " and " << i << "\n";
+
+            // check if current_integer is already in the hash map:
+            // Note: insert() only adds if key does not exist:
+            auto [it, inserted] = hash_table.insert({current_integer, i});
+
+            printHashMap(hash_table);  // Print after each step
+            std::cout << "\n";
+            return {found_it->second, i};
+        }
+        else
+        {
+            std::cout << "The second integer " << second_integer <<" NOT found in hash." << "\n";
+
+            // check if current_integer is already in the hash map:
+            // Note: insert() only adds if key does not exist:
+            auto [it, inserted] = hash_table.insert({current_integer, i});
+            if (inserted)
+            {
+                std::cout << "+ Add to hash " << "\n";
+            }
+            //if (hash_table.find(current_integer) == hash_table.end())
+            //{
+                // std::cout << "+ Add to hash " << "\n";
+                // insert current integer into the hash map:
+            //    hash_table[current_integer] = i;
+            //}
+
+            else
+            {
+                std::cout << "- No action. Already in hash " << "\n";
+            }
+
+            // hash_table[current_integer] = i;
+            printHashMap(hash_table);  // Print after each step
+            std::cout << "\n";
+        }
+    }
+
+    return {0, 0}; // Return a default value if no pair is found
+}
+
+int main()
+{
+    // test_city_vector();
+    // vector<int> testArray = {2, 6, 11, 12, 3, 6, 5, 15};
+    // vector<int> testArray = {10, 10};
+
+    vector<int> testArray;
+    create_random_vector(&testArray);
+
+    // TwoSumBruteForce(testArray, 20);
+    vector<int> resultArray = TwoSumHashMap(testArray, 20);
+
+    for (std::size_t i = 0; i < testArray.size(); ++i)
+    {
+        std::cout << "[" << i << "]:" << testArray[i] << " ";
+    }
+
+    std::cout << "\n";
+    cout << "resultArray[0] = " << resultArray[0] << "\n";
+    cout << "resultArray[1] = " << resultArray[1] << "\n";
+
+    // test_vector_hash_index();
 
     // cout << "ProstotronMap[12] = " << ProstotronMap[12] << "\n";
     // cout << "ProstotronMap[32] = " << ProstotronMap[32] << "\n";

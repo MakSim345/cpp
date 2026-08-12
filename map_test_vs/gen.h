@@ -9,6 +9,9 @@
 #include <fstream>
 #include <map>
 #include <memory>
+#include <format>
+#include <unordered_map>
+#include <random>
 
 // #define WIN32_APP
 #ifdef WIN32_APP
